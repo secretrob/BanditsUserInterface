@@ -1127,7 +1127,6 @@ local function BuffsPlayer()		--PlayerBuffs
 	end
 	--Oakensoul Filter
 	if BUI.Vars.PassiveOakFilter and OakensoulEquipped() and BUI.PassiveBuffs then
-		local passive=((timeStarted==timeEnding or Passives[abilityId]) and not Active[abilityId]) and 1 or 0
 		local oakbuff = {
 				id		=9999999,
 				Name	="Oakensoul",
@@ -1135,12 +1134,12 @@ local function BuffsPlayer()		--PlayerBuffs
 				Texture	="/esoui/art/icons/u34_mythic_oakensoul_ring.dds",
 				Duration	=0,
 				Timer		=-1,
-				filter 		=-1,
+				filter 		=1,
 				Scale 		=1,
 				Positive	=true,
 				Player	=true,		
 			}
-		if (BUI.Vars.BuffsPassives=="On additional panel" and passive==1) then
+		if (BUI.Vars.BuffsPassives=="On additional panel") then
 			local filteredPassives={}
 			--remove passives provided by oakensoul
 			for id,value in pairs(BUI.PassiveBuffs) do
@@ -1149,9 +1148,8 @@ local function BuffsPlayer()		--PlayerBuffs
 			--add fake oakensoul entry
 			table.insert(filteredPassives,oakbuff)
 			BUI.PassiveBuffs=filteredPassives
-		elseif (	(BUI.Vars.BuffsPassives=="On one panel" and passive) or
-					(timeEnding*1000-now>0 and timeEnding-timeStarted>=BUI.Vars.MinimumDuration) or stackCount>0) then
-			local filteredBuffs={}
+		elseif (BUI.Vars.BuffsPassives=="On one panel") then
+			local filteredBuffs={}			
 			--remove passives provided by oakensoul
 			for id,value in pairs(BUI.PlayerBuffs) do
 				if not IsOakensoul(BUI.PlayerBuffs[id].id) then table.insert(filteredBuffs,BUI.PlayerBuffs[id]) end
@@ -1159,7 +1157,7 @@ local function BuffsPlayer()		--PlayerBuffs
 			--add fake oakensoul entry
 			table.insert(filteredBuffs,oakbuff)
 			BUI.PlayerBuffs=filteredBuffs
-		end
+		end		
 	end
 	--Sort
 	if BUI.Vars.PlayerBuffs then
