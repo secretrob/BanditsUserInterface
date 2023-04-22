@@ -1,0 +1,14 @@
+<GuiXml>
+	<Animations>
+		<AnimationTimeline name="BUI_ProcReadyBurst">
+			<Animations>
+				<TextureAnimation cellsWide="16" cellsHigh="1" framerate="32"/>
+			</Animations>
+		</AnimationTimeline>
+		<AnimationTimeline name="BUI_ProcReadyLoop" playbackType="LOOP" loopCount="LOOP_INDEFINITELY">
+			<Animations>
+				<TextureAnimation cellsWide="64" cellsHigh="1" framerate="32"/>
+			</Animations>
+		</AnimationTimeline>
+	</Animations>
+</GuiXml>

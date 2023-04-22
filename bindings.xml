@@ -1,0 +1,91 @@
+<Bindings>
+	<Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
+		<Category name="|c4B8BFEBandits|r User Interface">
+			<Action name="TOGGLE_MINIMAP">
+				<Down>BUI.Vars.MiniMap=not BUI.Vars.MiniMap BUI.MiniMap.Initialize()</Down>
+			</Action>
+			<Action name="REGROUPER_REINVITE">
+				<Down>BUI.RG_ReInvite()</Down>
+			</Action>
+			<Action name="REGROUPER_REGROUP">
+				<Down>BUI.RG_ReGroup()</Down>
+			</Action>
+			<Action name="BUI_DISMISS_ALL">
+				<Down>BUI.DismissPets()</Down>
+			</Action>
+		</Category>
+		<Category name="|c4B8BFEBandits|r UI Statistics">
+			<Action name="DISPLAY_DAMAGE_REPORT_WINDOW">
+				<Down>BUI.Stats:Toggle()</Down>
+			</Action>
+			<Action name="POST_DAMAGE_RESULTS_TO_CHAT">
+				<Down>BUI.Stats:Post()</Down>
+			</Action>
+			<Action name="RESET_FIGHT">
+				<Down>BUI.Stats:Reset()</Down>
+			</Action>
+			<Action name="SHOW_LOG">
+				<Down>BUI.ShowLog()</Down>
+			</Action>
+		</Category>
+		<Category name="|c4B8BFEBandits|r UI Quick slots">
+			<Action name="BUI_QUICKSLOT_1">
+				<Down>BUI.QuickSlots.SelectQuickSlot(1)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_2">
+				<Down>BUI.QuickSlots.SelectQuickSlot(2)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_3">
+				<Down>BUI.QuickSlots.SelectQuickSlot(3)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_4">
+				<Down>BUI.QuickSlots.SelectQuickSlot(4)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_5">
+				<Down>BUI.QuickSlots.SelectQuickSlot(5)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_6">
+				<Down>BUI.QuickSlots.SelectQuickSlot(6)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_7">
+				<Down>BUI.QuickSlots.SelectQuickSlot(7)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_8">
+				<Down>BUI.QuickSlots.SelectQuickSlot(8)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_NEXT">
+				<Down>BUI.QuickSlots.SelectQuickSlotNext(1)</Down>
+			</Action>
+			<Action name="BUI_QUICKSLOT_PREV">
+				<Down>BUI.QuickSlots.SelectQuickSlotNext(-1)</Down>
+			</Action>
+		</Category>
+		<Category name="|c4B8BFEBandits|r UI Custom slots">
+			<Action name="BUI_CUSTOMSLOT_1">
+				<Down>BUI.UseCustomSlot(1)</Down>
+			</Action>
+			<Action name="BUI_CUSTOMSLOT_2">
+				<Down>BUI.UseCustomSlot(2)</Down>
+			</Action>
+			<Action name="BUI_CUSTOMSLOT_3">
+				<Down>BUI.UseCustomSlot(3)</Down>
+			</Action>
+			<Action name="BUI_CUSTOMSLOT_4">
+				<Down>BUI.UseCustomSlot(4)</Down>
+			</Action>
+			<Action name="BUI_CUSTOMSLOT_5">
+				<Down>BUI.UseCustomSlot(5)</Down>
+			</Action>
+			<Action name="BUI_CUSTOMSLOT_6">
+				<Down>BUI.UseCustomSlot(6)</Down>
+			</Action>
+		</Category>
+	</Layer>
+	<Layer name="SI_KEYBINDINGS_LAYER_SIEGE">
+		<Category name="">
+			<Action name="SIEGECAMERATOGGLE">
+				<Down>SiegeCameraToggle()</Down>
+			</Action>
+		</Category>
+	</Layer>
+</Bindings>
