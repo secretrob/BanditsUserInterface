@@ -458,6 +458,7 @@ function BUI.Player:GetColoredLevel(unitTag)
 end
 
 function BUI.Player:GetClass(classId)
-	local arr={"Dragonknight", "Scorcerer", "Nightblade", "", "", "Templar"}
+	local arr={"Dragonknight", "Scorcerer", "Nightblade", "Warden", "Necromancer", "Templar"}
+	arr[117]="Arcanist"
 	return arr[classId]
 end
