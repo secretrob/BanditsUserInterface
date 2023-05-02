@@ -404,7 +404,7 @@ local function GetGoalPledges()
 	local Pledges,haveQuest={},false
 	for i=1,MAX_JOURNAL_QUESTS do
 		local name,_,_,stepType,_,completed,_,_,_,questType,instanceType=GetJournalQuestInfo(i)
-		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP and name:match(".*:%s*(.*)") then
+		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP then --and name:match(".*:%s*(.*)") 
 			local text=string.format("%s",name:gsub(".*:%s*",""):gsub(" "," "):gsub("%s+"," "):lower())
 			if BUI.language~="ru" and BUI.language~="fr" then
 				local number=string.match(text,"%sii$")
@@ -985,8 +985,7 @@ function BUI.Automation_Init()
 --	/script StartChatInput(string.sub(GetOfferedQuestInfo(),5,12))
 	if BUI.Vars.CovetousCountess or BUI.Vars.DarkBrotherhoodSpree then
 		local lastInteractableName
-		--ZO_PreHook(FISHING_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
-		SecurePostHook(FISHING_MANAGER or INTERACTIVE_WHEEL_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
+		ZO_PreHook(FISHING_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
 --		local tipBoard={["Tip Board"]=true,["Brett für Aufträge"]=true,["Tableau des tuyaux"]=true,["Доска объявлений"]=true,}
 		local contractBook={["Marked for Death"]=true,}
 --		local CovetousDialog={["eemed th"]=true,["e new fa"]=true,["ochgesch"]=true,["s gibt e"]=true,["Voleurs "]=true,["De la bl"]=true,["овые"]=true}
