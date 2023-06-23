@@ -2175,6 +2175,7 @@ local AbilityDuration={
 --	[38689]=9500,--Endless Hail
 --	[40255]=14500,--Anti-Cavalry Caltrops
 	[126941]=7000,--Maarselok
+	[20252]=5000,--Burning Talons
 	}
 local AbilityArmTime={
 	[35750]=1500,[40382]=1500,[40372]=1500,--Trap

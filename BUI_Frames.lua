@@ -320,7 +320,7 @@ local function Frame_Target_UI()	--UI init
 	health.bar		=BUI.UI.Statusbar("BUI_TargetFrame_HealthBar",health.bg,{w,h},{CENTER,CENTER,0,0},ch,BUI.Textures[BUI.Vars.FramesTexture],false)
 --	health.bar:SetGradientColors(ch[1],ch[2],ch[3],ch[4],ch1[1],ch1[2],ch1[3],ch1[4])
 	health.current	=BUI.UI.Label("BUI_TargetFrame_HealthCurrent",health.bg,{w*2/3,h},{CENTER,CENTER,0,0},BUI.UI.Font(BUI.Vars.FrameFont1,fs,true),nil,{1,1},'Health',false)
-	health.pct		=BUI.UI.Label("BUI_TargetFrame_HealthPct",health.bg,{w*1/3,h},{RIGHT,RIGHT,-12,0},BUI.UI.Font(BUI.Vars.FrameFont2,fs,true),nil,{2,1},'Pct%',not BUI.Vars.FramePercents)
+	health.pct		=BUI.UI.Label("BUI_TargetFrame_HealthPct",health.bg,{w*1/3,h},{RIGHT,RIGHT,-12,0},BUI.UI.Font(BUI.Vars.FrameFont2,fs,true),nil,{2,1},'Pct%',not BUI.Vars.TargetFramePercents)
 	health.hot		=BUI.UI.Texture("BUI_TargetFrame_HealthHoT",health.bg,{w/6,w/12},{LEFT,CENTER,6,0},'/BanditsUserInterface/textures/regen_sm.dds',true)
 	health.dot		=BUI.UI.Texture("BUI_TargetFrame_HealthDoT",health.bg,{w/6,w/12},{RIGHT,CENTER,0,0},'/BanditsUserInterface/textures/regen_sm.dds',true) health.dot:SetTextureRotation(math.pi)
 	target.health=health
@@ -334,7 +334,7 @@ local function Frame_Target_UI()	--UI init
 		health.bar:ClearAnchors() health.bar:SetAnchor(LEFT,health.bg,LEFT,0,0)
 		target.shield:ClearAnchors() target.shield:SetAnchor(LEFT,health,LEFT,0,0)
 	end
-	if not BUI.Vars.FrameHorisontal or BUI.Vars.FramePercents then
+	if not BUI.Vars.FrameHorisontal or BUI.Vars.TargetFramePercents then
 		health.current:ClearAnchors() health.current:SetAnchor(LEFT,health.bg,LEFT,12,0) health.current:SetHorizontalAlignment(0)
 	end
 	--Default target bar
@@ -1351,8 +1351,8 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 					BUI.UI.Expires(frame.dead)
 				end
 			else
-				local add_pct=unitTag=='reticleover' and not BUI.Vars.FramePercents
-				label=label..(add_pct and " ("..pctLabel..")" or "")..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")
+				local add_pct=unitTag=='reticleover' and not BUI.Vars.TargetFramePercents
+				label=label..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")
 				if group then frame.dead:SetHidden(true) end
 			end
 		end

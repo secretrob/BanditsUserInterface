@@ -96,6 +96,10 @@ local ProcEffects={
 local UpdateCooldown=false
 local Synergy_id={
 [108799]=1,[108802]=1,[108821]=1,[108924]=1,--Shard, Orb
+[48052]=1, -- Trial dummy / Blessed Shards
+[95926]=1, -- Holy Shards (Luminous Shards)
+[85434]=1, -- Combustion (Mystic or Unmorphed)
+[63512]=1, -- Healing Combustion (Energy)
 [108607]=2,--Conduit (Sorc)
 [108824]=3,--Ritual (Templar)
 [108826]=4,--Healing Seed (Warden)
@@ -132,6 +136,8 @@ local Synergy_id={
 [118610]=16,--Agony Totem (Necr)
 [58813]=17,--Feeding Frenzy
 [141971]=18,--Sanguine Burst (Lady Thorn)
+[191080]=19, -- Runebreak (Arcanist)
+[191080]=20, -- Passage Between Worlds (Arcanist)
 }
 local Synergy_Name={
 [1]="Resource",
@@ -152,6 +158,8 @@ local Synergy_Name={
 [16]="Agony Totem",
 [17]="Feeding Frenzy",
 [18]="Sanguine Burst",
+[19]="Runebreak",
+[20]="Passage Between Worlds",
 }
 local Synergy_Texture={
 [1]="/esoui/art/icons/ability_undaunted_004.dds",
@@ -172,6 +180,8 @@ local Synergy_Texture={
 [16]="/esoui/art/icons/ability_necromancer_010_b.dds",
 [17]="/esoui/art/icons/ability_werewolf_005_b.dds",
 [18]="/esoui/art/icons/ability_u23_bloodball_chokeonit.dds",
+[19]="/esoui/art/icons/ability_arcanist_004.dds",
+[20]="/esoui/art/icons/ability_arcanist_016_b.dds",
 }
 for id,i in pairs(Synergy_id) do BUI.SynergyTexture[id]=Synergy_Texture[i] end
 local prog_color,theme_color={.2,.5,.6,1}
@@ -730,7 +740,7 @@ local function PlayerBuffs_Update()
 	local space		=5
 	local size		=BUI.Vars.PlayerBuffSize
 	local number=(not BUI.PlayerBuffs) and 0 or #BUI.PlayerBuffs
-	BUI_BuffsP_Panel:SetWidth((size+space)*number-space)
+	BUI_BuffsP_Panel:SetWidth((size+space)*math.min(number,16)-space)
 	--Main Buffs
 	for i=1, math.min(number,16) do
 		local ability=_G["BUI_BuffsP"..i]
@@ -773,7 +783,7 @@ local function PlayerBuffs_Update()
 			end
 		end
 		for i=math.min(number+1,16), 16 do _G["BUI_BuffsPas"..i]:SetHidden(true) end
-		BUI_BuffsPas_Base:SetHeight((BUI.Vars.PassiveBuffSize+space)*number-space)
+		BUI_BuffsPas_Base:SetHeight((BUI.Vars.PassiveBuffSize+space)*math.min(number,16)-space)
 	end
 end
 local function Widgets_Update()
@@ -930,7 +940,7 @@ local function TargetBuffs_Update()
 	local space		=5
 	local size		=BUI.Vars.TargetBuffSize
 	local number=(BUI.TargetBuffs==nil) and 0 or #BUI.TargetBuffs
-	BUI_BuffsT_Panel:SetWidth((size+space)*number-space)
+	BUI_BuffsT_Panel:SetWidth((size+space)*math.min(number,15)-space)
 	--Iterate over Buffs
 	for i=1, math.min(number,15) do
 		local ability=_G[	"BUI_BuffsT"..i]

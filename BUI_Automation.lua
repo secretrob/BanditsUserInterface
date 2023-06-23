@@ -985,7 +985,8 @@ function BUI.Automation_Init()
 --	/script StartChatInput(string.sub(GetOfferedQuestInfo(),5,12))
 	if BUI.Vars.CovetousCountess or BUI.Vars.DarkBrotherhoodSpree then
 		local lastInteractableName
-		ZO_PreHook(FISHING_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
+		SecurePostHook(FISHING_MANAGER or INTERACTIVE_WHEEL_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
+---		ZO_PreHook(FISHING_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
 --		local tipBoard={["Tip Board"]=true,["Brett für Aufträge"]=true,["Tableau des tuyaux"]=true,["Доска объявлений"]=true,}
 		local contractBook={["Marked for Death"]=true,}
 --		local CovetousDialog={["eemed th"]=true,["e new fa"]=true,["ochgesch"]=true,["s gibt e"]=true,["Voleurs "]=true,["De la bl"]=true,["овые"]=true}

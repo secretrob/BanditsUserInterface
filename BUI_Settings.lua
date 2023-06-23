@@ -756,9 +756,9 @@ local function MenuOptions_Init()	--Menu options
 	},
 	--Show Percents
 	{	type		="checkbox",
-		name		="FramePercents",
-		getFunc	=function() return BUI.Vars.FramePercents end,
-		setFunc	=function(value) BUI.Menu.UpdateFrames('FramePercents', value) end,
+		name		="TargetFramePercents",
+		getFunc	=function() return BUI.Vars.TargetFramePercents end,
+		setFunc	=function(value) BUI.Menu.UpdateFrames('TargetFramePercents', value) end,
 		disabled	=function() return not BUI.Vars.TargetFrame end,
 	},
 	--Boss Frame
@@ -2273,7 +2273,7 @@ function BUI.Menu.UpdateFrames(setting,value,...)
 	--Reset the fade animation
 	BUI.Frames.resetAnim=true
 	--Re-populate the frames
-	BUI.Frames:SetupPlayer()
+	BUI.Frames.SetupPlayer()
 	if BUI_RaidFrame then BUI.Frames:SetupGroup() end
 	--Position the frame for menu display
 	BUI.Menu.FramesReposition()
