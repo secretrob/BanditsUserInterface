@@ -137,7 +137,7 @@ local Synergy_id={
 [58813]=17,--Feeding Frenzy
 [141971]=18,--Sanguine Burst (Lady Thorn)
 [191080]=19, -- Runebreak (Arcanist)
-[191080]=20, -- Passage Between Worlds (Arcanist)
+[190646]=20, -- Passage Between Worlds (Arcanist)
 }
 local Synergy_Name={
 [1]="Resource",

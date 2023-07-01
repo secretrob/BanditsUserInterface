@@ -736,4 +736,5 @@ Markers_Dungeons=				"Afficher les marqueurs dans les donjons",
 Markers_Trials=					"Afficher les marqueurs lors des essais",
 Markers_Message=				"Afficher le message de coffre trouvé dans le chat",
 Markers_Icon=					"Afficher l'icône lorsque le coffre est trouvé",
+Markers_HeavySack=				"Afficher également les marqueurs lorsque Heavy Sack est trouvé",
 }

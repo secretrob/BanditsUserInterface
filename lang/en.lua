@@ -736,4 +736,5 @@ Markers_Dungeons="Show markers when in dungeons",
 Markers_Trials="Show markers when in trials",
 Markers_Message="Display found chest message in chat",
 Markers_Icon="Display icon when chest is found",
+Markers_HeavySack="Also show markers when Heavy Sack is found",
 }

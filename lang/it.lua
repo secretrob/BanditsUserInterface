@@ -719,4 +719,5 @@ Markers_Dungeons="Mostra i marcatori nei sotterranei",
 Markers_Trials="Mostra marcatori durante le prove",
 Markers_Message="Visualizza il messaggio sul petto trovato nella chat",
 Markers_Icon="Mostra l'icona quando viene trovato il forziere",
+Markers_HeavySack="Mostra anche i segnalini quando viene trovato Heavy Sack",
 }

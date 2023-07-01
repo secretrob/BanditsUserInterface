@@ -123,7 +123,7 @@ local function OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerVal
 		end
 	--Group Updates
 	elseif BUI.InGroup and string.sub(unitTag, 0, 5)=="group" then
-		--Health
+		--Health		
 		if (powerType==POWERTYPE_HEALTH) then
 			if BUI.init.Frames then
 				BUI.Player:UpdateAttribute(unitTag, powerType, powerValue, powerMax, powerEffectiveMax)

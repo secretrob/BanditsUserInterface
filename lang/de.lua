@@ -728,4 +728,5 @@ Markers_Dungeons="In Dungeons Markierungen anzeigen",
 Markers_Trials="Zeigen Sie bei Prüfungen Markierungen an",
 Markers_Message="Meldung „Gefundene Truhe“ im Chat anzeigen",
 Markers_Icon="Symbol anzeigen, wenn Truhe gefunden wird",
+Markers_HeavySack="Zeigt auch Markierungen an, wenn Heavy Sack gefunden wird",
 }

@@ -120,7 +120,7 @@ local Boss_Phase={
 	-- Bal Sunnar 
 	["Kovan Giryon"]		={65,45,20,0},
 	["Roksa the Warped"]	={100,70,40,0}, ["Roksa die Verkrümmte"]	={100,70,40,0},
-	["Matriarch Lladi Telvanni"]={100,70,35,0}, ["Matriarchin Lladi Telvanni"]	={100,70,35,0},	
+	["Matriarch Lladi Telvanni"]={100,70,35,0}, ["Matriarchin Lladi Telvanni"]	={100,70,35,0},		
 	}
 --	/script StartChatInput(GetUnitName("boss1"))
 local PhaseTimer={
@@ -1347,7 +1347,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 		local dead=IsUnitDead(unitTag)
 
 		if attribute=="health" then
-			if not IsUnitOnline(unitTag) then
+			if not IsUnitOnline(unitTag) then				
 				label,pct,pctLabel,short=BUI.Loc("Offline"),0,"",false
 			elseif dead or powerValue<0 then
 				label,pct,pctLabel,short=BUI.Loc("Dead"),0,"",false

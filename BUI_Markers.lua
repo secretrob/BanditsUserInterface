@@ -5,44 +5,83 @@ BUI.Markers={
 		Trials=false,
 		Message=true,
 		Icon=true,
+		HeavySack=true,
 		},
-	List={"IconDuration","Dungeons","Trials","Message","Icon"}
+	List={"IconDuration","Dungeons","Trials","Message","Icon"},
+	MarkerType=nil
 }
 
 local targetX,targetY,targetZ=0,0,0
 local lockpicking = nil
-
 local lastInteractableName
 SecurePostHook(FISHING_MANAGER or INTERACTIVE_WHEEL_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
 
-function MarkPlayerOpeningChest(trigger)
+function ClearMarkOnPlayer()
+	local name=GetUnitName('reticleover')
+	--d(name)
+	--d(BUI.Markers.MarkerType)
+	if name == nil or string.len(name)==0 then
+		AssignTargetMarkerToReticleTarget(BUI.Markers.MarkerType)
+		BUI.Markers.MarkerType=nil		
+		EVENT_MANAGER:UnregisterForEvent("BUI_Markers", EVENT_RETICLE_TARGET_CHANGED)
+	end	
+end
+
+function CheckFlagsToContinue()
+	if not IsUnitInDungeon("player") then return false end
+	if GetCurrentZoneDungeonDifficulty() <= 0 then return false end
+	if not BUI.Vars.Markers_Dungeons and not IsPlayerInRaid() then return false end
+	if not BUI.Vars.Markers_Trials and IsPlayerInRaid() then return false end
+	if lastInteractableName ~= "Chest" and lastInteractableName ~= "Heavy Sack" then return false end
+	return true
+end
+
+function MarkThenUnmark()
+	AssignTargetMarkerToReticleTarget(BUI.Markers.MarkerType)
+	--after Markers_IconDuration seconds call hide to drop the X.
+	BUI.CallLater("HideXMarker",BUI.Vars.Markers_IconDuration*1000,function ()
+		lockpicking=nil
+		EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_RETICLE_TARGET_CHANGED, ClearMarkOnPlayer)
+		ClearMarkOnPlayer()
+	end)
+end
+
+function MarkPlayerOpeningChest()
 	local lptimer
-	if not IsUnitInDungeon("player") then return end
-	if GetCurrentZoneDungeonDifficulty() > 0 then 		
-		if not BUI.Vars.Markers_Dungeons and not IsPlayerInRaid() then return end
-		if not BUI.Vars.Markers_Trials and IsPlayerInRaid() then return end
-		if trigger then lastInteractableName = "Chest" end
-		if lastInteractableName ~= "Chest" then return end
-		if lockpicking ~= nil then lptimer = lockpicking + 30 end --cooldown before checking again
-		if lockpicking == nil or lptimer <= os.time() then
-			quality = GetLockQuality()
-			if quality < 1 then quality = 1 end
-			qualitytype = {[1] = "Simple", [2] = "Intermediate", [3] = "Advanced", [4] = "Master"}
-			if BUI.Vars.Markers_Message then CHAT_SYSTEM:StartTextEntry(string.format("Found %s chest at marker X", qualitytype[quality]), CHAT_CHANNEL_PARTY) end
-			lockpicking = os.time()
-			if BUI.Vars.Markers_Icon then
-				AssignTargetMarkerToReticleTarget(TARGET_MARKER_TYPE_SEVEN)
-				--after Markers_IconDuration seconds call hide to drop the X.
-				BUI.CallLater("HideXMarker",BUI.Vars.Markers_IconDuration*1000,function() lockpicking=nil AssignTargetMarkerToReticleTarget(TARGET_MARKER_TYPE_SEVEN) end)
-			end
+	if not CheckFlagsToContinue() then return end
+	if lockpicking ~= nil then lptimer = lockpicking + 30 end --cooldown before checking again
+	if lockpicking == nil or lptimer <= os.time() then
+		quality = GetLockQuality()
+		if quality < 1 then quality = 1 end
+		qualitytype = {[1] = "Simple", [2] = "Intermediate", [3] = "Advanced", [4] = "Master"}
+		if BUI.Vars.Markers_Message then CHAT_SYSTEM:StartTextEntry(string.format("Found %s chest at marker X", qualitytype[quality]), CHAT_CHANNEL_PARTY) end
+		lockpicking = os.time()
+		if BUI.Vars.Markers_Icon then
+			BUI.Markers.MarkerType=TARGET_MARKER_TYPE_SEVEN
+			MarkThenUnmark()
+		end
+	end
+end
+
+function MarkPlayerOpeningHeavySack(event, result, target_name)
+	if target_name == "Heavy Sack" then 
+		if not CheckFlagsToContinue() then return end		
+		if BUI.Vars.Markers_Message then CHAT_SYSTEM:StartTextEntry("Found Heavy Sack at marker Moon", CHAT_CHANNEL_PARTY) end
+		if BUI.Vars.Markers_Icon then
+			BUI.Markers.MarkerType=TARGET_MARKER_TYPE_FIVE
+			MarkThenUnmark()
 		end
 	end
 end
 
 function BUI.Markers.Initialize()
-	EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_BEGIN_LOCKPICK, MarkPlayerOpeningChest)	
 	for _,name in pairs(BUI.Markers.List) do		
 		if BUI.Vars["Markers_"..name] == nil then BUI.Vars["Markers_"..name]=BUI.Markers.Default[name] end
+	end
+
+	EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_BEGIN_LOCKPICK, MarkPlayerOpeningChest)
+	if BUI.Vars.Markers_HeavySack then 
+		EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_CLIENT_INTERACT_RESULT, MarkPlayerOpeningHeavySack)
 	end
 end
 
