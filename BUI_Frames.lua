@@ -301,6 +301,12 @@ local function Frame_Target_UI()	--UI init
 	local color=BUI.border[Border][5] and {1,1,1,1} or theme_color
 	local w,h=BUI.Vars.TargetWidth,BUI.Vars.TargetHeight
 	local fs=math.min(BUI.Vars.FrameFontSize,h*.8)
+	local textpos={
+		health = BUI.Vars.TargetFrameCenter and CENTER or LEFT,
+		healthw = BUI.Vars.TargetFrameCenter and w*1/3 or w*2/3,
+		percent = BUI.Vars.TargetFrameCenter and CENTER or RIGHT,
+		spacing = BUI.Vars.TargetFrameCenter and 0 or 12		
+	}	
 	local target	=BUI.UI.Control("BUI_TargetFrame",BanditsUI,{w+b1*2,h+b2*2+fs*1.5*2},BUI.Vars.BUI_TargetFrame,true)
 	target.backdrop	=BUI.UI.Backdrop("BUI_TargetFrame_Bg",target,"inherit",{CENTER,CENTER,0,0},{0,0,0,0.4},{0,0,0,1},nil,true)
 	target.label	=BUI.UI.Label("BUI_TargetFrame_Label",target.backdrop,"inherit",{CENTER,CENTER,0,0},BUI.UI.Font("standard",20,true),nil,{1,1},BUI.Loc("TF_Label"),false)
@@ -319,8 +325,8 @@ local function Frame_Target_UI()	--UI init
 	health.bg:SetDrawLayer(0)
 	health.bar		=BUI.UI.Statusbar("BUI_TargetFrame_HealthBar",health.bg,{w,h},{CENTER,CENTER,0,0},ch,BUI.Textures[BUI.Vars.FramesTexture],false)
 --	health.bar:SetGradientColors(ch[1],ch[2],ch[3],ch[4],ch1[1],ch1[2],ch1[3],ch1[4])
-	health.current	=BUI.UI.Label("BUI_TargetFrame_HealthCurrent",health.bg,{w*2/3,h},{CENTER,CENTER,0,0},BUI.UI.Font(BUI.Vars.FrameFont1,fs,true),nil,{1,1},'Health',false)
-	health.pct		=BUI.UI.Label("BUI_TargetFrame_HealthPct",health.bg,{w*1/3,h},{RIGHT,RIGHT,-12,0},BUI.UI.Font(BUI.Vars.FrameFont2,fs,true),nil,{2,1},'Pct%',not BUI.Vars.TargetFramePercents)
+	health.current	=BUI.UI.Label("BUI_TargetFrame_HealthCurrent",health.bg,{textpos.healthw,h},{CENTER,CENTER,0,0},BUI.UI.Font(BUI.Vars.FrameFont1,fs,true),nil,{1,1},'Health',false)
+	health.pct		=BUI.UI.Label("BUI_TargetFrame_HealthPct",health.bg,{w*1/3,h},{textpos.percent,textpos.percent,-textpos.spacing,0},BUI.UI.Font(BUI.Vars.FrameFont2,fs,true),nil,{2,1},'Pct%',not BUI.Vars.TargetFramePercents)
 	health.hot		=BUI.UI.Texture("BUI_TargetFrame_HealthHoT",health.bg,{w/6,w/12},{LEFT,CENTER,6,0},'/BanditsUserInterface/textures/regen_sm.dds',true)
 	health.dot		=BUI.UI.Texture("BUI_TargetFrame_HealthDoT",health.bg,{w/6,w/12},{RIGHT,CENTER,0,0},'/BanditsUserInterface/textures/regen_sm.dds',true) health.dot:SetTextureRotation(math.pi)
 	target.health=health
@@ -335,7 +341,7 @@ local function Frame_Target_UI()	--UI init
 		target.shield:ClearAnchors() target.shield:SetAnchor(LEFT,health,LEFT,0,0)
 	end
 	if not BUI.Vars.FrameHorisontal or BUI.Vars.TargetFramePercents then
-		health.current:ClearAnchors() health.current:SetAnchor(LEFT,health.bg,LEFT,12,0) health.current:SetHorizontalAlignment(0)
+		health.current:ClearAnchors() health.current:SetAnchor(textpos.health,health.bg,textpos.health,textpos.spacing,0) health.current:SetHorizontalAlignment(0)
 	end
 	--Default target bar
 	local parent=_G["ZO_TargetUnitFramereticleover"] BUI.UI.Label("BUI_Targethealth",parent,{parent:GetWidth(),20},{CENTER,CENTER,0,-1},BUI.UI.Font(BUI.Vars.FrameFont2,fs,true),nil,{1,1},nil,false)
@@ -1399,9 +1405,8 @@ function BUI.Frames:Shield(unitTag, shieldValue, shieldPct, healthValue, healthM
 			--Update bar labels
 		local short=group or healthValue>100000
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
-			..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1) or BUI.DisplayNumber(healthMax)) or "")
-			..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")
-			..(short and "k" or "")
+			..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")
+			..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")			
 		frame.health.current:SetText(label)
 	end
 end

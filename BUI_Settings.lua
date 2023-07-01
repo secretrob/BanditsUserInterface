@@ -19,6 +19,7 @@ MenuNotifications="/esoui/art/help/help_tabicon_tutorial_up.dds",
 MenuMinimap="/esoui/art/icons/achievements_indexicon_exploration_up.dds",
 MenuFrameColors="/esoui/art/tutorial/dyes_tabicon_dye_up.dds",
 MenuMeters="esoui/art/treeicons/housing_indexicon_structures_up.dds",
+MenuMarkers="/esoui/art/guild/guild_indexicon_leader_up.dds",
 }
 local MenuNumber={
 MenuMisc		="1.  ",
@@ -35,7 +36,8 @@ MenuReticle		="10. ",
 MenuDamageStatistics="11. ",
 MenuNotifications	="12. ",
 MenuFrameColors	="13. ",
-MenuMeters		="21. "
+MenuMeters		="21. ",
+MenuMarkers		="22. ",
 }
 local GroupDeathSounds={
 "No_Sound",
@@ -753,6 +755,13 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.TargetHeight end,
 		setFunc	=function(value) BUI.Menu.UpdateFrames("TargetHeight", value) end,
 		disabled	=function() return not BUI.Vars.TargetFrame end,
+	},	
+	--Center Frame Text
+	{	type		="checkbox",
+		name		="TargetFrameCenter",
+		getFunc	=function() return BUI.Vars.TargetFrameCenter end,
+		setFunc	=function(value) BUI.Menu.UpdateFrames('TargetFrameCenter', value) end,
+		disabled	=function() return not BUI.Vars.PlayerFrame end,
 	},
 	--Show Percents
 	{	type		="checkbox",
@@ -2064,6 +2073,47 @@ end
 		BUI.inMenu=false
 	end,
 	}
+	
+	MenuOptions["MenuMarkers"]={
+	{	type		="checkbox",
+		name		="Markers_Dungeons",
+		getFunc	=function() return BUI.Vars.Markers_Dungeons or BUI.Markers.Default.Dungeons end,
+		setFunc	=function(value) BUI.Vars.Markers_Dungeons=value BUI.Markers.Initialize() end,
+	},
+	{	type		="checkbox",
+		name		="Markers_Trials",
+		getFunc	=function() return BUI.Vars.Markers_Trials or BUI.Markers.Default.Trials end,
+		setFunc	=function(value) BUI.Vars.Markers_Trials=value BUI.Markers.Initialize() end,
+	},
+	{	type		="checkbox",
+		name		="Markers_Message",
+		getFunc	=function() return BUI.Vars.Markers_Message or BUI.Markers.Default.Message end,
+		setFunc	=function(value) BUI.Vars.Markers_Message=value BUI.Markers.Initialize() end,
+	},
+	{	type		="checkbox",
+		name		="Markers_Icon",
+		getFunc	=function() return BUI.Vars.Markers_Icon or BUI.Markers.Default.Icon end,
+		setFunc	=function(value) BUI.Vars.Markers_Icon=value BUI.Markers.Initialize() end,
+	},
+	{	type		="slider",
+		name		="Markers_IconDuration",
+		min		=5,
+		max		=90,
+		step		=1,
+		getFunc	=function() return BUI.Vars.Markers_IconDuration or BUI.Markers.Default.IconDuration end,
+		setFunc	=function(value) BUI.Vars.Markers_IconDuration=value BUI.Markers.Initialize() end,
+	}}
+	MenuPanel["MenuMarkers"]={name="Markers_Header"}
+	MenuHandlers["MenuMarkers"]={
+	["OnEffectivelyShown"]=function()
+		BUI.inMenu=true
+		BanditsUI:SetHidden(false)
+	end,
+	["OnEffectivelyHidden"]=function()
+		BUI.inMenu=false
+	end,
+	}
+
 end
 
 function BUI.Menu.MakeList(var)
@@ -2681,7 +2731,7 @@ function BUI.Menu.MoveFrames(move)
 		if BUI.Vars.Attackers then table.insert(frames, BUI_Attackers) end
 		for _,name in pairs(BUI.Meters.List) do
 			if BUI.Vars["Meter_"..name] then table.insert(frames, _G["BUI_Meter_"..name]) end
-		end
+		end		
 		for _, frame in pairs(frames) do
 			frame:SetMouseEnabled(move)
 			frame:SetHidden(false)

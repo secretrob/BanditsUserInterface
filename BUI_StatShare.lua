@@ -314,7 +314,7 @@ local function SendPing()
 		local _horn=(BUI.Buffs.HornAvailable[1] or BUI.Buffs.HornAvailable[2]) and 4 or 0
 		local _colossus=(BUI.Buffs.ColossusAvailable[1] or BUI.Buffs.ColossusAvailable[2]) and 8 or 0
 		local _barrier=_colossus==0 and (BUI.Buffs.BarrierAvailable[1] or BUI.Buffs.BarrierAvailable[2]) and 2 or 0
-		local _power=power[BUI.MainPower]
+		local _power=power[BUI.MainPower] or 0
 		--Send the ping
 		BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,DataToCoord(StatShare_Code,_ult,_power+_barrier+(_horn>0 and _horn or _colossus),_stat))
 --		BUI.CallLater("PingMap",250,function() BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,0,0) end)

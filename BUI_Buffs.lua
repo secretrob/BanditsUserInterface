@@ -740,7 +740,7 @@ local function PlayerBuffs_Update()
 	local space		=5
 	local size		=BUI.Vars.PlayerBuffSize
 	local number=(not BUI.PlayerBuffs) and 0 or #BUI.PlayerBuffs
-	BUI_BuffsP_Panel:SetWidth((size+space)*math.min(number,16)-space)
+	BUI_BuffsP_Panel:SetWidth((size+space)*number-space)
 	--Main Buffs
 	for i=1, math.min(number,16) do
 		local ability=_G["BUI_BuffsP"..i]
@@ -783,7 +783,7 @@ local function PlayerBuffs_Update()
 			end
 		end
 		for i=math.min(number+1,16), 16 do _G["BUI_BuffsPas"..i]:SetHidden(true) end
-		BUI_BuffsPas_Base:SetHeight((BUI.Vars.PassiveBuffSize+space)*math.min(number,16)-space)
+		BUI_BuffsPas_Base:SetHeight((BUI.Vars.PassiveBuffSize+space)*number-space)
 	end
 end
 local function Widgets_Update()
@@ -940,7 +940,7 @@ local function TargetBuffs_Update()
 	local space		=5
 	local size		=BUI.Vars.TargetBuffSize
 	local number=(BUI.TargetBuffs==nil) and 0 or #BUI.TargetBuffs
-	BUI_BuffsT_Panel:SetWidth((size+space)*math.min(number,15)-space)
+	BUI_BuffsT_Panel:SetWidth((size+space)*number-space)
 	--Iterate over Buffs
 	for i=1, math.min(number,15) do
 		local ability=_G[	"BUI_BuffsT"..i]

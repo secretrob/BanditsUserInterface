@@ -1,5 +1,52 @@
-local targetX,targetY,targetZ=0,0,0
+BUI.Markers={
+	Default={
+		IconDuration=20,
+		Dungeons=false,
+		Trials=false,
+		Message=true,
+		Icon=true,
+		},
+	List={"IconDuration","Dungeons","Trials","Message","Icon"}
+}
 
+local targetX,targetY,targetZ=0,0,0
+local lockpicking = nil
+
+local lastInteractableName
+SecurePostHook(FISHING_MANAGER or INTERACTIVE_WHEEL_MANAGER, "StartInteraction", function() local _, name=GetGameCameraInteractableActionInfo() lastInteractableName=name end)
+
+function MarkPlayerOpeningChest(trigger)
+	local lptimer
+	if not IsUnitInDungeon("player") then return end
+	if GetCurrentZoneDungeonDifficulty() > 0 then 		
+		if not BUI.Vars.Markers_Dungeons and not IsPlayerInRaid() then return end
+		if not BUI.Vars.Markers_Trials and IsPlayerInRaid() then return end
+		if trigger then lastInteractableName = "Chest" end
+		if lastInteractableName ~= "Chest" then return end
+		if lockpicking ~= nil then lptimer = lockpicking + 30 end --cooldown before checking again
+		if lockpicking == nil or lptimer <= os.time() then
+			quality = GetLockQuality()
+			if quality < 1 then quality = 1 end
+			qualitytype = {[1] = "Simple", [2] = "Intermediate", [3] = "Advanced", [4] = "Master"}
+			if BUI.Vars.Markers_Message then CHAT_SYSTEM:StartTextEntry(string.format("Found %s chest at marker X", qualitytype[quality]), CHAT_CHANNEL_PARTY) end
+			lockpicking = os.time()
+			if BUI.Vars.Markers_Icon then
+				AssignTargetMarkerToReticleTarget(TARGET_MARKER_TYPE_SEVEN)
+				--after Markers_IconDuration seconds call hide to drop the X.
+				BUI.CallLater("HideXMarker",BUI.Vars.Markers_IconDuration*1000,function() lockpicking=nil AssignTargetMarkerToReticleTarget(TARGET_MARKER_TYPE_SEVEN) end)
+			end
+		end
+	end
+end
+
+function BUI.Markers.Initialize()
+	EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_BEGIN_LOCKPICK, MarkPlayerOpeningChest)	
+	for _,name in pairs(BUI.Markers.List) do		
+		if BUI.Vars["Markers_"..name] == nil then BUI.Vars["Markers_"..name]=BUI.Markers.Default[name] end
+	end
+end
+
+--[[
 function BUI.PlaceMarker(num)
 	local r=3
 	local zone,worldX,worldY,worldZ=GetUnitRawWorldPosition('player')
@@ -21,13 +68,13 @@ function BUI.PlaceMarker(num)
 	targetY=pY
 	targetZ=pZ
 end
---[[
+**
 	/script PlaySound("DaedricArtifact_Despawned")
 	/script BUI_Marker:Set3DLocalDimensions(.5,.5)
 	/script BUI_Marker:Set3DRenderSpaceUsesDepthBuffer(false)
 	/script BUI_Marker:Set3DRenderSpaceOrientation(0,math.pi,0)
 	/script BUI.PlaceMarker(1)
---]]
+**
 local function GetTargetPosition()
 	local _,worldX,worldY,worldZ=GetUnitRawWorldPosition(BUI.GroupLeader)
 	return WorldPositionToGuiRender3DPosition(worldX,worldY,worldZ)
@@ -89,14 +136,14 @@ function BUI.Markers_Init()
 		if not BUI.Compass then EVENT_MANAGER:UnregisterForUpdate("BUI_Markers") end
 	end
 end
---[[
+**
 /script BUI.Markers_Init()
 /script
 for i=1,24 do
 BUI.GroupMarker[i]:Destroy3DRenderSpace()
 BUI.GroupMarker[i]:Create3DRenderSpace()
 end
---]]
+**
 function BUI.Compass_Init()
 	if BUI.Compass then
 		local compass=_G["BUI_Compass"] or WINDOW_MANAGER:CreateControl("BUI_Compass",ParticleUI,CT_TEXTURE)
@@ -146,7 +193,7 @@ function GetTargetPoint()
 --	d("Target range: "..range)
 end
 
---[[
+**
 /script Set3DRenderSpaceToCurrentCamera("BUI_Camera") d(BUI_Crown:Get3DRenderSpaceOrientation())
 /script GetTargetPoint()
 /script BUI_Compass:Set3DRenderSpaceSystem(GUI_RENDER_3D_SPACE_SYSTEM_WORLD)
