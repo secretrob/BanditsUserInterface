@@ -982,7 +982,7 @@ local function BuffsPlayer()		--PlayerBuffs
 	BUI.Expedition=0
 	BUI.Gallop=0
 	BUI_ReticleBoost:SetHidden(true)
-	for i=-8, numBuffs do
+	for i=1, math.min(numBuffs,15) do
 		buffName=nil
 		local effect=BUI.Buffs.Effects[i]
 		if effect and effect.timeEnding>now/1000 then
