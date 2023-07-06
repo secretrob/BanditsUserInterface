@@ -305,7 +305,7 @@ local function Frame_Target_UI()	--UI init
 		health = BUI.Vars.TargetFrameCenter and CENTER or LEFT,
 		healthw = BUI.Vars.TargetFrameCenter and w*1/3 or w*2/3,
 		percent = BUI.Vars.TargetFrameCenter and CENTER or RIGHT,
-		spacing = BUI.Vars.TargetFrameCenter and 0 or 12		
+		spacing = BUI.Vars.TargetFrameCenter and math.min((14-BUI.Vars.FrameFontSize)*2,0) or 12
 	}	
 	local target	=BUI.UI.Control("BUI_TargetFrame",BanditsUI,{w+b1*2,h+b2*2+fs*1.5*2},BUI.Vars.BUI_TargetFrame,true)
 	target.backdrop	=BUI.UI.Backdrop("BUI_TargetFrame_Bg",target,"inherit",{CENTER,CENTER,0,0},{0,0,0,0.4},{0,0,0,1},nil,true)
