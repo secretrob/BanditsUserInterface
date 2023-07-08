@@ -7,7 +7,7 @@ BUI.Markers={
 		Icon=true,
 		HeavySack=true,
 		},
-	List={"IconDuration","Dungeons","Trials","Message","Icon"},
+	List={"IconDuration","Dungeons","Trials","Message","Icon","HeavySack"},
 	MarkerType=nil
 }
 
