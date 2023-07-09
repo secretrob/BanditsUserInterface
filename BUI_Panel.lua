@@ -44,10 +44,10 @@ local Defaults={
 
 local Assistans={
 	Armorer		={10618, 9745},
-	Banker		={9743, 8994, 6376, 267},
+	Banker		={11097, 9743, 8994, 6376, 267},
 	Ragpicker	={10617, 10184},
 	Smuggler	={300},
-	Trader		={9744, 8995, 6378, 301},
+	Trader		={11059, 9744, 8995, 6378, 301},
 }
 
 local function CollectibleUnlocked(data)

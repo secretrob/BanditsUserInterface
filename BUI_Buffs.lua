@@ -740,7 +740,7 @@ local function PlayerBuffs_Update()
 	local space		=5
 	local size		=BUI.Vars.PlayerBuffSize
 	local number=(not BUI.PlayerBuffs) and 0 or #BUI.PlayerBuffs
-	BUI_BuffsP_Panel:SetWidth((size+space)*number-space)
+	BUI_BuffsP_Panel:SetWidth((size+space)*math.min(number,16)-space)
 	--Main Buffs
 	for i=1, math.min(number,16) do
 		local ability=_G["BUI_BuffsP"..i]
@@ -982,7 +982,7 @@ local function BuffsPlayer()		--PlayerBuffs
 	BUI.Expedition=0
 	BUI.Gallop=0
 	BUI_ReticleBoost:SetHidden(true)
-	for i=1, math.min(numBuffs,15) do
+	for i=-8, numBuffs do
 		buffName=nil
 		local effect=BUI.Buffs.Effects[i]
 		if effect and effect.timeEnding>now/1000 then
