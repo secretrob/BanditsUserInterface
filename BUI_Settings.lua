@@ -2639,7 +2639,7 @@ function BUI.Menu.ManageWidgets(move)
 				BUI.Menu.ManageWidgets(false)
 			end
 		end
-		EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_POPPED	,OnLayerChange)
+		--EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_POPPED	,OnLayerChange)
 		EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_PUSHED	,OnLayerChange)
 	else
 		BUI_Menu_Move_Anchor:SetHidden(true) BUI_Menu_Move_B1:SetHidden(true) BUI_Menu_Move_B2:SetHidden(true) BUI_Menu_Move_B3:SetHidden(true) BUI_Menu_Move_B4:SetHidden(true)
@@ -2789,7 +2789,7 @@ function BUI.Menu.MoveFrames(move)
 		--		if BUI.moveDefault then BUI.Menu:MoveDefaultFrames(false) end
 			end
 		end
-		EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_POPPED	,OnLayerChange)
+		--EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_POPPED	,OnLayerChange)
 		EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_ACTION_LAYER_PUSHED	,OnLayerChange)
 	else
 		BUI_Menu_Move_Anchor:SetHidden(true) BUI_Menu_Move_B1:SetHidden(true) BUI_Menu_Move_B2:SetHidden(true) BUI_Menu_Move_B3:SetHidden(true) BUI_Menu_Move_B4:SetHidden(true)

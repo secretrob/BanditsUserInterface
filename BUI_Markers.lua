@@ -80,12 +80,14 @@ function BUI.Markers.Initialize()
 	end
 
 	EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_BEGIN_LOCKPICK, MarkPlayerOpeningChest)
-	if BUI.Vars.Markers_HeavySack then 
-		EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_CLIENT_INTERACT_RESULT, MarkPlayerOpeningHeavySack)
-	end
+--disable heavysack for now
+--	if BUI.Vars.Markers_HeavySack then 
+--		EVENT_MANAGER:RegisterForEvent("BUI_Markers", EVENT_CLIENT_INTERACT_RESULT, MarkPlayerOpeningHeavySack)
+--	end
 end
 
 --[[
+	/script BUI.PlaceMarker(1)
 function BUI.PlaceMarker(num)
 	local r=3
 	local zone,worldX,worldY,worldZ=GetUnitRawWorldPosition('player')
