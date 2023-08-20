@@ -2073,51 +2073,6 @@ end
 		BUI.inMenu=false
 	end,
 	}
-	
-	MenuOptions["MenuMarkers"]={
-	{	type		="checkbox",
-		name		="Markers_Dungeons",
-		getFunc	=function() return BUI.Vars.Markers_Dungeons or BUI.Markers.Default.Dungeons end,
-		setFunc	=function(value) BUI.Vars.Markers_Dungeons=value BUI.Markers.Initialize() end,
-	},
-	{	type		="checkbox",
-		name		="Markers_Trials",
-		getFunc	=function() return BUI.Vars.Markers_Trials or BUI.Markers.Default.Trials end,
-		setFunc	=function(value) BUI.Vars.Markers_Trials=value BUI.Markers.Initialize() end,
-	},
-	{	type		="checkbox",
-		name		="Markers_Message",
-		getFunc	=function() return BUI.Vars.Markers_Message or BUI.Markers.Default.Message end,
-		setFunc	=function(value) BUI.Vars.Markers_Message=value BUI.Markers.Initialize() end,
-	},
-	{	type		="checkbox",
-		name		="Markers_Icon",
-		getFunc	=function() return BUI.Vars.Markers_Icon or BUI.Markers.Default.Icon end,
-		setFunc	=function(value) BUI.Vars.Markers_Icon=value BUI.Markers.Initialize() end,
-	},
-	{	type		="checkbox",
-		name		="Markers_HeavySack",
-		getFunc	=function() return BUI.Vars.Markers_HeavySack or BUI.Markers.Default.HeavySack end,
-		setFunc	=function(value) BUI.Vars.Markers_HeavySack=value BUI.Markers.Initialize() end,
-	},	
-	{	type		="slider",
-		name		="Markers_IconDuration",
-		min		=5,
-		max		=90,
-		step		=1,
-		getFunc	=function() return BUI.Vars.Markers_IconDuration or BUI.Markers.Default.IconDuration end,
-		setFunc	=function(value) BUI.Vars.Markers_IconDuration=value BUI.Markers.Initialize() end,
-	}}
-	MenuPanel["MenuMarkers"]={name="Markers_Header"}
-	MenuHandlers["MenuMarkers"]={
-	["OnEffectivelyShown"]=function()
-		BUI.inMenu=true
-		BanditsUI:SetHidden(false)
-	end,
-	["OnEffectivelyHidden"]=function()
-		BUI.inMenu=false
-	end,
-	}
 
 end
 

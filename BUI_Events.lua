@@ -47,7 +47,7 @@ local Enchants={
 	}
 local LastWipe,LastPowerValue=0,0
 local ResultDamage={[ACTION_RESULT_DAMAGE]=true,[ACTION_RESULT_CRITICAL_DAMAGE]=true,[ACTION_RESULT_BLOCKED_DAMAGE]=true,[ACTION_RESULT_DOT_TICK]=true,[ACTION_RESULT_DOT_TICK_CRITICAL]=true,[ACTION_RESULT_DAMAGE_SHIELDED]=true}
-local TrialLobby={u30_rg=true,sunspirehall001_base=true,cloudresttrial_base=true,hofabriccaves_base=true,maw_of=true,mawlorkajsevenriddles_base=true,arenaslobbyexterior_base=true,trl_so=true,helracitadelentry_base=true,aetherianarchivebottom_base=true,gladiatorsassembly_base=true,blackroseprison01_base=true,kynesaegismap001_0=true,vateshransrites01_0=true}
+local TrialLobby={u30_rg=true,sunspirehall001_base=true,cloudresttrial_base=true,hofabriccaves_base=true,maw_of=true,mawlorkajsevenriddles_base=true,arenaslobbyexterior_base=true,trl_so=true,helracitadelentry_base=true,aetherianarchivebottom_base=true,gladiatorsassembly_base=true,blackroseprison01_base=true,kynesaegismap001_0=true,vateshransrites01_0=true,dsr_beach=true,sanitysedgesection0_map=true}
 local TrialZones,TrialNames={
 636,	--Hel Ra Citadel
 638,	--Aetheran Archive
@@ -63,6 +63,8 @@ local TrialZones,TrialNames={
 1196,	--Kyne's Aegis
 1227,	--Vateshran Hollows
 1263,	--Rockgrove
+1344,   --DSR
+1427,   --Sanitys Edge
 },{}
 for _,id in pairs(TrialZones) do TrialNames[GetZoneNameById(id)]=id end
 
