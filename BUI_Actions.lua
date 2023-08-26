@@ -29,32 +29,36 @@ local IgnoreTimer={
 local IgnoreId={
 	[0]=true,
 	[46327]=true,	--Crystal Fragments proc
-	[61930]=true,	--Assasins will
 	[61932]=true,	--Assassin's Scourge
 	[114716]=true,	--Crystal Fragments
-	[130291]=true,	--Bound Armaments
+	--[203447]=true,	--Bound Armaments
 	[85922]=true,--Budding Seeds
 	}
 local ProcEffectId={
 	[46327]=46324,	--Crystal Fragments proc
 	[61920]=61919,	--Assasins will
-	[61928]=61927,	--Assassin's Scourge
 	[114863]=114860,	--Blastbones
 	[117750]=117749,	--Stalking Blastbones
 	[117691]=117690,	--Blighted Blastbones
-	[130293]=24165,	--Bound Armaments
 	[69143]=true,	--Dodge Fatigue
 	[31816]=31816,	--Stone Giant
+--light/heavy attack counters
+	[203447]=24165,	--Bound Armaments
+	[122585]=61902, -- Grim Focus
+	[122586]=61919, --Merciless Resolve
+	[122587]=61927, --Relentless Focus
 	}
 local ProcAbilityId={
-	[43714]=46327,[46331]=46327,[46324]=46327,	--Crystal Fragments
-	[61919]=61920,	--Assasins will
-	[61927]=61928,	--Assassin's Scourgee
+	[43714]=46327,[46331]=46327,[46324]=46327,	--Crystal Fragments	
 	[114860]=114863,	--Blastbones
 	[117749]=117750,	--Stalking Blastbones
-	[117690]=117691,	--Blighted Blastbones
-	[24165]=130293,	--Bound Armaments
+	[117690]=117691,	--Blighted Blastbones	
 	[31816]=31816,--Stone Giant
+--light/heavy attack counters
+	[24165]=203447,	--Bound Armaments	
+	[61902]=122585, --Grim Focus
+	[61919]=122586,	--Merciless Resolve
+	[61927]=122587, --Relentless Focus
 	}
 local UpdateCooldown=false
 local RapidManeuver,AdditionalCastTime,AbilityName,QueueAbility={},{},{},nil
@@ -239,7 +243,16 @@ local EffectResults={
 }
 
 local function OnEffectChanged(_, changeType, effectSlot, effectName, unitTag, startTimeSec, endTimeSec, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId)
---	d(BUI.TimeStamp().."["..abilityId.."] |t16:16:"..iconName.."|t "..effectName.."|| "..unitTag.."|| duration: "..math.floor((endTimeSec-startTimeSec)*100)/100 .."|| "..EffectResults[changeType])	--.."|| "..EffectResults[changeType].."|| "..BuffTypes[buffType].."|| "..BuffEffectTypes[effectType]..", AbType:  "..AbilityTypes[abilityType].."|| "..", StatusEff: "..StatusEffectTypes[statusEffectType]
+	--d(BUI.TimeStamp().."["..abilityId.."] |t16:16:"..iconName.."|t "..effectName.."|| "..unitTag.."|| duration: "..math.floor((endTimeSec-startTimeSec)*100)/100 .."|| "..EffectResults[changeType])	--.."|| "..EffectResults[changeType].."|| "..BuffTypes[buffType].."|| "..BuffEffectTypes[effectType]..", AbType:  "..AbilityTypes[abilityType].."|| "..", StatusEff: "..StatusEffectTypes[statusEffectType]
+	if BUI.Vars.Actions then 
+	local ids = {122585,122586,122587,203447} --Bound Armaments and Grim Focus / Merciless
+		for i=1,4 do
+			local abilid=ProcEffectId[ids[i]]
+			if BUI.Actions.AbilityBar[abilid] and ids[i]==abilityId then
+				QueueAbility={id=abilid,start=GetGameTimeMilliseconds()}
+			end
+		end
+	end
 	if QueueAbility and changeType~=EFFECT_RESULT_FADED then
 		local duration=math.floor((endTimeSec-startTimeSec)*1000)
 		if ability_log then
@@ -250,7 +263,7 @@ local function OnEffectChanged(_, changeType, effectSlot, effectName, unitTag, s
 		end
 		if QueueAbility.id==abilityId or AbilityEffect[QueueAbility.id]==abilityId then
 			StartTimer(QueueAbility.id,duration,stackCount,effectType)
-		elseif QueueAbility.id==AbilityName[QueueAbility.id]==effectName then
+		elseif QueueAbility.id==AbilityName[QueueAbility.id]==effectName then			
 			AbilityEffect[QueueAbility.id]=abilityId
 			StartTimer(QueueAbility.id,duration,stackCount,effectType)
 		elseif QueueAbility.start-1000<=startTimeSec*1000 and QueueAbility.start+1000>=startTimeSec*1000 and BUI.Actions.AbilityBar[QueueAbility.id].DurationBase==duration then
@@ -330,7 +343,7 @@ local function OnSlotAbilityUsed(_,slot)
 	if slot<1 or slot>8 then return end
 	local id=GetSlotBoundId(slot)
 	local now=GetGameTimeMilliseconds()
---	if BUI.Vars.DeveloperMode then d(BUI.TimeStamp().."["..id.."] "..GetAbilityName(id)) end
+	--if BUI.Vars.DeveloperMode then d(BUI.TimeStamp().."["..id.."] "..GetAbilityName(id)) end
 
 	--Statistics
 	if BUI.Vars.EnableStats then
@@ -417,8 +430,9 @@ local function UpdateTimers()
 		local _act=BUI.Actions.AbilityBar[id]
 		if _act then
 			if RapidManeuver[id] and _act.StartTime<BUI.Damage.last then _act.StartTime=0 end
-			local timer=_act.StartTime+_act.Duration-_now
+			local timer=_act.StartTime+_act.Duration-_now			
 			AbilitySlot.AbTimer:SetText(timer>0 and BUI.FormatTime(timer/1000) or "")
+			if id==61902 or id==61919 or id==61927 and timer<=0 then timer=1 end --Grim Focus and morphs have no timer so force show the stack
 			AbilitySlot.AbStack:SetText((timer>0 and _act.Stack>0) and _act.Stack or "")
 		else
 			AbilitySlot.AbTimer:SetText("")
