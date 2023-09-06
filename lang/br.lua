@@ -696,6 +696,8 @@ PlayerToPlayer	="Prompt de jogador para jogador",
 PlayerToPlayerDesc	="Remove a opção de chutar do grupo (isso foi feito para remover a possibilidade de chutar acidentalmente o jogador do grupo ao tentar ressuscitar).",
 BuiltInGlobalCooldown="Habilite o cooldown global integrado",
 BuiltInGlobalCooldownDesc="Define o cooldown global integrado no login.",
+AutoDismissPet="Dispensa pets (Trial)",
+AutoDismissPetDesc="Dispense animais de estimação ao entrar em um trial.",
 HousePins	="Ocultar pinos de casa do mapa",
 HousePinsDesc	="Oculta apenas ícones de \"casa\". Os pinos não serão removidos.",
 

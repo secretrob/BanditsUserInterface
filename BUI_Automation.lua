@@ -21,6 +21,7 @@ local Defaults={
 	CollapseNormalDungeon=false,
 	PlayerToPlayer=false,
 	BuiltInGlobalCooldown=false,
+	AutoDismissPet=true,
 	HousePins=4,
 	}
 BUI:JoinTables(BUI.Defaults,Defaults)
@@ -648,6 +649,7 @@ local function Menu_Init()
 		{type="checkbox",	param="CollapseNormalDungeon",	warning=true, disabled=function() return not BUI.Vars.UndauntedPledges end},
 		{type="checkbox",	param="PlayerToPlayer",		warning=true},
 		{type="checkbox",   param="BuiltInGlobalCooldown", warning=true},
+		{type="checkbox",   param="AutoDismissPet", warning=true},
 		{type="button",	name="Reload UI",func=function() SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8,"Reloading UI") BUI.CallLater("ReloadUI",1000,ReloadUI) end},
 		}
 	local Options,i,var={},0,0

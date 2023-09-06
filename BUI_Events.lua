@@ -653,7 +653,7 @@ local function OnActivated()
 	if not PvPzone then	--and not (RaidNotifier and RaidNotifier.Vars.general.last_pet) then
 		if TrialLobby[BUI.MapId] then
 			local id=GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-			if id~=0 then
+			if id~=0 and BUI.Vars.AutoDismissPet then
 				ZO_Alert(UI_ALERT_CATEGORY_ALERT,nil,"Dismissing: "..string.gsub(tostring(GetCollectibleName(id)),"%^%w+",""))
 				UseCollectible(id)
 				CallBackVanityPet=id

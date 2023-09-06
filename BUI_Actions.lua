@@ -169,7 +169,7 @@ local function ProcAbility(changeType, duration, stackCount, abilityId)
 				if BUI.Vars.ProcAnimation then ProcEffectRemove(BUI.Proc[id].Slot,id)end
 			end
 			stackCount=0
-		end		
+		end
 		if BUI.Vars.Actions then BUI.Actions.AbilityBar[id].Stack=stackCount end
 		BUI.Frames.ShowDots(stackCount,total)
 		CALLBACK_MANAGER:FireCallbacks("BUI_Proc",id,stackCount)
@@ -243,16 +243,7 @@ local EffectResults={
 }
 
 local function OnEffectChanged(_, changeType, effectSlot, effectName, unitTag, startTimeSec, endTimeSec, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId)
-	--d(BUI.TimeStamp().."["..abilityId.."] |t16:16:"..iconName.."|t "..effectName.."|| "..unitTag.."|| duration: "..math.floor((endTimeSec-startTimeSec)*100)/100 .."|| "..EffectResults[changeType])	--.."|| "..EffectResults[changeType].."|| "..BuffTypes[buffType].."|| "..BuffEffectTypes[effectType]..", AbType:  "..AbilityTypes[abilityType].."|| "..", StatusEff: "..StatusEffectTypes[statusEffectType]
-	if BUI.Vars.Actions then 
-	local ids = {122585,122586,122587,203447} --Bound Armaments and Grim Focus / Merciless
-		for i=1,4 do
-			local abilid=ProcEffectId[ids[i]]
-			if BUI.Actions.AbilityBar[abilid] and ids[i]==abilityId then
-				QueueAbility={id=abilid,start=GetGameTimeMilliseconds()}
-			end
-		end
-	end
+	--d(BUI.TimeStamp().."["..abilityId.."] |t16:16:"..iconName.."|t "..effectName.."|| "..unitTag.."|| "..stackCount.."|| duration: "..math.floor((endTimeSec-startTimeSec)*100)/100 .."|| "..EffectResults[changeType])	--.."|| "..EffectResults[changeType].."|| "..BuffTypes[buffType].."|| "..BuffEffectTypes[effectType]..", AbType:  "..AbilityTypes[abilityType].."|| "..", StatusEff: "..StatusEffectTypes[statusEffectType]	
 	if QueueAbility and changeType~=EFFECT_RESULT_FADED then
 		local duration=math.floor((endTimeSec-startTimeSec)*1000)
 		if ability_log then
@@ -263,7 +254,7 @@ local function OnEffectChanged(_, changeType, effectSlot, effectName, unitTag, s
 		end
 		if QueueAbility.id==abilityId or AbilityEffect[QueueAbility.id]==abilityId then
 			StartTimer(QueueAbility.id,duration,stackCount,effectType)
-		elseif QueueAbility.id==AbilityName[QueueAbility.id]==effectName then			
+		elseif QueueAbility.id==AbilityName[QueueAbility.id]==effectName then
 			AbilityEffect[QueueAbility.id]=abilityId
 			StartTimer(QueueAbility.id,duration,stackCount,effectType)
 		elseif QueueAbility.start-1000<=startTimeSec*1000 and QueueAbility.start+1000>=startTimeSec*1000 and BUI.Actions.AbilityBar[QueueAbility.id].DurationBase==duration then

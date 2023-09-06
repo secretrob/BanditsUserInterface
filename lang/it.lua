@@ -695,6 +695,8 @@ PlayerToPlayer	="Player to player prompt",
 PlayerToPlayerDesc	="Rimuove l'opzione espelli dal gruppo (è stata creata per rimuovere la possibilità di cacciare accidentalmente un giocatore dal gruppo quando si tenta di resuscitare).",
 BuiltInGlobalCooldown="Abilita il cooldown globale integrato",
 BuiltInGlobalCooldownDesc="Attiva il tempo di recupero globale integrato all'accesso.",
+AutoDismissPet="Elimina pets (Trial)",
+AutoDismissPetDesc="Eliminare gli animali domestici quando si partecipa a una prova.",
 HousePins	="Nascondi le icone delle abitazioni sulle mappa",
 HousePinsDesc	="Nasconde solo le icone della \"casa\". Gli indicatori non verranno rimossi.",
 
