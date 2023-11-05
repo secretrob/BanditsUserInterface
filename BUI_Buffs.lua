@@ -1493,7 +1493,7 @@ function BUI.Buffs.AddTo(var,value,target)
 	end
 --	CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
 	if success then
---		ZO_Dialogs_ShowPlatformDialog("BUI_BUFFS_CONFIRMATION", {var=var,id=id,value=true,prompt=prompt,widget=(target=="Widgets")})
+--		ZO_Dialogs_ShowDialog ("BUI_BUFFS_CONFIRMATION", {var=var,id=id,value=true,prompt=prompt,widget=(target=="Widgets")})
 		ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, prompt)	--d(prompt)
 		var[id]=true
 		UpdateChoices(target)
@@ -1514,7 +1514,7 @@ function BUI.Buffs.RemoveFrom(var,value,target)
 		id=value
 		prompt=zo_strformat(prompt,value,target)
 	end
-	ZO_Dialogs_ShowPlatformDialog("BUI_BUFFS_CONFIRMATION", {var=var,id=id,value=false,prompt=prompt,target=target})
+	ZO_Dialogs_ShowDialog ("BUI_BUFFS_CONFIRMATION", {var=var,id=id,value=false,prompt=prompt,target=target})
 end
 
 function BUI.FormatTime(t)

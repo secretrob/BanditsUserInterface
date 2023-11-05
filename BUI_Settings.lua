@@ -117,7 +117,7 @@ local function MenuOptions_Init()	--Menu options
 	--Reset Default Frames
 	{	type		="button",
 		name		="ResetPositions",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ResetPositionsDesc"),func=function()BUI.Menu.Reset("Positions")end})end,
+		func		=function()ZO_Dialogs_ShowDialog ("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ResetPositionsDesc"),func=function()BUI.Menu.Reset("Positions")end})end,
 		reference	="BUI_MenuButton_Reset",
 	},
 	--Theme
@@ -215,7 +215,7 @@ local function MenuOptions_Init()	--Menu options
 	--Reset Addon
 	{	type		="button",
 		name		="Reset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ResetDesc"),func=BUI.Menu.Reset})end,
+		func		=function()ZO_Dialogs_ShowDialog ("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ResetDesc"),func=BUI.Menu.Reset})end,
 	}}
 	MenuPanel["MenuMisc"]={name="MiscHeader"}
 	MenuHandlers["MenuMisc"]={
@@ -474,7 +474,7 @@ local function MenuOptions_Init()	--Menu options
 	--Reset Unit Frames
 	{	type		="button",
 		name		="FramesReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
 	},
 	--	==Curved Frames==
 	{type="submenu",name="CurvedHeader",controls={
@@ -558,7 +558,7 @@ local function MenuOptions_Init()	--Menu options
 	{
 		type		="button",
 		name		="CurvedReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("CurvedResetDesc"),func=function()BUI.Menu.Reset("Curved")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("CurvedResetDesc"),func=function()BUI.Menu.Reset("Curved")end})end,
 	}}},
 	--	=="Advanced settings==
 	{type="submenu",name="AdvancedHeader",controls={
@@ -686,7 +686,7 @@ local function MenuOptions_Init()	--Menu options
 	{
 		type		="button",
 		name		="CurvedReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("CurvedResetDesc"),func=function()BUI.Menu.Reset("Curved")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("CurvedResetDesc"),func=function()BUI.Menu.Reset("Curved")end})end,
 	}}
 	MenuPanel["MenuCurvedFrames"]={name="CurvedHeader"}
 	MenuHandlers["MenuCurvedFrames"]={
@@ -800,7 +800,7 @@ local function MenuOptions_Init()	--Menu options
 	--Reset Unit Frames
 	{	type		="button",
 		name		="FramesReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
 	}}
 	MenuPanel["MenuTargetFrames"]={name="TargetHeader"}
 	MenuHandlers["MenuTargetFrames"]={
@@ -1092,7 +1092,7 @@ end
 	--Reset Unit Frames
 	{	type		="button",
 		name		="FramesReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("FramesResetDesc"),func=function()BUI.Menu.Reset("Frames")end})end,
 	}
 	}
 	MenuPanel["MenuGroupFrames"]={name="GroupHeader"}
@@ -1237,7 +1237,7 @@ end
 	--Reset Stats
 	{	type		="button",
 		name		="StatsReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("StatsResetDesc"),func=function()BUI.Menu.Reset("Stats")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("StatsResetDesc"),func=function()BUI.Menu.Reset("Stats")end})end,
 	}}
 	MenuPanel["MenuDamageStatistics"]={name="StatHeader"}
 	MenuHandlers["MenuDamageStatistics"]={
@@ -1573,7 +1573,7 @@ end
 	{--Reset
 		type		="button",
 		name		="BuffsReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("BuffsResetDesc"),func=function()BUI.Menu.Reset("Buffs")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("BuffsResetDesc"),func=function()BUI.Menu.Reset("Buffs")end})end,
 	}}
 	MenuPanel["MenuBuffs"]={name="BuffsHeader"}
 	MenuHandlers["MenuBuffs"]={
@@ -1644,7 +1644,7 @@ end
 	--Reset
 	{	type		="button",
 		name		="ActionsReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ActionsResetDesc"),func=function()BUI.Menu.Reset("Actions")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ActionsResetDesc"),func=function()BUI.Menu.Reset("Actions")end})end,
 	}}
 	MenuPanel["MenuActions"]={name="ActionsHeader"}
 	MenuHandlers["MenuActions"]={
@@ -1892,7 +1892,7 @@ end
 		{--Reset
 		type		="button",
 		name		="MinimapReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("MinimapResetDesc"),func=function()BUI.Menu.Reset("Minimap")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("MinimapResetDesc"),func=function()BUI.Menu.Reset("Minimap")end})end,
 		})
 	end
 
@@ -1977,7 +1977,7 @@ end
 	},
 	{	type		="button",
 		name		="SameColors",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("SameColorsDesc"),func=function()BUI.Menu.Reset("SameColors")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("SameColorsDesc"),func=function()BUI.Menu.Reset("SameColors")end})end,
 	},
 	{type="header",name="GroupRolesHeader"},	--Group Roles
 	--Self Color difference
@@ -2016,7 +2016,7 @@ end
 	--Reset Colors
 	{	type		="button",
 		name		="ColorsReset",
-		func		=function()ZO_Dialogs_ShowPlatformDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ColorsResetDesc"),func=function()BUI.Menu.Reset("Colors")end})end,
+		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("ColorsResetDesc"),func=function()BUI.Menu.Reset("Colors")end})end,
 	}}
 	MenuPanel["MenuFrameColors"]={name="ColorsHeader"}
 	MenuHandlers["MenuFrameColors"]={
