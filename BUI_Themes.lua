@@ -469,9 +469,9 @@ function BUI.Frames.ZO_Frame_reposition()
 --		line.fadingControlBuffer.templates.ZO_AlertLineGamepad.setup=SetupFunction
 	end
 
-	local function ApplyTemplateHook(obj,name)
-		local ZO_Func=obj['ApplyStyle']
-		obj['ApplyStyle']=function(self)
+	local function ApplyTemplateHook(obj,name,func)
+		local ZO_Func=obj[func]
+		obj[func]=function(self)
 			local result=ZO_Func(self)
 			if BUI.Vars[name] then
 				local frame=_G[name] frame:ClearAnchors() frame:SetAnchor(BUI.Vars[name][1],GuiRoot,BUI.Vars[name][2],BUI.Vars[name][3],BUI.Vars[name][4])
@@ -488,9 +488,10 @@ function BUI.Frames.ZO_Frame_reposition()
 		if var then
 			local frame=_G[name]
 			if frame then
-				if name=='ZO_ActiveCombatTips' then ApplyTemplateHook(ACTIVE_COMBAT_TIP_SYSTEM,'ZO_ActiveCombatTips')
-				elseif name=='ZO_CenterScreenAnnounce' then ApplyTemplateHook(CENTER_SCREEN_ANNOUNCE,'ZO_CenterScreenAnnounce')
-				elseif name=='ZO_CompassFrame' then ApplyTemplateHook(COMPASS_FRAME,'ZO_CompassFrame') end
+				if name=='ZO_ActiveCombatTips' then ApplyTemplateHook(ACTIVE_COMBAT_TIP_SYSTEM,'ZO_ActiveCombatTips','ApplyStyle')
+				elseif name=='ZO_CenterScreenAnnounce' then ApplyTemplateHook(CENTER_SCREEN_ANNOUNCE,'ZO_CenterScreenAnnounce','ApplyStyle')
+				elseif name=='ZO_CompassFrame' then ApplyTemplateHook(COMPASS_FRAME,'ZO_CompassFrame','ApplyStyle')
+				elseif name=='ZO_EndDunHUDTrackerContainer' then ApplyTemplateHook(ZO_HUDTracker_Base, 'ZO_EndDunHUDTrackerContainer','RefreshAnchors') end
 				frame:ClearAnchors() frame:SetAnchor(var[1],GuiRoot,var[2],var[3],var[4])
 			else
 				pl(name.." was not placed")

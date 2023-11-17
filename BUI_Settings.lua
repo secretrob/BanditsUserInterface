@@ -2627,6 +2627,10 @@ local function MoveDefaultFrames(move)
 				anchorPoint=RIGHT
 			elseif name=="ZO_PlayerAttributeStamina" then
 				anchorPoint=LEFT
+			elseif name=="ZO_EndDunHUDTrackerContainer" then
+				frame:SetWidth(200)
+				lX,lY=-100,-20
+				anchorPoint=BOTTOMRIGHT
 			end
 			local w,h=frame:GetDimensions()
 			if w==0 then w=14 end w=w+math.abs(lX)
