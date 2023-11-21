@@ -543,8 +543,8 @@ function BUI.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
 	if (dims=="inherit" or #dims~=2) then dims={parent:GetWidth(), parent:GetHeight()} end
 	if (#anchor~=4 and #anchor~=5) then return end
 	hidden=(hidden==nil) and false or hidden
-	--Create the control
-	local control=_G[name] or WINDOW_MANAGER:CreateControlFromVirtual(name, parent, (scroll and #array>20) and "ZO_ScrollableComboBox" or "ZO_ComboBox")
+	--Create the control	
+	local control=_G[name] or WINDOW_MANAGER:CreateControlFromVirtual(name, parent, "ZO_ComboBox")
 	control:GetNamedChild("BGMungeOverlay"):SetHidden(true)
 	--Apply properties
 	control:SetDimensions(dims[1], dims[2])
@@ -552,23 +552,29 @@ function BUI.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
 	control:SetAnchor(anchor[1], #anchor==5 and anchor[5] or parent, anchor[2], anchor[3], anchor[4])
 	control:SetHidden(hidden)
 	control.m_comboBox:SetSortsItems(false)
+	control.m_comboBox.m_dropdown:SetParent(control:GetOwningWindow()) --temp fix
 	local fs=math.min(18,dims[2]-8)
 	control.m_comboBox:SetFont(BUI.UI.Font("standard",fs,false))
 	if scroll and #array>20 then
 		control.m_comboBox:SetHeight(math.min(control.m_comboBox:GetEntryTemplateHeightWithSpacing()*#array-control.m_comboBox.m_spacing+ZO_SCROLLABLE_COMBO_BOX_LIST_PADDING_Y*2,400))
 	end
+	local largestEntryWidth=0
 	--Set values
 	control.UpdateValues=function(self,array,index)
 		local comboBox=self.m_comboBox
 		if array then
 			comboBox:ClearItems()
 			for i, v in pairs(array) do
-				local entry=ZO_ComboBox:CreateItemEntry(v, function()
+				local entry=comboBox:CreateItemEntry(v, function()
 					control.value=i
 					fun(i,v)
 					self:UpdateParent()
 				end)
 				entry.id=i
+				local entryWidth=GetStringWidthScaled(ZoFontHeader3, v, 1, SPACE_INTERFACE)
+				if entryWidth > largestEntryWidth then
+					largestEntryWidth = entryWidth
+				end
 				comboBox:AddItem(entry, ZO_COMBOBOX_SUPRESS_UPDATE)
 			end
 		end
@@ -600,6 +606,11 @@ function BUI.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
 	end
 
 	control:UpdateValues(array,index)
+	control.m_comboBox.m_containerWidth=largestEntryWidth + 5
+	if( control.m_comboBox.m_containerWidth < dims[1] ) then
+		control.m_comboBox.m_containerWidth=dims[1]
+	end
+
 	return control
 end
 

@@ -373,7 +373,10 @@ local function OnMount(eventCode,mounted)
 	BUI.Mounted=mounted
 	BUI.Reticle.SpeedBoost()
 	if BUI.init.Frames then
-		BUI.Frames:SetupAltBar()
+		if not mounted then BUI.CallLater("SetupAltBar",1500,BUI.Frames.SetupAltBar)
+		else
+			BUI.Frames:SetupAltBar()
+		end
 	end
 --	d("eventCode "..tostring(eventCode).." mounted "..tostring(mounted))
 end
