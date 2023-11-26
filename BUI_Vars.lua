@@ -5,7 +5,7 @@ BUI	={
 	DisplayName			="|c4B8BFEBandits|cFEFEFE User Interface|r",	--"|c4B8BFEBandits|r User Interface",
 	ShortName			="|c4B8BFEBandits|r UI",
 	URL					="http://bandits-clan.ru/",
-	Version				=4.351,
+	Version				=4.400,
 	language			=tostring(GetCVar("language.2")),
 	API					=GetAPIVersion(),
 	GamepadMode			=IsInGamepadPreferredMode(),
@@ -190,6 +190,8 @@ BUI	={
 		FrameHealerColor	={255/255,193/255,127/255},
 		FrameDamageColor	={224/255,028/255,028/255},
 		SelfColor			=true,
+		FrameTraumaColor    ={150/255,50/255,255/255,1},
+		FrameTraumaColor1   ={075/255,0/255,150/255,1},
 		}
 	},
 	init={

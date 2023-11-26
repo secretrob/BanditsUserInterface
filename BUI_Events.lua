@@ -175,6 +175,8 @@ local function OnVisualAdded(eventCode, unitTag, unitAttributeVisual, statType, 
 			if unitAttributeVisual==ATTRIBUTE_VISUAL_POWER_SHIELDING then
 				BUI.Player:UpdateShield(unitTag, (sequenceId==0 and value or 0), maxValue)
 				if sequenceId==0 and value>20000 then BUI.Buffs.BarrierActive=GetGameTimeSeconds()+30 end
+			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
+				BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue)				
 			elseif statType==3 and unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_STAT and value>1000 then	--unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_STAT
 				if BUI.Vars.PlayerFrame then BUI.Frames:AttributeVisual(unitTag,unitAttributeVisual,sequenceId==0) end
 			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
@@ -185,6 +187,8 @@ local function OnVisualAdded(eventCode, unitTag, unitAttributeVisual, statType, 
 	elseif unitTag=="reticleover" and powerType==POWERTYPE_HEALTH then
 		if unitAttributeVisual==ATTRIBUTE_VISUAL_POWER_SHIELDING then
 			if BUI_TargetFrame then BUI.Player:UpdateShield(unitTag, (sequenceId==0 and value or 0), maxValue) end
+		elseif unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
+			if BUI_TargetFrame then BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue) end
 		elseif unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
 			if BUI_TargetFrame then BUI.Frames.Regen(unitTag,unitAttributeVisual,powerType,(sequenceId==0 and 2000 or 0)) end
 			if BUI.Vars.CurvedFrame~=0 then BUI.Curved.Regen(unitTag,unitAttributeVisual,powerType,(sequenceId==0 and 2000 or 0)) end
@@ -197,6 +201,8 @@ local function OnVisualAdded(eventCode, unitTag, unitAttributeVisual, statType, 
 		if powerType==POWERTYPE_HEALTH then
 			if unitAttributeVisual==ATTRIBUTE_VISUAL_POWER_SHIELDING then
 				BUI.Player:UpdateShield(unitTag, (sequenceId==0 and value or 0), maxValue)
+			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
+				BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue)
 			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
 				BUI.Frames:GroupRegen(unitTag,unitAttributeVisual,powerType,(sequenceId==0 and 2000 or 0))
 				if unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
@@ -231,6 +237,9 @@ local function OnVisualUpdate(eventCode, unitTag, unitAttributeVisual, statType,
 	--Damage Shields
 	if powerType==POWERTYPE_HEALTH and unitAttributeVisual==ATTRIBUTE_VISUAL_POWER_SHIELDING then
 		BUI.Player:UpdateShield(unitTag, newValue, newMaxValue)
+	end
+	if powerType==POWERTYPE_HEALTH and unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
+		BUI.Player:UpdateTrauma(unitTag, newValue, newMaxValue)
 	end
 end
 

@@ -398,6 +398,8 @@ FrameStaminaColor	="Цвет атрибута стамины",
 FrameStaminaColorDesc	=default..BUI.TranslateColor(BUI.Defaults.FrameStaminaColor).."]",
 FrameShieldColor	="Цвет панели щита",
 FrameShieldColorDesc	=default..BUI.TranslateColor(BUI.Defaults.FrameShieldColor).."]",
+FrameTraumaColor	="Цвет панели травм",
+FrameTraumaColorDesc	=default..BUI.TranslateColor(BUI.Defaults.FrameTraumaColor).."]",
 SameColors	="Cброс градиента",
 
 ColorRoles	="Цвета по роли в группе",

@@ -212,7 +212,7 @@ local function Initialize(eventCode, addOnName)
 	--Check old version settings
 	VersionCheck()
 	--Error window
-	ZO_UIErrors:ClearAnchors() ZO_UIErrors:SetDimensions(600,300) ZO_UIErrors:SetAnchor(BOTTOMRIGHT, GuiRoot, BOTTOMRIGHT, 0, 0)
+	ZO_UIErrors:ClearAnchors()  ZO_UIErrors:SetAnchor(BOTTOMRIGHT, GuiRoot, BOTTOMRIGHT, 0, 0) --ZO_UIErrors:SetDimensions(600,300)
 	EVENT_MANAGER:RegisterForEvent("BUI_ErrorManager", EVENT_LUA_ERROR, OnUIError)
 	--Initialize UI
 	UI_Initialize()

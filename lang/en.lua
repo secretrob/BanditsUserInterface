@@ -420,6 +420,8 @@ FrameStaminaColor	="Stamina bar color",
 FrameStaminaColorDesc	="Set the color displayed in the player frame Stamina bar.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameStaminaColor),
 FrameShieldColor	="Shield bar color",
 FrameShieldColorDesc	="Set the color displayed in unit frame Shield bars.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameShieldColor),
+FrameTraumaColor    ="Trauma bar color",
+FrameTraumaColorDesc	="Set the color displayed in unit frame Trauma bars.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameTraumaColor),
 SameColors	="Equal coloros",
 SameColorsDesc="Set the end colors are the same as start color",
 

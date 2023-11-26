@@ -1,7 +1,7 @@
 ## Title: |c4B8BFEBandits|r User Interface
 ## Description: User Interface add-on from Bandits guild. Contains: different UI styles, minimap, buff tracker, combat notifications and combat statistics. Originally based on Foundry Tactical Combat by Atropos.
 ## Author: |c4B8BFEHoft|r, |c8000ffsecretrob|r
-## Version: 4.351
+## Version: 4.400
 ## APIVersion: 101040
 ## SavedVariables: BUI_VARS BUI_REPORTS
 

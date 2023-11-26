@@ -157,8 +157,8 @@ BUI.Phase_Timers={
 }
 --	/script d("|t26:26:"..GetAbilityIcon(117815).."|t")
 local function Frame_Player_UI()	--UI init
-	local ch,cm,cs,cw=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor
-	local ch1,cm1,cs1,cw1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1
+	local ch,cm,cs,cw,ct=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor,BUI.Vars.FrameTraumaColor
+	local ch1,cm1,cs1,cw1,ct1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1,BUI.Vars.FrameTraumaColor1
 	local b,b1,b2=BUI.border[Border][2],BUI.border[Border][3],BUI.border[Border][4]
 	local color=BUI.border[Border][5] and {1,1,1,1} or theme_color
 	local w,h=BUI.Vars.FrameWidth,BUI.Vars.FrameHeight
@@ -227,6 +227,13 @@ local function Frame_Player_UI()	--UI init
 	player.shield	=BUI.UI.Backdrop("BUI_PlayerFrame_ShieldBar",		health,	{w,h2},		{CENTER,CENTER,0,0},		{cw[1],cw[2],cw[3],.5}, {0,0,0,0}, nil, true)
 	player.shield:SetDrawLayer(2)
 
+	--Trauma Bar
+	player.trauma	=BUI.UI.Backdrop("BUI_PlayerFrame_TraumaBar",		health,	{w,h2},		{LEFT,LEFT,2,0},		{ct[1],ct[2],ct[3],ct[4]}, {0,0,0,0}, nil, true)
+	player.trauma:SetDrawLayer(2)
+
+	--redraw the borders
+	health:SetEdgeTexture(BUI.border[Border][1],b*8,b,b) health:SetEdgeColor(unpack(color))
+
 	--Alternate Progress Bar
 	local alt		=BUI.UI.Control("BUI_PlayerFrame_Alt",			health,	{w*2/3,h/2},	{TOPLEFT,BOTTOMLEFT,0,2,stamina},	true)
 	alt.bg		=BUI.UI.Backdrop("BUI_PlayerFrame_AltBg",			alt,		{w*2/3-h*2/3-2,8},{RIGHT,RIGHT,0,0},		{0,0,0,0}, {1,1,1,1}, nil, false)
@@ -266,6 +273,7 @@ local function Frame_Player_UI()	--UI init
 		magicka.bar1:ClearAnchors() magicka.bar1:SetAnchor(LEFT,magicka.bar,RIGHT,0,0)
 		stamina:ClearAnchors() stamina:SetAnchor(TOPLEFT,magicka,BOTTOMLEFT,0,-b2)
 		player.shield:ClearAnchors() player.shield:SetAnchor(RIGHT,health,RIGHT,0,0)
+		player.trauma:ClearAnchors() player.trauma:SetAnchor(RIGHT,health,RIGHT,0,0)
 		dodge:ClearAnchors() dodge:SetAnchor(LEFT,stamina,RIGHT,2,0)
 	elseif BUI.Vars.RepositionFrames then
 		magicka:ClearAnchors() magicka:SetAnchor(TOPRIGHT,health,BOTTOM,-1,3-b2)
@@ -295,8 +303,8 @@ local function Frame_Player_UI()	--UI init
 end
 
 local function Frame_Target_UI()	--UI init
-	local ch,cm,cs,cw=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor
-	local ch1,cm1,cs1,cw1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1
+	local ch,cm,cs,cw,ct=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor,BUI.Vars.FrameTraumaColor
+	local ch1,cm1,cs1,cw1,ct1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1,BUI.Vars.FrameTraumaColor1
 	local b,b1,b2=BUI.border[Border][2],BUI.border[Border][3],BUI.border[Border][4]
 	local color=BUI.border[Border][5] and {1,1,1,1} or theme_color
 	local w,h=BUI.Vars.TargetWidth,BUI.Vars.TargetHeight
@@ -335,10 +343,12 @@ local function Frame_Target_UI()	--UI init
 	lplate.title	=BUI.UI.Label("BUI_TargetFrame_LPlateTitle",lplate,{w,fs*1.5},{TOP,TOP,0,0},BUI.UI.Font(BUI.Vars.FrameFont1,fs,true),nil,{1,1},'Title',false)
 	lplate.rank		=BUI.UI.Texture("BUI_TargetFrame_LPlateIcon",lplate,{fs*1.5,fs*1.5},{LEFT,LEFT,0,0},"/esoui/art/ava/ava_rankicon_sergeant.dds",false) target.lplate=lplate
 	target.shield	=BUI.UI.Statusbar("BUI_TargetFrame_ShieldBar",health,{w,h},{CENTER,CENTER,0,0},{cw[1],cw[2],cw[3],.5},BUI.Textures[BUI.Vars.FramesTexture],true)	--target.shield:SetDrawTier(2)
+	target.trauma   =BUI.UI.Statusbar("BUI_TargetFrame_TraumaBar",health,{w,h},{LEFT,LEFT,2,0},{ct[1],ct[2],ct[3],.5},BUI.Textures[BUI.Vars.FramesTexture],true)
 	--Reposition
 	if not BUI.Vars.FrameHorisontal then
 		health.bar:ClearAnchors() health.bar:SetAnchor(LEFT,health.bg,LEFT,0,0)
 		target.shield:ClearAnchors() target.shield:SetAnchor(LEFT,health,LEFT,0,0)
+		target.trauma:ClearAnchors() target.trauma:SetAnchor(LEFT,health,LEFT,0,0)
 	end
 	if not BUI.Vars.FrameHorisontal or BUI.Vars.TargetFramePercents then
 		health.current:ClearAnchors() health.current:SetAnchor(textpos.health,health.bg,textpos.health,textpos.spacing,0) health.current:SetHorizontalAlignment(0)
@@ -475,7 +485,7 @@ end
 function BUI.Frames.Raid_UI(s)	--UI init
 	s=s or BUI_RaidFrame and BUI_RaidFrame.scale or 1
 	local col=BUI.Vars.RaidColumnSize
-	local ch,cm,cs,cw=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor
+	local ch,cm,cs,cw,ct=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor,BUI.Vars.FrameTraumaColor
 --	local ch1,cm1,cs1,cw1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1
 	local w,h=BUI.Vars.RaidWidth*s,BUI.Vars.RaidHeight*s
 	local hs=h-(BUI.Vars.StatShare and 8-1 or 0)*s
@@ -522,6 +532,8 @@ function BUI.Frames.Raid_UI(s)	--UI init
 	health.bar:SetDrawLayer(1)
 	member.shield	=BUI.UI.Backdrop(	"BUI_RaidFrame"..i.."_Shield",health,	{w,hs-4*s},		{RIGHT,RIGHT,-2*s,0},	{cw[1],cw[2],cw[3],.5}, {0,0,0,0}, nil, true)
 	member.shield:SetDrawLayer(2)	--member.shield:SetEdgeTexture("",2,2,2)
+	member.trauma	=BUI.UI.Backdrop(	"BUI_RaidFrame"..i.."_Trauma",health,	{w,hs-4*s},		{LEFT,LEFT,2*s,0},	{ct[1],ct[2],ct[3],ct[4]}, {0,0,0,0}, nil, true)
+	member.trauma:SetDrawLayer(2)
 	health.current	=BUI.UI.Label(	"BUI_RaidFrame"..i.."_Current",health,	{w*2/3,hs},		(comp and {RIGHT,RIGHT,-fs*1.3,0} or {LEFT,LEFT,8,0}),		BUI.UI.Font(BUI.Vars.FrameFont1,fs,true), nil, {comp and 2 or 0,1}, (BUI.Vars.RaidStatValue==3 and "" or BUI.Vars.RaidStatValue==2 and "0%" or "0.0k"), false)
 	health.current:SetDrawLayer(3)
 	health.pct		=BUI.UI.Label(	"BUI_RaidFrame"..i.."_Pct",	health,	{w*1/3,hs},		{RIGHT,RIGHT,-8*s,2*s},	BUI.UI.Font(BUI.Vars.FrameFont2,fs,true), nil, {2,1}, 'Pct%', true)
@@ -986,6 +998,8 @@ function BUI.Frames:SetupPlayer()
 	BUI.Player:UpdateAttribute('player', POWERTYPE_STAMINA, nil)
 	--Repopulate shield
 	BUI.Player:UpdateShield('player', nil, nil)
+	--Repopulate trauma
+	BUI.Player:UpdateTrauma('player', nil, nil)
 end
 
 function BUI.Frames:SetupTarget()
@@ -1044,12 +1058,15 @@ function BUI.Frames:SetupTarget()
 		frame.lplate.rank:SetHidden(rank==nil)
 		frame:SetHidden(not BUI.Vars.TargetFrame)
 		frame.shield:SetHidden(true)
+		frame.trauma:SetHidden(true)
 		BUI.Frames.TargetReactionUpdate()
 	end
 	--Repopulate health
 	BUI.Player:UpdateAttribute('reticleover', POWERTYPE_HEALTH)
 	--Repopulate shield
 	BUI.Player:UpdateShield('reticleover')
+	--Repopulate trauma
+	BUI.Player:UpdateTrauma('reticleover')
 end
 
 function BUI.Frames.TargetReactionUpdate()
@@ -1276,7 +1293,7 @@ function BUI.Frames:GroupRange(unitTag, inRange)
 	end
 end
 
-function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shieldValue)
+function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shieldValue, traumaValue)
 	local frame,group,enabled=nil,false,false
 	local ShowMax=BUI.Vars.FrameShowMax
 	local pctLabel=(pct*100).."%"
@@ -1358,7 +1375,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 				end
 			else
 				local add_pct=unitTag=='reticleover' and not BUI.Vars.TargetFramePercents
-				label=label..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")
+				label=(traumaValue>0 and "["..BUI.DisplayNumber(traumaValue/(short and 1000 or 1)).."]" or "")..label..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")
 				if group then frame.dead:SetHidden(true) end
 			end
 		end
@@ -1380,7 +1397,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 	end
 end
 
-function BUI.Frames:Shield(unitTag, shieldValue, shieldPct, healthValue, healthMax)
+function BUI.Frames:Shield(unitTag, shieldValue, shieldPct, healthValue, healthMax, traumaValue)
 	--Setup placeholders
 	local frame,update,group
 	--Player Frame
@@ -1406,7 +1423,44 @@ function BUI.Frames:Shield(unitTag, shieldValue, shieldPct, healthValue, healthM
 		local short=group or healthValue>100000
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
 			..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")
-			..(shieldValue>0 and "["..BUI.DisplayNumber(shieldValue/(short and 1000 or 1)).."]" or "")			
+			..((shieldValue>0 or traumaValue>0) and "[" or "")
+			..(shieldValue>0 and BUI.DisplayNumber(shieldValue/(short and 1000 or 1)) or "")
+			..(traumaValue>0 and "-"..BUI.DisplayNumber(traumaValue/(short and 1000 or 1)) or "")
+			..((shieldValue>0 or traumaValue>0) and "]" or "")
+		frame.health.current:SetText(label)
+	end
+end
+
+function BUI.Frames:Trauma(unitTag, traumaValue, traumaPct, healthValue, healthMax, shieldValue)
+	--Setup placeholders
+	local frame,update,group
+	--Player Frame
+	if unitTag=='player' then
+		frame=BUI_PlayerFrame
+		update=BUI.Vars.PlayerFrame
+	--Target Frame
+	elseif unitTag=='reticleover' then
+		frame=BUI_TargetFrame
+		update=BUI.Vars.TargetFrame
+	--Group Frames
+	elseif BUI.init.Group and BUI.Group[unitTag] then
+		frame=BUI.Group[unitTag].frame
+		update=BUI.Vars.RaidFrames
+		group=true
+	else return end
+	--Update custom frames
+	if update and frame then
+		local width=math.min(traumaPct,1)*(frame.width-4)
+		frame.trauma:SetWidth(width)
+		frame.trauma:SetHidden(traumaValue<=0)
+			--Update bar labels
+		local short=group or healthValue>100000
+		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
+		..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")
+		..((shieldValue>0 or traumaValue>0) and "[" or "")
+			..(shieldValue>0 and BUI.DisplayNumber(shieldValue/(short and 1000 or 1)) or "")
+			..(traumaValue>0 and "-"..BUI.DisplayNumber(traumaValue/(short and 1000 or 1)) or "")
+			..((shieldValue>0 or traumaValue>0) and "]" or "")
 		frame.health.current:SetText(label)
 	end
 end
@@ -1644,6 +1698,7 @@ function BUI.Frames:SafetyCheck()
 			BUI.Player:UpdateAttribute(	'player',POWERTYPE_MAGICKA,nil,nil,nil)
 			BUI.Player:UpdateAttribute(	'player',POWERTYPE_STAMINA,nil,nil,nil)
 			BUI.Player:UpdateShield(	'player',nil,nil)
+			BUI.Player:UpdateTrauma(    'player',nil,nil)
 		end
 	end
 end

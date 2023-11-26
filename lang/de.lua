@@ -411,7 +411,9 @@ FrameMagickaColorDesc="Legt die Farbe des eigenen Magickabalkens fest.\n"..defau
 FrameStaminaColor="Farbe des Ausdauerbalkens",
 FrameStaminaColorDesc="Legt die Farbe des eigenen Ausdauerbalkens fest.\n"..default..BUI.ColorString(unpack(BUI.Defaults.FrameStaminaColor)).."]",
 FrameShieldColor="Farbe des Schildbalkens",
-FrameShieldColorDesc="Legt die Farbe des eigenen Lebensbalkens fest.\n"..default..BUI.ColorString(unpack(BUI.Defaults.FrameShieldColor)).."]",
+FrameShieldColorDesc="Legt die Farbe des eigenen Schildbalkens fest.\n"..default..BUI.ColorString(unpack(BUI.Defaults.FrameShieldColor)).."]",
+FrameTraumaColor    ="Farbe der Traumaleiste",
+FrameTraumaColorDesc	="Legt die Farbe des eigenen Traumaleiste fest.\n"..default..BUI.ColorString(unpack(BUI.Defaults.FrameTraumaColor)).."]",
 SameColors="einfarbig",
 SameColorsDesc="Macht sämtliche Balken einfarbig.",
 

@@ -41,6 +41,9 @@ function BUI.Player:Initialize()
 	--Load starting shield
 	local value, maxValue	=GetUnitAttributeVisualizerEffectInfo('player',ATTRIBUTE_VISUAL_POWER_SHIELDING,STAT_MITIGATION,ATTRIBUTE_HEALTH,POWERTYPE_HEALTH)
 	BUI.Player.shield		={["current"]=value or 0, ["max"]=maxValue or 0, ["pct"]=zo_roundToNearest((value or 0)/(maxValue or 0),0.01)}
+	--Load starting trauma
+	local value, maxValue	=GetUnitAttributeVisualizerEffectInfo('player',ATTRIBUTE_VISUAL_TRAUMA,STAT_MITIGATION,ATTRIBUTE_HEALTH,COMBAT_MECHANIC_FLAGS_HEALTH)
+	BUI.Player.trauma		={["current"]=value or 0, ["max"]=maxValue or 0, ["pct"]=zo_roundToNearest((value or 0)/(maxValue or 0),0.01)}
 
 	--Initialize group
 	for i=1, 24 do
@@ -49,6 +52,7 @@ function BUI.Player:Initialize()
 			["magicka"]	={current=0,max=0,pct=100},
 			["stamina"]	={current=0,max=0,pct=100},
 			["shield"]	={current=0,max=0,pct=100},
+			["trauma"]  ={current=0,max=0,pct=100},
 		}
 	end
 	BUI.Group.members=0
@@ -65,6 +69,7 @@ function BUI.Target:Initialize()
 		resist	=0,
 		health	={["current"]=0, ["max"]=0, ["pct"]=1},
 		shield	={["current"]=0, ["max"]=0, ["pct"]=1},
+		trauma	={["current"]=0, ["max"]=0, ["pct"]=1},
 		color		={.6,.1,.2,1},
 	}
 	--Populate the target object
@@ -103,6 +108,7 @@ function BUI.Target:Update(isTarget)
 		end
 		BUI.Target.resist	=TargetResistance[BUI.Target.difficulty]
 		BUI.Target.shield.current,BUI.Target.shield.max=GetUnitAttributeVisualizerEffectInfo('reticleover',ATTRIBUTE_VISUAL_POWER_SHIELDING,STAT_MITIGATION,ATTRIBUTE_HEALTH,POWERTYPE_HEALTH) or 0
+		BUI.Target.trauma.current,BUI.Target.trauma.max=GetUnitAttributeVisualizerEffectInfo('reticleover',ATTRIBUTE_VISUAL_TRAUMA,STAT_MITIGATION,ATTRIBUTE_HEALTH,COMBAT_MECHANIC_FLAGS_HEALTH) or 0
 		BUI.Target.Invul	=GetUnitAttributeVisualizerEffectInfo('reticleover',ATTRIBUTE_VISUAL_UNWAVERING_POWER,STAT_MITIGATION,ATTRIBUTE_HEALTH,POWERTYPE_HEALTH)
 		if IsUnitAttackable("reticleover") then BUI.Target.attackable=BUI.Target.name end
 		BUI.Reticle.Invul()
@@ -166,9 +172,10 @@ function BUI.Player:UpdateAttribute(unitTag, powerType, powerValue, powerMax, po
 	if unitTag~='reticleover' then data[power]={current=powerValue,max=powerMax,pct=pct} end
 	--Update frames
 	local shield=data.shield.current or 0
+	local trauma=data.trauma.current or 0
 	if BUI.init.Frames and powerType~=POWERTYPE_ULTIMATE then
-		BUI.Frames.Attribute(unitTag, power, powerValue, powerMax, pct, shield)
-		if BUI.Vars.CurvedFrame~=0 and not isGroup then BUI.Curved.Attribute(unitTag, power, powerValue, powerMax, pct, shield) end
+		BUI.Frames.Attribute(unitTag, power, powerValue, powerMax, pct, shield, trauma)
+		if BUI.Vars.CurvedFrame~=0 and not isGroup then BUI.Curved.Attribute(unitTag, power, powerValue, powerMax, pct, shield, trauma) end
 	end
 end
 
@@ -193,8 +200,34 @@ function BUI.Player:UpdateShield(unitTag, value, maxValue)
 	data.shield={["current"]=value, ["max"]=maxValue, ["pct"]=pct}
 	--Update frames
 	if BUI.init.Frames then
-		if BUI.Vars.PlayerFrame or BUI.Vars.RaidFrames then BUI.Frames:Shield(unitTag,value,pct,data.health.current,data.health.max) end
-		if BUI.Vars.CurvedFrame~=0 and not isGroup then BUI.Curved.Shield(unitTag,value,pct,data.health.current) end
+		if BUI.Vars.PlayerFrame or BUI.Vars.RaidFrames then BUI.Frames:Shield(unitTag,value,pct,data.health.current,data.health.max,data.trauma.current) end
+		if BUI.Vars.CurvedFrame~=0 and not isGroup then BUI.Curved.Shield(unitTag,value,pct,data.health.current,data.trauma.current,data.trauma.current) end
+	end
+end
+
+function BUI.Player:UpdateTrauma(unitTag, value, maxValue)
+	local data,isGroup
+	if unitTag=='player' then
+		data=BUI.Player
+	elseif unitTag=='reticleover' then
+		data=BUI.Target
+		BUI.Target.trauma.current=value or 0
+		BUI.Reticle.Invul()
+	elseif BUI.init.Group and BUI.Group[unitTag] then
+		data=BUI.Group[unitTag]
+		isGroup=true
+	else return end
+	if not data or not data["health"] then return end
+	if not value then
+		value,maxValue=GetUnitAttributeVisualizerEffectInfo(unitTag,ATTRIBUTE_VISUAL_TRAUMA,STAT_MITIGATION,ATTRIBUTE_HEALTH,COMBAT_MECHANIC_FLAGS_HEALTH) or 0
+	end
+	if value==data.trauma.current then return end
+	local pct=value/data.health.max
+	data.trauma={["current"]=value, ["max"]=maxValue, ["pct"]=pct}
+	--Update frames
+	if BUI.init.Frames then
+		if BUI.Vars.PlayerFrame or BUI.Vars.RaidFrames then BUI.Frames:Trauma(unitTag,value,pct,data.health.current,data.health.max,data.shield.current) end
+		if BUI.Vars.CurvedFrame~=0 and not isGroup then BUI.Curved.Trauma(unitTag,value,pct,data.health.current,data.shield.current,data.shield.current) end
 	end
 end
 --[[ API<100034

@@ -1975,6 +1975,14 @@ end
 		getFunc2	=function() return BUI.Vars.FrameShieldColor1[1],BUI.Vars.FrameShieldColor1[2],BUI.Vars.FrameShieldColor1[3] end,
 		setFunc2	=function(r,g,b,a) BUI.Menu.UpdateFrames('FrameShieldColor1', {math.floor(r*100)/100, math.floor(g*100)/100, math.floor(b*100)/100,1}) end,
 	},
+	--Trauma Bar Colors
+	{	type		="gradient",
+		name		="FrameTraumaColor",
+		getFunc	=function() return BUI.Vars.FrameTraumaColor[1],BUI.Vars.FrameTraumaColor[2],BUI.Vars.FrameTraumaColor[3] end,
+		setFunc	=function(r,g,b,a) BUI.Menu.UpdateFrames('FrameTraumaColor', {math.floor(r*100)/100, math.floor(g*100)/100, math.floor(b*100)/100,1}) end,
+		getFunc2	=function() return BUI.Vars.FrameTraumaColor[1],BUI.Vars.FrameTraumaColor[2],BUI.Vars.FrameTraumaColor[3] end,
+		setFunc2	=function(r,g,b,a) BUI.Menu.UpdateFrames('FrameTraumaColor', {math.floor(r*100)/100, math.floor(g*100)/100, math.floor(b*100)/100,1}) end,
+	},
 	{	type		="button",
 		name		="SameColors",
 		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("SameColorsDesc"),func=function()BUI.Menu.Reset("SameColors")end})end,
@@ -2168,6 +2176,11 @@ function BUI.Menu:FramesReposition()
 			BUI_Curved:SetAlpha(BUI.Vars.FrameOpacityIn/100)
 			BUI_CurvedTarget:ClearAnchors()
 			BUI_CurvedTarget:SetAnchor(CENTER,BUI_MenuPlayerFrames,RIGHT,300,BUI.Vars.CurvedOffset)
+
+			--Spoof a shield
+			BUI.Curved.Shield('player',math.floor(BUI.Player.health.max*.5),BUI.Player.health.pct,BUI.Player.health.max,BUI.Player.trauma.current)
+			BUI.Curved.Trauma('player',math.floor(BUI.Player.health.max*.25),BUI.Player.health.pct,BUI.Player.health.max,BUI.Player.shield.current)
+
 			if not BUI.Vars.CurvedShift then
 				BUI_CurvedTarget:SetHidden(false)
 				BUI_CurvedTarget:SetAlpha(BUI.Vars.FrameOpacityIn/100)
@@ -2180,6 +2193,8 @@ function BUI.Menu:FramesReposition()
 	end
 	--Spoof a shield on the player frame
 	BUI.Player:UpdateShield('player', math.floor(BUI.Player.health.max*.5),	BUI.Player.health.max)
+	--Spoof trauma on the player frame
+	BUI.Player:UpdateTrauma('player', math.floor(BUI.Player.health.max*.25),	BUI.Player.health.max)
 	--Show the UI layer
 	BanditsUI:SetHidden(false)
 end
@@ -2204,6 +2219,7 @@ function BUI.Menu.FramesRestore()
 		end
 	end
 	BUI.Player:UpdateShield('player')
+	BUI.Player:UpdateTrauma('player')
 	--Toggle visibility
 	BanditsUI:SetHidden(not BUI_SettingsWindow:IsHidden())
 end
@@ -2265,7 +2281,7 @@ function BUI.Menu.Reset(context)
 		BUI.Menu.UpdateFrames()
 		BUI.Menu.UpdateOptions("BUI_MenuFrameColors")
 	elseif context=="SameColors" then
-		local vars={"FrameHealthColor","FrameMagickaColor","FrameStaminaColor","FrameShieldColor"}
+		local vars={"FrameHealthColor","FrameMagickaColor","FrameStaminaColor","FrameShieldColor","FrameTraumaColor"}
 		for _,var in pairs(vars) do BUI.Vars[var.."1"]=BUI.Vars[var] end
 		BUI.Menu.UpdateFrames()
 		BUI.Menu.UpdateOptions("BUI_MenuFrameColors")

@@ -12,7 +12,7 @@ BUI.Curved={
 --		CurvedShiftAnimation
 		}
 	}
-local ch,cm,cs,cw,ch1,cm1,cs1,cw1,rh,rh1
+local ch,cm,cs,ct,cw,ch1,cm1,cs1,ct1,cw1,rh,rh1
 local disable_hit_anim
 local coords={
 	--Simple
@@ -91,12 +91,15 @@ local function UI_Init()
 		[1]	=BUI.UI.Texture("BUI_Curved_HealthTop1", ui, {w1,h*delta}, {BOTTOMLEFT,(delta==1 and BOTTOMLEFT or LEFT),0,0}, texture, false, {1,0}, coord),
 		[2]	=BUI.UI.Texture("BUI_Curved_HealthTop2", ui, {w1,h*delta}, {BOTTOMLEFT,(delta==1 and BOTTOMLEFT or LEFT),0,0}, texture, false, {0,1}, coord),
 		[3]	=BUI.UI.Texture("BUI_Curved_HealthTop3", ui, {w1,h*delta}, {BOTTOMLEFT,(delta==1 and BOTTOMLEFT or LEFT),0,0}, texture, true, {1,1}, coord),
+		[4]	=BUI.UI.Texture("BUI_Curved_HealthTop4", ui, {w1,h*delta}, {BOTTOMLEFT,(delta==1 and BOTTOMLEFT or LEFT),0,0}, texture, true, {1,1}, coord),
 		coord=coord
 		}
 	ui.health.top[1]:SetGradientColors(2,ch[1],ch[2],ch[3],ch[4],ch1[1],ch1[2],ch1[3],ch1[4])
 	ui.health.top[2]:SetColor(ch[1],ch[2],ch[3],.4)
 	ui.health.top[3]:SetGradientColors(2,cw[1],cw[2],cw[3],cw[4],cw1[1],cw1[2],cw1[3],cw1[4])
 	ui.health.top[3]:SetAlpha(.4)
+	ui.health.top[4]:SetGradientColors(2,ct[1],ct[2],ct[3],ct[4],ct1[1],ct1[2],ct1[3],ct1[4])
+	ui.health.top[4]:SetAlpha(ct[4])
 	local coord=coords[c][3]
 	if coord then
 		local delta=math.abs(coord[3]-coord[4])
@@ -104,17 +107,21 @@ local function UI_Init()
 		[1]	=BUI.UI.Texture("BUI_Curved_HealthBot1", ui, {w1,h*delta}, {TOPLEFT,(delta==1 and TOPLEFT or LEFT),0,0}, texture, false, {1,0}, coord),
 		[2]	=BUI.UI.Texture("BUI_Curved_HealthBot2", ui, {w1,h*delta}, {TOPLEFT,(delta==1 and TOPLEFT or LEFT),0,0}, texture, false, {0,1}, coord),
 		[3]	=BUI.UI.Texture("BUI_Curved_HealthBot3", ui, {w1,h*delta}, {TOPLEFT,(delta==1 and TOPLEFT or LEFT),0,0}, texture, true, {1,1}, coord),
+		[4]	=BUI.UI.Texture("BUI_Curved_HealthBot4", ui, {w1,h*delta}, {TOPLEFT,(delta==1 and TOPLEFT or LEFT),0,0}, texture, true, {1,1}, coord),
 		coord=coord
 		}
 		ui.health.bot[1]:SetGradientColors(2,ch1[1],ch1[2],ch1[3],ch1[4],ch[1],ch[2],ch[3],ch[4])
 		ui.health.bot[2]:SetColor(ch[1],ch[2],ch[3],.4)
 		ui.health.bot[3]:SetGradientColors(2,cw1[1],cw1[2],cw1[3],cw1[4],cw[1],cw[2],cw[3],cw[4])
 		ui.health.bot[3]:SetAlpha(.4)
+		ui.health.bot[4]:SetGradientColors(2,ct1[1],ct1[2],ct1[3],ct1[4],ct[1],ct[2],ct[3],ct[4])
+		ui.health.bot[4]:SetAlpha(ct[4])
 	else
 		ui.health.bot=nil
 		if BUI_Curved_HealthBot1 then BUI_Curved_HealthBot1:SetHidden(true) end
 		if BUI_Curved_HealthBot2 then BUI_Curved_HealthBot2:SetHidden(true) end
 		if BUI_Curved_HealthBot3 then BUI_Curved_HealthBot3:SetHidden(true) end
+		if BUI_Curved_HealthBot4 then BUI_Curved_HealthBot4:SetHidden(true) end
 	end
 	Attributes.player.health.frame=ui.health
 
@@ -144,12 +151,15 @@ local function UI_Init()
 		[1]	=BUI.UI.Texture("BUI_Curved_TargetBot1", target, {w1,h*delta}, {BOTTOMRIGHT,(delta==1 and BOTTOMRIGHT or RIGHT),0,0}, texture, false, {1,0}, coord),
 		[2]	=BUI.UI.Texture("BUI_Curved_TargetBot2", target, {w1,h*delta}, {BOTTOMRIGHT,(delta==1 and BOTTOMRIGHT or RIGHT),0,0}, texture, false, {0,1}, coord),
 		[3]	=BUI.UI.Texture("BUI_Curved_TargetBot3", target, {w1,h*delta}, {BOTTOMRIGHT,(delta==1 and BOTTOMRIGHT or RIGHT),0,0}, texture, true, {1,1}, coord),
+		[4]	=BUI.UI.Texture("BUI_Curved_TargetBot4", target, {w1,h*delta}, {BOTTOMRIGHT,(delta==1 and BOTTOMRIGHT or RIGHT),0,0}, texture, true, {1,1}, coord),
 		coord=coord
 		}
 	ui.target.bot[1]:SetGradientColors(2,ch[1],ch[2],ch[3],ch[4],ch1[1],ch1[2],ch1[3],ch1[4])
 	ui.target.bot[2]:SetColor(ch[1],ch[2],ch[3],.4)
 	ui.target.bot[3]:SetGradientColors(2,cw[1],cw[2],cw[3],cw[4],cw1[1],cw1[2],cw1[3],cw1[4])
 	ui.target.bot[3]:SetAlpha(.4)
+	ui.target.bot[4]:SetGradientColors(2,ct[1],ct[2],ct[3],ct[4],ct1[1],ct1[2],ct1[3],ct1[4])
+	ui.target.bot[4]:SetAlpha(ct[4])
 	local coord=coords[c][10]
 	if coord then
 		local delta=math.abs(coord[3]-coord[4])
@@ -157,17 +167,21 @@ local function UI_Init()
 		[1]	=BUI.UI.Texture("BUI_Curved_TargetTop1", target, {w1,h*delta}, {TOPRIGHT,(delta==1 and TOPRIGHT or RIGHT),0,0}, texture, false, {1,0}, coord),
 		[2]	=BUI.UI.Texture("BUI_Curved_TargetTop2", target, {w1,h*delta}, {TOPRIGHT,(delta==1 and TOPRIGHT or RIGHT),0,0}, texture, false, {0,1}, coord),
 		[3]	=BUI.UI.Texture("BUI_Curved_TargetTop3", target, {w1,h*delta}, {TOPRIGHT,(delta==1 and TOPRIGHT or RIGHT),0,0}, texture, true, {1,1}, coord),
+		[4]	=BUI.UI.Texture("BUI_Curved_TargetTop4", target, {w1,h*delta}, {TOPRIGHT,(delta==1 and TOPRIGHT or RIGHT),0,0}, texture, true, {1,1}, coord),
 		coord=coord
 		}
 		ui.target.top[1]:SetGradientColors(2,ch1[1],ch1[2],ch1[3],ch1[4],ch[1],ch[2],ch[3],ch[4])
 		ui.target.top[2]:SetColor(ch[1],ch[2],ch[3],.4)
 		ui.target.top[3]:SetGradientColors(2,cw1[1],cw1[2],cw1[3],cw1[4],cw[1],cw[2],cw[3],cw[4])
 		ui.target.top[3]:SetAlpha(.4)
+		ui.target.top[4]:SetGradientColors(2,ct1[1],ct1[2],ct1[3],ct1[4],ct[1],ct[2],ct[3],ct[4])
+		ui.target.top[4]:SetAlpha(ct[4])
 	else
 		ui.target.top=nil
 		if BUI_Curved_TargetTop1 then BUI_Curved_TargetTop1:SetHidden(true) end
 		if BUI_Curved_TargetTop2 then BUI_Curved_TargetTop2:SetHidden(true) end
 		if BUI_Curved_TargetTop3 then BUI_Curved_TargetTop3:SetHidden(true) end
+		if BUI_Curved_TargetTop4 then BUI_Curved_TargetTop4:SetHidden(true) end
 	end
 	Attributes.reticleover.health.frame=ui.target
 
@@ -432,7 +446,7 @@ local function FramesFadeCheck(pct)
 	end
 end
 
-function BUI.Curved.Attribute(unitTag, attribute, powerValue, powerMax, pct, shieldValue)
+function BUI.Curved.Attribute(unitTag, attribute, powerValue, powerMax, pct, shieldValue, traumaValue)
 	local frame=Attributes[unitTag] and Attributes[unitTag][attribute] and Attributes[unitTag][attribute].frame
 	if not frame then return end
 
@@ -455,20 +469,40 @@ function BUI.Curved.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 
 	ChangeAttribute(frame,pct)
 	if frame.cur then
-		local shield=((attribute=="health" and shieldValue and shieldValue>0) and " ["..BUI.DisplayNumber(shieldValue/1000).."k]" or "")
-		frame.cur:SetText(BUI.DisplayNumber(powerValue/1000, 1).."k"..shield)
+		local preText=((shieldValue>0 or traumaValue>0) and " [" or "")
+		local postText=((shieldValue>0 or traumaValue>0) and "]" or "")
+		local shield=((attribute=="health" and shieldValue and shieldValue>0) and BUI.DisplayNumber(shieldValue/1000).."k" or "")
+		local trauma=((attribute=="health" and traumaValue and traumaValue>0) and "-"..BUI.DisplayNumber(traumaValue/1000).."k" or "")
+		frame.cur:SetText(BUI.DisplayNumber(powerValue/1000, 1).."k"..preText..shield..trauma..postText)
 	end
 	if frame.pct then frame.pct:SetText(pct*100 .."%") end
 end
 
-function BUI.Curved.Shield(unitTag,value,pct,health)
+function BUI.Curved.Shield(unitTag,value,pct,health,traumaValue)
+	local frame=Attributes[unitTag] and Attributes[unitTag].health and Attributes[unitTag].health.frame	
+	if frame then
+		if frame.cur then
+			local preText=((value>0 or traumaValue>0) and " [" or "")
+			local postText=((value>0 or traumaValue>0) and "]" or "")
+			local shield=(value>0 and BUI.DisplayNumber(value/1000).."k" or "")
+			local trauma=(traumaValue>0 and "-"..BUI.DisplayNumber(traumaValue/1000).."k" or "")
+			frame.cur:SetText(BUI.DisplayNumber(health/1000, 1).."k"..preText..shield..trauma..postText)
+		end
+		ChangeAttribute(frame,pct,3)
+	end
+end
+
+function BUI.Curved.Trauma(unitTag,value,pct,health,shieldValue)
 	local frame=Attributes[unitTag] and Attributes[unitTag].health and Attributes[unitTag].health.frame
 	if frame then
 		if frame.cur then
-			local shield=(value>0 and " ["..BUI.DisplayNumber(value/1000).."k]" or "")
-			frame.cur:SetText(BUI.DisplayNumber(health/1000, 1).."k"..shield)
+			local preText=((value>0 or shieldValue>0) and " [" or "")
+			local postText=((value>0 or shieldValue>0) and "]" or "")
+			local shield=(shieldValue>0 and BUI.DisplayNumber(shieldValue/1000).."k" or "")
+			local trauma=(value>0 and "-"..BUI.DisplayNumber(value/1000).."k" or "")
+			frame.cur:SetText(BUI.DisplayNumber(health/1000, 1).."k"..preText..shield..trauma..postText)
 		end
-		ChangeAttribute(frame,pct,3)
+		ChangeAttribute(frame,pct,4)
 	end
 end
 
@@ -560,8 +594,8 @@ function BUI.Curved.Initialize()	--Initialisation
 		return
 	end
 	theme_color=BUI.Vars.Theme==6 and {1,204/255,248/255,1} or BUI.Vars.Theme==7 and BUI.Vars.AdvancedThemeColor or BUI.Vars.CustomEdgeColor
-	ch,cm,cs,cw=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor
-	ch1,cm1,cs1,cw1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1
+	ch,cm,cs,cw,ct=BUI.Vars.FrameHealthColor,BUI.Vars.FrameMagickaColor,BUI.Vars.FrameStaminaColor,BUI.Vars.FrameShieldColor,BUI.Vars.FrameTraumaColor
+	ch1,cm1,cs1,cw1,ct1=BUI.Vars.FrameHealthColor1,BUI.Vars.FrameMagickaColor1,BUI.Vars.FrameStaminaColor1,BUI.Vars.FrameShieldColor1,BUI.Vars.FrameTraumaColor1
 	rh,rh1={1-ch[1],1-ch[2],1-ch[3],1-ch[4]},{1-ch1[1],1-ch1[2],1-ch1[3],1-ch1[4]}
 	disable_hit_anim=not BUI.Vars.CurvedHitAnimation
 	UI_Init()

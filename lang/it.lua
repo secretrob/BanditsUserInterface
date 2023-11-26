@@ -405,6 +405,8 @@ FrameStaminaColor	="Colore della Barra della Stamina",
 FrameStaminaColorDesc	="Imposta il colore visualizzato nella barra della stamina del frame del giocatore.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameStaminaColor),
 FrameShieldColor	="Colore Barra dello Scudo",
 FrameShieldColorDesc	="Imposta il colore visualizzato nelle barre dello scudo del frame del giocatore.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameShieldColor),
+FrameTraumaColor    ="Colore della barra del trauma",
+FrameTraumaColorDesc	="Imposta il colore visualizzato nelle barre del trauma del riquadro del giocatore.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameTraumaColor),
 SameColors	="Colori Uguali",
 SameColorsDesc="Imposta i colori finali come i colori iniziali",
 

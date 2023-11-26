@@ -420,6 +420,8 @@ FrameStaminaColor =				"Couleur de la vigueur dans la barre",
 FrameStaminaColorDesc =			"Détermine la couleur affichée dans la barre de vigueur.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameStaminaColor),
 FrameShieldColor =				"Couleur du bouclier dans la barre ",
 FrameShieldColorDesc =			"Détermine la couleur affichée dans la barre de bouclier.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameShieldColor),
+FrameTraumaColor    =			"Couleur de traumatisme en barre",
+FrameTraumaColorDesc	=		"Détermine la couleur affichée dans la barre du traumatisme.\n"..default..BUI.TranslateColor(BUI.Defaults.FrameTraumaColor),
 SameColors =					"Coloris égaux",
 SameColorsDesc =				"Détermine, si les couleurs de fin sont comme la couleur du début.",
 
