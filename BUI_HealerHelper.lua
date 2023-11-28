@@ -340,7 +340,7 @@ local function GetBuffsPlayer()
 		end
 	end
 	--Powers
-	local dmg_power=mainpower=="magicka" and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
+	local dmg_power=(GetPlayerStat(STAT_SPELL_POWER)>GetPlayerStat(STAT_POWER)) and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
 	if PlayerStats.dmg[dmg_power]==nil then PlayerStats.dmg[dmg_power]=PERIOD/1000
 	else PlayerStats.dmg[dmg_power]=PlayerStats.dmg[dmg_power]+PERIOD/1000 end
 
@@ -348,7 +348,7 @@ local function GetBuffsPlayer()
 	if PlayerStats.stat[stat_max]==nil then PlayerStats.stat[stat_max]=PERIOD/1000
 	else PlayerStats.stat[stat_max]=PlayerStats.stat[stat_max]+PERIOD/1000 end
 
-	local crit_chance=mainpower=="magicka" and GetPlayerStat(STAT_SPELL_CRITICAL)/218 or GetPlayerStat(STAT_CRITICAL_STRIKE)/218
+	local crit_chance=(GetPlayerStat(STAT_SPELL_CRITICAL)>GetPlayerStat(STAT_CRITICAL_STRIKE)) and GetPlayerStat(STAT_SPELL_CRITICAL)/218 or GetPlayerStat(STAT_CRITICAL_STRIKE)/218
 	if PlayerStats.crit[crit_chance]==nil then PlayerStats.crit[crit_chance]=PERIOD/1000
 	else PlayerStats.crit[crit_chance]=PlayerStats.crit[crit_chance]+PERIOD/1000 end
 end
@@ -544,7 +544,7 @@ end
 local function Helper_Init()
 	local magicka,stamina=GetPlayerStat(STAT_MAGICKA_MAX),GetPlayerStat(STAT_STAMINA_MAX)
 	mainpower=(stamina>magicka) and "stamina" or "magicka"
-	crit_chance=mainpower=="magicka" and GetPlayerStat(STAT_SPELL_CRITICAL)/218 or GetPlayerStat(STAT_CRITICAL_STRIKE)/218
+	crit_chance=(GetPlayerStat(STAT_SPELL_CRITICAL)>GetPlayerStat(STAT_CRITICAL_STRIKE)) and GetPlayerStat(STAT_SPELL_CRITICAL)/218 or GetPlayerStat(STAT_CRITICAL_STRIKE)/218
 	--Constellations
 	--	9 Rejuvenator Grants 41 Weapon and Spell Damage to your healing abilities per stage.
 	--	12 Fighting Finesse Increases your Critical Damage and Critical Healing done by 4% per stage.
@@ -570,8 +570,8 @@ local function Helper_Init()
 	Reset()
 	--Section 1
 	BUI_Helper_Label_1_1:SetText(mainpower=="magicka" and "|c5555ff"..Loc("Magicka").."|r" or "|c33bb33"..Loc("Stamina").."|r")
-	BUI_Helper_Label_1_2:SetText((mainpower=="magicka" and "|c5555ff"..Loc("Spd").."|r" or "|c33bb33"..Loc("Wdm").."|r").." (+"..rejuvenator_bonus..")")
-	BUI_Helper_Label_1_3:SetText((mainpower=="magicka" and "|c5555ff" or "|c33bb33")..Loc("CritBonus").."|r")
+	BUI_Helper_Label_1_2:SetText(((GetPlayerStat(STAT_SPELL_POWER)>GetPlayerStat(STAT_POWER)) and "|c5555ff"..Loc("Spd").."|r" or "|c33bb33"..Loc("Wdm").."|r").." (+"..rejuvenator_bonus..")")
+	BUI_Helper_Label_1_3:SetText(((GetPlayerStat(STAT_SPELL_CRITICAL)>GetPlayerStat(STAT_CRITICAL_STRIKE)) and "|c5555ff" or "|c33bb33")..Loc("CritBonus").."|r")
 --	BUI_Helper_Label_1_4:SetText("|cccccaa"..Loc("ConstellationsBonus").."|r (+"..healing_done_descr..")")
 	BUI_Helper_Label_1_4:SetText("|cccccaa"..Loc("MundusBonus").."|r")
 	BUI_Helper_Label_1_5:SetText("|cccccaa"..Loc("HealingDone").."|r (+"..healing_done_descr..")")

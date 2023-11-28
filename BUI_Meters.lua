@@ -76,11 +76,13 @@ Meters={
 	Power	={
 		min=0,max=5000,delta=5000,color={{.6,.6,.6,1},{.9,.9,.9,1}},
 		startfunc=function()
-			local minValue=BUI.MainPower=="magicka" and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
-			Meters.Power.color[2]=BUI.MainPower=="magicka" and {0,.2,.96,1} or {0,.55,.12,1}
+			local useSpell=GetPlayerStat(STAT_SPELL_POWER)>GetPlayerStat(STAT_POWER)
+			local minValue=useSpell and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
+			Meters.Power.color[2]=useSpell and {0,.2,.96,1} or {0,.55,.12,1}
 			BUI.Meters.UI_Init("Power")
 			local function PowerUpdate()
-				local value=BUI.MainPower=="magicka" and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
+				local useSpell=GetPlayerStat(STAT_SPELL_POWER)>GetPlayerStat(STAT_POWER)
+				local value=useSpell and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
 				if value<minValue then minValue=value end
 				BUI_Meter_Power.value:SetText(value)	--(BUI.MainPower=="magicka" and "|c5555ff" or "|c33bb33")..value.."|r")
 				MeterSet("Power",minValue,value)
@@ -96,11 +98,12 @@ Meters={
 	Crit	={
 		min=0,max=100,delta=100,color={{.6,.6,.6,1},{.9,.9,.9,1}},
 		startfunc=function()
-			local minValue=BUI.MainPower=="magicka" and GetPlayerStat(STAT_SPELL_POWER) or GetPlayerStat(STAT_POWER)
-			Meters.Crit.color[2]=BUI.MainPower=="magicka" and {0,.2,.96,1} or {0,.55,.12,1}
+			local useSpell=GetPlayerStat(STAT_SPELL_CRITICAL)>GetPlayerStat(STAT_CRITICAL_STRIKE)
+			local minValue=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10)/10
+			Meters.Crit.color[2]=useSpell and {0,.2,.96,1} or {0,.55,.12,1}
 			BUI.Meters.UI_Init("Crit")
 			local function PowerUpdate()
-				local value=BUI.MainPower=="magicka" and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10)/10
+				local value=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10)/10
 				if value<minValue then minValue=value end
 				BUI_Meter_Crit.value:SetText(value.."%")
 				MeterSet("Crit",minValue,value)
