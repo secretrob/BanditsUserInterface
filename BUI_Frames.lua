@@ -228,7 +228,7 @@ local function Frame_Player_UI()	--UI init
 	player.shield:SetDrawLayer(2)
 
 	--Trauma Bar
-	player.trauma	=BUI.UI.Backdrop("BUI_PlayerFrame_TraumaBar",		health,	{w,h2},		{LEFT,LEFT,2,0},		{ct[1],ct[2],ct[3],ct[4]}, {0,0,0,0}, nil, true)
+	player.trauma	=BUI.UI.Backdrop("BUI_PlayerFrame_TraumaBar",		health,	{w,h2},		{LEFT,LEFT,2,0},		{ct[1],ct[2],ct[3],.5}, {0,0,0,0}, nil, true)
 	player.trauma:SetDrawLayer(2)
 
 	--redraw the borders
@@ -532,7 +532,7 @@ function BUI.Frames.Raid_UI(s)	--UI init
 	health.bar:SetDrawLayer(1)
 	member.shield	=BUI.UI.Backdrop(	"BUI_RaidFrame"..i.."_Shield",health,	{w,hs-4*s},		{RIGHT,RIGHT,-2*s,0},	{cw[1],cw[2],cw[3],.5}, {0,0,0,0}, nil, true)
 	member.shield:SetDrawLayer(2)	--member.shield:SetEdgeTexture("",2,2,2)
-	member.trauma	=BUI.UI.Backdrop(	"BUI_RaidFrame"..i.."_Trauma",health,	{w,hs-4*s},		{LEFT,LEFT,2*s,0},	{ct[1],ct[2],ct[3],ct[4]}, {0,0,0,0}, nil, true)
+	member.trauma	=BUI.UI.Backdrop(	"BUI_RaidFrame"..i.."_Trauma",health,	{w,hs-4*s},		{LEFT,LEFT,2*s,0},	{ct[1],ct[2],ct[3],.5}, {0,0,0,0}, nil, true)
 	member.trauma:SetDrawLayer(2)
 	health.current	=BUI.UI.Label(	"BUI_RaidFrame"..i.."_Current",health,	{w*2/3,hs},		(comp and {RIGHT,RIGHT,-fs*1.3,0} or {LEFT,LEFT,8,0}),		BUI.UI.Font(BUI.Vars.FrameFont1,fs,true), nil, {comp and 2 or 0,1}, (BUI.Vars.RaidStatValue==3 and "" or BUI.Vars.RaidStatValue==2 and "0%" or "0.0k"), false)
 	health.current:SetDrawLayer(3)

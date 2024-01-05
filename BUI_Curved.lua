@@ -99,7 +99,7 @@ local function UI_Init()
 	ui.health.top[3]:SetGradientColors(2,cw[1],cw[2],cw[3],cw[4],cw1[1],cw1[2],cw1[3],cw1[4])
 	ui.health.top[3]:SetAlpha(.4)
 	ui.health.top[4]:SetGradientColors(2,ct[1],ct[2],ct[3],ct[4],ct1[1],ct1[2],ct1[3],ct1[4])
-	ui.health.top[4]:SetAlpha(ct[4])
+	ui.health.top[4]:SetAlpha(.4)
 	local coord=coords[c][3]
 	if coord then
 		local delta=math.abs(coord[3]-coord[4])
@@ -115,7 +115,7 @@ local function UI_Init()
 		ui.health.bot[3]:SetGradientColors(2,cw1[1],cw1[2],cw1[3],cw1[4],cw[1],cw[2],cw[3],cw[4])
 		ui.health.bot[3]:SetAlpha(.4)
 		ui.health.bot[4]:SetGradientColors(2,ct1[1],ct1[2],ct1[3],ct1[4],ct[1],ct[2],ct[3],ct[4])
-		ui.health.bot[4]:SetAlpha(ct[4])
+		ui.health.bot[4]:SetAlpha(.4)
 	else
 		ui.health.bot=nil
 		if BUI_Curved_HealthBot1 then BUI_Curved_HealthBot1:SetHidden(true) end
@@ -159,7 +159,7 @@ local function UI_Init()
 	ui.target.bot[3]:SetGradientColors(2,cw[1],cw[2],cw[3],cw[4],cw1[1],cw1[2],cw1[3],cw1[4])
 	ui.target.bot[3]:SetAlpha(.4)
 	ui.target.bot[4]:SetGradientColors(2,ct[1],ct[2],ct[3],ct[4],ct1[1],ct1[2],ct1[3],ct1[4])
-	ui.target.bot[4]:SetAlpha(ct[4])
+	ui.target.bot[4]:SetAlpha(.4)
 	local coord=coords[c][10]
 	if coord then
 		local delta=math.abs(coord[3]-coord[4])
@@ -175,7 +175,7 @@ local function UI_Init()
 		ui.target.top[3]:SetGradientColors(2,cw1[1],cw1[2],cw1[3],cw1[4],cw[1],cw[2],cw[3],cw[4])
 		ui.target.top[3]:SetAlpha(.4)
 		ui.target.top[4]:SetGradientColors(2,ct1[1],ct1[2],ct1[3],ct1[4],ct[1],ct[2],ct[3],ct[4])
-		ui.target.top[4]:SetAlpha(ct[4])
+		ui.target.top[4]:SetAlpha(.4)
 	else
 		ui.target.top=nil
 		if BUI_Curved_TargetTop1 then BUI_Curved_TargetTop1:SetHidden(true) end

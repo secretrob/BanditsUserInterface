@@ -820,7 +820,7 @@ function BUI.Automation_Init()
 	end
 
 	if BUI.Vars.GroupLeave then
-		GROUP_LIST["keybindStripDescriptor"][3].callback=function() GroupLeave() end
+		GROUP_LIST["keybindStripDescriptor"][4].callback=function() GroupLeave() end
 	end
 
 	if BUI.Vars.FriendInvite then
