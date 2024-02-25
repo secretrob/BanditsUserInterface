@@ -12,6 +12,7 @@ BUI.Actions	={
 		ProcAnimation	=true,
 		UseSwapPanel	=true,
 		HideSwapPanel	=true,
+		FullSwapPanel   =false,
 		ExpiresAnimation	=true,
 		ActionsFontSize	=16,
 		ProcSound		=SOUNDS.ABILITY_ULTIMATE_READY,
@@ -457,8 +458,8 @@ local function MakeAbilitySlot(i)
 	local AbilitySlot=ZO_ActionBar_GetButton(i)
 	local w,h=AbilitySlot.icon:GetDimensions()
 	slot=_G["BUI_ActionButton"..i] or WINDOW_MANAGER:CreateControl("BUI_ActionButton"..i, AbilitySlot.slot, CT_BACKDROP)
-	slot:ClearAnchors()
-	slot:SetAnchor(CENTER,AbilitySlot.slot,TOPRIGHT,-w/3,0)
+	slot:ClearAnchors()	
+	if not BUI.Vars.FullSwapPanel then slot:SetAnchor(CENTER,AbilitySlot.slot,TOPRIGHT,-w/3,0) else slot:SetAnchor(CENTER,AbilitySlot.slot,TOPRIGHT,-w/2,-20) end
 	slot:SetDimensions(w+4,h+4)
 	slot:SetCenterColor(0,0,0,0)
 	slot:SetEdgeColor(unpack(theme_color))

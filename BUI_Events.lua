@@ -609,11 +609,13 @@ local function CombatEvents(disable)
 end
 
 local function SwitchCombatEvents(PvPzone)
-	local on,off="|c33FE33enabled|r","|cFE3333disabled|r"
-	d(BUI.DisplayName..": You have entered the "..(PvPzone and "PvP" or "PvE").." location")
-	d("Combat statistics: "..(BUI.Stats.Initialize(PvPzone) and on or off))
-	d("Notifications: "..(BUI.OnScreen.Initialize(PvPzone) and on or off))
-	d("Stats share: "..(BUI.StatShare.Initialize(PvPzone) and on or off))
+	if BUI.Vars.PvPmodeAnnouncements then
+		local on,off="|c33FE33enabled|r","|cFE3333disabled|r"
+		d(BUI.DisplayName..": You have entered the "..(PvPzone and "PvP" or "PvE").." location")
+		d("Combat statistics: "..(BUI.Stats.Initialize(PvPzone) and on or off))
+		d("Notifications: "..(BUI.OnScreen.Initialize(PvPzone) and on or off))
+		d("Stats share: "..(BUI.StatShare.Initialize(PvPzone) and on or off))
+	end
 	CombatEvents(PvPzone)
 end
 

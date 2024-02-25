@@ -227,9 +227,9 @@ local function Frame_Player_UI()	--UI init
 	player.shield	=BUI.UI.Backdrop("BUI_PlayerFrame_ShieldBar",		health,	{w,h2},		{CENTER,CENTER,0,0},		{cw[1],cw[2],cw[3],.5}, {0,0,0,0}, nil, true)
 	player.shield:SetDrawLayer(2)
 
-	--Trauma Bar
+	--Trauma Bar	
 	player.trauma	=BUI.UI.Backdrop("BUI_PlayerFrame_TraumaBar",		health,	{w,h2},		{LEFT,LEFT,2,0},		{ct[1],ct[2],ct[3],.5}, {0,0,0,0}, nil, true)
-	player.trauma:SetDrawLayer(2)
+	player.trauma:SetDrawLayer(2)	
 
 	--redraw the borders
 	health:SetEdgeTexture(BUI.border[Border][1],b*8,b,b) health:SetEdgeColor(unpack(color))
@@ -1449,11 +1449,11 @@ function BUI.Frames:Trauma(unitTag, traumaValue, traumaPct, healthValue, healthM
 		group=true
 	else return end
 	--Update custom frames
-	if update and frame then
+	if update and frame then		
 		local width=math.min(traumaPct,1)*(frame.width-4)
 		frame.trauma:SetWidth(width)
-		frame.trauma:SetHidden(traumaValue<=0)
-			--Update bar labels
+		frame.trauma:SetHidden(traumaValue<=0)	
+		--Update bar labels
 		local short=group or healthValue>100000
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
 		..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")

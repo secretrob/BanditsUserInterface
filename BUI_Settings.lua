@@ -204,6 +204,12 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.PvPmode end,
 		setFunc	=function(value) BUI.Vars.PvPmode=value end,
 	},
+	--PvPmodeAnnouncement
+	{	type		="checkbox",
+		name		="PvPmodeAnnouncement",
+		getFunc	=function() return BUI.Vars.PvPmodeAnnouncement end,
+		setFunc	=function(value) BUI.Vars.PvPmodeAnnouncement=value end,
+	},
 --[[	--Champion system helper
 	{	type		="checkbox",
 		name		="ChampionHelper",
@@ -589,6 +595,18 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.FramesFade end,
 		setFunc	=function(value) BUI.Vars.FramesFade=value end,
 		disabled	=function() return not BUI.Vars.PlayerFrame and BUI.Vars.CurvedFrame==0 end,
+	},
+	--Shield bar
+	{	type		="checkbox",
+		name		="Shield",
+		getFunc	=function() return BUI.Vars.Shield end,
+		setFunc	=function(value) BUI.Vars.Shield=value end,
+	},
+	--Trauma bar
+	{	type		="checkbox",
+		name		="Trauma",
+		getFunc	=function() return BUI.Vars.Trauma end,
+		setFunc	=function(value) BUI.Vars.Trauma=value end,
 	}}}
 	}
 	MenuPanel["MenuPlayerFrames"]={name="PlayerHeader"}
@@ -1024,6 +1042,18 @@ end
 		getFunc	=function() return BUI.Vars.RaidSort+1 end,
 		setFunc	=function(i,value) BUI.Vars.RaidSort=i-1 BUI.Frames:SetupGroup() PreviewGroupFrames() end,
 		disabled	=function() return not BUI.Vars.RaidFrames end,
+	},
+	--Shield bar
+	{	type		="checkbox",
+		name		="ShieldGroup",
+		getFunc	=function() return BUI.Vars.ShieldGroup end,
+		setFunc	=function(value) BUI.Vars.ShieldGroup=value end,
+	},
+	--Trauma bar
+	{	type		="checkbox",
+		name		="TraumaGroup",
+		getFunc	=function() return BUI.Vars.TraumaGroup end,
+		setFunc	=function(value) BUI.Vars.TraumaGroup=value end,
 	}}},
 	--	==Stats share==
 	{type="submenu",name="StatShareHeader",controls={
@@ -1610,6 +1640,13 @@ end
 		setFunc	=function(value) BUI.Vars.HideSwapPanel=value end,
 		disabled	=function() return not BUI.Vars.Actions or not BUI.Vars.UseSwapPanel end,
 	},
+	{
+		type		="checkbox",
+		name		="FullSwapPanel",
+		getFunc	=function() return BUI.Vars.FullSwapPanel end,
+		setFunc	=function(value) BUI.Vars.FullSwapPanel=value end,
+		disabled	=function() return not BUI.Vars.Actions or not BUI.Vars.UseSwapPanel end,
+	},	
 	{	type		="checkbox",
 		name		="ExpiresAnimation",
 		getFunc	=function() return BUI.Vars.ExpiresAnimation end,

@@ -181,15 +181,17 @@ end
 
 function BUI.Player:UpdateShield(unitTag, value, maxValue)
 	local data,isGroup
-	if unitTag=='player' then
+	if unitTag=='player' then		
 		data=BUI.Player
+		if not BUI.Vars.Shield then value = 0 end
 	elseif unitTag=='reticleover' then
 		data=BUI.Target
 		BUI.Target.shield.current=value or 0
 		BUI.Reticle.Invul()
-	elseif BUI.init.Group and BUI.Group[unitTag] then
+	elseif BUI.init.Group and BUI.Group[unitTag] then		
 		data=BUI.Group[unitTag]
 		isGroup=true
+		if not BUI.Vars.ShieldGroup then value = 0 end
 	else return end
 	if not data or not data["health"] then return end
 	if not value then
@@ -207,15 +209,17 @@ end
 
 function BUI.Player:UpdateTrauma(unitTag, value, maxValue)
 	local data,isGroup
-	if unitTag=='player' then
+	if unitTag=='player' then		
 		data=BUI.Player
-	elseif unitTag=='reticleover' then
+		if not BUI.Vars.Trauma then value = 0 end
+	elseif unitTag=='reticleover' then		
 		data=BUI.Target
 		BUI.Target.trauma.current=value or 0
 		BUI.Reticle.Invul()
-	elseif BUI.init.Group and BUI.Group[unitTag] then
+	elseif BUI.init.Group and BUI.Group[unitTag] then		
 		data=BUI.Group[unitTag]
 		isGroup=true
+		if not BUI.Vars.TraumaGroup then value = 0 end
 	else return end
 	if not data or not data["health"] then return end
 	if not value then

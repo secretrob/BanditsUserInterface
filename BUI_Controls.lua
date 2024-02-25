@@ -551,8 +551,7 @@ function BUI.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
 	control:ClearAnchors()
 	control:SetAnchor(anchor[1], #anchor==5 and anchor[5] or parent, anchor[2], anchor[3], anchor[4])
 	control:SetHidden(hidden)
-	control.m_comboBox:SetSortsItems(false)
-	control.m_comboBox.m_dropdown:SetParent(control:GetOwningWindow()) --temp fix
+	control.m_comboBox:SetSortsItems(false)	
 	local fs=math.min(18,dims[2]-8)
 	control.m_comboBox:SetFont(BUI.UI.Font("standard",fs,false))
 	if scroll and #array>20 then
