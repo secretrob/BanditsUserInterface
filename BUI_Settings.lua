@@ -419,6 +419,14 @@ local function MenuOptions_Init()	--Menu options
 		setFunc	=function(i,value) BUI.Vars.FramesBorder=i BUI.Frames:Controls() end,
 		disabled	=function() return not BUI.Vars.PlayerFrame end,
 	},
+	--Primary Stat
+	{	type		="dropdown",
+		name		="PrimaryStat",
+		choices	={"Default","Stamina","Magica"},
+		getFunc	=function() return BUI.Vars.PrimaryStat end,
+		setFunc	=function(i,value) BUI.Vars.PrimaryStat=i BUI.Player:SetPrimaryStat() end,
+		disabled	=function() return not BUI.Vars.PlayerFrame end,
+	},
 	--Show Maximum Health
 	{	type		="checkbox",
 		name		="FrameShowMax",

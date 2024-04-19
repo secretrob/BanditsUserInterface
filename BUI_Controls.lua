@@ -555,7 +555,7 @@ function BUI.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
 	local fs=math.min(18,dims[2]-8)
 	control.m_comboBox:SetFont(BUI.UI.Font("standard",fs,false))
 	if scroll and #array>20 then
-		control.m_comboBox:SetHeight(math.min(control.m_comboBox:GetEntryTemplateHeightWithSpacing()*#array-control.m_comboBox.m_spacing+ZO_SCROLLABLE_COMBO_BOX_LIST_PADDING_Y*2,400))
+		control.m_comboBox:SetHeight(math.min(control.m_comboBox.m_height*#array-control.m_comboBox.m_spacing+ZO_SCROLLABLE_COMBO_BOX_LIST_PADDING_Y*2,400))
 	end
 	local largestEntryWidth=0
 	--Set values

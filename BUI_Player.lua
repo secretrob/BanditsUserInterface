@@ -29,15 +29,9 @@ function BUI.Player:Initialize()
 		local current, maximum=GetUnitPower("player", stats[i].id)
 		BUI.Player[stats[i].name]={["current"]=current, ["max"]=maximum, ["pct"]=zo_roundToNearest(current/maximum,0.01)}
 	end
-	if BUI.Player.magicka.max>=BUI.Player.stamina.max then
-		BUI.MainPower="magicka"
-		BUI.SecondaryPower="stamina"
-		BUI.MainPowerType=POWERTYPE_MAGICKA
-	else
-		BUI.MainPower="stamina"
-		BUI.SecondaryPower="magicka"
-		BUI.MainPowerType=POWERTYPE_STAMINA
-	end
+	
+	BUI.Player:SetPrimaryStat()
+
 	--Load starting shield
 	local value, maxValue	=GetUnitAttributeVisualizerEffectInfo('player',ATTRIBUTE_VISUAL_POWER_SHIELDING,STAT_MITIGATION,ATTRIBUTE_HEALTH,POWERTYPE_HEALTH)
 	BUI.Player.shield		={["current"]=value or 0, ["max"]=maxValue or 0, ["pct"]=zo_roundToNearest((value or 0)/(maxValue or 0),0.01)}
@@ -56,6 +50,18 @@ function BUI.Player:Initialize()
 		}
 	end
 	BUI.Group.members=0
+end
+
+function BUI.Player:SetPrimaryStat()
+	if BUI.Player.magicka.max>=BUI.Player.stamina.max or BUI.Vars.PrimaryStat == 3 then
+		BUI.MainPower="magicka"
+		BUI.SecondaryPower="stamina"
+		BUI.MainPowerType=POWERTYPE_MAGICKA
+	else
+		BUI.MainPower="stamina"
+		BUI.SecondaryPower="magicka"
+		BUI.MainPowerType=POWERTYPE_STAMINA
+	end
 end
 
 function BUI.Target:Initialize()

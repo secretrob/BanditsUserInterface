@@ -125,7 +125,9 @@ local DailyPledges={
 		{en="Graven Deep",			ru="Могильная Пучина",		de="Kentertiefen",	fr="Profondeurs mortuaires"},
 		{en="Bal Sunnar",			ru="Бал-Суннар",	de="Bal Sunnar",	fr="Bal Sunnar"},
 		{en="Scrivener's Hall",		ru="Зал Книжников",		de="Halle der Schriftmeister",	fr="Salles du Scribe"},
-		shift=7
+		{en="Oathsworn Pit",        ru="Храм Верных Клятве",    de="Grube der Eidgeschworenen",     fr="Fosse aux fidèles", zh="誓约者深渊", ze="誓约者深渊"},
+		{en="Bedlam Veil",          ru="Завеса Хаоса",    de="Schleier des Aufruhrs",  fr="Voile des fous",  zh="癫狂之幕",  ze="癫狂之幕"},
+		shift=13
 	},
 }
 
@@ -183,6 +185,8 @@ local DungeonIndex={
 [610]	={id=3394},	--Graven Deep
 [613]	={id=3468},	--Bal Sunnar
 [615]	={id=3529},	--Scrivener's Hall
+[638]	={id=3810},	--Oathsworn Pit
+[640]	={id=3851},	--Bedlam Veil
 --Veteran
 [19]	={id=421,	hm=448,	tt=446,	nd=1572},	--Spindleclutch II
 [20]	={id=1549,	hm=1554,	tt=1552,	nd=1553},	--Banished Cells I
@@ -236,6 +240,8 @@ local DungeonIndex={
 [611]	={id=3395,	hm=3396,	tt=3397,	nd=3398},	--Graven Deep
 [614]	={id=3469,	hm=3470,	tt=3471,	nd=3472},	--Bal Sunnar
 [616]	={id=3530,	hm=3531,	tt=3532,	nd=3533},	--Scrivener's Hall
+[639]   ={id=3811,  hm=3812,    tt=3813,    nd=3814}, 	--Oathsworn Pit
+[641]   ={id=3852,  hm=3853,    tt=3854,    nd=3855}, 	--Bedlam Veil
 }
 
 function SiegeCameraToggle()
