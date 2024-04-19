@@ -422,7 +422,7 @@ local function MenuOptions_Init()	--Menu options
 	--Primary Stat
 	{	type		="dropdown",
 		name		="PrimaryStat",
-		choices	={"Default","Stamina","Magica"},
+		choices	={"Default","Stamina","Magicka"},
 		getFunc	=function() return BUI.Vars.PrimaryStat end,
 		setFunc	=function(i,value) BUI.Vars.PrimaryStat=i BUI.Player:SetPrimaryStat() end,
 		disabled	=function() return not BUI.Vars.PlayerFrame end,
