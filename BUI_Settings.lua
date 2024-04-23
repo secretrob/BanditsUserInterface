@@ -154,6 +154,15 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.AdvancedThemeColor[1],BUI.Vars.AdvancedThemeColor[2],BUI.Vars.AdvancedThemeColor[3],BUI.Vars.AdvancedThemeColor[4] end,
 		setFunc	=function(r,g,b,a) BUI.Vars.AdvancedThemeColor={math.floor(r*100)/100, math.floor(g*100)/100, math.floor(b*100)/100, math.floor(a*100)/100} if BUI.Vars.Theme==7 then BUI.Themes_Setup(true) end end,
 	},
+	--ActionSlots
+	{	type		="header",
+		name		="ActionSlotsHeader",
+	},
+	{	type		="checkbox",
+		name		="ActionSlots",
+		getFunc	=function() return BUI.Vars.ActionSlots end,
+		setFunc	=function(value) BUI.Vars.ActionSlots=value BUI.ActionSlots:Initialize() end,
+	},	
 	--QuickSlots
 	{	type		="header",
 		name		="QuickSlotsHeader",

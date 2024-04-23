@@ -342,7 +342,7 @@ function BUI.Themes_Setup(change)
 		frame:SetEdgeTexture(texture,128,16,16) if color then frame:SetEdgeColor(unpack(color)) end
 	end
 	--ActionBar
-	Setup_ActionSlot()
+	if BUI.Vars.ActionSlots then Setup_ActionSlot() end
 	--Compass
 	local texture=BUI.Vars.Theme<=3 and "/esoui/art/compass/compass.dds" or "/BanditsUserInterface/textures/theme/compass.dds"
 	for _,text in pairs({"Center","Left","Right"}) do local frame=_G["ZO_CompassFrame"..text] if frame then frame:SetTexture(texture) if color then frame:SetColor(unpack(color)) end end end

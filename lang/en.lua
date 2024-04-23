@@ -172,6 +172,7 @@ ReticleHeader	="Reticle",
 NotificationsHeader	="Notifications",
 NotificationsCombatHeader	="Combat Notifications",
 ColorsHeader	="Frames settings",
+ActionSlotsHeader	="Action slots",
 QuickSlotsHeader	="Quick slots",
 GroupRolesHeader	="Group roles",
 StatHeader	="Damage statistics",
@@ -276,6 +277,10 @@ ReticleMode	="12. Reticle mode",
 ReticleBoost	="13. Speed boost indicator",
 ReticleBoostDesc	="(Player buffs must be enabled)\n"..default..(BUI.Defaults.ReticleBoost and on or off),
 BlockIndicator	="14. Block indicator",
+
+--ActionSlots
+ActionSlots	="Action Slots",
+ActionSlotsDesc	=default..(BUI.Defaults.ActionSlots and on or off),
 
 --QuickSlots
 QuickSlots	="Quick Slots",

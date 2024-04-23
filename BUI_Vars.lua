@@ -5,7 +5,7 @@ BUI	={
 	DisplayName			="|c4B8BFEBandits|cFEFEFE User Interface|r",	--"|c4B8BFEBandits|r User Interface",
 	ShortName			="|c4B8BFEBandits|r UI",
 	URL					="http://bandits-clan.ru/",
-	Version				=4.406,
+	Version				=4.407,
 	language			=tostring(GetCVar("language.2")),
 	API					=GetAPIVersion(),
 	GamepadMode			=IsInGamepadPreferredMode(),
@@ -96,6 +96,8 @@ BUI	={
 		Glyphs				=true,
 		NotificationSound_1	="Champion_PointsCommitted",
 		NotificationSound_2	="No_Sound",
+		--ActionSlot
+		ActionSlots			=true,
 		--QuickSlots
 		QuickSlots			=true,
 		QuickSlotsShow		=4,

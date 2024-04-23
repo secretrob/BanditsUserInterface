@@ -172,6 +172,7 @@ ReticleHeader	="Siatka",
 NotificationsHeader	="Powiadomienia",
 NotificationsCombatHeader	="Powiadomienia z Walki",
 ColorsHeader	="Ustawienia ramek",
+ActionSlotsHeader	="Sloty akcji",
 QuickSlotsHeader	="Szybki dostęp",
 GroupRolesHeader	="Role w grupie",
 StatHeader	="Statystyki uszkodzeń",
@@ -276,6 +277,10 @@ ReticleMode	="12. Tryb celownika",
 ReticleBoost	="13. Wskaźnik zwiększenia prędkości",
 ReticleBoostDesc	="(Wzmocnienia gracza muszą być włączone)\n"..default..(BUI.Defaults.ReticleBoost and on or off),
 BlockIndicator	="14. Wskaźnik blokady",
+
+--ActionSlots
+ActionSlots	="Sloty akcji",
+ActionSlotsDesc	=default..(BUI.Defaults.ActionSlots and on or off),
 
 --QuickSlots
 QuickSlots	="Szybki dostęp",

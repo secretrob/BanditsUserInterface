@@ -156,6 +156,7 @@ ReticleHeader	="Настройки Прицела",
 NotificationsHeader	="Оповещения",
 NotificationsCombatHeader	="Боевые оповещения",
 ColorsHeader	="Настройки элементов",
+ActionSlotsHeader	="Слоты действий",
 QuickSlotsHeader	="Слоты быстрого доступа",
 GroupRolesHeader	="Роли в группе",
 StatHeader	="Статистика боя",
@@ -258,6 +259,10 @@ ImpactAnimationDesc	=default..(BUI.Defaults.ImpactAnimation and on or off).."]",
 ReticleMode	="12. Внешний вид прицела",
 ReticleBoost	="13. Индикатор ускорения",
 BlockIndicator	="14. Индикатор блокирования",
+
+--ActionSlots
+ActionSlots	="Слоты действий",
+ActionSlotsDesc	=default..(BUI.Defaults.ActionSlots and on or off).."]",
 
 --QuickSlots
 QuickSlots	="Быстрые слоты",

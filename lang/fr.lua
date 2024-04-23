@@ -172,6 +172,7 @@ ReticleHeader =					"Réticule",
 NotificationsHeader =			"Notifications",
 NotificationsCombatHeader =		"Notifications de combat",
 ColorsHeader =					"Paramètres des barres",
+ActionSlotsHeader =				"Emplacements d'action",
 QuickSlotsHeader =				"Emplacements rapides",
 GroupRolesHeader =				"Rôle de groupe",
 StatHeader =					"Statistiques de dégâts",
@@ -276,6 +277,10 @@ ReticleMode =					"12. Mode du réticule",
 ReticleBoost =					"13. Indicateur d'accélération de la vitesse",
 ReticleBoostDesc =				"(Les bonus du joueur doivent être activés).\n"..default..(BUI.Defaults.ReticleBoost and on or off),
 BlockIndicator =				"14. Indicateur de blocage",
+
+--ActionSlots
+ActionSlots	=					"Emplacements d'action",
+ActionSlotsDesc	=				default..(BUI.Defaults.ActionSlots and on or off),
 
 --QuickSlots
 QuickSlots =					"Emplacements rapides",

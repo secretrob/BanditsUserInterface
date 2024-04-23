@@ -165,6 +165,7 @@ ReticleHeader="Fadenkreuz",
 NotificationsHeader="Benachrichtigungen",
 NotificationsCombatHeader	="Kampfbenachrichtigungen",
 ColorsHeader="Fenstereinstellungen",
+ActionSlotsHeader="Aktionsslots",
 QuickSlotsHeader="Schnellzugriff",
 GroupRolesHeader="Gruppenrollen",
 StatHeader="Kampfstatistiken",
@@ -268,6 +269,10 @@ ReticleMode="11. Fadenkreuz Aussehen",
 ReticleBoost="13. Indikator für Bewegungsgeschwindigkeits-Boost",
 ReticleBoostDesc="Anzeige eigener Buffs muss aktiviert sein.\n"..default..(BUI.Defaults.ReticleBoost and on or off),
 BlockIndicator="14. Indikator für  Blocken",
+
+--ActionSlots
+ActionSlots	="Aktionsslots",
+ActionSlotsDesc	=default..(BUI.Defaults.ActionSlots and on or off).."]",
 
 --QuickSlots
 QuickSlots="Schnellauswahl",

@@ -171,6 +171,7 @@ ReticleHeader	="Retícula",
 NotificationsHeader	="Notificações",
 NotificationsCombatHeader	="Notificações Combate",
 ColorsHeader	="Configurações de quadros",
+ActionSlotsHeader	="Slots de ação",
 QuickSlotsHeader	="Slots rápidos",
 GroupRolesHeader	="Funções no grupo",
 StatHeader	="Estatísticas de Dano",
@@ -266,6 +267,10 @@ ImpactAnimationDesc	="Animar cursor no golpe impactante\n"..default..(BUI.Defaul
 ReticleMode	="12. Modo retícula",
 ReticleBoost	="13. Indicador de aumento de velocidade",
 ReticleBoostDesc	="(Os buffs do jogador devem estar habilitados)\n"..default..(BUI.Defaults.ReticleBoost and on or off),
+
+--ActionSlots
+ActionSlots	="Slots de ação",
+ActionSlotsDesc	=default..(BUI.Defaults.ActionSlots and on or off),
 
 --QuickSlots
 QuickSlots	="Slots Rápidos",
