@@ -297,6 +297,8 @@ local function ActionsUpdate()
 					local diration,castTime=BUI.GetAbilityDuration(id)
 					local addCastTime=AdditionalCastTime[id] and AdditionalCastTime[id] or 0
 					local name=GetSlotName(i)
+					if diration == nil then diration = 0
+					if castTime == nil then castTime = 0
 					BUI.Actions.AbilityBar[id]={
 --						id		=id,
 						Name		=name,

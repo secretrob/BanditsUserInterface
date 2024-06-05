@@ -772,6 +772,7 @@ function BUI.Automation_Init()
 	if BUI.Vars.DeleteMail then
 		MAIL_INBOX.Delete=function(self)
 			if self.mailId then
+				d(self)
 				if self:IsMailDeletable() then
 					local numAttachments,attachedMoney=GetMailAttachmentInfo(self.mailId)
 					if numAttachments>0 and attachedMoney>0 then

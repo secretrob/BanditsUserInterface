@@ -161,7 +161,7 @@ local function MenuOptions_Init()	--Menu options
 	{	type		="checkbox",
 		name		="ActionSlots",
 		getFunc	=function() return BUI.Vars.ActionSlots end,
-		setFunc	=function(value) BUI.Vars.ActionSlots=value BUI.ActionSlots:Initialize() end,
+		setFunc	=function(value) BUI.Vars.ActionSlots=value BUI.Themes_Setup() end,
 	},	
 	--QuickSlots
 	{	type		="header",

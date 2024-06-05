@@ -2183,7 +2183,7 @@ local AbilityArmTime={
 	}
 function BUI.GetAbilityDuration(id)
 	local _sec=AbilityDuration[id] or GetAbilityDuration(id)
-	if _sec<3000 then
+	if _sec and _sec<3000 then
 		local _descr=GetAbilityDescription(id)
 		local _start,_end=string.find(_descr,_seconds)
 		if _start then
@@ -2201,7 +2201,7 @@ function BUI.GetAbilityDuration(id)
 	end
 	local _,castTime,channelTime=GetAbilityCastInfo(id)
 	local armTime=BUI.Vars.ActionsPrecise and AbilityArmTime[id] or 0
-	return _sec,castTime+channelTime+armTime
+	return _sec,castTime+(channelTime or 0)+armTime
 end
 
 function BUI.GetAbilityTickTime(id)
