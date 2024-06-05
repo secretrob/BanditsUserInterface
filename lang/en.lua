@@ -674,7 +674,7 @@ FullSwapPanelDesc	="Show the entire swap panel\n"..default..(BUI.Defaults.UseSwa
 ExpiresAnimation	="Expires animation",
 ExpiresAnimationDesc	=default..(BUI.Defaults.ExpiresAnimation and on or off),
 ActionsFontSize	="Font Size",
-ActionsFontSizeDesc	=default..BUI.Defaults.ActionsFontSize,
+ActionsFontSizeDesc	=default..(BUI.Defaults.ActionsFontSize and on or off),
 
 --Automation
 AutoConfirm	="Auto confirm",

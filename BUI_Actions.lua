@@ -224,7 +224,7 @@ local function StartTimer(id,duration,stackCount,effectType)
 				Started	=now,
 				Positive	=effectType==BUFF_EFFECT_TYPE_BUFF,
 				Player	=true,
-				Hold		=true,
+				Hold		=true
 --				Expires	=BUI.Widgets[widgetId] and BUI.Widgets[widgetId].Expires,
 			}
 		end
@@ -297,8 +297,8 @@ local function ActionsUpdate()
 					local diration,castTime=BUI.GetAbilityDuration(id)
 					local addCastTime=AdditionalCastTime[id] and AdditionalCastTime[id] or 0
 					local name=GetSlotName(i)
-					if diration == nil then diration = 0
-					if castTime == nil then castTime = 0
+					if diration == nil then diration = 0 end
+					if castTime == nil then castTime = 0 end
 					BUI.Actions.AbilityBar[id]={
 --						id		=id,
 						Name		=name,
@@ -310,7 +310,7 @@ local function ActionsUpdate()
 --						Target	=GetAbilityTargetDescription(id),
 						Pair		=BUI.CurrentPair,
 						Slot		=i,
-						Stack		=0,
+						Stack		=0
 						}
 					AbilityName[name]=id
 					BUI.Actions.AbilitySlots[BUI.CurrentPair][i]=id
