@@ -219,6 +219,12 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.PvPmodeAnnouncement end,
 		setFunc	=function(value) BUI.Vars.PvPmodeAnnouncement=value end,
 	},
+	--DisableHelpAnnounce
+	{	type		="checkbox",
+		name		="DisableHelpAnnounce",
+		getFunc	=function() return BUI.Vars.DisableHelpAnnounce end,
+		setFunc	=function(value) BUI.Vars.DisableHelpAnnounce=value end,
+	},	
 --[[	--Champion system helper
 	{	type		="checkbox",
 		name		="ChampionHelper",
@@ -473,7 +479,7 @@ local function MenuOptions_Init()	--Menu options
 	--Frame Font Size
 	{	type		="slider",
 		name		="FrameFontSize",
-		min		=12,
+		min		=8,
 		max		=24,
 		step		=1,
 		getFunc	=function() return BUI.Vars.FrameFontSize end,
@@ -984,7 +990,7 @@ end
 	--Raid Frame Font Size
 	{	type		="slider",
 		name		="RaidFontSize",
-		min		=10,
+		min		=8,
 		max		=20,
 		step		=1,
 		getFunc	=function() return BUI.Vars.RaidFontSize end,
@@ -1672,7 +1678,7 @@ end
 	},
 	{	type		="slider",
 		name		="ActionsFontSize",
-		min		=15,
+		min		=12,
 		max		=20,
 		step		=1,
 		getFunc	=function() return BUI.Vars.ActionsFontSize end,

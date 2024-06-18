@@ -769,25 +769,28 @@ function BUI.Automation_Init()
 		end
 	end
 
+	--DELETE MAIL
+	ZO_Dialogs_RegisterCustomDialog("BUI_DELETE_CONFIRMATION", {
+		gamepadInfo={dialogType=GAMEPAD_DIALOGS.BASIC, allowShowOnNextScene=true},
+		title={text=SI_PROMPT_TITLE_DELETE_MAIL_ATTACHMENTS},
+		mainText=function(dialog) return {text=dialog.data.body} end,
+		buttons=
+			{
+				{text=SI_OK,callback=function(dialog)dialog.data.confirmationCallback()end,keybind="DIALOG_PRIMARY",clickSound=SOUNDS.MAIL_ITEM_DELETED},
+				{text=SI_DIALOG_CANCEL,keybind="DIALOG_NEGATIVE",clickSound=SOUNDS.DIALOG_ACCEPT}
+			}
+		}
+	)
 	if BUI.Vars.DeleteMail then
 		MAIL_INBOX.Delete=function(self)
 			if self.mailId then
-				d(self)
-				if self:IsMailDeletable() then
-					local numAttachments,attachedMoney=GetMailAttachmentInfo(self.mailId)
-					if numAttachments>0 and attachedMoney>0 then
-						ZO_Dialogs_ShowDialog("DELETE_MAIL_ATTACHMENTS_AND_MONEY",self.mailId)
-					elseif numAttachments>0 then
-						ZO_Dialogs_ShowDialog("DELETE_MAIL_ATTACHMENTS",self.mailId)
-					elseif attachedMoney>0 then
-						ZO_Dialogs_ShowDialog("DELETE_MAIL_MONEY",self.mailId)
-					else
-						if BUI.Vars.DeleteMail then
-							self:ConfirmDelete(self.mailId) 
-						else
-							ZO_Dialogs_ShowDialog("DELETE_MAIL",{callback=function(...) self:ConfirmDelete(...) end,mailId=self.mailId})
-						end
-					end
+				local dialogTextParams = { mainTextParams = { GetString(SI_DELETE_MAIL_CONFIRMATION_TEXT), }, }
+				local numAttachments,attachedMoney=GetMailAttachmentInfo(self.mailId)
+				if numAttachments>0 or attachedMoney>0 then
+					ZO_Dialogs_ShowDialog("BUI_DELETE_CONFIRMATION", { confirmationCallback = function(...) DeleteMail(self.mailId) PlaySound(SOUNDS.MAIL_ITEM_DELETED) end, title = SI_PROMPT_TITLE_DELETE_MAIL_ATTACHMENTS, body = BUI.Loc("DeleteMailConfirm"), })
+				else
+					DeleteMail(self.mailId)					
+					PlaySound(SOUNDS.MAIL_ITEM_DELETED)
 				end
 			end
 		end

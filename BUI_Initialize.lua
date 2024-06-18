@@ -202,8 +202,10 @@ local function VersionCheck()
 	if BUI.Vars.CurvedFrame==4 or type(BUI.Vars.CurvedFrame)~="number" then BUI.Vars.CurvedFrame=1 pl("|c4B8BFEBandits|r User Interface: Curved frames are changed. Settings are resetted to defaults") end
 	if changed then BUI.Vars.LastVersion=BUI.Version end
 	local accessibilityModeEnabled = GetSetting_Bool(SETTING_TYPE_ACCESSIBILITY, ACCESSIBILITY_SETTING_ACCESSIBILITY_MODE)
-	if IsInGamepadPreferredMode() then pl("|c4B8BFEBandits|r User Interface: You are currently in gamepad mode which is not fully supported by BUI.") end
-	if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: You are currently in accessibility mode which may cause issues with BUI and other addons.") end	
+	if BUI.Vars.DisableHelpAnnounce==false then
+		if IsInGamepadPreferredMode() then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("GamepadHelpAnnouncement")) end
+		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end	
+	end
 end
 
 local function Initialize(eventCode, addOnName)

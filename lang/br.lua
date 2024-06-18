@@ -155,6 +155,8 @@ ActionsReset	="Redefinir",
 ActionsResetDesc	="Redefinir para as configurações originais.",
 MinimapReset	="Redefinir Minimapa",
 MinimapResetDesc	="Redefinir as configurações originais do minimapa.",
+--Delete
+DeleteMailConfirm ="Você realmente deseja destruir os anexos ou o ouro anexado?",
 
 --Headers
 MiscHeader	="Opções básicas",
@@ -313,6 +315,10 @@ PvPmodeAnnouncement="Aviso de Modo PvP",
 PvPmodeAnnouncementDesc="Exibir o aviso de bate-papo para o modo PvP",
 ChampionHelper	="Ajudante do sistema campeão",
 ChampionHelperDesc	="Capacidade de lembrar e aplicar configurações do sistema campeão na interface do sistema campeão\n"..default..(BUI.Defaults.ChampionHelper and on or off),
+DisableHelpAnnounce ="Desativar anúncios de inicialização",
+DisableHelpAnnounceDesc ="Desative os anúncios de aviso do Gamepad e do modo de acessibilidade.",
+GamepadHelpAnnouncement ="Você está atualmente no modo gamepad, que não é totalmente compatível com BUI.",
+AccessibilityHelpAnnouncement ="Você está atualmente no modo de acessibilidade, o que pode causar problemas com o BUI e outros complementos.",
 
 --Frame do jogador
 PlayerFrame	="Quadro do Jogador",

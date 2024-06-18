@@ -140,6 +140,8 @@ ActionsReset	="Сброс настроек",
 ActionsResetDesc	="Сброс настроек на стандартные",
 MinimapReset	="Сброс настроек",
 MinimapResetDesc	="Сброс настроек миникарты на стандартные.",
+--Delete
+DeleteMailConfirm ="Вы действительно хотите уничтожить вложения или прикрепленное золото?",
 
 --Headers
 MiscHeader	="Основные настройки",
@@ -306,6 +308,10 @@ PvPmodeAnnouncement="Анонс режима PvP",
 PvPmodeAnnouncementDesc="Отображать объявления чата для режима PvP",
 ChampionHelper	="Модернизация интерфейса \"чемпионки\"",
 ChampionHelperDesc	="Содержит предустановки различных типов \"чемпионки\". Позволяет сохранять и восстанавливать собственные.\n"..default..(BUI.Defaults.ChampionHelper and on or off).."]",
+DisableHelpAnnounce ="Отключить уведомления о запуске",
+DisableHelpAnnounceDesc ="Отключите предупреждающие сообщения в режиме геймпада и специальных возможностей.",
+GamepadHelpAnnouncement ="В настоящее время вы находитесь в режиме геймпада, который не полностью поддерживается BUI.",
+AccessibilityHelpAnnouncement ="В настоящее время вы находитесь в режиме специальных возможностей, что может вызвать проблемы с BUI и другими дополнениями.",
 
 --Player frame
 PlayerFrame	="Панель Игрока",

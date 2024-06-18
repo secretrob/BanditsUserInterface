@@ -3,7 +3,7 @@ local Localization={
 		AUTHOR=string.format("%s: <<X:1>>", GetString(SI_ADDON_MANAGER_AUTHOR)),
 		AUTHORLINE=string.format("%s", GetString(SI_ADD_ON_AUTHOR_LINE)),
 		CREATOR="|c4B8BFEHoft|r",
-		VERSIONBY="|c8000ffsecretrob|r",
+		VERSIONBY="|c32CD32secretrob|r",
 		VERSION="Version: <<X:1>>",
 		WEBSITE="Visit Website",
 		PANEL_INFO_FONT="$(CHAT_FONT)|14|soft-shadow-thin",
@@ -145,7 +145,7 @@ local function SettingsWindow_Init()
 	ui.website:SetHandler("OnClicked",function(self)RequestOpenUnsafeURL(BUI.URL)end)
 	--Author info
 	local ver=tostring(BUI.Version) local l=string.len(ver) while l<5 do ver=ver.."0" l=string.len(ver) end
-	ui.info	=BUI.UI.Label("$(parent)_info", ui, {645,14}, {TOPRIGHT,TOPLEFT,-10,0,ui.website}, Loc["PANEL_INFO_FONT"], nil, {2,0}, zo_strformat(Loc["AUTHOR"], Loc["CREATOR"]).."  "..zo_strformat(Loc["VERSION"], ver).."  "..zo_strformat(Loc["AUTHORLINE"], Loc["VERSIONBY"]))
+	ui.info	=BUI.UI.Label("$(parent)_info", ui, {645,14}, {TOPRIGHT,TOPLEFT,-10,0,ui.website}, Loc["PANEL_INFO_FONT"], nil, {2,0}, zo_strformat(Loc["AUTHOR"], Loc["CREATOR"]).."    "..zo_strformat(Loc["VERSION"], ver).." "..zo_strformat(Loc["AUTHORLINE"], Loc["VERSIONBY"]).."    ")
 	--Dialogs
 	ui.default=WINDOW_MANAGER:CreateControlFromVirtual("$(parent)_default", ui, "ZO_DialogButton")
 	ZO_KeybindButtonTemplate_Setup(ui.default, "OPTIONS_LOAD_DEFAULTS", HandleLoadDefaultsPressed, GetString(SI_OPTIONS_DEFAULTS))

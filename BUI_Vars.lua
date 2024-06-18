@@ -5,7 +5,7 @@ BUI	={
 	DisplayName			="|c4B8BFEBandits|cFEFEFE User Interface|r",	--"|c4B8BFEBandits|r User Interface",
 	ShortName			="|c4B8BFEBandits|r UI",
 	URL					="http://bandits-clan.ru/",
-	Version				=4.412,
+	Version				=4.413,
 	language			=tostring(GetCVar("language.2")),
 	API					=GetAPIVersion(),
 	GamepadMode			=IsInGamepadPreferredMode(),
@@ -102,6 +102,7 @@ BUI	={
 		QuickSlots			=true,
 		QuickSlotsShow		=4,
 		QuickSlotsInventory	=true,
+		DisableHelpAnnounce =false,
 	},
 	Frames={
 		Defaults={

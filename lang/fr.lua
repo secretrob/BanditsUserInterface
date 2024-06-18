@@ -156,6 +156,8 @@ ActionsReset =					"Réinitialiser",
 ActionsResetDesc =				"Réinitialise aux paramètres d'origine.",
 MinimapReset =					"Réinitialiser la minicarte",
 MinimapResetDesc =				"Réinitialise la minicarte aux paramètres d'origine.",
+--Delete
+DeleteMailConfirm =				"Voulez-vous vraiment détruire les pièces jointes ou l’or attaché ?",
 
 --Headers
 MiscHeader =					"Options de bases",
@@ -325,6 +327,10 @@ PvPmodeAnnouncement=			"Annonce du mode JcJ",
 PvPmodeAnnouncementDesc=		"Afficher l'annonce du chat pour le mode JcJ",
 ChampionHelper =				"Aide au Système Champion",
 ChampionHelperDesc =			"Enregistrer et appliquer différentes configurations de points de champion dans l'interface du système champion.\n"..default..(BUI.Defaults.ChampionHelper and on or off),
+DisableHelpAnnounce =			"Désactiver les annonces de démarrage",
+DisableHelpAnnounceDesc =		"Désactivez les annonces d’avertissement du mode manette de jeu et accessibilité.",
+GamepadHelpAnnouncement =		"Vous êtes actuellement en mode manette de jeu qui n'est pas entièrement pris en charge par BUI.",
+AccessibilityHelpAnnouncement =	"Vous êtes actuellement en mode accessibilité, ce qui peut entraîner des problèmes avec BUI et d'autres modules complémentaires.",
 
 --Player frame
 PlayerFrame =					"Barre du joueur",

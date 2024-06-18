@@ -156,6 +156,9 @@ ActionsReset	="Reset",
 ActionsResetDesc	="Reset to original settings.",
 MinimapReset	="Minimap reset",
 MinimapResetDesc	="Reset original settings for minimap.",
+--Delete
+DeleteMailConfirm ="Do you really want to destroy the attachments or attached gold?",
+
 
 --Headers
 MiscHeader	="Base options",
@@ -325,6 +328,10 @@ PvPmodeAnnouncement="PvP mode announcement",
 PvPmodeAnnouncementDesc="Display the chat announcement for PvP mode",
 ChampionHelper	="Champion system helper",
 ChampionHelperDesc	="Ability to remember and apply remembered champion system configurations in champion system interface\n"..default..(BUI.Defaults.ChampionHelper and on or off),
+DisableHelpAnnounce ="Disable Startup Annoucements",
+DisableHelpAnnounceDesc ="Disable the Gamepad and Accissiblity mode warning annoucements.",
+GamepadHelpAnnouncement ="You are currently in gamepad mode which is not fully supported by BUI.",
+AccessibilityHelpAnnouncement ="You are currently in accessibility mode which may cause issues with BUI and other addons.",
 
 --Player frame
 PlayerFrame	="Player Frame",

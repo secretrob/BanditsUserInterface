@@ -149,6 +149,8 @@ ActionsReset="Zurücksetzen",
 ActionsResetDesc="Setzt die Einstellungen auf Standard zurück.",
 MinimapReset="Minimap zurücksetzen",
 MinimapResetDesc="Setzt alle Einstellungen für die Minimap auf Standard zurück.",
+--Delete
+DeleteMailConfirm ="Möchten Sie die Anhänge bzw. das angehängte Gold wirklich zerstören?",
 
 --Headers
 MiscHeader="Grundlegende Einstellungen",
@@ -317,6 +319,10 @@ PvPmodeAnnouncement="Ankündigung des PvP Modus",
 PvPmodeAnnouncementDesc="Zeigt die Chat-Ankündigung für den PvP Modus an",
 ChampionHelper="Championpunkte-Helfer",
 ChampionHelperDesc="Fügt dem Championsystem Einstellungen zum Speichern und Laden von eigenen Championpunkt-Konfigurationen hinzu.\n"..default..(BUI.Defaults.ChampionHelper and on or off).."]",
+DisableHelpAnnounce ="Startankündigungen deaktivieren",
+DisableHelpAnnounceDesc ="Deaktivieren Sie die Warnmeldungen zum Gamepad- und Eingabehilfenmodus.",
+GamepadHelpAnnouncement ="Sie befinden sich derzeit im Gamepad-Modus, der von BUI nicht vollständig unterstützt wird.",
+AccessibilityHelpAnnouncement ="Sie befinden sich derzeit im Barrierefreiheitsmodus, was zu Problemen mit BUI und anderen Add-Ons führen kann.",
 
 --Player frame
 PlayerFrame="Spielerfenster",

@@ -156,6 +156,8 @@ ActionsReset	="Reset",
 ActionsResetDesc	="Reset do oryginalnych ustawień.",
 MinimapReset	="Reset minimapy",
 MinimapResetDesc	="Przywrócenie oryginalnych ustawień minimapy.",
+--Delete
+DeleteMailConfirm ="Czy na pewno chcesz zniszczyć załączniki lub dołączone złoto?",
 
 --Headers
 MiscHeader	="Opcje podstawowe",
@@ -325,6 +327,10 @@ PvPmodeAnnouncement="Ogłoszenie trybu PvP",
 PvPmodeAnnouncementDesc="Wyświetl powiadomienia na czacie w trybie PvP",
 ChampionHelper	="Pomoc systemu mistrzostwa",
 ChampionHelperDesc	="Zdolność do zapamiętywania i stosowania zapamiętanych konfiguracji systemu w interfejsie systemu mistrzostwa.\n"..default..(BUI.Defaults.ChampionHelper and on or off),
+DisableHelpAnnounce ="Wyłącz powiadomienia startowe",
+DisableHelpAnnounceDesc ="Wyłącz powiadomienia ostrzegawcze gamepada i trybu dostępności.",
+GamepadHelpAnnouncement ="Aktualnie znajdujesz się w trybie gamepada, który nie jest w pełni obsługiwany przez BUI.",
+AccessibilityHelpAnnouncement ="Aktualnie znajdujesz się w trybie dostępności, co może powodować problemy z BUI i innymi dodatkami.",
 
 --Player frame
 PlayerFrame	="Ramka gracza",
