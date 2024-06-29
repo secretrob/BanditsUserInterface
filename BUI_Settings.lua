@@ -2479,7 +2479,7 @@ local function WidgetContext_UI(parent)	--Context menu
 			if not BUI.Vars[name] then BUI.Vars[name]={[13]=i} else BUI.Vars[name][13]=i end
 		end)
 	--Delete
-	local label=BUI.UI.Label(	"BUI_Menu_Context_Delete_Label",	ui,	{w-15,fs*1.5},		{TOPLEFT,TOPLEFT,10,10+fs*1.5*9},	BUI.UI.Font("standard",fs,true), {.6,.6,.4,1}, {0,1}, GetString(SI_MAIL_DELETE))
+	local label=BUI.UI.Label(	"BUI_Menu_Context_Delete_Label",	ui,	{w-15,fs*1.5},		{TOPLEFT,TOPLEFT,10,10+fs*1.5*9},	BUI.UI.Font("standard",fs,true), {.6,.6,.4,1}, {0,1}, GetString(SI_MAIL_READ_DELETE))
 	BUI.UI.SimpleButton("BUI_Menu_Context_Delete", label, {20,20}, {RIGHT,RIGHT,0,0}, 4, false, function()BUI.Buffs.RemoveFrom(BUI.Vars.Widgets,parent.index,"Widgets")end)
 	--Close button
 	local button=BUI_Menu_Context_Close or WINDOW_MANAGER:CreateControlFromVirtual("BUI_Menu_Context_Close", ui, "ZO_DefaultButton")
@@ -2566,7 +2566,7 @@ local function ManageWidgets_UI()		--Manage widgets
 	local label=BUI.UI.Label(	"BUI_Menu_WManage_Reset",	ui,	{w*.5-10,rs},		{TOPLEFT,TOPLEFT,10,5+rs*6},	BUI.UI.Font("standard",fs,true), {.6,.6,.4,1}, {0,1}, BUI.Loc("WidgetsReset"))
 	BUI.UI.ComboBox(	"BUI_Menu_WManage_Reset_DropBox", label, {w*.5-10,28}, {TOPLEFT,TOPRIGHT,0,0}, choices, nil, ResetFunc)
 	--Delete widget
-	local label=BUI.UI.Label(	"BUI_Menu_WManage_Delete",	ui,	{w*.5-10,rs},		{TOPLEFT,TOPLEFT,10,5+rs*7},	BUI.UI.Font("standard",fs,true), {.6,.6,.4,1}, {0,1}, GetString(SI_MAIL_DELETE))
+	local label=BUI.UI.Label(	"BUI_Menu_WManage_Delete",	ui,	{w*.5-10,rs},		{TOPLEFT,TOPLEFT,10,5+rs*7},	BUI.UI.Font("standard",fs,true), {.6,.6,.4,1}, {0,1}, GetString(SI_MAIL_READ_DELETE))
 	BUI.UI.ComboBox(	"BUI_Menu_WManage_Delete_DropBox", label, {w*.5-10,28}, {TOPLEFT,TOPRIGHT,0,0}, choices, nil, function(i,value)BUI.Buffs.RemoveFrom(BUI.Vars.Widgets,values[i],"Widgets")end)
 	--Close button
 	local button=BUI_Menu_WManage_Close or WINDOW_MANAGER:CreateControlFromVirtual("BUI_Menu_WManage_Close", ui, "ZO_DefaultButton")

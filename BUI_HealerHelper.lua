@@ -280,7 +280,7 @@ local function GetCritDamage()
 			ability[id]=true	--nb assasination abilities or templar aedric spear abilities
 		end
 		for i=3, 8 do
-			if ability[GetSlotBoundId(i)] then ability_slotted=1 end
+			if ability[BUI.TranslateIdToScribedId(GetSlotBoundId(i))] then ability_slotted=1 end
 		end
 		local passive_level=GetSkillAbilityUpgradeInfo(1,1,(class==3 and 10 or 7))
 		class_bonus=5*passive_level*ability_slotted
@@ -555,7 +555,7 @@ local function Helper_Init()
 	blessed_bonus=0
 	local healing_done_descr=''
 	for i=5,8 do
-		local id=GetSlotBoundId(i,HOTBAR_CATEGORY_CHAMPION)
+		local id=BUI.TranslateIdToScribedId(GetSlotBoundId(i,HOTBAR_CATEGORY_CHAMPION))
 		if id==12 then	--Finese
 			crit_champ_bonus=math.floor(GetNumPointsSpentOnChampionSkill(id)/25)*4
 		elseif id==24 or id==26 or id==28 then	--Tide, Renewal, Mending
@@ -750,7 +750,7 @@ end
 
 local function OnSlotAbilityUsed(_,slot)
 	if slot<3 or slot>7 then return end
-	local id=GetSlotBoundId(slot)
+	local id=BUI.TranslateIdToScribedId(GetSlotBoundId(slot))
 	local now=GetGameTimeMilliseconds()
 --	if BUI.Vars.DeveloperMode then d(BUI.TimeStamp().."["..id.."] "..GetAbilityName(id)) end
 

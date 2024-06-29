@@ -384,7 +384,7 @@ local function OnPairChanged()
 		OWN_PENETR=BUI.MainPower=="magicka" and GetPlayerStat(STAT_SPELL_PENETRATION) or GetPlayerStat(STAT_PHYSICAL_PENETRATION)
 	end
 	if BUI.Vars.NotificationsGroup then
-		local ult=GetSlotBoundId(8)
+		local ult=BUI.TranslateIdToScribedId(GetSlotBoundId(8))
 		BUI.Buffs.HornAvailable[BUI.CurrentPair]=BUI.Buffs.Horn[ult]
 		BUI.Buffs.ColossusAvailable[BUI.CurrentPair]=BUI.Buffs.Colossus[ult]
 		BUI.Buffs.BarrierAvailable[BUI.CurrentPair]=BUI.Buffs.Barrier[ult]
@@ -410,7 +410,7 @@ local function OnAbilitySlotted()
 		UpdateCooldown=true
 		BUI.CallLater("Buffs_AbilitySlotted",500,function()
 			if BUI.Vars.NotificationsGroup then
-				local ult=GetSlotBoundId(8)
+				local ult=BUI.TranslateIdToScribedId(GetSlotBoundId(8))
 				BUI.Buffs.HornAvailable[BUI.CurrentPair]=BUI.Buffs.Horn[ult]
 				BUI.Buffs.ColossusAvailable[BUI.CurrentPair]=BUI.Buffs.Colossus[ult]
 				BUI.Buffs.BarrierAvailable[BUI.CurrentPair]=BUI.Buffs.Barrier[ult]

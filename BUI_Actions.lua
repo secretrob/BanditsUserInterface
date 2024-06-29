@@ -188,7 +188,7 @@ end
 local function RegisterUptimes(id,duration,now)
 	if now>BUI.Stats.Current[BUI.ReportN].startTime then
 		if not BUI.Stats.Current[BUI.ReportN].Uptimes[id] then
-			if last_effect[id] and last_effect[id][1]+last_effect[id][2]>BUI.Stats.Current[BUI.ReportN].startTime then
+			if last_effect[id] and last_effect[id][1] and last_effect[id][2] and last_effect[id][1]+last_effect[id][2]>BUI.Stats.Current[BUI.ReportN].startTime then
 				BUI.Stats.Current[BUI.ReportN].Uptimes[id]={[1]={BUI.Stats.Current[BUI.ReportN].startTime,last_effect[id][1]+last_effect[id][2]-BUI.Stats.Current[BUI.ReportN].startTime}}
 			else
 				BUI.Stats.Current[BUI.ReportN].Uptimes[id]={}
@@ -269,6 +269,19 @@ local function OnEffectChanged(_, changeType, effectSlot, effectName, unitTag, s
 	end
 end
 
+function BUI.TranslateIdToScribedId(id)
+	local scribedId=0
+	if( id < 13 ) then
+		local scribed = IsCraftedAbilityScribed(id)
+		if scribed then
+			scribedId=GetAbilityIdForCraftedAbilityId(id)
+--			d('ID:' .. id .. ' SCRIBED ID:' .. scribedId)
+			return scribedId
+		end
+	end
+	return id
+end
+
 local function ActionsUpdate()
 	if BUI.CurrentPair~=1 and BUI.CurrentPair~=2 then
 		if BUI.Vars.DeveloperMode then d("CurrentPair error: "..tostring(BUI.CurrentPair)) end
@@ -276,7 +289,8 @@ local function ActionsUpdate()
 	end
 	for i=3, 8 do
 		local _update=false
-		local id=GetSlotBoundId(i)
+		local id=BUI.TranslateIdToScribedId(GetSlotBoundId(i))
+		
 		--Proc animation
 		if BUI.Vars.ProcAnimation and i<8 and ProcAbilityId[id] and BUI.Proc[id]==nil then
 			BUI.Proc[id]={["id"]=id,["Slot"]=i,["Pair"]=BUI.CurrentPair,["Active"]=false}
@@ -335,7 +349,7 @@ end
 
 local function OnSlotAbilityUsed(_,slot)
 	if slot<1 or slot>8 then return end
-	local id=GetSlotBoundId(slot)
+	local id=BUI.TranslateIdToScribedId(GetSlotBoundId(slot))
 	local now=GetGameTimeMilliseconds()
 	--if BUI.Vars.DeveloperMode then d(BUI.TimeStamp().."["..id.."] "..GetAbilityName(id)) end
 

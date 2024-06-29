@@ -45,7 +45,7 @@ local Defaults={
 local Assistans={
 	Armorer		={10618, 9745, 11876},
 	Banker		={11097, 9743, 8994, 6376, 267},
-	Ragpicker	={10617, 10184},
+	Ragpicker	={11877, 10617, 10184},
 	Smuggler	={300},
 	Trader		={12414, 11059, 9744, 8995, 6378, 301},
 }

@@ -2182,6 +2182,7 @@ local AbilityArmTime={
 	[40465]=2000,--Scalding Rune
 	}
 function BUI.GetAbilityDuration(id)
+--	d('AB DUR ' .. id)
 	local _sec=AbilityDuration[id] or GetAbilityDuration(id)
 	if _sec and _sec<3000 then
 		local _descr=GetAbilityDescription(id)
