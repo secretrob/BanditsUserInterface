@@ -35,10 +35,10 @@ BUI:JoinTables(BUI.Defaults,BUI.MiniMap.Defaults)
 
 local function UpdateDimensions()
 	ZO_WorldMap:SetDimensions(size,size)
-	ZO_WorldMapScroll:SetDimensions(size-8,size-8)
+	ZO_WorldMapScroll:SetDimensions(size-8,size-8)	
 end
 
-local function UpdatePosition()
+local function UpdatePosition()	
 	ZO_WorldMap:ClearAnchors()
 	ZO_WorldMap:SetAnchor(BUI.Vars.BUI_Minimap[1],nil,BUI.Vars.BUI_Minimap[2],BUI.Vars.BUI_Minimap[3],BUI.Vars.BUI_Minimap[4])
 end
@@ -85,6 +85,7 @@ function BUI.MiniMap.Initialize()
 		if BUI.init.MiniMap then
 			BUI.MiniMap.Restore()
 			ZO_WorldMap:SetHidden(true)
+			_G["ZO_WorldMapMapFrame"]:SetHidden(true)
 			if not BUI.Vars.ZO_FocusedQuestTrackerPanel then
 				ZO_FocusedQuestTrackerPanel:ClearAnchors() ZO_FocusedQuestTrackerPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, 0, 60)
 			end
@@ -124,10 +125,10 @@ function BUI.MiniMap.Initialize()
 		if BUI.moveDefault or BUI.move then return end
 		if newState==SCENE_HIDDEN then BUI.CallLater("MiniMap",20,function()
 				if not BUI_MINIMAP_SCENE_NAMES[SCENE_MANAGER:GetCurrentSceneName()] then
-					if BUI.init.MiniMap then ZO_WorldMap:SetHidden(true) end
+					if BUI.init.MiniMap then ZO_WorldMap:SetHidden(true) _G["ZO_WorldMapMapFrame"]:SetHidden(true) end
 				end
 			end)
-		elseif newState==SCENE_SHOWING then if BUI.init.MiniMap then ZO_WorldMap:SetHidden(false) else BUI.MiniMap.Show() end end
+		elseif newState==SCENE_SHOWING then if BUI.init.MiniMap then ZO_WorldMap:SetHidden(false) _G["ZO_WorldMapMapFrame"]:SetHidden(false) else BUI.MiniMap.Show() end end
 	end
 	for scene in pairs(BUI_MINIMAP_SCENE_NAMES) do SCENE_MANAGER:GetScene(scene):RegisterCallback("StateChange", OnHUD) end
 
@@ -148,6 +149,7 @@ function BUI.MiniMap.Initialize()
 	local ctrl	=BUI.UI.Control("BUI_Minimap",	BanditsUI,	{size,size},	BUI.Vars.BUI_Minimap,	false)
 	ctrl.backdrop=BUI.UI.Backdrop("BUI_Minimap_B",	ctrl,		"inherit",		{CENTER,CENTER,0,0},	{0,0,0,0.4}, {0,0,0,1}, nil, true)
 	ctrl.label	=BUI.UI.Label("BUI_Minimap_L",	ctrl.backdrop,		"inherit",		{CENTER,CENTER,0,0},	BUI.UI.Font("standard",20,true), nil, {1,1}, BUI.Loc("MiniMap_Label"))
+
 	ctrl:SetMovable(true)
 	ctrl:SetMouseEnabled(false)
 	ctrl:SetHandler("OnMouseUp", function(self) BUI.Menu:SaveAnchor(BUI_Minimap) end)
@@ -171,21 +173,22 @@ function BUI.MiniMap.PinColors()
 	ZO_MapPin.PIN_DATA[MAP_PIN_TYPE_ASSISTED_QUEST_ENDING].tint=ZO_ColorDef:New(unpack(BUI.Vars.PinColor[MAP_PIN_TYPE_ASSISTED_QUEST_ENDING]))
 end
 
-function BUI.MiniMap.Show()
-	if not BUI.Vars.MiniMap or MapSceneIsShowing or BUI.GamepadMode then return end
+function BUI.MiniMap.Show()	
+	if not BUI.Vars.MiniMap or MapSceneIsShowing or BUI.GamepadMode then return end	
 	EVENT_MANAGER:UnregisterForUpdate("BUI_Minimap")
 	BUI.MiniMap.ResizePins(true)
 	if BUI.inMenu then ZO_WorldMap_UpdateMap() end
 	UpdatePosition()
 --	ZO_WorldMap:SetMouseEnabled(false)
 	ZO_WorldMap:SetHidden(not (SCENE_MANAGER:IsShowingBaseScene() or BUI.inMenu))
+	_G["ZO_WorldMapMapFrame"]:SetHidden(not (SCENE_MANAGER:IsShowingBaseScene() or BUI.inMenu))
 	BUI.init.MiniMap=true
 	BUI.MiniMap.ZoneChanged()
 	BUI.CallLater("MiniMap_Shown",100,function() EVENT_MANAGER:RegisterForUpdate("BUI_Minimap", 500, BUI.MiniMap.Update) end)
 	CALLBACK_MANAGER:FireCallbacks("BUI_MiniMap_Shown", true)
 end
 
-function BUI.MiniMap.Restore()
+function BUI.MiniMap.Restore()	
 	EVENT_MANAGER:UnregisterForUpdate("BUI_Minimap")
 --	if BUI.API<=10024 then
 	BUI.MiniMap.ResizePins(false)
@@ -213,6 +216,7 @@ end
 function BUI.Map_Toggle()
 	local _visible=not ZO_WorldMap:IsHidden()
 	ZO_WorldMap:SetHidden(_visible)
+	_G["ZO_WorldMapMapFrame"]:SetHidden(_visible)
 	if not _visible then
 --		ZO_WorldMap_SetCustomZoomLevels(2.5,2.5)
 		ZO_WorldMap_JumpToPlayer()

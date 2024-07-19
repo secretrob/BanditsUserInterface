@@ -2621,6 +2621,7 @@ function BUI.Menu.ManageWidgets(move)
 	if move then
 		BUI.Menu.FramesRestore()
 		ZO_WorldMap:SetHidden(true)
+		_G["ZO_WorldMapMapFrame"]:SetHidden(true)
 		BanditsUI.line_vert	=BUI.UI.Line("BanditsUI_Line_vert",	BanditsUI,	{0,BanditsUI:GetHeight()},	{TOPLEFT,TOP,0,0},	{.2,.8,.2,.5},1.8, false)
 		BanditsUI.line_hor	=BUI.UI.Line("BanditsUI_Line_hor",	BanditsUI,	{BanditsUI:GetWidth(),0},	{TOPLEFT,LEFT,0,0},	{.2,.8,.2,.5},1.8, false)
 		if BUI.Vars.CurvedFrame~=0 then
@@ -2737,6 +2738,7 @@ function BUI.Menu.MoveFrames(move)
 		BUI.inMenu=false
 		BUI.Menu.FramesRestore()
 		ZO_WorldMap:SetHidden(true)
+		_G["ZO_WorldMapMapFrame"]:SetHidden(true)
 		BanditsUI.line_vert	=BUI.UI.Line("BanditsUI_Line_vert",	BanditsUI,	{0,BanditsUI:GetHeight()},	{TOPLEFT,TOP,0,0},	{.2,.8,.2,.5},1.8, false)
 		BanditsUI.line_hor	=BUI.UI.Line("BanditsUI_Line_hor",	BanditsUI,	{BanditsUI:GetWidth(),0},	{TOPLEFT,LEFT,0,0},	{.2,.8,.2,.5},1.8, false)
 	else

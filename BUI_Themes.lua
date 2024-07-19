@@ -447,7 +447,7 @@ function BUI.Frames.ZO_PlayerAttribute_reposition()
 	end
 end
 
-function BUI.Frames.ZO_Frame_reposition()
+function BUI.Frames.ZO_Frame_reposition()	
 	local function SetupFunction(control, data)
 		control:SetWidth(GuiRoot:GetRight()-ZO_Compass:GetRight()-40)
 		control:SetText(data.text)
@@ -510,7 +510,7 @@ function BUI.Frames.ZO_Frame_reposition()
 	end)
 end
 
-function BUI.Themes_Initialize()
+function BUI.Themes_Initialize()		
 	BUI.abilityframe=BUI.Vars.Theme<=3 and "/esoui/art/actionbar/abilityframe64_up.dds" or "/BanditsUserInterface/textures/theme/abilityframe64_up.dds"
 	--Hide keybinds background
 	ZO_ActionBar1KeybindBG:SetHidden(true)

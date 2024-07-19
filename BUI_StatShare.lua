@@ -37,7 +37,10 @@ function BUI.MapData()
 	local pX1,pY1=GetMapPlayerPosition('player')
 	local wpX1,wpY1=GetMapPlayerWaypoint()
 
-	--calculate scale and offset for all collected maps
+	--if we didn't read the above, send back default
+	if pX1 == nil or pY1 == nil or wpX1 == nil or wpY1 == nil then return mData.default.scaleX,mData.default.scaleY end
+
+	--calculate scale and offset for all collected maps	
 	local scaleX,scaleY=(wpX1-pX1)/(wpX-pX),(wpY1-pY1)/(wpY-pY)
 --	local offsetX,offsetY=pX1-pX*scaleX,pY1-pY*scaleY
 	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then pl("Error: Map data for "..BUI.MapId.." might be wrong") end

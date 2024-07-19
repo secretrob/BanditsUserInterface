@@ -77,7 +77,7 @@ function BUI.UI.Control(name, parent, dims, anchor, hidden)
 	return control
 end
 
-function BUI.UI.Backdrop(name, parent, dims, anchor, center, edge, tex, hidden)
+function BUI.UI.Backdrop(name, parent, dims, anchor, center, edge, tex, hidden)	
 	--Validate arguments
 --	if (name==nil or name=="") then return end
 	parent=(parent==nil) and GuiRoot or parent
