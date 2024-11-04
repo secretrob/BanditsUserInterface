@@ -67,66 +67,66 @@ local ConfirmationDialog={
 
 local DailyPledges={
 	[1]={	--Maj
-		{en="Elden Hollow II",		ru="Элденская расщелина II",	de="Eldengrund II",	fr="Creuset des aînés II"},
-		{en="Wayrest Sewers I",		ru="Канализация Вэйреста I",	de="Kanalisation I",	fr="Égouts d'Haltevoie I"},
-		{en="Spindleclutch II",		ru="Логово Мертвой Хватки II",	de="Spindeltiefen II",	fr="Tressefuseau II"},
-		{en="Banished Cells I",		ru="Темницы изгнанников I",	de="Verbannungszellen I",	fr="Cachot interdit I"},
-		{en="Fungal Grotto II",		ru="Грибной грот II",		de="Pilzgrotte II",	fr="Champignonnière II"},
-		{en="Spindleclutch I",		ru="Логово Мертвой Хватки I",	de="Spindeltiefen I",	fr="Tressefuseau I"},
-		{en="Darkshade Caverns II",	ru="Пещеры Глубокой Тени II",	de="Dunkelschattenkavernen II",		fr="Cavernes d'Ombre-noire II"},
-		{en="Elden Hollow I",		ru="Элденская расщелина I",	de="Eldengrund I",	fr="Creuset des aînés I"},
-		{en="Wayrest Sewers II",	ru="Канализация Вэйреста II",	de="Kanalisation II",	fr="Égouts d'Haltevoie II"},
-		{en="Fungal Grotto I",		ru="Грибной грот I",		de="Pilzgrotte I",	fr="Champignonnière I"},
-		{en="Banished Cells II",	ru="Темницы изгнанников II",	de="Verbannungszellen II",	fr="Cachot interdit II"},
-		{en="Darkshade Caverns I",	ru="Пещеры Глубокой Тени I",	de="Dunkelschattenkavernen I",		fr="Cavernes d'Ombre-noire I"},
+		{en="Elden Hollow II",		ru="Элденская расщелина II",	de="Eldengrund II",	fr="Creuset des aînés II",	es="Hondonada de Elden 1"},
+		{en="Wayrest Sewers I",		ru="Канализация Вэйреста I",	de="Kanalisation I",	fr="Égouts d'Haltevoie I",	es="Cloacas de Quietud 1"},
+		{en="Spindleclutch II",		ru="Логово Мертвой Хватки II",	de="Spindeltiefen II",	fr="Tressefuseau II",	es="El Espiráculo 2"},
+		{en="Banished Cells I",		ru="Темницы изгнанников I",	de="Verbannungszellen I",	fr="Cachot interdit I",	es="Celdas del Destierro 1"},
+		{en="Fungal Grotto II",		ru="Грибной грот II",		de="Pilzgrotte II",	fr="Champignonnière II",	es="Gruta de los Hongos 2"},
+		{en="Spindleclutch I",		ru="Логово Мертвой Хватки I",	de="Spindeltiefen I",	fr="Tressefuseau I",	es="El Espiráculo 1"},
+		{en="Darkshade Caverns II",	ru="Пещеры Глубокой Тени II",	de="Dunkelschattenkavernen II",		fr="Cavernes d'Ombre-noire II",	es="Cavernas Sombra Oscura 2"},
+		{en="Elden Hollow I",		ru="Элденская расщелина I",	de="Eldengrund I",	fr="Creuset des aînés I",	es="Hondonada de Elden 1"},
+		{en="Wayrest Sewers II",	ru="Канализация Вэйреста II",	de="Kanalisation II",	fr="Égouts d'Haltevoie II",	es="Cloacas de Quietud 2"},
+		{en="Fungal Grotto I",		ru="Грибной грот I",		de="Pilzgrotte I",	fr="Champignonnière I",	es="Gruta de los Hongos 1"},
+		{en="Banished Cells II",	ru="Темницы изгнанников II",	de="Verbannungszellen II",	fr="Cachot interdit II",	es="Celdas del Destierro 2"},
+		{en="Darkshade Caverns I",	ru="Пещеры Глубокой Тени I",	de="Dunkelschattenkavernen I",		fr="Cavernes d'Ombre-noire I",	es="Cavernas Sombra Oscura 1"},
 		shift=0
 	},
 	[2]={	--Glirion
 		{en="Volenfell",			ru="Воленфелл"},
-		{en="Blessed Crucible I",	ru="Священное Горнило",		de="Gesegnete Feuerprobe",	fr="Creuset béni"},
-		{en="Direfrost Keep I",		ru="Крепость Лютых Морозов",	de="Burg Grauenfrost",		fr="Donjon d'Affregivre"},
-		{en="Vaults of Madness",	ru="Своды Безумия",		de="Kammern des Wahnsinns",	fr="Chambres de la folie"},
-		{en="Crypt of Hearts II",	ru="Крипта Сердец II",		de="Krypta der Herzen II",	fr="Crypte des cœurs II"},
-		{en="City of Ash I",		ru="Город Пепла I",		de="Stadt der Asche I",		fr="Cité des cendres I"},
-		{en="Tempest Island",		ru="Остров Бурь",			de="Orkaninsel",			fr="Île des Tempêtes"},
-		{en="Blackheart Haven",		ru="Гавань Черного Сердца",	de="Schwarzherz-Unterschlupf",fr="Havre de Cœurnoir"},
+		{en="Blessed Crucible I",	ru="Священное Горнило",		de="Gesegnete Feuerprobe",	fr="Creuset béni",	es="Crisol Sagrado"},
+		{en="Direfrost Keep I",		ru="Крепость Лютых Морозов",	de="Burg Grauenfrost",		fr="Donjon d'Affregivre",	es="Bastión Escarcha Aviesa"},
+		{en="Vaults of Madness",	ru="Своды Безумия",		de="Kammern des Wahnsinns",	fr="Chambres de la folie",	es="Cámaras de la Locura"},
+		{en="Crypt of Hearts II",	ru="Крипта Сердец II",		de="Krypta der Herzen II",	fr="Crypte des cœurs II",	es="Cripta de los Corazones 2"},
+		{en="City of Ash I",		ru="Город Пепла I",		de="Stadt der Asche I",		fr="Cité des cendres I",	es="Ciudad de Ceniza 1"},
+		{en="Tempest Island",		ru="Остров Бурь",			de="Orkaninsel",			fr="Île des Tempêtes",	es="Isla de la Tempestad"},
+		{en="Blackheart Haven",		ru="Гавань Черного Сердца",	de="Schwarzherz-Unterschlupf",fr="Havre de Cœurnoir",	es="Regugio del Corazón Negro"},
 		{en="Arx Corinium",			ru="Аркс-Кориниум"},
-		{en="Selene's Web",			ru="Паутина Селены",		de="Selenes Netz"},
-		{en="City of Ash II",		ru="Город Пепла II",		de="Stadt der Asche II",	fr="Cité des cendres II"},
-		{en="Crypt of Hearts I",	ru="Крипта Сердец I",		de="Krypta der Herzen I",	fr="Crypte des cœurs I"},
+		{en="Selene's Web",			ru="Паутина Селены",		de="Selenes Netz",	es="Telaraña de Selene"},
+		{en="City of Ash II",		ru="Город Пепла II",		de="Stadt der Asche II",	fr="Cité des cendres II",	es="Ciudad de Ceniza 2"},
+		{en="Crypt of Hearts I",	ru="Крипта Сердец I",		de="Krypta der Herzen I",	fr="Crypte des cœurs I",	es="Cripta de los Corazones 1"},
 		shift=0
 	},
 	[3]={	--Urgarlag
-		{en="Imperial City Prison",	ru="Тюрьма Имперского города",de="Gefängnis der Kaiserstadt",	fr="Tour d'Or Blanc"},
-		{en="Ruins of Mazzatun",	ru="Руины Маззатуна",		de="Ruinen von Mazzatun",	fr="Ruines de Mazzatun"},
-		{en="White-Gold Tower",		ru="Башня Белого Золота",	de="Weißgoldturm",		fr="Tour d'Or Blanc"},
-		{en="Cradle of Shadows",	ru="Колыбель Теней",		de="Wiege der Schatten",	fr="Berceau des ombres"},
-		{en="Bloodroot Forge",		ru="Кузница Кровавого корня",	de="Blutquellschmiede",		fr="Forge de Sangracine"},
-		{en="Falkreath Hold",		ru="Владение Фолкрит",		de="Falkenring",			fr="Forteresse d'Épervine"},
-		{en="Fang Lair",			ru="Логово Клыка",		de="Krallenhort",			fr="Repaire du croc"},
-		{en="Scalecaller Peak",		ru="Пик Воспевательницы Дракона",de="Gipfel der Schuppenruferin",	fr="Pic de la Mandécailles"},
-		{en="Moon Hunter Keep",		ru="Крепость Лунного Охотника",de="Mondjägerfeste",		fr="Fort du Chasseur lunaire"},
-		{en="March of Sacrifices",	ru="Путь Жертвоприношений",	de="Marsch der Aufopferung",	fr="Procession des Sacrifiés"},
-		{en="Depths of Malatar",	ru="Глубины Малатара",		de="Tiefen von Malatar",	fr="Profondeurs de Malatar"},
-		{en="Frostvault",			ru="Морозное хранилище",	de="Frostgewölbe",		fr="Arquegivre"},
-		{en="Moongrave Fane",		ru="Храм Погребенных Лун",	de="Mondgrab-Tempelstadt",	fr="le reliquaire des Lunes funèbres"},
-		{en="Lair of Maarselok",	ru="Логово Марселока",		de="Hort von Maarselok",	fr="Repaire de Maarselok"},
-		{en="Icereach",				ru="Ледяной Предел",		de="Eiskap",			fr="Crève-Nève"},
-		{en="Unhallowed Grave",		ru="Нечестивая Могила",		de="Unheiliges Grab",		fr="Sépulcre profane"},
-		{en="Stone Garden",			ru="Каменный Сад",		de="Steingarten",			fr="Jardin de pierre"},
-		{en="Castle Thorn",			ru="Замок Шипов",			de="Kastell Dorn",		fr="Bastion-les-Ronce"},
-		{en="Black Drake Villa",	ru="Вилла Черного Змея",	de="Schwarzdrachenvilla",	fr="Villa du Dragon noir"},
-		{en="Cauldron",				ru="Котел",				de="Kessel",			fr="Chaudron"},
-		{en="Red Petal Bastion",	ru="Оплот Алый Лепесток",	de="Rotblütenbastion",		fr="Bastion du Pétale rouge"},
-		{en="Dread Cellar",			ru="Ужасный Подвал",		de="Schreckenskeller",		fr="Cave d'effroi"},
-		{en="Coral Aerie",			ru="Коралловое Гнездо",	de="Korallenhorst",	fr="L'Aire de corail"},
+		{en="Imperial City Prison",	ru="Тюрьма Имперского города",de="Gefängnis der Kaiserstadt",	fr="Tour d'Or Blanc",	es="Prisión de la Ciudad Imperial"},
+		{en="Ruins of Mazzatun",	ru="Руины Маззатуна",		de="Ruinen von Mazzatun",	fr="Ruines de Mazzatun",	es="Ruinas de Mazzatun"},
+		{en="White-Gold Tower",		ru="Башня Белого Золота",	de="Weißgoldturm",		fr="Tour d'Or Blanc",	es="Torre Blanca y Dorada"},
+		{en="Cradle of Shadows",	ru="Колыбель Теней",		de="Wiege der Schatten",	fr="Berceau des ombres",	es="Cuna de Sombras"},
+		{en="Bloodroot Forge",		ru="Кузница Кровавого корня",	de="Blutquellschmiede",		fr="Forge de Sangracine",	es="Forja Sanguinaria"},
+		{en="Falkreath Hold",		ru="Владение Фолкрит",		de="Falkenring",			fr="Forteresse d'Épervine",	es="Comarca de Falkreath"},
+		{en="Fang Lair",			ru="Логово Клыка",		de="Krallenhort",			fr="Repaire du croc",	es="Guarida de los Colmillos"},
+		{en="Scalecaller Peak",		ru="Пик Воспевательницы Дракона",de="Gipfel der Schuppenruferin",	fr="Pic de la Mandécailles",	es="Cumbre de la Invocadora de Escamas"},
+		{en="Moon Hunter Keep",		ru="Крепость Лунного Охотника",de="Mondjägerfeste",		fr="Fort du Chasseur lunaire",	es="Bastión del Cazador de la Luna"},
+		{en="March of Sacrifices",	ru="Путь Жертвоприношений",	de="Marsch der Aufopferung",	fr="Procession des Sacrifiés",	es="Marcha de los Sacrificios"},
+		{en="Depths of Malatar",	ru="Глубины Малатара",		de="Tiefen von Malatar",	fr="Profondeurs de Malatar",	es="Profundidades de Malatar"},
+		{en="Frostvault",			ru="Морозное хранилище",	de="Frostgewölbe",		fr="Arquegivre",	es="Cripta Helada"},
+		{en="Moongrave Fane",		ru="Храм Погребенных Лун",	de="Mondgrab-Tempelstadt",	fr="le reliquaire des Lunes funèbres",	es="Sepulcro Lunar"},
+		{en="Lair of Maarselok",	ru="Логово Марселока",		de="Hort von Maarselok",	fr="Repaire de Maarselok",	es="Guarida de Maarselok"},
+		{en="Icereach",				ru="Ледяной Предел",		de="Eiskap",			fr="Crève-Nève",	es="Cuenca Glacial"},
+		{en="Unhallowed Grave",		ru="Нечестивая Могила",		de="Unheiliges Grab",		fr="Sépulcre profane",	es="Sepulcro Profano"},
+		{en="Stone Garden",			ru="Каменный Сад",		de="Steingarten",			fr="Jardin de pierre",	es="Jardín de Piedra"},
+		{en="Castle Thorn",			ru="Замок Шипов",			de="Kastell Dorn",		fr="Bastion-les-Ronce",	es="Castillo Espina"},
+		{en="Black Drake Villa",	ru="Вилла Черного Змея",	de="Schwarzdrachenvilla",	fr="Villa du Dragon noir",	es="Villa del Draco Negro"},
+		{en="Cauldron",				ru="Котел",				de="Kessel",			fr="Chaudron",	es="El Caldero"},
+		{en="Red Petal Bastion",	ru="Оплот Алый Лепесток",	de="Rotblütenbastion",		fr="Bastion du Pétale rouge",	es="Bastión del Pétalo Rojo"},
+		{en="Dread Cellar",			ru="Ужасный Подвал",		de="Schreckenskeller",		fr="Cave d'effroi",	es="Sótano Pavoroso"},
+		{en="Coral Aerie",			ru="Коралловое Гнездо",	de="Korallenhorst",	fr="L'Aire de corail",	es="Nido dee Coral"},
 		{en="Shipwright's Regret",	ru="Горе Корабела",	de="Gram des Schiffsbauers",	fr="Le Regret du Charpentier"},
 		{en="Earthen Root Enclave",	ru="Анклав Земляного Корня",	de="Erdwurz-Enklave",	fr="Enclave des Racines de la terre"},
-		{en="Graven Deep",			ru="Могильная Пучина",		de="Kentertiefen",	fr="Profondeurs mortuaires"},
-		{en="Bal Sunnar",			ru="Бал-Суннар",	de="Bal Sunnar",	fr="Bal Sunnar"},
-		{en="Scrivener's Hall",		ru="Зал Книжников",		de="Halle der Schriftmeister",	fr="Salles du Scribe"},
-		{en="Oathsworn Pit",        ru="Храм Верных Клятве",    de="Grube der Eidgeschworenen",     fr="Fosse aux fidèles", zh="誓约者深渊", ze="誓约者深渊"},
-		{en="Bedlam Veil",          ru="Завеса Хаоса",    de="Schleier des Aufruhrs",  fr="Voile des fous",  zh="癫狂之幕",  ze="癫狂之幕"},
+		{en="Graven Deep",			ru="Могильная Пучина",		de="Kentertiefen",	fr="Profondeurs mortuaires"},	es="Sima Mortuoria",
+		{en="Bal Sunnar",			ru="Бал-Суннар",	de="Bal Sunnar",	fr="Bal Sunnar",	es="Bal Sunnar"},
+		{en="Scrivener's Hall",		ru="Зал Книжников",		de="Halle der Schriftmeister",	fr="Salles du Scribe",	es="Sala del Escribano"},
+		{en="Oathsworn Pit",        ru="Храм Верных Клятве",    de="Grube der Eidgeschworenen",     fr="Fosse aux fidèles", zh="誓约者深渊", ze="誓约者深渊",	es="Palestra de los Juramentados"},
+		{en="Bedlam Veil",          ru="Завеса Хаоса",    de="Schleier des Aufruhrs",  fr="Voile des fous",  zh="癫狂之幕",  ze="癫狂之幕",	es="Velo del Trastorno"},
 		shift=13
 	},
 }
@@ -413,7 +413,7 @@ local function GetGoalPledges()
 		local name,_,_,stepType,_,completed,_,_,_,questType,instanceType=GetJournalQuestInfo(i)
 		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP then --and name:match(".*:%s*(.*)") 
 			local text=string.format("%s",name:gsub(".*:%s*",""):gsub(" "," "):gsub("%s+"," "):lower())
-			if BUI.language~="ru" and BUI.language~="fr" then
+			if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
 				local number=string.match(text,"%sii$")
 				text=string.match(text,"[^%s]+")..(number or "")
 			end
@@ -467,7 +467,7 @@ local function UndauntedPledges()
 								local _start,_end=string.find(text,"s|t")
 								if _start then text=string.sub(text,_end+2) end
 							end
-							if BUI.language~="ru" and BUI.language~="fr" then
+							if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
 								local number=string.match(text,"%sii$")
 								text=string.match(text,"[^%s]+")..(number or "")
 							elseif RuESO_init then
@@ -482,7 +482,7 @@ local function UndauntedPledges()
 								local name=dp[n][BUI.language] or dp[n].en
 								if name then
 									name=name:lower()
-									if BUI.language~="ru" and BUI.language~="fr" then
+									if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
 										local number=string.match(name,"%sii$")
 										name=string.match(name,"[^%s]+")..(number or "")
 									elseif RuESO_init then
@@ -521,7 +521,7 @@ local function UndauntedPledges()
 								local name=dp[n][BUI.language] or dp[n].en
 								if name then
 									name=name:lower()
-									if BUI.language~="ru" and BUI.language~="fr" then
+									if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
 										local number=string.match(name,"%sii$")
 										name=string.match(name,"[^%s]+")..(number or "")
 									elseif RuESO_init then
@@ -591,7 +591,7 @@ function BUI.DailyPledges()
 		local quest=""
 		if pledge then
 			local text=pledge:lower()
-			if BUI.language~="ru" and BUI.language~="fr" then
+			if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
 				local number=string.match(text,"%sii$")
 				text=string.match(text,"[^%s]+")..(number or "")
 			elseif RuESO_init then
