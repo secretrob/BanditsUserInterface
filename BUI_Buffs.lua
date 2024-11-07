@@ -20,7 +20,7 @@ local buffFood={
 	[66127]={Magicka=true},[66128]={Magicka=true},[68413]={Magicka=true},[66568]={Magicka=true},[61260]={Magicka=true},[84678]={Magicka=true},[84709]={Magicka=true},[84725]={Magicka=true},[84720]={Magicka=true},
 	[61341]=true,[61344]=true,[61340]=true,[61335]=true,[61345]=true,[66131]=true,[66132]=true,[66136]=true,[66137]=true,[66140]=true,[66141]=true,[17614]=true,[61350]=true,[84700]=true,[84704]=true,[100502]=true,[68416]=true,[86746]=true,[86559]=true,--Recovery
 	[68411]={Health=true,Magicka=true,Stamina=true},[17581]={Health=true,Magicka=true,Stamina=true},[61218]={Health=true,Magicka=true,Stamina=true},[85484]={Health=true,Magicka=true,Stamina=true},[100488]={Health=true,Magicka=true,Stamina=true},[127596]={Health=true,Magicka=true,Stamina=true},
-	[72956]={Health=true,Stamina=true},[61255]={Health=true,Stamina=true},[89957]={Health=true,Stamina=true},[107789]={Health=true,Stamina=true},[127572]={Health=true,Stamina=true},
+	[72956]={Health=true,Stamina=true},[61255]={Health=true,Stamina=true},[89957]={Health=true,Stamina=true},[107789]={Health=true,Stamina=true},[127572]={Health=true,Stamina=true},[86749]={Magicka=true,Stamina=true},
 	}
 local oakensoul={
 	[61665]="Major Brutality",
