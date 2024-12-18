@@ -455,20 +455,24 @@ local function UndauntedPledges()
 						--Achievement
 						local id=obj.node.data.id
 						if DungeonIndex[id] then
-							local text=IsAchievementComplete(DungeonIndex[id].id) and "|t16:16:/esoui/art/cadwell/check.dds|t" or ""
+							local text=IsAchievementComplete(DungeonIndex[id].id) and "|t16:16:/esoui/art/cadwell/check.dds|t" or ""							
 							text=text..((DungeonIndex[id].hm and IsAchievementComplete(DungeonIndex[id].hm)) and "|t20:20:/esoui/art/unitframes/target_veteranrank_icon.dds|t" or "")
 							text=text..((DungeonIndex[id].tt and IsAchievementComplete(DungeonIndex[id].tt)) and "|t20:20:/esoui/art/ava/overview_icon_underdog_score.dds|t" or "")
 							text=text..((DungeonIndex[id].nd and IsAchievementComplete(DungeonIndex[id].nd)) and "|t20:20:/esoui/art/treeicons/gamepad/gp_tutorial_idexicon_death.dds|t" or "")
 							local info=BUI.UI.Label("BUI_DungeonInfo"..c..i, obj, {80,20}, {LEFT,LEFT,465,0}, "ZoFontGameLarge", nil, {0,1}, text)
 							--Quest
-							local orig=obj.text:GetText()
-							local text=orig:lower() text=text:gsub("the ",""):gsub(" "," "):gsub("der ",""):gsub("die ",""):gsub("das ","")
+							local orig=obj.text:GetText()							
+							local text=orig:lower()
+							if( BUI.language~="es" ) then
+								text=text:gsub("the ",""):gsub(" "," "):gsub("der ",""):gsub("die ",""):gsub("das ","")
+							end
 							if c==3 then
 								local _start,_end=string.find(text,"s|t")
 								if _start then text=string.sub(text,_end+2) end
 							end
-							if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
+							if BUI.language~="ru" and BUI.language~="fr" then
 								local number=string.match(text,"%sii$")
+								if( BUI.language=="es" ) then number=string.match(text,"%s2$") end
 								text=string.match(text,"[^%s]+")..(number or "")
 							elseif RuESO_init then
 								text=string.match(text,"[^(]+"):gsub("%s$","")
@@ -481,9 +485,11 @@ local function UndauntedPledges()
 								local n=1+(day+dp.shift)%#dp
 								local name=dp[n][BUI.language] or dp[n].en
 								if name then
-									name=name:lower()
-									if BUI.language~="ru" and BUI.language~="fr" and BUI.language~="es" then
+									name=name:lower()									
+									if BUI.language~="ru" and BUI.language~="fr" then
 										local number=string.match(name,"%sii$")
+										if( BUI.language=="es" ) then number=string.match(name,"%s2$") end
+										
 										name=string.match(name,"[^%s]+")..(number or "")
 									elseif RuESO_init then
 										name=string.match(name,"[^(]+"):gsub("%s$","")

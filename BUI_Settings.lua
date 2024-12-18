@@ -193,7 +193,7 @@ local function MenuOptions_Init()	--Menu options
 	--Change language
 	{	type		="dropdown",
 		name		="ChangeLanguage",
-		choices	={"en", "ru", "de", "fr", "jp", "it", "br", "pl"},
+		choices	={"en", "ru", "de", "fr", "jp", "it", "br", "pl", "es"},
 		getFunc	=function() return BUI.language end,
 		setFunc	=function(i,value) SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8,"Reloading UI") BUI.CallLater("Language",1000,SetCVar,"Language.2",value) end,
 		warning	="ChangeLanguageWarn",

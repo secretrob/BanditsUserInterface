@@ -17,43 +17,47 @@ local mData={
 	sunspirehall001_base={scaleX=.02,scaleY=.02,offsetX=0,offsetY=0},
 	}
 
---Coords util
 function BUI.MapData()
-	if not BUI.MapId or BUI.MapId=="" then return mData.default.scaleX,mData.default.scaleY end
-	if mData[BUI.MapId] then return mData[BUI.MapId].scaleX,mData[BUI.MapId].scaleY end
-	local pX,pY=GetMapPlayerPosition('player')
-	if pX==0 and pY==0 then return mData.default.scaleX,mData.default.scaleY end
+	return 0,0
+end
+
+	--Coords util
+--*|*function BUI.MapData()
+--*|*	if not BUI.MapId or BUI.MapId=="" then return mData.default.scaleX,mData.default.scaleY end
+--*|*	if mData[BUI.MapId] then return mData[BUI.MapId].scaleX,mData[BUI.MapId].scaleY end
+--*|*	local pX,pY=GetMapPlayerPosition('player')
+--*|*	if pX==0 and pY==0 then return mData.default.scaleX,mData.default.scaleY end
 
 	--Select the map corner far from the player position
-	local wpX=pX<0.5 and 0.915 or 0.085
-	local wpY=pY<0.5 and 0.915 or 0.085
-	BUI.PingMap(MAP_PIN_TYPE_PLAYER_WAYPOINT,MAP_TYPE_LOCATION_CENTERED,wpX,wpY)
+--*|*	local wpX=pX<0.5 and 0.915 or 0.085
+--*|*	local wpY=pY<0.5 and 0.915 or 0.085
+	--*|*BUI.PingMap(MAP_PIN_TYPE_PLAYER_WAYPOINT,MAP_TYPE_LOCATION_CENTERED,wpX,wpY)
 
 	--Switch to world map so we can calculate the global map scale and offset
-	if SetMapToMapListIndex(TAMRIEL_MAP_INDEX)==SET_MAP_RESULT_FAILED then
-		if BUI.Vars.DeveloperMode then pl("Error: Could not switch to world map") end
-		return mData.default.scaleX,mData.default.scaleY
-	end
-	local pX1,pY1=GetMapPlayerPosition('player')
-	local wpX1,wpY1=GetMapPlayerWaypoint()
+--*|*	if SetMapToMapListIndex(TAMRIEL_MAP_INDEX)==SET_MAP_RESULT_FAILED then
+--*|*		if BUI.Vars.DeveloperMode then pl("Error: Could not switch to world map") end
+--*|*		return mData.default.scaleX,mData.default.scaleY
+--*|*	end
+--*|*	local pX1,pY1=GetMapPlayerPosition('player')
+--*|*	local wpX1,wpY1=GetMapPlayerWaypoint()
 
 	--if we didn't read the above, send back default
-	if pX1 == nil or pY1 == nil or wpX1 == nil or wpY1 == nil then return mData.default.scaleX,mData.default.scaleY end
+--*|*	if pX1 == nil or pY1 == nil or wpX1 == nil or wpY1 == nil then return mData.default.scaleX,mData.default.scaleY end
 
 	--calculate scale and offset for all collected maps	
-	local scaleX,scaleY=(wpX1-pX1)/(wpX-pX),(wpY1-pY1)/(wpY-pY)
+--*|*	local scaleX,scaleY=(wpX1-pX1)/(wpX-pX),(wpY1-pY1)/(wpY-pY)
 --	local offsetX,offsetY=pX1-pX*scaleX,pY1-pY*scaleY
-	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then pl("Error: Map data for "..BUI.MapId.." might be wrong") end
-	mData[BUI.MapId]={scaleX=scaleX,scaleY=scaleY,offsetX=offsetX,offsetY=offsetY}
+--*|*	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then pl("Error: Map data for "..BUI.MapId.." might be wrong") end
+--*|*	mData[BUI.MapId]={scaleX=scaleX,scaleY=scaleY,offsetX=offsetX,offsetY=offsetY}
 
-	RemovePlayerWaypoint()
-	SetMapToPlayerLocation()
-	if not mData[BUI.MapId] then
-		if BUI.Vars.DeveloperMode then pl("Error: Map data for "..BUI.MapId.." was not collected") end
-		return mData.default.scaleX,mData.default.scaleY
-	end
-	return mData[BUI.MapId].scaleX,mData[BUI.MapId].scaleY
-end
+--*|*	RemovePlayerWaypoint()
+--*|*	SetMapToPlayerLocation()
+--*|*	if not mData[BUI.MapId] then
+--*|*		if BUI.Vars.DeveloperMode then pl("Error: Map data for "..BUI.MapId.." was not collected") end
+--*|*		return mData.default.scaleX,mData.default.scaleY
+--*|*	end
+--*|*	return mData[BUI.MapId].scaleX,mData[BUI.MapId].scaleY
+--*|*end
 --[[
 local function DataToCoord(b0, b1, b2, b3)
 --	local scaleX,scaleY=BUI.MapData()
@@ -319,7 +323,7 @@ local function SendPing()
 		local _barrier=_colossus==0 and (BUI.Buffs.BarrierAvailable[1] or BUI.Buffs.BarrierAvailable[2]) and 2 or 0
 		local _power=power[BUI.MainPower] or 0
 		--Send the ping
-		BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,DataToCoord(StatShare_Code,_ult,_power+_barrier+(_horn>0 and _horn or _colossus),_stat))
+		--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,DataToCoord(StatShare_Code,_ult,_power+_barrier+(_horn>0 and _horn or _colossus),_stat))
 --		BUI.CallLater("PingMap",250,function() BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,0,0) end)
 		lastPing=_now
 		LastUlt=_ult
@@ -423,7 +427,7 @@ local PingEventAction={
 --		d(unitTag..", "..value ..", "..code..", "..dice)
 		if code==7 and BUI.Group[unitTag] and not DiceRolls then
 			DiceRolls={[0]={unitTag=unitTag,dice=dice,value=value}}
-			BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Dice_roll+.5)/100,.701+math.random(98)/1000)
+			--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Dice_roll+.5)/100,.701+math.random(98)/1000)
 			BUI.CallLater("DiceRequest",2000,function()
 				local data={}
 				local max=0
@@ -509,7 +513,7 @@ function BUI.StatShare.GroupElection()
 				value=value or 20
 				if value<6 or value>64 then d("/dice [6-64]") return end
 				local dice=math.random(98)
-				BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Dice_request)/100+(value+10)/10000,.701+dice/1000)
+				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Dice_request)/100+(value+10)/10000,.701+dice/1000)
 				a("Dice roll request was sent.")
 			else
 				a(GetString(SI_GROUPELECTIONFAILURE8))
@@ -522,9 +526,11 @@ function BUI.StatShare.GroupElection()
 	if BUI.Vars.RaidFrames and BUI.Vars.GroupElection then
 		CastGroupVote=function(vote)
 			if vote==GROUP_VOTE_CHOICE_FOR then
-				BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_Yes+.5)/100,.75)
+				a("Sharing disabled")
+				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_Yes+.5)/100,.75)
 			elseif vote==GROUP_VOTE_CHOICE_AGAINST then
-				BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_No+.5)/100,.75)
+				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_No+.5)/100,.75)
+				a("Sharing disabled")
 			end
 			CastGroupVoteOrig(vote)
 		end
@@ -558,7 +564,7 @@ function BUI.StatShare.GroupElection()
 		EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_GROUP_ELECTION_REQUESTED, function(_,descriptor)
 			if descriptor=="[ZO_READY_CHECK]" then
 				BUI.CallLater("PingMap",1000,function()
-					BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_Yes+.5)/100,.75)
+					--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_Yes+.5)/100,.75)
 				end)
 				ClearVotes(true)
 				GroupElectionPending=0

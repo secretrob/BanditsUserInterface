@@ -1995,7 +1995,7 @@ function BUI.Stats.SendPing()
 	if fighttime<10 or dps<500 then return end
 	--Send the ping
 	SetMapToPlayerLocation()
-	BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,StatShare_Code/100+fighttime/100000,dps/200000)
+	--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,StatShare_Code/100+fighttime/100000,dps/200000)
 	BUI.Stats.lastPing=BUI.Stats.Current[BUI.ReportN].endTime
 --[[	--Ping confirmation
 	PingConfirmed=2

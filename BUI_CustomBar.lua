@@ -155,7 +155,7 @@ end
 
 function BUI.UseCustomSlot(i)
 	if BarContent[i].leader then
-		PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,.765+BarContent[i].command/100,.75)
+		--*|*PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,.765+BarContent[i].command/100,.75)
 	else
 		BUI.CallLater("DoCommand",200,DoCommand,BarContent[i].command)
 	end
