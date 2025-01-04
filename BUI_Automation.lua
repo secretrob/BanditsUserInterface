@@ -465,7 +465,7 @@ local function UndauntedPledges()
 							--Quest
 							local orig=obj.text:GetText()							
 							local text=orig:lower()
-							text=text:gsub("the ",""):gsub(" "," "):gsub("der ",""):gsub("die ",""):gsub("el ","")
+							text=text:gsub("the ",""):gsub(" "," "):gsub("^der ",""):gsub("^die ",""):gsub("^el ","")
 							if( BUI.language~="es" ) then text=text:gsub("das ","") end
 							if c==3 then
 								local _start,_end=string.find(text,"s|t")
