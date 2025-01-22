@@ -412,13 +412,9 @@ local function GetGoalPledges()
 	for i=1,MAX_JOURNAL_QUESTS do
 		local name,_,_,stepType,_,completed,_,_,_,questType,instanceType=GetJournalQuestInfo(i)
 		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP then --and name:match(".*:%s*(.*)") 
-			local text=string.format("%s",name:gsub(".*:%s*",""):gsub(" "," "):gsub("%s+"," "):lower())
-			if BUI.language~="ru" and BUI.language~="fr" then
-				local number=string.match(text,"%sii$")
-				if( BUI.language=="es" ) then number=string.match(text,"%s2$") end
-				text=string.match(text,"[^%s]+")..(number or "")
-			end
---			d(text)
+			local text=name:gsub(".*:%s*",""):gsub(" "," "):lower()
+			if( BUI.language=="es" ) then text=text:gsub(" ii$"," 2"):gsub(" i$"," 1") end			
+--			d("GetGoalPledges => " .. text)
 			Pledges[text]=stepType~=QUEST_STEP_TYPE_AND
 			if stepType==QUEST_STEP_TYPE_AND then haveQuest=true end
 --			if BUI.Vars.DeveloperMode then d(zo_strformat("QuestName: \"<<1>>\" Dungeon: \"<<2>>\" Step: <<3>>",name,text,stepType)) end
@@ -464,18 +460,12 @@ local function UndauntedPledges()
 							local info=BUI.UI.Label("BUI_DungeonInfo"..c..i, obj, {80,20}, {LEFT,LEFT,465,0}, "ZoFontGameLarge", nil, {0,1}, text)
 							--Quest
 							local orig=obj.text:GetText()							
-							local text=orig:lower()
-							text=text:gsub("the ",""):gsub(" "," "):gsub("^der ",""):gsub("^die ",""):gsub("^el ","")
-							if( BUI.language~="es" ) then text=text:gsub("das ","") end
+							local text=orig:lower():gsub(" "," ")
 							if c==3 then
 								local _start,_end=string.find(text,"s|t")
 								if _start then text=string.sub(text,_end+2) end
-							end
-							if BUI.language~="ru" and BUI.language~="fr" then
-								local number=string.match(text,"%sii$")
-								if( BUI.language=="es" ) then number=string.match(text,"%s2$") text=text:gsub("guarida de ","") end
-								text=string.match(text,"[^%s]+")..(number or "")
-							elseif RuESO_init then
+							end							
+							if RuESO_init then
 								text=string.match(text,"[^(]+"):gsub("%s$","")
 							end
 --							d(text)
@@ -486,27 +476,26 @@ local function UndauntedPledges()
 								local n=1+(day+dp.shift)%#dp
 								local name=dp[n][BUI.language] or dp[n].en
 								if name then
-									name=name:lower()									
-									if BUI.language~="ru" and BUI.language~="fr" then
-										local number=string.match(name,"%sii$")
-										if( BUI.language=="es" ) then number=string.match(name,"%s2$") name=name:gsub("el ",""):gsub("guarida de ","") end										
-										name=string.match(name,"[^%s]+")..(number or "")
-									elseif RuESO_init then
+									name=name:lower()
+									local textnum=string.match(text,"%sii$") or ""
+									local number=string.match(name,"%sii$") or ""									
+									if RuESO_init then
 										name=string.match(name,"[^(]+"):gsub("%s$","")
 									end
---									d("TEXT "..text)
---									d("NAME "..name)
-									if text==name then daily=" ("..BUI.Loc("UndauntedDaily")..")" obj.text:SetText(orig.." |c3388EE"..daily.."|r") end
+--									if string.find(text,name) then d("TEXT "..text.." # "..textnum) if number != "" then d("NAME "..name.." # "..number) end end
+									if string.find(text,name) and textnum==number then daily=" ("..BUI.Loc("UndauntedDaily")..")" obj.text:SetText(orig.." |c3388EE"..daily.."|r") end
 								end
 							end
 							--Current pledges
 							local completed=Pledges[text]
 							obj.pledge=completed==false
-							if completed==false then
+							if completed==false then								
 								obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
 							elseif completed==true then
 								obj.text:SetText(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r")
 							end
+
+--							d(obj.text:GetText())
 						else
 --							d("["..id.."] "..obj.text:GetText())
 						end
@@ -529,14 +518,9 @@ local function UndauntedPledges()
 								local name=dp[n][BUI.language] or dp[n].en
 								if name then
 									name=name:lower()
-									if BUI.language~="ru" and BUI.language~="fr" then
-										local number=string.match(name,"%sii$")
-										if( BUI.language=="es" ) then number=string.match(text,"%s2$") end
-										name=string.match(name,"[^%s]+")..(number or "")
-									elseif RuESO_init then
-										name=string.match(name,"[^(]+"):gsub("%s$","")
-									end
-									if text==name then daily=" ("..BUI.Loc("UndauntedDaily")..")" control:AddLine(orig.." |c3388EE"..daily.."|r", "ZoFontWinH4") end
+									local textnum=string.match(text,"%sii$") or ""
+									local number=string.match(name,"%sii$") or ""
+									if string.find(text,name) and textnum==number then daily=" ("..BUI.Loc("UndauntedDaily")..")" control:AddLine(orig.." |c3388EE"..daily.."|r", "ZoFontWinH4") end
 								end
 							end
 							--Current pledges
@@ -600,13 +584,8 @@ function BUI.DailyPledges()
 		local quest=""
 		if pledge then
 			local text=pledge:lower()
-			if BUI.language~="ru" and BUI.language~="fr" then
-				local number=string.match(text,"%sii$")
-				if( BUI.language=="es" ) then number=string.match(text,"%s2$") end
-				text=string.match(text,"[^%s]+")..(number or "")
-			elseif RuESO_init then
-				text=string.match(text,"[^(]+"):gsub("%s$","")
-			end
+--			d("DailyPledges => " .. text)
+--			d(Pledges[text])
 			if Pledges[text]==false then quest=" |c3388EE- "..BUI.Loc("UndauntedQuest").."|r" end
 --			d(text)
 		end
