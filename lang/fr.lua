@@ -766,4 +766,8 @@ Markers_Trials=					"Afficher les marqueurs lors des essais",
 Markers_Message=				"Afficher le message de coffre trouvé dans le chat",
 Markers_Icon=					"Afficher l'icône lorsque le coffre est trouvé",
 Markers_HeavySack=				"Afficher également les marqueurs lorsque Heavy Sack est trouvé",
+
+Daily_NPC_Glirion="Glirion",
+Daily_NPC_Maj="Maj",
+Daily_NPC_Urgarlag="Urgarlag",
 }

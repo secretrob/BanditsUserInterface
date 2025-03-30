@@ -476,12 +476,13 @@ function BUI.DailyPledges()
 		local n=1+(day+shift)%length
 		local pledge=GetZoneNameById(zoneId)
 
-		if (BUI.language == "es") then
+		if (BUI.language == "es" or BUI.language == "de" or BUI.language == "fr" or BUI.language == "br" ) then
 			pledge = pledge:gsub('%^.*', '')
 		end
 
+		local npcName = BUI.Loc("Daily_NPC_" .. v.npc)
 		if n == v.index then
-			d("["..v.npc.."] "..pledge)
+			d("["..npcName.."] "..pledge)
 		end
 		--/script d(GetZoneNameById(272))
 	end

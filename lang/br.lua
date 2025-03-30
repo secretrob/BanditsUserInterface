@@ -750,4 +750,8 @@ Markers_Trials="Mostrar marcadores quando em testes",
 Markers_Message="Exibir mensagem de baú encontrado no chat",
 Markers_Icon="Exibir ícone quando o baú for encontrado",
 Markers_HeavySack="Também mostra marcadores quando o Heavy Sack é encontrado",
+
+Daily_NPC_Glirion="Glirion",
+Daily_NPC_Maj="Maj",
+Daily_NPC_Urgarlag="Urgarlag",
 }

@@ -723,4 +723,8 @@ Markers_Trials="Показывать маркеры во время испыта
 Markers_Message="Отображать сообщение о найденном сундуке в чате",
 Markers_Icon="Отображать значок при обнаружении сундука",
 Markers_HeavySack="Также показывать маркеры, когда найден тяжелый мешок",
+
+Daily_NPC_Glirion="Глиpион",
+Daily_NPC_Maj="Maдж",
+Daily_NPC_Urgarlag="Ургaрлaг",
 }

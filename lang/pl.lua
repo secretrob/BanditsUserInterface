@@ -766,5 +766,9 @@ Markers_Trials="Wyświetlanie znaczników podczas prób",
 Markers_Message="Wyświetlanie wiadomości o znalezionej skrzyni na czacie",
 Markers_Icon="Wyświetlanie ikony po odnalezieniu skrzyni",
 Markers_HeavySack="Pokazuje znaczniki po znalezieniu ciężkiego worka",
+
+Daily_NPC_Glirion="Glirion",
+Daily_NPC_Maj="Maj",
+Daily_NPC_Urgarlag="Urgarlag",
 }
 

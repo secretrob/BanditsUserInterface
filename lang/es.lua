@@ -767,4 +767,8 @@ Markers_Trials="Mostrar marcadores cuando estés en pruebas",
 Markers_Message="Mostrar mensaje de cofre encontrado en el chat",
 Markers_Icon="Mostrar icono cuando se encuentre un cofre",
 Markers_HeavySack="Mostrar marcadores cuando se encuentre un saco pesado",
+
+Daily_NPC_Glirion="Glirion",
+Daily_NPC_Maj="Maj",
+Daily_NPC_Urgarlag="Urgarlag",
 }

@@ -758,4 +758,8 @@ Markers_Trials="Zeigen Sie bei Prüfungen Markierungen an",
 Markers_Message="Meldung „Gefundene Truhe“ im Chat anzeigen",
 Markers_Icon="Symbol anzeigen, wenn Truhe gefunden wird",
 Markers_HeavySack="Zeigt auch Markierungen an, wenn Heavy Sack gefunden wird",
+
+Daily_NPC_Glirion="Glirion",
+Daily_NPC_Maj="Maj",
+Daily_NPC_Urgarlag="Urgarlag",
 }
