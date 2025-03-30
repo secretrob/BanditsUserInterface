@@ -65,183 +65,70 @@ local ConfirmationDialog={
 	["CONFIRM_IMPROVE_LOCKED_ITEM"]=true,
 	}
 
-local DailyPledges={
-	[1]={	--Maj
-		{en="Elden Hollow II",		ru="Элденская расщелина II",	de="Eldengrund II",	fr="Creuset des aînés II",	es="Hondonada de Elden 1"},
-		{en="Wayrest Sewers I",		ru="Канализация Вэйреста I",	de="Kanalisation I",	fr="Égouts d'Haltevoie I",	es="Cloacas de Quietud 1"},
-		{en="Spindleclutch II",		ru="Логово Мертвой Хватки II",	de="Spindeltiefen II",	fr="Tressefuseau II",	es="El Espiráculo 2"},
-		{en="Banished Cells I",		ru="Темницы изгнанников I",	de="Verbannungszellen I",	fr="Cachot interdit I",	es="Celdas del Destierro 1"},
-		{en="Fungal Grotto II",		ru="Грибной грот II",		de="Pilzgrotte II",	fr="Champignonnière II",	es="Gruta de los Hongos 2"},
-		{en="Spindleclutch I",		ru="Логово Мертвой Хватки I",	de="Spindeltiefen I",	fr="Tressefuseau I",	es="El Espiráculo 1"},
-		{en="Darkshade Caverns II",	ru="Пещеры Глубокой Тени II",	de="Dunkelschattenkavernen II",		fr="Cavernes d'Ombre-noire II",	es="Cavernas Sombra Oscura 2"},
-		{en="Elden Hollow I",		ru="Элденская расщелина I",	de="Eldengrund I",	fr="Creuset des aînés I",	es="Hondonada de Elden 1"},
-		{en="Wayrest Sewers II",	ru="Канализация Вэйреста II",	de="Kanalisation II",	fr="Égouts d'Haltevoie II",	es="Cloacas de Quietud 2"},
-		{en="Fungal Grotto I",		ru="Грибной грот I",		de="Pilzgrotte I",	fr="Champignonnière I",	es="Gruta de los Hongos 1"},
-		{en="Banished Cells II",	ru="Темницы изгнанников II",	de="Verbannungszellen II",	fr="Cachot interdit II",	es="Celdas del Destierro 2"},
-		{en="Darkshade Caverns I",	ru="Пещеры Глубокой Тени I",	de="Dunkelschattenkavernen I",		fr="Cavernes d'Ombre-noire I",	es="Cavernas Sombra Oscura 1"},
-		shift=0
-	},
-	[2]={	--Glirion
-		{en="Volenfell",			ru="Воленфелл"},
-		{en="Blessed Crucible I",	ru="Священное Горнило",		de="Gesegnete Feuerprobe",	fr="Creuset béni",	es="Crisol Sagrado"},
-		{en="Direfrost Keep I",		ru="Крепость Лютых Морозов",	de="Burg Grauenfrost",		fr="Donjon d'Affregivre",	es="Bastión Escarcha Aviesa"},
-		{en="Vaults of Madness",	ru="Своды Безумия",		de="Kammern des Wahnsinns",	fr="Chambres de la folie",	es="Cámaras de la Locura"},
-		{en="Crypt of Hearts II",	ru="Крипта Сердец II",		de="Krypta der Herzen II",	fr="Crypte des cœurs II",	es="Cripta de los Corazones 2"},
-		{en="City of Ash I",		ru="Город Пепла I",		de="Stadt der Asche I",		fr="Cité des cendres I",	es="Ciudad de Ceniza 1"},
-		{en="Tempest Island",		ru="Остров Бурь",			de="Orkaninsel",			fr="Île des Tempêtes",	es="Isla de la Tempestad"},
-		{en="Blackheart Haven",		ru="Гавань Черного Сердца",	de="Schwarzherz-Unterschlupf",fr="Havre de Cœurnoir",	es="Regugio del Corazón Negro"},
-		{en="Arx Corinium",			ru="Аркс-Кориниум"},
-		{en="Selene's Web",			ru="Паутина Селены",		de="Selenes Netz",	es="Telaraña de Selene"},
-		{en="City of Ash II",		ru="Город Пепла II",		de="Stadt der Asche II",	fr="Cité des cendres II",	es="Ciudad de Ceniza 2"},
-		{en="Crypt of Hearts I",	ru="Крипта Сердец I",		de="Krypta der Herzen I",	fr="Crypte des cœurs I",	es="Cripta de los Corazones 1"},
-		shift=0
-	},
-	[3]={	--Urgarlag
-		{en="Imperial City Prison",	ru="Тюрьма Имперского города",de="Gefängnis der Kaiserstadt",	fr="Tour d'Or Blanc",	es="Prisión de la Ciudad Imperial"},
-		{en="Ruins of Mazzatun",	ru="Руины Маззатуна",		de="Ruinen von Mazzatun",	fr="Ruines de Mazzatun",	es="Ruinas de Mazzatun"},
-		{en="White-Gold Tower",		ru="Башня Белого Золота",	de="Weißgoldturm",		fr="Tour d'Or Blanc",	es="Torre Blanca y Dorada"},
-		{en="Cradle of Shadows",	ru="Колыбель Теней",		de="Wiege der Schatten",	fr="Berceau des ombres",	es="Cuna de Sombras"},
-		{en="Bloodroot Forge",		ru="Кузница Кровавого корня",	de="Blutquellschmiede",		fr="Forge de Sangracine",	es="Forja Sanguinaria"},
-		{en="Falkreath Hold",		ru="Владение Фолкрит",		de="Falkenring",			fr="Forteresse d'Épervine",	es="Comarca de Falkreath"},
-		{en="Fang Lair",			ru="Логово Клыка",		de="Krallenhort",			fr="Repaire du croc",	es="Guarida de los Colmillos"},
-		{en="Scalecaller Peak",		ru="Пик Воспевательницы Дракона",de="Gipfel der Schuppenruferin",	fr="Pic de la Mandécailles",	es="Cumbre de la Invocadora de Escamas"},
-		{en="Moon Hunter Keep",		ru="Крепость Лунного Охотника",de="Mondjägerfeste",		fr="Fort du Chasseur lunaire",	es="Bastión del Cazador de la Luna"},
-		{en="March of Sacrifices",	ru="Путь Жертвоприношений",	de="Marsch der Aufopferung",	fr="Procession des Sacrifiés",	es="Marcha de los Sacrificios"},
-		{en="Depths of Malatar",	ru="Глубины Малатара",		de="Tiefen von Malatar",	fr="Profondeurs de Malatar",	es="Profundidades de Malatar"},
-		{en="Frostvault",			ru="Морозное хранилище",	de="Frostgewölbe",		fr="Arquegivre",	es="Cripta Helada"},
-		{en="Moongrave Fane",		ru="Храм Погребенных Лун",	de="Mondgrab-Tempelstadt",	fr="le reliquaire des Lunes funèbres",	es="Sepulcro Lunar"},
-		{en="Lair of Maarselok",	ru="Логово Марселока",		de="Hort von Maarselok",	fr="Repaire de Maarselok",	es="Guarida de Maarselok"},
-		{en="Icereach",				ru="Ледяной Предел",		de="Eiskap",			fr="Crève-Nève",	es="Cuenca Glacial"},
-		{en="Unhallowed Grave",		ru="Нечестивая Могила",		de="Unheiliges Grab",		fr="Sépulcre profane",	es="Sepulcro Profano"},
-		{en="Stone Garden",			ru="Каменный Сад",		de="Steingarten",			fr="Jardin de pierre",	es="Jardín de Piedra"},
-		{en="Castle Thorn",			ru="Замок Шипов",			de="Kastell Dorn",		fr="Bastion-les-Ronce",	es="Castillo Espina"},
-		{en="Black Drake Villa",	ru="Вилла Черного Змея",	de="Schwarzdrachenvilla",	fr="Villa du Dragon noir",	es="Villa del Draco Negro"},
-		{en="Cauldron",				ru="Котел",				de="Kessel",			fr="Chaudron",	es="El Caldero"},
-		{en="Red Petal Bastion",	ru="Оплот Алый Лепесток",	de="Rotblütenbastion",		fr="Bastion du Pétale rouge",	es="Bastión del Pétalo Rojo"},
-		{en="Dread Cellar",			ru="Ужасный Подвал",		de="Schreckenskeller",		fr="Cave d'effroi",	es="Sótano Pavoroso"},
-		{en="Coral Aerie",			ru="Коралловое Гнездо",	de="Korallenhorst",	fr="L'Aire de corail",	es="Nido dee Coral"},
-		{en="Shipwright's Regret",	ru="Горе Корабела",	de="Gram des Schiffsbauers",	fr="Le Regret du Charpentier"},
-		{en="Earthen Root Enclave",	ru="Анклав Земляного Корня",	de="Erdwurz-Enklave",	fr="Enclave des Racines de la terre"},
-		{en="Graven Deep",			ru="Могильная Пучина",		de="Kentertiefen",	fr="Profondeurs mortuaires"},	es="Sima Mortuoria",
-		{en="Bal Sunnar",			ru="Бал-Суннар",	de="Bal Sunnar",	fr="Bal Sunnar",	es="Bal Sunnar"},
-		{en="Scrivener's Hall",		ru="Зал Книжников",		de="Halle der Schriftmeister",	fr="Salles du Scribe",	es="Sala del Escribano"},
-		{en="Oathsworn Pit",        ru="Храм Верных Клятве",    de="Grube der Eidgeschworenen",     fr="Fosse aux fidèles", zh="誓约者深渊", ze="誓约者深渊",	es="Palestra de los Juramentados"},
-		{en="Bedlam Veil",          ru="Завеса Хаоса",    de="Schleier des Aufruhrs",  fr="Voile des fous",  zh="癫狂之幕",  ze="癫狂之幕",	es="Velo del Trastorno"},
-		shift=13
-	},
-}
-
+--  Useful Scripts for obtaining the information in this table
+--  /script d(GetZoneNameById(272))
+--  /script d(GetAchievementIdFromLink(""))
+--	/script d(ZO_DungeonFinder_KeyboardListSectionScrollChildContainer3:GetChild(34).node.data)
+--	/script d(GetCompletedQuestInfo(5288))
+--	"normal", "vet", "hm", "tt", and "nd" are AchievmentId's
+--	"pledge" is a QuestId
 local DungeonIndex={
---Normal
-[2]	={id=294},	--Fungal Grotto I
-[3]	={id=301},	--Spindleclutch I
-[4]	={id=325},	--Banished Cells I
-[5]	={id=78},	--Darkshade Caverns I
-[6]	={id=79},	--Wayrest Sewers I
-[7]	={id=11},	--Elden Hollow I
-[8]	={id=272},	--Arx Corinium
-[9]	={id=80},	--Crypt of Hearts I
-[10]	={id=551},	--City of Ash I
-[11]	={id=357},	--Direfrost Keep
-[12]	={id=391},	--Volenfell
-[13]	={id=81},	--Tempest Island
-[14]	={id=393},	--Blessed Crucible
-[15]	={id=410},	--Blackheart Haven
-[16]	={id=417},	--Selene's Web
-[17]	={id=570},	--Vaults of Madness
-[18]	={id=1562},	--Fungal Grotto II
-[22]	={id=1595},	--Wayrest Sewers II
-[288]	={id=1346},	--White-Gold Tower
-[289]	={id=1345},	--Imperial City Prison
-[293]	={id=1504},	--Ruins of Mazzatun
-[295]	={id=1522},	--Cradle of Shadows
-[300]	={id=1555},	--Banished Cells II
-[303]	={id=1579},	--Elden Hollow II
-[308]	={id=1587},	--Darkshade Caverns II
-[316]	={id=1571},	--Spindleclutch II
-[317]	={id=1616},	--Crypt of Hearts II
-[322]	={id=1603},	--City of Ash II
-[324]	={id=1690},	--Bloodroot Forge
-[368]	={id=1698},	--Falkreath Hold
-[420]	={id=1959},	--Fang Lair
-[418]	={id=1975},	--Scalecaller Peak
-[428]	={id=2162},	--March of Sacrifices
-[426]	={id=2152},	--Moon Hunter Keep
-[433]	={id=2260},	--Frostvault
-[435]	={id=2270},	--Depths of Malatar
-[496]	={id=2425},	--Lair of Maarselok
-[494]	={id=2415},	--Moongrave Fane
-[503]	={id=2539},	--Icereach
-[505]	={id=2549},	--Unhallowed Grave
-[507]	={id=2694},	--Stone Garden
-[509]	={id=2704},	--Castle Thorn
-[591]	={id=2831},	--Black Drake Villa
-[593]	={id=2841},	--Cauldron
-[595]	={id=3016},	--Red Petal Bastion
-[597]	={id=3026},	--The Dread Cellar
-[599]	={id=3104},	--Coral Aerie
-[601]	={id=3114},	--Shipwright's Regret
-[608]	={id=3375},	--Earthen Root Enclave
-[610]	={id=3394},	--Graven Deep
-[613]	={id=3468},	--Bal Sunnar
-[615]	={id=3529},	--Scrivener's Hall
-[638]	={id=3810},	--Oathsworn Pit
-[640]	={id=3851},	--Bedlam Veil
---Veteran
-[19]	={id=421,	hm=448,	tt=446,	nd=1572},	--Spindleclutch II
-[20]	={id=1549,	hm=1554,	tt=1552,	nd=1553},	--Banished Cells I
-[21]	={id=464,	hm=467,	tt=465,	nd=1588},	--Darkshade Caverns II
-[23]	={id=1573,	hm=1578,	tt=1576,	nd=1577},	--Elden Hollow I
-[261]	={id=1610,	hm=1615,	tt=1613,	nd=1614},	--Crypt of Hearts I
-[267]	={id=878,	hm=1114,	tt=1108,	nd=1107},	--City of Ash II
-[268]	={id=880,	hm=1303,	tt=1128,	nd=1129},	--Imperial City Prison
-[287]	={id=1120,	hm=1279,	tt=1275,	nd=1276},	--White-Gold Tower
-[294]	={id=1505,	hm=1506,	tt=1507,	nd=1508},	--Ruins of Mazzatun
-[296]	={id=1523,	hm=1524,	tt=1525,	nd=1526},	--Cradle of Shadows
-[299]	={id=1556,	hm=1561,	tt=1559,	nd=1560},	--Fungal Grotto I
-[301]	={id=545,	hm=451,	tt=449,	nd=1564},	--Banished Cells II
-[302]	={id=459,	hm=463,	tt=461,	nd=1580},	--Elden Hollow II
-[304]	={id=1629,	hm=1634,	tt=1632,	nd=1633},	--Volenfell
-[305]	={id=1604,	hm=1609,	tt=1607,	nd=1608},	--Arx Corinium
-[306]	={id=1589,	hm=1594,	tt=1592,	nd=1593},	--Wayrest Sewers I
-[307]	={id=678,	hm=681,	tt=679,	nd=1596},	--Wayrest Sewers II
-[309]	={id=1581,	hm=1586,	tt=1584,	nd=1585},	--Darkshade Caverns I
-[310]	={id=1597,	hm=1602,	tt=1600,	nd=1601},	--City of Ash I
-[311]	={id=1617,	hm=1622,	tt=1620,	nd=1621},	--Tempest Island
-[312]	={id=343,	hm=342,	tt=340,	nd=1563},	--Fungal Grotto II
-[313]	={id=1635,	hm=1640,	tt=1638,	nd=1639},	--Selene's Web
-[314]	={id=1653,	hm=1658,	tt=1656,	nd=1657},	--Vaults of Madness
-[315]	={id=1565,	hm=1570,	tt=1568,	nd=1569},	--Spindleclutch I
-[318]	={id=876,	hm=1084,	tt=941,	nd=942},	--Crypt of Hearts II
-[319]	={id=1623,	hm=1628,	tt=1626,	nd=1627},	--Direfrost Keep
-[320]	={id=1641,	hm=1646,	tt=1644,	nd=1645},	--Blessed Crucible
-[321]	={id=1647,	hm=1652,	tt=1650,	nd=1651},	--Blackheart Haven
-[325]	={id=1691,	hm=1696,	tt=1694,	nd=1695},	--Bloodroot Forge
-[369]	={id=1699,	hm=1704,	tt=1702,	nd=1703},	--Falkreath Hold
-[421]	={id=1960,	hm=1965,	tt=1963,	nd=1964},	--Fang Lair
-[419]	={id=1976,	hm=1981,	tt=1979,	nd=1980},	--Scalecaller Peak
-[429]	={id=2163,	hm=2164,	tt=2165,	nd=2166},	--March of Sacrifices
-[427]	={id=2153,	hm=2154,	tt=2155,	nd=2156},	--Moon Hunter Keep
-[434]	={id=2261,	hm=2262,	tt=2263,	nd=2264},	--Frostvault
-[436]	={id=2271,	hm=2272,	tt=2273,	nd=2274},	--Depths of Malatar
-[497]	={id=2426,	hm=2427,	tt=2428,	nd=2429},	--Lair of Maarselok
-[495]	={id=2416,	hm=2417,	tt=2418,	nd=2419},	--Moongrave Fane
-[504]	={id=2540,	hm=2541,	tt=2542,	nd=2543},	--Icereach
-[506]	={id=2550,	hm=2551,	tt=2552,	nd=2553},	--Unhallowed Grave
-[508]	={id=2695,	hm=2755,	tt=2697,	nd=2698},	--Stone Garden
-[510]	={id=2705,	hm=2706,	tt=2707,	nd=2708},	--Castle Thorn
-[592]	={id=2832,	hm=2833,	tt=2834,	nd=2835},	--Black Drake Villa
-[594]	={id=2842,	hm=2843,	tt=2844,	nd=2845},	--Cauldron
-[596]	={id=3017,	hm=3018,	tt=3019,	nd=3020},	--Red Petal Bastion
-[598]	={id=3027,	hm=3028,	tt=3029,	nd=3030},	--The Dread Cellar
-[600]	={id=3105,	hm=3153,	tt=3107,	nd=3108},	--Coral Aerie
-[602]	={id=3115,	hm=3154,	tt=3117,	nd=3118},	--Shipwright's Regret
-[609]	={id=3376,	hm=3377,	tt=3378,	nd=3379},	--Earthen Root Enclave
-[611]	={id=3395,	hm=3396,	tt=3397,	nd=3398},	--Graven Deep
-[614]	={id=3469,	hm=3470,	tt=3471,	nd=3472},	--Bal Sunnar
-[616]	={id=3530,	hm=3531,	tt=3532,	nd=3533},	--Scrivener's Hall
-[639]   ={id=3811,  hm=3812,    tt=3813,    nd=3814}, 	--Oathsworn Pit
-[641]   ={id=3852,  hm=3853,    tt=3854,    nd=3855}, 	--Bedlam Veil
+[148]	={normal=272,	vet=1604,	hm=1609,	tt=1607,	nd=1608,	npc="Glirion",	pledge=5288,	index=9},	--Arx Corinium
+[1389]	={normal=3468,	vet=3469,	hm=3470,	tt=3471,	nd=3472,	npc="Urgarlag",	pledge=6897,	index=27},	--Bal Sunnar
+[1471]	={normal=3851,	vet=3852,	hm=3853,	tt=3854,	nd=3855,	npc="Urgarlag",	pledge=7156,	index=30},	--Bedlam Veil
+[1228]	={normal=2831,	vet=2832,	hm=2833,	tt=2834,	nd=2835,	npc="Urgarlag",	pledge=6577,	index=19},	--Black Drake Villa
+[38]	={normal=410,	vet=1647,	hm=1652,	tt=1650,	nd=1651,	npc="Glirion",	pledge=5305,	index=8},	--Blackheart Haven
+[64]	={normal=393,	vet=1641,	hm=1646,	tt=1644,	nd=1645,	npc="Glirion",	pledge=5306,	index=2},	--Blessed Crucible
+[973]	={normal=1690,	vet=1691,	hm=1696,	tt=1694,	nd=1695,	npc="Urgarlag",	pledge=6053,	index=5},	--Bloodroot Forge
+[1201]	={normal=2704,	vet=2705,	hm=2706,	tt=2707,	nd=2708,	npc="Urgarlag",	pledge=6508,	index=18},	--Castle Thorn
+[176]	={normal=551,	vet=1597,	hm=1602,	tt=1600,	nd=1601,	npc="Glirion",	pledge=5290,	index=6},	--City of Ash I
+[681]	={normal=1603,	vet=878,	hm=1114,	tt=1108,	nd=1107,	npc="Glirion",	pledge=5381,	index=11},	--City of Ash II
+[1301]	={normal=3104,	vet=3105,	hm=3153,	tt=3107,	nd=3108,	npc="Urgarlag",	pledge=6741,	index=23},	--Coral Aerie
+[848]	={normal=1522,	vet=1523,	hm=1524,	tt=1525,	nd=1526,	npc="Urgarlag",	pledge=5780,	index=4},	--Cradle of Shadows
+[130]	={normal=80,	vet=1610,	hm=1615,	tt=1613,	nd=1614,	npc="Glirion",	pledge=5283,	index=12},	--Crypt of Hearts I
+[932]	={normal=1616,	vet=876,	hm=1084,	tt=941,	nd=942,	npc="Glirion",	pledge=5284,	index=5},	--Crypt of Hearts II
+[63]	={normal=78,	vet=1581,	hm=1586,	tt=1584,	nd=1585,	npc="Maj",	pledge=5274,	index=12},	--Darkshade Caverns I
+[930]	={normal=1587,	vet=464,	hm=467,	tt=465,	nd=1588,	npc="Maj",	pledge=5275,	index=7},	--Darkshade Caverns II
+[1081]	={normal=2270,	vet=2271,	hm=2272,	tt=2273,	nd=2274,	npc="Urgarlag",	pledge=6252,	index=11},	--Depths of Malatar
+[449]	={normal=357,	vet=1623,	hm=1628,	tt=1626,	nd=1627,	npc="Glirion",	pledge=5291,	index=3},	--Direfrost Keep
+[1360]	={normal=3375,	vet=3376,	hm=3377,	tt=3378,	nd=3379,	npc="Urgarlag",	pledge=6836,	index=25},	--Earthen Root Enclave
+[126]	={normal=11,	vet=1573,	hm=1578,	tt=1576,	nd=1577,	npc="Maj",	pledge=5276,	index=8},	--Elden Hollow I
+[931]	={normal=1579,	vet=459,	hm=463,	tt=461,	nd=1580,	npc="Maj",	pledge=5277,	index=1},	--Elden Hollow II
+[1496]	={normal=4109,	vet=4110,	hm=4111,	tt=4112,	nd=4113,	npc="Urgarlag",	pledge=7236,	index=31},	--Exiled Redoubt
+[974]	={normal=1698,	vet=1699,	hm=1704,	tt=1702,	nd=1703,	npc="Urgarlag",	pledge=6054,	index=6},	--Falkreath Hold
+[1009]	={normal=1959,	vet=1960,	hm=1965,	tt=1963,	nd=1964,	npc="Urgarlag",	pledge=6155,	index=7},	--Fang Lair
+[1080]	={normal=2260,	vet=2261,	hm=2262,	tt=2263,	nd=2264,	npc="Urgarlag",	pledge=6250,	index=12},	--Frostvault
+[283]	={normal=294,	vet=1556,	hm=1561,	tt=1559,	nd=1560,	npc="Maj",	pledge=5247,	index=10},	--Fungal Grotto I
+[934]	={normal=1562,	vet=343,	hm=342,	tt=340,	nd=1563,	npc="Maj",	pledge=5248,	index=5},	--Fungal Grotto II
+[1361]	={normal=3394,	vet=3395,	hm=3396,	tt=3397,	nd=3398,	npc="Urgarlag",	pledge=6838,	index=26},	--Graven Deep
+[1152]	={normal=2539,	vet=2540,	hm=2541,	tt=2542,	nd=2543,	npc="Urgarlag",	pledge=6415,	index=15},	--Icereach
+[678]	={normal=1345,	vet=880,	hm=1303,	tt=1128,	nd=1129,	npc="Urgarlag",	pledge=5382,	index=1},	--Imperial City Prison
+[1123]	={normal=2425,	vet=2426,	hm=2427,	tt=2428,	nd=2429,	npc="Urgarlag",	pledge=6352,	index=14},	--Lair of Maarselok
+[1497]	={normal=4128,	vet=4129,	hm=4130,	tt=4131,	nd=4132,	npc="Urgarlag",	pledge=7238,	index=32},	--Lep Seclusa
+[1055]	={normal=2162,	vet=2163,	hm=2164,	tt=2165,	nd=2166,	npc="Urgarlag",	pledge=6189,	index=10},	--March of Sacrifices
+[1052]	={normal=2152,	vet=2153,	hm=2154,	tt=2155,	nd=2156,	npc="Urgarlag",	pledge=6187,	index=9},	--Moon Hunter Keep
+[1122]	={normal=2415,	vet=2416,	hm=2417,	tt=2418,	nd=2419,	npc="Urgarlag",	pledge=6350,	index=13},	--Moongrave Fane
+[1470]	={normal=3810,	vet=3811,	hm=3812,	tt=3813,	nd=3814,	npc="Urgarlag",	pledge=7106,	index=29},	--Oathsworn Pit
+[1267]	={normal=3016,	vet=3017,	hm=3018,	tt=3019,	nd=3020,	npc="Urgarlag",	pledge=6684,	index=21},	--Red Petal Bastion
+[843]	={normal=1504,	vet=1505,	hm=1506,	tt=1507,	nd=1508,	npc="Urgarlag",	pledge=5636,	index=2},	--Ruins of Mazzatun
+[1010]	={normal=1975,	vet=1976,	hm=1981,	tt=1979,	nd=1980,	npc="Urgarlag",	pledge=6154,	index=8},	--Scalecaller Peak
+[1390]	={normal=3529,	vet=3530,	hm=3531,	tt=3532,	nd=3533,	npc="Urgarlag",	pledge=7028,	index=28},	--Scrivener's Hall
+[31]	={normal=417,	vet=1635,	hm=1640,	tt=1638,	nd=1639,	npc="Glirion",	pledge=5307,	index=10},	--Selene's Web
+[1302]	={normal=3114,	vet=3115,	hm=3154,	tt=3117,	nd=3118,	npc="Urgarlag",	pledge=6743,	index=24},	--Shipwright's Regret
+[144]	={normal=301,	vet=1565,	hm=1570,	tt=1568,	nd=1569,	npc="Maj",	pledge=5260,	index=6},	--Spindleclutch I
+[936]	={normal=1571,	vet=421,	hm=448,	tt=446,	nd=1572,	npc="Maj",	pledge=5273,	index=3},	--Spindleclutch II
+[1197]	={normal=2694,	vet=2695,	hm=2755,	tt=2697,	nd=2698,	npc="Urgarlag",	pledge=6506,	index=17},	--Stone Garden
+[131]	={normal=81,	vet=1617,	hm=1622,	tt=1620,	nd=1621,	npc="Glirion",	pledge=5301,	index=7},	--Tempest Island
+[380]	={normal=325,	vet=1549,	hm=1554,	tt=1552,	nd=1553,	npc="Maj",	pledge=5244,	index=4},	--The Banished Cells I
+[935]	={normal=1555,	vet=545,	hm=451,	tt=449,	nd=1564,	npc="Maj",	pledge=5246,	index=11},	--The Banished Cells II
+[1229]	={normal=2841,	vet=2842,	hm=2843,	tt=2844,	nd=2845,	npc="Urgarlag",	pledge=6579,	index=20},	--The Cauldron
+[1268]	={normal=3026,	vet=3027,	hm=3028,	tt=3029,	nd=3030,	npc="Urgarlag",	pledge=6686,	index=22},	--The Dread Cellar
+[1153]	={normal=2549,	vet=2550,	hm=2551,	tt=2552,	nd=2553,	npc="Urgarlag",	pledge=6417,	index=16},	--Unhallowed Grave
+[11]	={normal=570,	vet=1653,	hm=1658,	tt=1656,	nd=1657,	npc="Glirion",	pledge=5309,	index=4},	--Vaults of Madness
+[22]	={normal=391,	vet=1629,	hm=1634,	tt=1632,	nd=1633,	npc="Glirion",	pledge=5303,	index=1},	--Volenfell
+[146]	={normal=79,	vet=1589,	hm=1594,	tt=1592,	nd=1593,	npc="Maj",	pledge=5278,	index=2},	--Wayrest Sewers I
+[933]	={normal=1595,	vet=678,	hm=681,	tt=679,	nd=1596,	npc="Maj",	pledge=5282,	index=9},	--Wayrest Sewers II
+[688]	={normal=1346,	vet=1120,	hm=1279,	tt=1275,	nd=1276,	npc="Urgarlag",	pledge=5431,	index=3},	--White-Gold Tower
 }
 
 function SiegeCameraToggle()
@@ -275,7 +162,7 @@ local function HaveItems(Type)
 	--d("Checking inventory")
 	if not(CheckInventorySpaceSilently(2) and (IsInGamepadPreferredMode() and GAMEPAD_INVENTORY_FRAGMENT or BACKPACK_MENU_BAR_LAYOUT_FRAGMENT):GetState()==SCENE_SHOWN) then return false end
 	local total=0
-	for i=0, GetBagSize(BAG_BACKPACK)-1 do		
+	for i=0, GetBagSize(BAG_BACKPACK)-1 do
 		if IsItemType(i, Type) then
 			local _, count=GetItemInfo(BAG_BACKPACK, i)
 			--d(GetItemInfo(BAG_BACKPACK, i))
@@ -411,13 +298,11 @@ local function GetGoalPledges()
 	local Pledges,haveQuest={},false
 	for i=1,MAX_JOURNAL_QUESTS do
 		local name,_,_,stepType,_,completed,_,_,_,questType,instanceType=GetJournalQuestInfo(i)
-		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP then --and name:match(".*:%s*(.*)") 
-			local text=name:gsub(".*:%s*",""):gsub(" "," "):lower()
-			if( BUI.language=="es" ) then text=text:gsub(" ii$"," 2"):gsub(" i$"," 1") end			
---			d("GetGoalPledges => " .. text)
-			Pledges[text]=stepType~=QUEST_STEP_TYPE_AND
+		if name and name~="" and not completed and questType==QUEST_TYPE_UNDAUNTED_PLEDGE and instanceType==INSTANCE_TYPE_GROUP then --and name:match(".*:%s*(.*)")
+--			d("GetGoalPledges => " .. name)
+			Pledges[name]=stepType~=QUEST_STEP_TYPE_AND
 			if stepType==QUEST_STEP_TYPE_AND then haveQuest=true end
---			if BUI.Vars.DeveloperMode then d(zo_strformat("QuestName: \"<<1>>\" Dungeon: \"<<2>>\" Step: <<3>>",name,text,stepType)) end
+--			if BUI.Vars.DeveloperMode then d(zo_strformat("QuestName: \"<<1>>\" Step: <<2>>",name,stepType)) end
 		end
 	end
 	return Pledges,haveQuest
@@ -426,7 +311,7 @@ end
 local function UndauntedPledges()
 	local Pledges,haveQuest={},false
 	local offset=1517479200
-	if GetCVar("LastRealm")~="NA Megaserver" then offset=1517454000 end	
+	if GetCVar("LastRealm")~="NA Megaserver" then offset=1517454000 end
 	local day=math.floor(GetDiffBetweenTimeStamps(GetTimeStamp(),offset)/86400)
 
 	local function CheckPledges(c)
@@ -450,49 +335,48 @@ local function UndauntedPledges()
 				for i=1,parent:GetNumChildren() do
 					local obj=parent:GetChild(i)
 					if obj then
-						--Achievement
-						local id=obj.node.data.id
+						local id=obj.node.data.zoneId
 						if DungeonIndex[id] then
-							local text=IsAchievementComplete(DungeonIndex[id].id) and "|t16:16:/esoui/art/cadwell/check.dds|t" or ""							
-							text=text..((DungeonIndex[id].hm and IsAchievementComplete(DungeonIndex[id].hm)) and "|t20:20:/esoui/art/unitframes/target_veteranrank_icon.dds|t" or "")
-							text=text..((DungeonIndex[id].tt and IsAchievementComplete(DungeonIndex[id].tt)) and "|t20:20:/esoui/art/ava/overview_icon_underdog_score.dds|t" or "")
-							text=text..((DungeonIndex[id].nd and IsAchievementComplete(DungeonIndex[id].nd)) and "|t20:20:/esoui/art/treeicons/gamepad/gp_tutorial_idexicon_death.dds|t" or "")
-							local info=BUI.UI.Label("BUI_DungeonInfo"..c..i, obj, {80,20}, {LEFT,LEFT,465,0}, "ZoFontGameLarge", nil, {0,1}, text)
-							--Quest
-							local orig=obj.text:GetText()							
-							local text=orig:lower():gsub(" "," ")
-							if c==3 then
-								local _start,_end=string.find(text,"s|t")
-								if _start then text=string.sub(text,_end+2) end
-							end							
-							if RuESO_init then
-								text=string.match(text,"[^(]+"):gsub("%s$","")
+
+							--Achievement
+							local completion = DungeonIndex[id].normal
+							if c == 3 then
+								completion = DungeonIndex[id].vet
 							end
---							d(text)
+							local text=IsAchievementComplete(completion) and "|t16:16:/esoui/art/cadwell/check.dds|t" or ""
+							if c == 3 then
+								text=text..((DungeonIndex[id].hm and IsAchievementComplete(DungeonIndex[id].hm)) and "|t20:20:/esoui/art/unitframes/target_veteranrank_icon.dds|t" or "")
+								text=text..((DungeonIndex[id].tt and IsAchievementComplete(DungeonIndex[id].tt)) and "|t20:20:/esoui/art/ava/overview_icon_underdog_score.dds|t" or "")
+								text=text..((DungeonIndex[id].nd and IsAchievementComplete(DungeonIndex[id].nd)) and "|t20:20:/esoui/art/treeicons/gamepad/gp_tutorial_idexicon_death.dds|t" or "")
+							end
+							_=BUI.UI.Label("BUI_DungeonInfo"..c..i, obj, {80,20}, {LEFT,LEFT,465,0}, "ZoFontGameLarge", nil, {0,1}, text)
+
+							--Quest
+							local orig=obj.text:GetText()
+
 							--Daily pledges
 							local daily=""
-							for npc=1,3 do
-								local dp=DailyPledges[npc]
-								local n=1+(day+dp.shift)%#dp
-								local name=dp[n][BUI.language] or dp[n].en
-								if name then
-									name=name:lower()
-									local textnum=string.match(text,"%sii$") or ""
-									local number=string.match(name,"%sii$") or ""									
-									if RuESO_init then
-										name=string.match(name,"[^(]+"):gsub("%s$","")
-									end
---									if string.find(text,name) then d("TEXT "..text.." # "..textnum) if number != "" then d("NAME "..name.." # "..number) end end
-									if string.find(text,name) and textnum==number then daily=" ("..BUI.Loc("UndauntedDaily")..")" obj.text:SetText(orig.." |c3388EE"..daily.."|r") end
-								end
+							local length = 12
+							local shift = 0
+							if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
+								length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+								shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
 							end
+							if 1+(day+shift)%length == DungeonIndex[id].index then
+								daily=" ("..BUI.Loc("UndauntedDaily")..")"
+								obj.text:SetText(orig.." |c3388EE"..daily.."|r")
+							end
+
 							--Current pledges
-							local completed=Pledges[text]
-							obj.pledge=completed==false
-							if completed==false then								
-								obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
-							elseif completed==true then
+							local questname = GetQuestName(DungeonIndex[id].pledge)
+							local completed=Pledges[questname]
+							obj.pledge=false
+
+							if Pledges[questname]==true then
 								obj.text:SetText(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r")
+							elseif Pledges[questname]==false then
+								obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
+								obj.pledge=true
 							end
 
 --							d(obj.text:GetText())
@@ -502,34 +386,40 @@ local function UndauntedPledges()
 					end
 				end
 			end
-			local parent=_G["ZO_DungeonFinder_GamepadMaskContainerEntriesList"] 
+			local parent=_G["ZO_DungeonFinder_GamepadMaskContainerEntriesList"]
 			if IsInGamepadPreferredMode() and parent then
 				for i=1,parent:GetNumChildren() do
 					local obj=parent:GetChild(i)
 					if obj then
-						--Achievement
-						local id=obj.node.data.id
+						local id=obj.node.data.zoneId
 						if DungeonIndex[id] then
+
+							--Quest
+							local orig=obj.text:GetText()
+
 							--Daily pledges
 							local daily=""
-							for npc=1,3 do
-								local dp=DailyPledges[npc]
-								local n=1+(day+dp.shift)%#dp
-								local name=dp[n][BUI.language] or dp[n].en
-								if name then
-									name=name:lower()
-									local textnum=string.match(text,"%sii$") or ""
-									local number=string.match(name,"%sii$") or ""
-									if string.find(text,name) and textnum==number then daily=" ("..BUI.Loc("UndauntedDaily")..")" control:AddLine(orig.." |c3388EE"..daily.."|r", "ZoFontWinH4") end
-								end
+							local length = 12
+							local shift = 0
+							if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
+								length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+								shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
 							end
+							if 1+(day+shift)%length == DungeonIndex[id].index then
+								daily=" ("..BUI.Loc("UndauntedDaily")..")"
+								obj.text:SetText(orig.." |c3388EE"..daily.."|r")
+							end
+
 							--Current pledges
-							local completed=Pledges[text]
-							obj.pledge=completed==false
-							if completed==false then
-								control:AddLine(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r", "ZoFontWinH4")
-							elseif completed==true then
-								control:AddLine(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r", "ZoFontWinH4")
+							local questname = GetQuestName(DungeonIndex[id].pledge)
+							local completed=Pledges[questname]
+							obj.pledge=false
+
+							if Pledges[questname]==true then
+								obj.text:SetText(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r")
+							elseif Pledges[questname]==false then
+								obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
+								obj.pledge=true
 							end
 						end
 					end
@@ -554,7 +444,7 @@ local function UndauntedPledges()
 					ZO_DungeonFinder_KeyboardQueueButton:SetAnchor(BOTTOM,parent,BOTTOM,-w/5,0)
 					ZO_DungeonFinder_KeyboardQueueButton:SetDrawTier(2)
 				end
-				
+
 				if BUI.Vars.CollapseNormalDungeon then
 					local header=_G["ZO_DungeonFinder_KeyboardListSectionScrollChildZO_ActivityFinderTemplateNavigationHeader_Keyboard"..c-1]
 					if header then
@@ -576,21 +466,24 @@ function BUI.DailyPledges()
 	if GetCVar("LastRealm")~="NA Megaserver" then offset=1517454000 end
 	local day=math.floor(GetDiffBetweenTimeStamps(GetTimeStamp(),offset)/86400)
 	d("Daily pledges:")
-	for npc=1,3 do
-		local dp=DailyPledges[npc]
-		local n=1+(day+dp.shift)%#dp
-		local pledge=dp[n][BUI.language] or dp[n].en
+	for zoneId, v in pairs(DungeonIndex) do
+		local length = 12
+		local shift = 0
+		if v.npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
+			length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+			shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
+		end
+		local n=1+(day+shift)%length
+		local pledge=GetZoneNameById(zoneId)
 
-		local quest=""
-		if pledge then
-			local text=pledge:lower()
---			d("DailyPledges => " .. text)
---			d(Pledges[text])
-			if Pledges[text]==false then quest=" |c3388EE- "..BUI.Loc("UndauntedQuest").."|r" end
---			d(text)
+		if (BUI.language == "es") then
+			pledge = pledge:gsub('%^.*', '')
 		end
 
-		d("["..npc.."] "..tostring(pledge)..quest)
+		if n == v.index then
+			d("["..v.npc.."] "..pledge)
+		end
+		--/script d(GetZoneNameById(272))
 	end
 end
 
@@ -778,7 +671,7 @@ function BUI.Automation_Init()
 				if numAttachments>0 or attachedMoney>0 then
 					ZO_Dialogs_ShowDialog("BUI_DELETE_CONFIRMATION", { confirmationCallback = function(...) DeleteMail(self.mailId) PlaySound(SOUNDS.MAIL_ITEM_DELETED) end, title = SI_PROMPT_TITLE_DELETE_MAIL_ATTACHMENTS, body = BUI.Loc("DeleteMailConfirm"), })
 				else
-					DeleteMail(self.mailId)					
+					DeleteMail(self.mailId)
 					PlaySound(SOUNDS.MAIL_ITEM_DELETED)
 				end
 			end
@@ -794,8 +687,8 @@ function BUI.Automation_Init()
 	end
 
 	if BUI.Vars.BlockAnnouncement then
-		local function OnPlayerActivated(eventCode, initial)			
-			if initial then				
+		local function OnPlayerActivated(eventCode, initial)
+			if initial then
 				local scene=SCENE_MANAGER:GetScene('marketAnnouncement')
 				local function OnSceneStateChange(oldState, newState)
 					if newState==SCENE_SHOWN then
@@ -810,12 +703,12 @@ function BUI.Automation_Init()
 	end
 
 	local BuiltInGlobalCooldownOn=false
-	if BUI.Vars.BuiltInGlobalCooldown then 
+	if BUI.Vars.BuiltInGlobalCooldown then
 		if not BuiltInGlobalCooldownOn then
 	    	BuiltInGlobalCooldownOn=true
-	       	d("Setting Global Cooldown") 
+	       	d("Setting Global Cooldown")
 	       	ZO_ActionButtons_ToggleShowGlobalCooldown()
-	    end		
+	    end
 	end
 
 	if BUI.Vars.GroupLeave then
