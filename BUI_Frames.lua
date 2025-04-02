@@ -117,10 +117,10 @@ local Boss_Phase={
 	-- Scrivener's Hall / Halle der Schriftmeister
 	["Ritemaster Naqri"]	={80,55,35,0}, ["Rissmeister Naqri"]	={80,55,35,0},
 	["Ozezan the Inferno"]	={100,40,20,0}, ["Ozezan das Inferno"]	={100,40,20,0},
-	-- Bal Sunnar 
+	-- Bal Sunnar
 	["Kovan Giryon"]		={65,45,20,0},
 	["Roksa the Warped"]	={100,70,40,0}, ["Roksa die Verkrümmte"]	={100,70,40,0},
-	["Matriarch Lladi Telvanni"]={100,70,35,0}, ["Matriarchin Lladi Telvanni"]	={100,70,35,0},		
+	["Matriarch Lladi Telvanni"]={100,70,35,0}, ["Matriarchin Lladi Telvanni"]	={100,70,35,0},
 	}
 --	/script StartChatInput(GetUnitName("boss1"))
 local PhaseTimer={
@@ -227,9 +227,9 @@ local function Frame_Player_UI()	--UI init
 	player.shield	=BUI.UI.Backdrop("BUI_PlayerFrame_ShieldBar",		health,	{w,h2},		{CENTER,CENTER,0,0},		{cw[1],cw[2],cw[3],.5}, {0,0,0,0}, nil, true)
 	player.shield:SetDrawLayer(2)
 
-	--Trauma Bar	
+	--Trauma Bar
 	player.trauma	=BUI.UI.Backdrop("BUI_PlayerFrame_TraumaBar",		health,	{w,h2},		{LEFT,LEFT,2,0},		{ct[1],ct[2],ct[3],.5}, {0,0,0,0}, nil, true)
-	player.trauma:SetDrawLayer(2)	
+	player.trauma:SetDrawLayer(2)
 
 	--redraw the borders
 	health:SetEdgeTexture(BUI.border[Border][1],b*8,b,b) health:SetEdgeColor(unpack(color))
@@ -314,7 +314,7 @@ local function Frame_Target_UI()	--UI init
 		healthw = BUI.Vars.TargetFrameCenter and w*1/3 or w*2/3,
 		percent = BUI.Vars.TargetFrameCenter and CENTER or RIGHT,
 		spacing = BUI.Vars.TargetFrameCenter and math.min((14-BUI.Vars.FrameFontSize)*2,0) or 12
-	}	
+	}
 	local target	=BUI.UI.Control("BUI_TargetFrame",BanditsUI,{w+b1*2,h+b2*2+fs*1.5*2},BUI.Vars.BUI_TargetFrame,true)
 	target.backdrop	=BUI.UI.Backdrop("BUI_TargetFrame_Bg",target,"inherit",{CENTER,CENTER,0,0},{0,0,0,0.4},{0,0,0,1},nil,true)
 	target.label	=BUI.UI.Label("BUI_TargetFrame_Label",target.backdrop,"inherit",{CENTER,CENTER,0,0},BUI.UI.Font("standard",20,true),nil,{1,1},BUI.Loc("TF_Label"),false)
@@ -412,7 +412,7 @@ local function GroupMember_OnMouseUp(control, button, upInside)
 					BUI.OnScreen.Notification(11,"Jump to "..accname.."("..GetUnitName(unitTag)..")".." is started")
 					JumpToGroupMember(accname)
 				end)
-				if control.dps>4000 then 
+				if control.dps>4000 then
 					AddMenuItem("Post DPS", function()
 						CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
 						StartChatInput("/p "..accname.." DPS: "..BUI.DisplayNumber(control.dps).." ("..ZO_FormatTime(control.time,SI_TIME_FORMAT_TIMESTAMP)..")")
@@ -436,9 +436,6 @@ local function GroupMember_OnMouseUp(control, button, upInside)
 						AddMenuItem(GetString(SI_GROUP_LIST_MENU_KICK_FROM_GROUP), function() GroupKick(unitTag) end)
 					end
 				end
-			end
-			if requiresVoting and not isPlayer then
-				AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function() BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitTag) end)
 			end
 		end
 		if isLeader and not isPlayer and isOnline then
@@ -697,9 +694,9 @@ function BUI.Frames.Bosses_Init(phase)
 	for i=1, MAX_BOSSES do
 		local unitTag="boss"..i
 		if DoesUnitExist(unitTag) then
-			if unitTag=="boss1" then n_bosses=1 
-			elseif unitTag=="boss2" then n_bosses=2 
-			elseif unitTag=="boss3" then n_bosses=3 
+			if unitTag=="boss1" then n_bosses=1
+			elseif unitTag=="boss2" then n_bosses=2
+			elseif unitTag=="boss3" then n_bosses=3
 			elseif unitTag=="boss4" then n_bosses=4
 			elseif unitTag=="boss5" then n_bosses=5
 			end
@@ -1364,7 +1361,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 		local dead=IsUnitDead(unitTag)
 
 		if attribute=="health" then
-			if not IsUnitOnline(unitTag) then				
+			if not IsUnitOnline(unitTag) then
 				label,pct,pctLabel,short=BUI.Loc("Offline"),0,"",false
 			elseif dead or powerValue<0 then
 				label,pct,pctLabel,short=BUI.Loc("Dead"),0,"",false
@@ -1449,10 +1446,10 @@ function BUI.Frames:Trauma(unitTag, traumaValue, traumaPct, healthValue, healthM
 		group=true
 	else return end
 	--Update custom frames
-	if update and frame then		
+	if update and frame then
 		local width=math.min(traumaPct,1)*(frame.width-4)
 		frame.trauma:SetWidth(width)
-		frame.trauma:SetHidden(traumaValue<=0)	
+		frame.trauma:SetHidden(traumaValue<=0)
 		--Update bar labels
 		local short=group or healthValue>100000
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
