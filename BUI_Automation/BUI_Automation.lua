@@ -1,27 +1,3 @@
-local Defaults={
-	DeleteMail=false,
-	ConfirmLocked=false,
-	JumpToLeader=false,
-	GroupLeave=false,
-	Books=false,
-	FriendStatus=false,
-	LargeGroupInvite=true,
-	LargeGroupAnnoucement=true,
-	FastTravel=false,
-	InitialDialog=false,
-	RepeatableQuests=false,
---	CovetousCountess=false,
-	DarkBrotherhoodSpree=false,
---	FeedSynergy=false,
-	AdvancedSynergy=false,
-	BlockAnnouncement=false,
-	ContainerHandler=false,
-	PlayerToPlayer=false,
-	BuiltInGlobalCooldown=false,
-	AutoDismissPet=true,
-	HousePins=4,
-	}
-BUI:JoinTables(BUI.Defaults,Defaults)
 local lastInteractableName
 local ContainerHandlerRunning,LootStolen=false,false
 local Button_Fish,Button_Container
@@ -243,115 +219,14 @@ local function SynergyHandler()
 	end
 end
 
-local function Menu_Init()
-	local warning=BUI.Loc("ReloadUiWarn1")
-	local MenuOptions={
-		{type="header",	param="AutomationHeader"},
-		{type="checkbox",	param="DeleteMail",		warning=true},
-		{type="checkbox",	param="GroupLeave",		warning=true},
-		{type="checkbox",	param="Books",			warning=true},
-		{type="checkbox",	param="LargeGroupInvite",	warning=true},
-		{type="checkbox",	param="FastTravel",		warning=true},
-		{type="checkbox",	param="InitialDialog",		warning=true},
-		{type="checkbox",	param="RepeatableQuests",	warning=true},
---		{type="checkbox",	param="CovetousCountess",	warning=true},
-		{type="checkbox",	param="DarkBrotherhoodSpree",	warning=true},
-		{type="checkbox",	param="ContainerHandler",	warning=true},
-		{type="checkbox",	param="StealthWield",		warning=true},
-		{type="checkbox",	param="LootStolen",		warning=true},
-		{type="checkbox",	param="ConfirmLocked"},
+BUI_Automation = {}
 
-		{type="header",	param="BlockingsHeader"},
---		{type="checkbox",	param="FeedSynergy"},
-		{type="checkbox",	param="AdvancedSynergy"},
-		{type="checkbox",	param="JumpToLeader",		warning=true},
-		{type="checkbox",	param="LargeGroupAnnoucement",warning=true},
-		{type="checkbox",	param="FriendStatus",		warning=true},
-		{type="checkbox",	param="BlockAnnouncement",	warning=true},
-		{type="dropdown",	param="HousePins",		warning="ReloadUiWarn3", choices={BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_All"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Owned"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Unowned"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Disabled")}},
+function BUI_Automation.Initialize()
+  -- Unregister Callback
+	CALLBACK_MANAGER:UnregisterCallback("BUI_Ready", BUI_Automation.Initialize)
 
-		{type="header",	param="ImprovementsHeader"},
-		{type="checkbox",	param="PlayerToPlayer",		warning=true},
-		{type="checkbox",   param="BuiltInGlobalCooldown", warning=true},
-		{type="checkbox",   param="AutoDismissPet", warning=true},
-		{type="button",	name="Reload UI",func=function() SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8, BUI.Loc("SETTINGS_ReloadingUI")) BUI.CallLater("ReloadUI",1000,ReloadUI) end},
-		}
-	local Options,i,var={},0,0
-	for _,option in pairs(MenuOptions) do
-		if not option.condition or BUI.Vars[option.condition] then
-		for _,dup in pairs(option.dup and option.dup or {1}) do
-			if not option.dup or (option.dup and (type(option.param)~="table" or (type(option.param)=="table" and option.param[dup]))) then
-			i=i+1;Options[i]={}
-			Options[i].type			=option.type
-			if option.name then
-				Options[i].name		=(option.icon and "|t32:32:"..option.icon.."|t " or "")..
-								(option.dup and (type(option.name)=="table" and dup.." "..option.name[dup] or dup.." "..option.name) or option.name)
-			else
-				Options[i].name		=BUI.Loc(option.param)
-			end
-			if option.tooltip then
-				Options[i].tooltip	=option.tooltip
-			elseif option.param then
-				Options[i].tooltip		=BUI.Loc(option.param.."Desc")
-			end
-			if option.text then
-				Options[i].text		=option.text
-			end
-			if option.warning then
-				Options[i].warning	=warning
-			end
-			if option.type=="slider" then
-				Options[i].min		=1
-				Options[i].max		=10
-				Options[i].step		=1
-			end
-			if option.choices then
-				Options[i].choices	=option.choices
-			end
-			if option.func then
-				Options[i].func		=option.func
-			end
-			if option.width then
-				Options[i].width		=option.width
-			end
-			if option.disabled then
-				Options[i].disabled	=option.disabled
-			end
-			if option.param then
-				Options[i].getFunc	=function()
-					local var
-					if option.dup then
-						if type(option.param)=="table" then var=BUI.Vars[ option.param[dup] ]
-						else var=BUI.Vars[option.param][dup] end
-					else var=BUI.Vars[option.param] end
-					return var
-					end
-				Options[i].setFunc	=function(value)
-					if option.dup then
-						if type(option.param)=="table" then BUI.Vars[ option.param[dup] ]=value
-						else BUI.Vars[option.param][dup]=value end
-					else BUI.Vars[option.param]=value end
-					if option.func then local function func(value) option.func(value) end func(value) end
-					end
-				if option.dup then
-					if type(option.param)=="table" then var=Defaults[ option.param[dup] ]
-					else var=Defaults[option.param][dup] end
-				else var=Defaults[option.param] end
-				Options[i].default	=var
-			end
-			end
-		end
-		end
-	end
-	BUI.Menu.RegisterPanel("BUI_MenuAutomation",{
-			type="panel",
-			name="18. |t32:32:/esoui/art/treeicons/store_indexicon_bundle_up.dds|t"..BUI.Loc("AutomationHeader"),
-			})
-	BUI.Menu.RegisterOptions("BUI_MenuAutomation", Options)
-end
+	BUI_Automation.SettingsInit()
 
-function BUI.Automation_Init()
-	Menu_Init()
 	SynergyHandler()
 
 --	EVENT_MANAGER:UnregisterForEvent("KeyboardNotifications",EVENT_GUILD_DESCRIPTION_CHANGED)
@@ -659,3 +534,5 @@ function BUI.Automation_Init()
 
 	CHAT_SYSTEM.maxContainerWidth,CHAT_SYSTEM.maxContainerHeight=GuiRoot:GetDimensions()
 end
+
+CALLBACK_MANAGER:RegisterCallback("BUI_Ready", BUI_Automation.Initialize)
