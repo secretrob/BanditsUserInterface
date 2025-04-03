@@ -771,4 +771,17 @@ Markers_HeavySack="Also show markers when Heavy Sack is found",
 Daily_NPC_Glirion="Glirion",
 Daily_NPC_Maj="Maj",
 Daily_NPC_Urgarlag="Urgarlag",
+
+SETTINGS_ReloadingUI="Reloading UI",
+
+ACTIVITYFINDER_DailyPledges = "Daily pledges",
+
+AUTOMATION_Left="Left",
+AUTOMATION_Stop="Stop",
+AUTOMATION_SETTINGS_MAP_PIN_All="All",
+AUTOMATION_SETTINGS_MAP_PIN_Owned="Owned",
+AUTOMATION_SETTINGS_MAP_PIN_Unowned="Unowned",
+AUTOMATION_SETTINGS_MAP_PIN_Disabled="Disabled",
+AUTOMATION_Global_Cooldown="Setting Global Cooldown",
+AUTOMATION_Quest_Low_Reward="Quest with low reward is skipped",
 }

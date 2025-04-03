@@ -179,7 +179,7 @@ local function ChangeLabel(Type)
 	if control then
 		control=control:GetChild(1)
 		if control:GetType()==CT_LABEL then
-			local text=ContainerHandlerRunning and "Stop (left: " or GetString(Type==ITEMTYPE_FISH and SI_KEYBIND_STRIP_FILLET_FISH or SI_KEYBIND_STRIP_OPEN_CONTAINERS).." ("
+			local text=ContainerHandlerRunning and BUI.Loc("AUTOMATION_Stop").." ("..BUI.Loc("AUTOMATION_Left")..": " or GetString(Type==ITEMTYPE_FISH and SI_KEYBIND_STRIP_FILLET_FISH or SI_KEYBIND_STRIP_OPEN_CONTAINERS).." ("
 			control:SetText(text..ItemsTotal[Type]..")")
 		end
 	end
@@ -467,7 +467,7 @@ function BUI.DailyPledges()
 	local offset=1517479200
 	if GetCVar("LastRealm")~="NA Megaserver" then offset=1517454000 end
 	local day=math.floor(GetDiffBetweenTimeStamps(GetTimeStamp(),offset)/86400)
-	d("Daily pledges:")
+	d(BUI.Loc("ACTIVITYFINDER_DailyPledges")..":")
 	for zoneId, v in pairs(DungeonIndex) do
 		local length = 12
 		local shift = 0
@@ -533,7 +533,7 @@ local function Menu_Init()
 		{type="checkbox",	param="LargeGroupAnnoucement",warning=true},
 		{type="checkbox",	param="FriendStatus",		warning=true},
 		{type="checkbox",	param="BlockAnnouncement",	warning=true},
-		{type="dropdown",	param="HousePins",		warning="ReloadUiWarn3", choices={"All","Owned","Unowned","Disabled"}},
+		{type="dropdown",	param="HousePins",		warning="ReloadUiWarn3", choices={BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_All"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Owned"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Unowned"),BUI.Loc("AUTOMATION_SETTINGS_MAP_PIN_Disabled")}},
 
 		{type="header",	param="ImprovementsHeader"},
 		{type="checkbox",	param="UndauntedPledges",	warning=true},
@@ -541,7 +541,7 @@ local function Menu_Init()
 		{type="checkbox",	param="PlayerToPlayer",		warning=true},
 		{type="checkbox",   param="BuiltInGlobalCooldown", warning=true},
 		{type="checkbox",   param="AutoDismissPet", warning=true},
-		{type="button",	name="Reload UI",func=function() SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8,"Reloading UI") BUI.CallLater("ReloadUI",1000,ReloadUI) end},
+		{type="button",	name="Reload UI",func=function() SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8, BUI.Loc("SETTINGS_ReloadingUI")) BUI.CallLater("ReloadUI",1000,ReloadUI) end},
 		}
 	local Options,i,var={},0,0
 	for _,option in pairs(MenuOptions) do
@@ -709,7 +709,7 @@ function BUI.Automation_Init()
 	if BUI.Vars.BuiltInGlobalCooldown then
 		if not BuiltInGlobalCooldownOn then
 	    	BuiltInGlobalCooldownOn=true
-	       	d("Setting Global Cooldown")
+	       	d(BUI.Loc("AUTOMATION_Global_Cooldown"))
 	       	ZO_ActionButtons_ToggleShowGlobalCooldown()
 	    end
 	end
@@ -896,7 +896,7 @@ function BUI.Automation_Init()
 				if (BUI.Vars.DarkBrotherhoodSpree and contractBook[lastInteractableName] and ZoneId==826 and nonSpreeDialog[string.sub(GetOfferedQuestInfo(),5,12)])
 				then
 					EndInteraction(INTERACTION_QUEST)
-					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, "Quest with low reward is skipped")
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, BUI.Loc("AUTOMATION_Quest_Low_Reward"))
 					return
 				end
 				PopulateChatterOption(self, index, fun, txt, type, ...)
