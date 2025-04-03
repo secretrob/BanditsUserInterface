@@ -334,7 +334,7 @@ local function UndauntedPledges()
 			if parent then
 				for i=1,parent:GetNumChildren() do
 					local obj=parent:GetChild(i)
-					if obj then
+					if obj and obj.node.data.isLocked == false then
 						local id=obj.node.data.zoneId
 						if DungeonIndex[id] then
 
@@ -351,32 +351,34 @@ local function UndauntedPledges()
 							end
 							_=BUI.UI.Label("BUI_DungeonInfo"..c..i, obj, {80,20}, {LEFT,LEFT,465,0}, "ZoFontGameLarge", nil, {0,1}, text)
 
-							--Quest
-							local orig=obj.text:GetText()
+							if GetUnitLevel("player") >= 45 then
+								--Quest
+								local orig=obj.text:GetText()
 
-							--Daily pledges
-							local daily=""
-							local length = 12
-							local shift = 0
-							if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
-								length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
-								shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
-							end
-							if 1+(day+shift)%length == DungeonIndex[id].index then
-								daily=" ("..BUI.Loc("UndauntedDaily")..")"
-								obj.text:SetText(orig.." |c3388EE"..daily.."|r")
-							end
+								--Daily pledges
+								local daily=""
+								local length = 12
+								local shift = 0
+								if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
+									length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+									shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
+								end
+								if 1+(day+shift)%length == DungeonIndex[id].index then
+									daily=" ("..BUI.Loc("UndauntedDaily")..")"
+									obj.text:SetText(orig.." |c3388EE"..daily.."|r")
+								end
 
-							--Current pledges
-							local questname = GetQuestName(DungeonIndex[id].pledge)
-							local completed=Pledges[questname]
-							obj.pledge=false
+								--Current pledges
+								local questname = GetQuestName(DungeonIndex[id].pledge)
+								local completed=Pledges[questname]
+								obj.pledge=false
 
-							if Pledges[questname]==true then
-								obj.text:SetText(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r")
-							elseif Pledges[questname]==false then
-								obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
-								obj.pledge=true
+								if Pledges[questname]==true then
+									obj.text:SetText(orig.." |c33EE33- "..BUI.Loc("UndauntedDone")..daily.."|r")
+								elseif Pledges[questname]==false then
+									obj.text:SetText(orig.." |c3388EE- "..BUI.Loc("UndauntedQuest")..daily.."|r")
+									obj.pledge=true
+								end
 							end
 
 --							d(obj.text:GetText())
