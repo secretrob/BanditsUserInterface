@@ -442,6 +442,77 @@ function BUI.Menu.RegisterPanel(name, data)
 	return panel
 end
 
+function BUI.Menu.OptionsTransformer(menuOptions, defaults)
+	local Options,i,var={},0,0
+	for _,option in pairs(menuOptions) do
+		if not option.condition or BUI.Vars[option.condition] then
+		for _,dup in pairs(option.dup and option.dup or {1}) do
+			if not option.dup or (option.dup and (type(option.param)~="table" or (type(option.param)=="table" and option.param[dup]))) then
+			i=i+1;Options[i]={}
+			Options[i].type			=option.type
+			if option.name then
+				Options[i].name		=(option.icon and "|t32:32:"..option.icon.."|t " or "")..
+								(option.dup and (type(option.name)=="table" and dup.." "..option.name[dup] or dup.." "..option.name) or option.name)
+			else
+				Options[i].name		=BUI.Loc(option.param)
+			end
+			if option.tooltip then
+				Options[i].tooltip	=option.tooltip
+			elseif option.param then
+				Options[i].tooltip		=BUI.Loc(option.param.."Desc")
+			end
+			if option.text then
+				Options[i].text		=option.text
+			end
+			if option.warning then
+				Options[i].warning	=warning
+			end
+			if option.type=="slider" then
+				Options[i].min		=1
+				Options[i].max		=10
+				Options[i].step		=1
+			end
+			if option.choices then
+				Options[i].choices	=option.choices
+			end
+			if option.func then
+				Options[i].func		=option.func
+			end
+			if option.width then
+				Options[i].width		=option.width
+			end
+			if option.disabled then
+				Options[i].disabled	=option.disabled
+			end
+			if option.param then
+				Options[i].getFunc	=function()
+					local var
+					if option.dup then
+						if type(option.param)=="table" then var=BUI.Vars[ option.param[dup] ]
+						else var=BUI.Vars[option.param][dup] end
+					else var=BUI.Vars[option.param] end
+					return var
+				end
+				Options[i].setFunc	=function(value)
+					if option.dup then
+						if type(option.param)=="table" then BUI.Vars[ option.param[dup] ]=value
+						else BUI.Vars[option.param][dup]=value end
+					else BUI.Vars[option.param]=value end
+					if option.func then local function func(value) option.func(value) end func(value) end
+				end
+				if option.dup then
+					if type(option.param)=="table" then var=defaults[ option.param[dup] ]
+					else var=defaults[option.param][dup] end
+				else var=defaults[option.param] end
+				Options[i].default	=var
+			end
+			end
+		end
+		end
+	end
+	return Options
+end
+
 function BUI.Menu.Init()
 	SettingsWindow_Init()
 	BUI.InternalMenu=true

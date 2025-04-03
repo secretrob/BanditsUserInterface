@@ -204,7 +204,7 @@ local function VersionCheck()
 	local accessibilityModeEnabled = GetSetting_Bool(SETTING_TYPE_ACCESSIBILITY, ACCESSIBILITY_SETTING_ACCESSIBILITY_MODE)
 	if BUI.Vars.DisableHelpAnnounce==false then
 		if IsInGamepadPreferredMode() then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("GamepadHelpAnnouncement")) end
-		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end	
+		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end
 	end
 end
 
@@ -240,7 +240,7 @@ local function Initialize(eventCode, addOnName)
 	--BUI.Markers.Initialize()
 	BUI.Menu.Init()
 	BUI.Menu.Initialize()
-	BUI.Automation_Init()	
+	BUI.Automation_Init()
 --	BUI.Champion_Init()
 	BUI.Panel_Init()
 	BUI.CustomBar_Init()
@@ -250,7 +250,6 @@ local function Initialize(eventCode, addOnName)
 --	ZO_Synergy.container:SetAnchor(BOTTOM, nil, BOTTOM, 0, -230)
 	--Register Slash Commands
 	SLASH_COMMANDS["/bui"]=Slash
-	SLASH_COMMANDS["/daily"]=BUI.DailyPledges
 	SLASH_COMMANDS["/ab"]=function(id) id=tonumber(id) if id>0 then StartChatInput('['..id..']=true,--'..GetAbilityName(id)) end end
 	SLASH_COMMANDS["/rl"]=function() BUI.OnScreen.Notification(8,"Reloading UI") BUI.CallLater("ReloadUI",1000,ReloadUI) end	--SLASH_COMMANDS["/reloadui"]
 	SLASH_COMMANDS["/scan"]=function(params) params={string.match(params, "^(%S*)%s*(.-)$")} ScanObj(params[1], params[2]~="") end

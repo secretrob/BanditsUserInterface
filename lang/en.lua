@@ -779,6 +779,7 @@ GENERIC_Stop="Stop",
 
 SETTINGS_ReloadingUI="Reloading UI",
 
+ACTIVITYFINDER_Label = "Activity Finder",
 ACTIVITYFINDER_DailyPledges = "Daily pledges",
 
 AUTOMATION_SETTINGS_MAP_PIN_All="All",
