@@ -248,9 +248,9 @@ local function EquipmentInfo()
 	--Items header
 	local header	=BUI.UI.Control(	"BUI_Report_Items_Header",	ui,		{w1-20,fs*1.3},	{TOPLEFT,TOPLEFT,10,2})
 	header.bg		=BUI.UI.Backdrop(	"BUI_Report_Items_BG",		header,	{w1-20,fs*1.3},	{TOPLEFT,TOPLEFT,0,0},			{.4,.4,.4,.3}, {0,0,0,0})
-	header.name		=BUI.UI.Label(	"BUI_Report_Items_Name",	header,	{255,fs*1.5},	{LEFT,LEFT,30,0},				BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, "Item")
-	header.trait	=BUI.UI.Label(	"BUI_Report_Items_Trait",	header,	{70,fs*1.5},	{LEFT,RIGHT,0,0,header.name},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, "Trait")
-	header.ench		=BUI.UI.Label(	"BUI_Report_Items_Enchant",	header,	{160,fs*1.5},	{LEFT,RIGHT,0,0,header.trait},	BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, "Enchant")
+	header.name		=BUI.UI.Label(	"BUI_Report_Items_Name",	header,	{255,fs*1.5},	{LEFT,LEFT,30,0},				BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("STATISTICS_Item"))
+	header.trait	=BUI.UI.Label(	"BUI_Report_Items_Trait",	header,	{70,fs*1.5},	{LEFT,RIGHT,0,0,header.name},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("STATISTICS_Trait"))
+	header.ench		=BUI.UI.Label(	"BUI_Report_Items_Enchant",	header,	{160,fs*1.5},	{LEFT,RIGHT,0,0,header.trait},	BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("STATISTICS_Enchant"))
 	--Items
 	for _,slot in pairs(SLOTS) do
 		local itemLink	=GetItemLink(BAG_WORN,slot)
@@ -342,9 +342,9 @@ local function EquipmentInfo()
 	local mainpower=BUI.Player["stamina"].max>BUI.Player["magicka"].max and "stamina" or "magicka"
 --	local s_crit,m_crit=BUI.GetCritDamage()
 --	local b_cost,b_mitigation=BUI.GetBlockCost()
-	local text="|cbb3333"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES1]).."|r "..BUI.DisplayNumber(BUI.Player["health"].max).." |cbb3333Recovery|r "..BUI.DisplayNumber(GetPlayerStat(STAT_HEALTH_REGEN_COMBAT)).."\n"
-		.."|c33bb33"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES3]).."|r "..BUI.DisplayNumber(BUI.Player["stamina"].max).." |c33bb33Recovery|r "..BUI.DisplayNumber(GetPlayerStat(STAT_STAMINA_REGEN_COMBAT)).."\n"
-		.."|c5555ff"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES2]).."|r "..BUI.DisplayNumber(BUI.Player["magicka"].max).." |c5555ffRecovery|r "..BUI.DisplayNumber(GetPlayerStat(STAT_MAGICKA_REGEN_COMBAT))
+	local text="|cbb3333"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES1]).."|r "..BUI.DisplayNumber(BUI.Player["health"].max).." |cbb3333"..BUI.Loc("STATISTICS_Recovery").."|r "..BUI.DisplayNumber(GetPlayerStat(STAT_HEALTH_REGEN_COMBAT)).."\n"
+		.."|c33bb33"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES3]).."|r "..BUI.DisplayNumber(BUI.Player["stamina"].max).." |c33bb33"..BUI.Loc("STATISTICS_Recovery").."|r "..BUI.DisplayNumber(GetPlayerStat(STAT_STAMINA_REGEN_COMBAT)).."\n"
+		.."|c5555ff"..zo_strformat("<<!aC:1>>",EsoStrings[SI_ATTRIBUTES2]).."|r "..BUI.DisplayNumber(BUI.Player["magicka"].max).." |c5555ff"..BUI.Loc("STATISTICS_Recovery").."|r "..BUI.DisplayNumber(GetPlayerStat(STAT_MAGICKA_REGEN_COMBAT))
 	local stat1=BUI.UI.Label("BUI_Report_Einfo_Stats1", ui, {w-w1-10,sfs*1.4*3}, {TOPLEFT,BOTTOMLEFT,0,10,name}, BUI.UI.Font("standard",sfs,true), {.8,.8,.8,1}, {0,0}, text)
 	local penetr=mainpower=="stamina" and GetPlayerStat(STAT_PHYSICAL_PENETRATION) or GetPlayerStat(STAT_SPELL_PENETRATION)
 	local text=(mainpower=="stamina" and "|c33bb33"..zo_strformat("<<!aC:1>>",EsoStrings[SI_DERIVEDSTATS33]) or "|c5555ff"..zo_strformat("<<!aC:1>>",EsoStrings[SI_DERIVEDSTATS34])).."|r "..BUI.DisplayNumber(penetr).." |c808080("..math.floor(penetr/66.2)/10 .."%)|r\n"
@@ -498,19 +498,19 @@ function BUI.Stats.Analistics_Init()	--ANALYTICS WINDOW
 	ui.tabs		=BUI.UI.Control("BUI_Report_Tabs", ui.top, {350,30}, {TOP,TOP,0,0})
 --	local tabs		=BUI.UI.Texture("BUI_Report_TabsBg", ui.tabs, {512,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tabs1.dds") tabs:SetColor(.7,.7,.5,.3)
 	ui.dbutton		=BUI.UI.Button(	"BUI_Report_Dbutton",				ui.tabs,	{70,24},		{LEFT,LEFT,70*0*s,0},		BSTATE_DISABLED, BUI.UI.Font("esobold",fs-2,true), {1,1}, {.7,.7,.5,1}, nil, {1,1,1,1}, false)
-	ui.dbutton:SetText("Damage") ui.dbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Damage",self) end)
+	ui.dbutton:SetText(BUI.Loc("Damage")) ui.dbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Damage",self) end)
 	ui.dbutton.tab	=BUI.UI.Texture(nil, ui.dbutton, {128,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tab.dds") ui.dbutton.tab:SetColor(.21,.21,.15,1)
 	ui.hbutton		=BUI.UI.Button(	"BUI_Report_Hbutton",				ui.tabs,	{70,24},		{LEFT,LEFT,70*1*s,0},		BSTATE_NORMAL, BUI.UI.Font("esobold",fs-2,true), {1,1}, {.7,.7,.5,1}, nil, {1,1,1,1}, false)
-	ui.hbutton:SetText("Healing") ui.hbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Healing",self) end)
+	ui.hbutton:SetText(BUI.Loc("Healing")) ui.hbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Healing",self) end)
 	ui.hbutton.tab	=BUI.UI.Texture(nil, ui.hbutton, {128,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tab.dds") ui.hbutton.tab:SetColor(.21,.21,.15,1)
 	ui.rbutton		=BUI.UI.Button(	"BUI_Report_Rbutton",				ui.tabs,	{70,24},		{LEFT,LEFT,70*2*s,0},		BSTATE_NORMAL, BUI.UI.Font("esobold",fs-2,true), {1,1}, {.7,.7,.5,1}, nil, {1,1,1,1}, false)
-	ui.rbutton:SetText("Resource") ui.rbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Power",self) end)
+	ui.rbutton:SetText(BUI.Loc("Power")) ui.rbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Power",self) end)
 	ui.rbutton.tab	=BUI.UI.Texture(nil, ui.rbutton, {128,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tab.dds") ui.rbutton.tab:SetColor(.21,.21,.15,1)
 	ui.ibutton		=BUI.UI.Button(	"BUI_Report_Ibutton",				ui.tabs,	{70,24},		{LEFT,LEFT,70*3*s,0},		BSTATE_NORMAL, BUI.UI.Font("esobold",fs-2,true), {1,1}, {.7,.7,.5,1}, nil, {1,1,1,1}, false)
-	ui.ibutton:SetText("Incoming") ui.ibutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Incoming",self) end)
+	ui.ibutton:SetText(BUI.Loc("STATISTICS_Incoming")) ui.ibutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupReport("Incoming",self) end)
 	ui.ibutton.tab	=BUI.UI.Texture(nil, ui.ibutton, {128,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tab.dds") ui.ibutton.tab:SetColor(.21,.21,.15,1)
 	ui.gbutton		=BUI.UI.Button(	"BUI_Report_Gbutton",				ui.tabs,	{70,24},		{LEFT,LEFT,70*4*s,0},		BSTATE_NORMAL, BUI.UI.Font("esobold",fs-2,true), {1,1}, {.7,.7,.5,1}, nil, {1,1,1,1}, false)
-	ui.gbutton:SetText("Group") ui.gbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupGroupReport() end)
+	ui.gbutton:SetText(BUI.Loc("STATISTICS_Group")) ui.gbutton:SetHandler("OnClicked", function(self) PlaySound("Click") BUI.Stats.SetupGroupReport() end)
 	ui.gbutton.tab	=BUI.UI.Texture(nil, ui.gbutton, {128,32}, {CENTER,CENTER,0,0}, "/BanditsUserInterface/textures/tab.dds") ui.gbutton.tab:SetColor(.21,.21,.15,1)
 	--Abilitys Detail
 	local abilities	=BUI.UI.Control(	"BUI_Report_Ability",				ui,		{w,fs*1.5},		{LEFT,LEFT,10*s,0},			true)
@@ -525,7 +525,7 @@ function BUI.Stats.Analistics_Init()	--ANALYTICS WINDOW
 	header.avg		=BUI.UI.Label(	"BUI_Report_Ability_Avg",			header,	{70,fs*1.5},	{LEFT,RIGHT,0,0,header.crit},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("Average"), false)
 	header.max		=BUI.UI.Label(	"BUI_Report_Ability_Max",			header,	{70,fs*1.5},	{LEFT,RIGHT,0,0,header.avg},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("Max"), false)
 	if (BUI.language=="en" or BUI.Vars.ActionsPrecise)then
-	header.perc		=BUI.UI.Label(	"BUI_Report_Ability_Perc",			header,	{50,fs*1.5},	{LEFT,RIGHT,0,0,header.max},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {0,1}, "Up", false)
+	header.perc		=BUI.UI.Label(	"BUI_Report_Ability_Perc",			header,	{50,fs*1.5},	{LEFT,RIGHT,0,0,header.max},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("STATISTICS_Up"), false)
 	end
 --	header.min		=BUI.UI.Label(	"BUI_Report_Ability_Min",			header,	{70,fs*1.5},	{LEFT,RIGHT,0,0,header.perc},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {0,1}, "Min", true)
 	abilities.header	=header
@@ -562,7 +562,7 @@ function BUI.Stats.Analistics_Init()	--ANALYTICS WINDOW
 	ui.ubutton:SetHandler("OnMouseExit", function(self)self:SetColor(156/256,147/256,117/256,1)end)
 	ui.ubutton:SetDrawTier(DT_HIGH)
     ui.ubutton:SetDrawLayer(DL_CONTROLS)
-	BUI.UI.Label(	"BUI_Report_uDescription",	ui.ubase,	{180,fs*1.5},		{LEFT,LEFT,(10+fs)*s,0},	BUI.UI.Font("standard",fs,true), {.8,.8,.6,1}, {0,1}, "Uptimes", false)
+	BUI.UI.Label(	"BUI_Report_uDescription",	ui.ubase,	{180,fs*1.5},		{LEFT,LEFT,(10+fs)*s,0},	BUI.UI.Font("standard",fs,true), {.8,.8,.6,1}, {0,1}, BUI.Loc("STATISTICS_Uptimes"), false)
 
 	BUI.UI.Label(	"BUI_Report_Version",		ui.foot,	{345,fs*1.5},	{RIGHT,RIGHT,-10*s,0},		BUI.UI.Font("standard",fs,true), {.8,.8,.6,1}, {2,1}, ""	, false)
 	--Buffs
@@ -577,7 +577,7 @@ function BUI.Stats.Analistics_Init()	--ANALYTICS WINDOW
 		local BuffsUp	=BUI.UI.Control(	"BUI_Report_BuffsUp",			control,	{345,fs*1.5*2},	{TOPLEFT,BOTTOMLEFT,0,0},		true)
 		BuffsUp.namesH	=BUI.UI.Label(	"BUI_Report_BuffsUp_NamesHeader",	BuffsUp,	{240,fs*1.5},	{TOPLEFT,TOPLEFT,0,0},			BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("ReportBuffHeader")	, false)
 		BuffsUp.timeH	=BUI.UI.Label(	"BUI_Report_BuffsUp_TimeHeader",	BuffsUp,	{50,fs*1.5},	{LEFT,RIGHT,0,0,BuffsUp.namesH},	BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("ReportTimeHeader")	, false)
-		BuffsUp.percH	=BUI.UI.Label(	"BUI_Report_BuffsUp_PercentHeader",	BuffsUp,	{50,fs*1.5},	{LEFT,RIGHT,0,0,BuffsUp.timeH},	BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, "Up "	, false)
+		BuffsUp.percH	=BUI.UI.Label(	"BUI_Report_BuffsUp_PercentHeader",	BuffsUp,	{50,fs*1.5},	{LEFT,RIGHT,0,0,BuffsUp.timeH},	BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("STATISTICS_Up")	, false)
 		--Buffs List
 		local list		=BUI.UI.Control(	"BUI_Report_BuffsUp_Content",		BuffsUp,	{345,20},		{TOPLEFT,TOPLEFT,0,(fs*1.5/2+10)*s},		false)
 		local scroll	=BUI.UI.Scroll(list)
@@ -622,7 +622,7 @@ local function PostGroupDps(name)
 		for name,data in pairs(GroupData) do if name~="Total" and data.dps and data.time then table.insert(members,{name=name,damage=data.dps*data.time}) end end
 		table.sort(members,BUI.Stats.SortDamage)
 		--Add total
-		text="Group DPS: "..text..BUI.DisplayNumber(GroupDPS).." ("..ZO_FormatTime(fighttime,SI_TIME_FORMAT_TIMESTAMP)..")"
+		text=BUI.Loc("GroupDPS")..": "..text..BUI.DisplayNumber(GroupDPS).." ("..ZO_FormatTime(fighttime,SI_TIME_FORMAT_TIMESTAMP)..")"
 		--Loop over members
 		for i=1,math.min(#members,12) do
 			local n=members[i].name
@@ -637,7 +637,7 @@ local function PostGroupDps(name)
 		end
 	elseif GroupData[name] then
 		local damage=GroupData[name].dps*GroupData[name].time
-		text=text..name.." DPS: "..BUI.DisplayNumber(GroupData[name].dps)..
+		text=text..name.." "..BUI.Loc("DPS")..": "..BUI.DisplayNumber(GroupData[name].dps)..
 			" ("..ZO_FormatTime(GroupData[name].time,SI_TIME_FORMAT_TIMESTAMP)..") "..
 			math.min(math.floor(damage/TotalDmg*100),100).."%"
 	end
@@ -689,7 +689,7 @@ function BUI.Stats.CreateTarget()
 	control.d.header	=BUI.UI.Control(	"BUI_Report_DeBuffs"..i.."_Header",		control.d,		{345,fs*1.5*2},	{TOPLEFT,BOTTOMLEFT,0,0},	false)
 	control.d.namesH	=BUI.UI.Label(	"BUI_Report_DeBuffs"..i.."_NamesHeader",	control.d.header,	{240,fs*1.5},	{TOPLEFT,TOPLEFT,0,0},		BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("ReportBuffHeader")	, false)
 	control.d.timeH	=BUI.UI.Label(	"BUI_Report_DeBuffs"..i.."_TimeHeader",	control.d.namesH,	{50,fs*1.5},	{LEFT,RIGHT,0,0},			BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("ReportTimeHeader")	, false)
-	control.d.percH	=BUI.UI.Label(	"BUI_Report_DeBuffs"..i.."_PercHeader",	control.d.timeH,	{50,fs*1.5},	{LEFT,RIGHT,0,0},			BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, "Up "	, false)
+	control.d.percH	=BUI.UI.Label(	"BUI_Report_DeBuffs"..i.."_PercHeader",	control.d.timeH,	{50,fs*1.5},	{LEFT,RIGHT,0,0},			BUI.UI.Font("esobold",fs,true), {1,1,1,1}, {1,1}, BUI.Loc("STATISTICS_Up")	, false)
 	--Buffs List
 	control.d.content	=BUI.UI.Control(	"BUI_Report_DeBuffsUp"..i.."_Content",	control.d.header,	{345,20},		{TOPLEFT,TOPLEFT,0,(fs*1.5/2+10)*s},		false)
 	local scroll	=BUI.UI.Scroll(control.d.content)
@@ -713,7 +713,7 @@ function BUI.Stats.CreateAbility()
 	control.name	=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Name",		control,	{220,fs*1.5},		{LEFT,RIGHT,0,0,control.icon},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("Ability"), false)
 --	control.uses	=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Uses",		control,	{30,fs*1.5},		{LEFT,RIGHT,0,0,control.name},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("ReportCount"), false)
 	control.total	=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Total",		control,	{130,fs*1.5},		{LEFT,RIGHT,0,0,control.name},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("ReportTotal"), false)
-	control.dps		=BUI.UI.Label(	"BUI_Report_Ability"..i.."_DPS",		control,	{70,fs*1.5},		{LEFT,RIGHT,0,0,control.total},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, "DPS", false)
+	control.dps		=BUI.UI.Label(	"BUI_Report_Ability"..i.."_DPS",		control,	{70,fs*1.5},		{LEFT,RIGHT,0,0,control.total},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("DPS"), false)
 	control.count	=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Count",		control,	{70,fs*1.5},		{LEFT,RIGHT,0,0,control.dps},		BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("ReportCount"), false)
 	control.crit	=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Crit",		control,	{50,fs*1.5},		{LEFT,RIGHT,0,0,control.count},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("Crit"), false)
 	control.avg		=BUI.UI.Label(	"BUI_Report_Ability"..i.."_Avg",		control,	{70,fs*1.5},		{LEFT,RIGHT,0,0,control.crit},	BUI.UI.Font("standard",fs,true), {1,1,1,1}, {0,1}, BUI.Loc("Average"), false)
@@ -855,10 +855,19 @@ local function SetupTargetBuffs(control)
 	if not Report.penetr[target] then Report.penetr[target]={avg={["stamina"]=penetr_p_avg,["magicka"]=penetr_m_avg},max={["stamina"]=penetr_p_max,["magicka"]=penetr_m_max}} end
 	--Apply labels
 	parent.summary:SetHeight((fs-4)*1.36*(control.index>1 and 4 or 3))
+
+	if (BUI.language == "es") then
+		ab_Magickasteal = ab_Magickasteal:gsub('%^.*', '')
+		ab_Crusher = ab_Crusher:gsub('%^.*', '')
+		ab_Alkosh = ab_Alkosh:gsub('%^.*', '')
+		ab_Breach = ab_Breach:gsub('%^.*', '')
+		ab_mBreach = ab_mBreach:gsub('%^.*', '')
+	end
+
 	parent.summary:SetText(
-		"|cbbbbbbCrusher:|r "..crusher.."|cbbbbbb%  Line-Breaker:|r "..alkosh.."|cbbbbbb%|r"..
-		"\n|cbbbbbbMajor/Minor Breach:|r "..Breach.."|cbbbbbb/|r"..mBreach.."|cbbbbbb%|r"..
-		"\n|cbbbbbbMagickasteal:|r "..msteal.."%"
+		"|cbbbbbb"..ab_Crusher..":|r "..crusher.."|cbbbbbb%  "..ab_Alkosh..":|r "..alkosh.."|cbbbbbb%|r"..
+		"\n|cbbbbbb"..ab_Breach..":|r "..Breach.."|cbbbbbb/|r"..mBreach.."|cbbbbbb%|r"..
+		"\n|cbbbbbb"..ab_Magickasteal..":|r "..msteal.."%"
 --		"\n|cbbbbbbPenetration average:|r |c33bb33"..math.floor(penetr_p_avg).."|cbbbbbb/|r|c5555ff"..math.floor(penetr_m_avg).."|r"..
 --		(control.index>1 and "\n|cbbbbbbPenetration max phisical/magical:|r |c33bb33"..math.floor(penetr_p_max).."|cbbbbbb/|r|c5555ff"..math.floor(penetr_m_max).."|r" or "")
 		)
@@ -924,11 +933,11 @@ local function CharacterSummary(target)
 	local mainpower=(Report.stamina and Report.magicka) and ((Report.stamina>Report.magicka) and "stamina" or "magicka")
 	local penetr=(Report.penetr.own and Report.penetr.own[mainpower] or 0)+(Report.penetr.tmp and Report.penetr.tmp[mainpower] or 0)
 	local text=
-		(Report.health and "|cbb3333Health|r "..BUI.DisplayNumber(Report.health) or "")..
-		(mainpower and (mainpower=="stamina" and "  |c33bb33Stamina|r "..BUI.DisplayNumber(Report.stamina) or "  |c5555ffMagicka|r "..BUI.DisplayNumber(Report.magicka)) or "")..
+		(Report.health and "|cbb3333"..EsoStrings[SI_ATTRIBUTES1].."|r "..BUI.DisplayNumber(Report.health) or "")..
+		(mainpower and (mainpower=="stamina" and "  |c33bb33"..EsoStrings[SI_ATTRIBUTES2].."|r "..BUI.DisplayNumber(Report.stamina) or "  |c5555ff"..EsoStrings[SI_ATTRIBUTES3].."|r "..BUI.DisplayNumber(Report.magicka)) or "")..
 --		((mainpower and Report.damagepower) and (mainpower=="stamina" and "\n|c33bb33W dmg|r " or "\n|c5555ffSp dmg|r ")..BUI.DisplayNumber(Report.damagepower[mainpower]) or "")..
 --		((mainpower and Report.crit and Report.crit[mainpower]) and (mainpower=="stamina" and "  |c33bb33" or "  |c5555ff").."Crit chance|r "..BUI.DisplayNumber(Report.crit[mainpower]).."|cbbbbbb%|r" or "")..
-		(mainpower and "\n|cbbbbbbPenetration avg/max:|r "..
+		(mainpower and "\n|cbbbbbb"..BUI.Loc("STATISTICS_PEN_AVG_MAX")..":|r "..
 			BUI.DisplayNumber(penetr+(Report.penetr[target] and Report.penetr[target].avg and Report.penetr[target].avg[mainpower] or 0)).."|cbbbbbb/|r"..
 			BUI.DisplayNumber(penetr+(Report.penetr[target] and Report.penetr[target].max and Report.penetr[target].max[mainpower] or 0)) or "")
 --	d("Penetration: "..(Report.penetr.own and Report.penetr.own[mainpower] or 0).."+"..(Report.penetr.tmp and Report.penetr.tmp[mainpower] or 0).."+"..(Report.penetr[target] and Report.penetr[target][mainpower] or 0))
@@ -1077,7 +1086,7 @@ function BUI.Stats.SetupUptimes()		--Uptimes
 	end
 	--Start
 	local ElementColor={[0]={.2,.2,.2,.7},[1]={.5,.5,.5,.7},[2]={.7,.7,.7,.7},[3]={.7,.2,.2,.7},[4]={1,1,1,.7},[5]={.5,.5,.5,.7},[6]={.7,.7,1,.7},[7]={.7,.7,.2,.7},[8]={.3,.3,.7,.7},[9]={.5,.5,.5,.7},[10]={.7,.2,.7,.7},[11]={.2,.7,.2,.7}}
-	local AbilityName={[103]="Swap"}
+	local AbilityName={[103]=BUI.Loc("STATISTICS_Swap")}
 	local startTime=Report.startTime
 	local fighttime=math.max(Report.endTime-Report.startTime,1000)
 	local scale=(w-230)/fighttime
@@ -1147,7 +1156,7 @@ function BUI.Stats.SetupUptimes()		--Uptimes
 			for i=1,100 do local bar=_G["BUI_Report_Uptime_Bar"..ii.."_"..i] if bar then bar:SetHidden(true) end end
 		end
 		ui:SetAnchor(BOTTOMRIGHT,BUI_Report,BOTTOMRIGHT,0,head+row*h)
-		ui.title:SetText("Uptimes for "..ZO_FormatTime(fighttime/1000,SI_TIME_FORMAT_TIMESTAMP))
+		ui.title:SetText(BUI.Loc("STATISTICS_Uptimes_For").." "..ZO_FormatTime(fighttime/1000,SI_TIME_FORMAT_TIMESTAMP))
 		if ui:GetBottom()>GuiRoot:GetBottom() then
 			BUI_Report:ClearAnchors()
 			BUI_Report:SetAnchor(TOP,GuiRoot,TOP,0,0)
@@ -1288,26 +1297,26 @@ function BUI.Stats.SetupReport(context,header_button)	--Setup player report
 		Direct_Damage=math.floor(Direct_Damage*100/Report.damage)
 		if (Report.magicka or 0)>(Report.stamina or 0) then
 			title=
-			"|cbb3333Fire|r "..math.floor(Element_Damage[3]*100/Report.damage).."%"..
-			"  |cffffffShock|r "..math.floor(Element_Damage[4]*100/Report.damage).."%"..
-			"  |cbbbbffCold|r "..math.floor(Element_Damage[6]*100/Report.damage).."%"..
-			"  |c5555ffMagic|r "..math.floor(Element_Damage[DAMAGE_TYPE_MAGIC]*100/Report.damage).."%"
+			"|cbb3333"..BUI.Loc("STATISTICS_Fire").."|r "..math.floor(Element_Damage[3]*100/Report.damage).."%"..
+			"  |cffffff"..BUI.Loc("STATISTICS_Shock").."|r "..math.floor(Element_Damage[4]*100/Report.damage).."%"..
+			"  |cbbbbff"..BUI.Loc("STATISTICS_Cold").."|r "..math.floor(Element_Damage[6]*100/Report.damage).."%"..
+			"  |c5555ff"..BUI.Loc("STATISTICS_Magic").."|r "..math.floor(Element_Damage[DAMAGE_TYPE_MAGIC]*100/Report.damage).."%"
 		else
 			title=
-			"|cbbbbbbPhysical|r "..math.floor(Element_Damage[DAMAGE_TYPE_PHYSICAL]*100/Report.damage).."%"..
-			"  |c33bb33Poison|r "..math.floor(Element_Damage[11]*100/Report.damage).."%"..
-			"  |cbb33bbDisease|r "..math.floor(Element_Damage[DAMAGE_TYPE_DISEASE]*100/Report.damage).."%"..
-			"  |cbb3333Bleed|r "..math.floor(Element_Damage[DAMAGE_TYPE_BLEED]*100/Report.damage).."%"
+			"|cbbbbbb"..BUI.Loc("STATISTICS_Physical").."|r "..math.floor(Element_Damage[DAMAGE_TYPE_PHYSICAL]*100/Report.damage).."%"..
+			"  |c33bb33"..BUI.Loc("STATISTICS_Poison").."|r "..math.floor(Element_Damage[11]*100/Report.damage).."%"..
+			"  |cbb33bb"..BUI.Loc("STATISTICS_Disease").."|r "..math.floor(Element_Damage[DAMAGE_TYPE_DISEASE]*100/Report.damage).."%"..
+			"  |cbb3333"..BUI.Loc("STATISTICS_Bleed").."|r "..math.floor(Element_Damage[DAMAGE_TYPE_BLEED]*100/Report.damage).."%"
 		end
 			title=title.."\n"..
-			"|cbbbbbbWeapon|r "..math.floor(Weapon_Damage*100/Report.damage).."%"..
-			"  |c5555ffSpell|r "..math.floor(Spell_Damage*100/Report.damage).."%"..
+			"|cbbbbbb"..BUI.Loc("STATISTICS_Weapon").."|r "..math.floor(Weapon_Damage*100/Report.damage).."%"..
+			"  |c5555ff"..BUI.Loc("STATISTICS_Spell").."|r "..math.floor(Spell_Damage*100/Report.damage).."%"..
 --			"  |cAAAAAADoT|r ".. 100-Direct_Damage.."%"..
-			(Direct_Damage<100 and "  |cAAAAAADirect damage|r "..Direct_Damage.."%" or "")
+			(Direct_Damage<100 and "  |cAAAAAA"..BUI.Loc("STATISTICS_Direct_Dmg").."|r "..Direct_Damage.."%" or "")
 		--Weawing
 		title=title.."\n"..
-			(Report.Ability.w and "|cAAAAAAWeapon Attack/Ability:|r "..Report.Ability.w.."|cAAAAAA/|r"..(Report.Ability.a or 0) or "")..
-			(Report.Ability.a and "  |cbbbbbbRotation speed:|r "..math.min(math.floor(Report.Ability.a/fighttime*100),100).."|cAAAAAA%|r" or "")
+			(Report.Ability.w and "|cAAAAAA"..BUI.Loc("STATISTICS_Weapon_Attack")..":|r "..Report.Ability.w.."|cAAAAAA/|r"..(Report.Ability.a or 0) or "")..
+			(Report.Ability.a and "  |cbbbbbb"..BUI.Loc("STATISTICS_Rotation_Speed")..":|r "..math.min(math.floor(Report.Ability.a/fighttime*100),100).."|cAAAAAA%|r" or "")
 		BUI_Report_Elements:SetText(title)
 		BUI_Report_Elements:SetHidden(realcontext=="Incoming")
 	end
@@ -1468,7 +1477,7 @@ function BUI.Stats.ExpandTarget(self)
 		container.header.crit:SetText(BUI.Loc("Crit"))
 		container.header.avg:SetText(BUI.Loc("Average"))
 		container.header.max:SetText(BUI.Loc("Max"))
-		if container.header.perc then container.header.perc:SetText("Up") end
+		if container.header.perc then container.header.perc:SetText(BUI.Loc("STATISTICS_Up")) end
 		--Expand the parent container
 		parent:SetHeight((math.min(#abilities,14)+2)*(fs*1.5+3))
 		container:ClearAnchors()
@@ -1577,9 +1586,9 @@ function BUI.Stats.SetupGroupReport()	--Setup group report
 		BUI_Report_PostDeathTotal:SetHandler("OnClicked", function(self)StartChatInput("/p Group deaths: "..text)end)
 	end
 	--Modify header labels
-	container.header.name:SetText("Group member")
+	container.header.name:SetText(BUI.Loc("STATISTICS_GroupMember"))
 --	container.header.uses
-	container.header.count:SetText("Death")	--BUI.Loc("Hit")
+	container.header.count:SetText(BUI.Loc("STATISTICS_Death"))	--BUI.Loc("Hit")
 	container.header.total:SetText(BUI.Loc("Damage"))
 	container.header.dps:SetText(BUI.Loc("DPS"))
 	container.header.crit:SetText("%")	--BUI.Loc("Crit")
@@ -1709,11 +1718,11 @@ function BUI.Stats.SaveReport()		--Save
 	BUI:JoinTables(BUI.Reports.data[slot],BUI.Stats.Current[ReportToShow])
 	BUI.Stats.Current[ReportToShow].Saved=slot
 	BUI_Report_Save:SetDisabled(true)
-	a("Report "..ReportToShow.." is saved")
+	a(BUI.Loc("STATISTICS_Report").." "..ReportToShow.." "..BUI.Loc("STATISTICS_Report_Saved"))
 end
 
 function BUI.Stats.ClearReport(n)		--Del
-	if BUI.Stats.Current[n].Saved then a("Report "..n.." was deleted") BUI.Reports.data[BUI.Stats.Current[n].Saved]=nil end
+	if BUI.Stats.Current[n].Saved then a(BUI.Loc("STATISTICS_Report").." "..n.." "..BUI.Loc("STATISTICS_Report_Deleted")) BUI.Reports.data[BUI.Stats.Current[n].Saved]=nil end
 	SetupStatsCurrent(n)
 	BUI.Stats.NextReport(true)
 end
@@ -1907,7 +1916,7 @@ function BUI.Stats.Post(self,button)
 	fighttime=math.max((BUI.Stats.Current[ReportToShow].endTime-BUI.Stats.Current[ReportToShow].startTime)/1000,1)
 	--Minimize the report if it is shown
 --	if (not BUI_Report:IsHidden()) then BUI.Stats.Toggle() end
-	if BUI.Stats.Bosses[UnitName] then UnitName=UnitName.."(Boss)" end
+	if BUI.Stats.Bosses[UnitName] then UnitName=UnitName.."("..BUI.Loc("Boss")..")" end
 	local dpsLabel	=(context=="Damage") and "DPS" or "HPS"
 	local bossDPS	=BUI.DisplayNumber(bossDamage/fighttime,2)	bossDamage	=BUI.DisplayNumber(bossDamage)
 	local bossString	=(bossUnits>0) and "Boss DPS" or "DPS"
@@ -2047,7 +2056,7 @@ function BUI.Stats.AddPing(offsetX,offsetY,pingTag,isOwner)
 	--Display control
 	if BUI.Vars.StatsGroupDPS and BUI.Vars.RaidFrames then
 		BUI.Group[pingTag].frame.health.dps:SetAlpha(1)
-		BUI.Group[pingTag].frame.health.dps:SetText("DPS: "..BUI.DisplayNumber(dps).." "..ZO_FormatTime(time,SI_TIME_FORMAT_TIMESTAMP))
+		BUI.Group[pingTag].frame.health.dps:SetText(BUI.Loc("DPS")..": "..BUI.DisplayNumber(dps).." "..ZO_FormatTime(time,SI_TIME_FORMAT_TIMESTAMP))
 	end
 	if now>BUI.Stats.Current[BUI.ReportN].endTime+10000 then
 --		if BUI.Vars.DeveloperMode then d(BUI.TimeStamp().."Received DPS from "..(BUI.Group[pingTag] and BUI.Group[pingTag].name or "").."("..name.."): "..math.floor(dps).." ("..ZO_FormatTime(time,SI_TIME_FORMAT_TIMESTAMP)..")".." delta: "..ZO_FormatTime((now-BUI.Stats.Current[BUI.ReportN].endTime)/1000,SI_TIME_FORMAT_TIMESTAMP)) end
@@ -2106,7 +2115,7 @@ function BUI.Stats.DisplayGroupDPS()
 					info.pct=math.floor(info.damage/TotalDmg*100)
 					--Group frames DPS stamp
 					if BUI.Vars.StatsGroupDPS and BUI.Vars.RaidFrames then
-						if BUI.Group[unitTag] then BUI.Group[unitTag].frame.health.dps:SetText("DPS: "..info.dps_text) end
+						if BUI.Group[unitTag] then BUI.Group[unitTag].frame.health.dps:SetText(BUI.Loc("DPS")..": "..info.dps_text) end
 						stamp_placed=true
 					end
 				elseif BUI.Vars.RaidFrames then
@@ -2117,7 +2126,7 @@ function BUI.Stats.DisplayGroupDPS()
 		--Prepare group DPS text
 		BUI.GroupDPS_tip=""
 		BUI.GroupDPS_text=""
-		BUI.GroupDPS_tip="Group DPS: "..BUI.DisplayNumber(GroupDPS).." "..ZO_FormatTime(fighttime,SI_TIME_FORMAT_TIMESTAMP).." Total: "..BUI.DisplayNumber(TotalDmg)
+		BUI.GroupDPS_tip=BUI.Loc("GroupDPS")..": "..BUI.DisplayNumber(GroupDPS).." "..ZO_FormatTime(fighttime,SI_TIME_FORMAT_TIMESTAMP).." "..BUI.Loc("ReportTotal")..": "..BUI.DisplayNumber(TotalDmg)
 		BUI.GroupDPS_text=" "..BUI.GroupDPS_tip..", "
 		local roles={Damage="/esoui/art/lfg/gamepad/lfg_roleicon_dps.dds",Tank="/esoui/art/lfg/gamepad/lfg_roleicon_tank.dds",Healer="/esoui/art/lfg/gamepad/lfg_roleicon_healer.dds"}
 
@@ -2140,11 +2149,11 @@ end
 function BUI.Stats.PostGroupDPS()
 	local data=BUI.Stats.groupDPS
 	--Post to the group chat
-	BUI.Stats.Msg("Group Damage results:")
+	BUI.Stats.Msg(BUI.Loc("STATISTICS_Group_DMG_Results")..":")
 	for i in pairs(data) do
 		BUI.Stats.Msg(
-			" DPS:" .. BUI.DisplayNumber(data[i].dps,0) ..
-			" in "..ZO_FormatTime(data[i].time,SI_TIME_FORMAT_TIMESTAMP)..
+			" "..BUI.Loc("DPS")..":" .. BUI.DisplayNumber(data[i].dps,0) ..
+			" "..BUI.Loc("STATISTICS_In").." "..ZO_FormatTime(data[i].time,SI_TIME_FORMAT_TIMESTAMP)..
 			" - "..string.sub(zo_strformat("<<!aC:1>>",data[i].name),0,15)
 			)
 	end
@@ -2156,9 +2165,9 @@ function BUI.Stats.PostTargets()
 	for target in pairs(BUI.Stats.GroupLog) do
 		Count=Count+1
 		TotalDmg=TotalDmg+BUI.Stats.GroupLog[target].dmg
-		BUI.Stats.Msg("-"..BUI.Stats.GroupLog[target].name.." ("..target..") Damage="..BUI.Stats.GroupLog[target].dmg)
+		BUI.Stats.Msg("-"..BUI.Stats.GroupLog[target].name.." ("..target..") "..BUI.Loc("Damage").."="..BUI.Stats.GroupLog[target].dmg)
 	end
-	if Count>1 then BUI.Stats.Msg("->>TotalDamage="..TotalDmg) end
+	if Count>1 then BUI.Stats.Msg("->>"..BUI.Loc("STATISTICS_TotalDamage").."="..TotalDmg) end
 end
 
 local AbilityDuration={
@@ -2207,13 +2216,13 @@ end
 
 function BUI.GetAbilityTickTime(id)
 	local _descr=GetAbilityDescription(id)
-	local _over=string.find(_descr," over |c")
+	local _over=string.find(_descr," "..BUI.Loc("STATISTICS_Over").." |c")
 	if _over then return 1 end
-	local _start,_end=string.find(_descr," every |c")
+	local _start,_end=string.find(_descr," "..BUI.Loc("STATISTICS_Every").." |c")
 	if _start then
 		_sec=string.gsub(string.gsub(string.sub(_descr,_end+7,_end+9),"|",""),"r","")
 		_descr=string.sub(_descr,_end)
-		_start,_end=string.find(_descr," every |c")
+		_start,_end=string.find(_descr," "..BUI.Loc("STATISTICS_Every").." |c")
 		local _sec1=_start and string.gsub(string.gsub(string.sub(_descr,_end+7,_end+9),"|",""),"r","") or 0
 		_sec=math.max((tonumber(_sec) or 0),(tonumber(_sec1) or 0))
 		return _sec
