@@ -125,7 +125,7 @@ local function OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerVal
 		end
 	--Group Updates
 	elseif BUI.InGroup and string.sub(unitTag, 0, 5)=="group" then
-		--Health		
+		--Health
 		if (powerType==POWERTYPE_HEALTH) then
 			if BUI.init.Frames then
 				BUI.Player:UpdateAttribute(unitTag, powerType, powerValue, powerMax, powerEffectiveMax)
@@ -176,7 +176,7 @@ local function OnVisualAdded(eventCode, unitTag, unitAttributeVisual, statType, 
 				BUI.Player:UpdateShield(unitTag, (sequenceId==0 and value or 0), maxValue)
 				if sequenceId==0 and value>20000 then BUI.Buffs.BarrierActive=GetGameTimeSeconds()+30 end
 			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
-				BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue)				
+				BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue)
 			elseif statType==3 and unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_STAT and value>1000 then	--unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_STAT
 				if BUI.Vars.PlayerFrame then BUI.Frames:AttributeVisual(unitTag,unitAttributeVisual,sequenceId==0) end
 			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
@@ -414,7 +414,7 @@ local function OnWerewolf(eventCode,werewolf)
 			end
 		end
 	end
---	if BUI.Vars.Actions then BUI.CallLater("Actions_PairChanged",3000,BUI.Actions.OnPairChanged) end 
+--	if BUI.Vars.Actions then BUI.CallLater("Actions_PairChanged",3000,BUI.Actions.OnPairChanged) end
 end
 
 --Group Events
@@ -763,7 +763,6 @@ function BUI.RegisterEvents()
 	EVENT_MANAGER:RegisterForEvent("BUI_Event", EVENT_GAMEPAD_PREFERRED_MODE_CHANGED,	function(_,gamepadPreferred)
 		BUI.GamepadMode=gamepadPreferred
 		BUI.Actions.Initialize()
-		BUI.MiniMap.Initialize()
 		BUI.Frames.ZO_Frame_reposition()
 		BUI.Themes_Setup()
 		if BUI.Vars.QuickSlots then BUI.QuickSlots.Update() end
