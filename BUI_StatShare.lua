@@ -44,7 +44,7 @@ end
 	--if we didn't read the above, send back default
 --*|*	if pX1 == nil or pY1 == nil or wpX1 == nil or wpY1 == nil then return mData.default.scaleX,mData.default.scaleY end
 
-	--calculate scale and offset for all collected maps	
+	--calculate scale and offset for all collected maps
 --*|*	local scaleX,scaleY=(wpX1-pX1)/(wpX-pX),(wpY1-pY1)/(wpY-pY)
 --	local offsetX,offsetY=pX1-pX*scaleX,pY1-pY*scaleY
 --*|*	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then pl("Error: Map data for "..BUI.MapId.." might be wrong") end
@@ -482,7 +482,7 @@ end
 
 --Initialization
 local function SwitchLMP(enable)
-	local LMP=LibStub and LibStub("LibMapPing", true)
+	local LMP=LibMapPing2
 	if LMP then
 		if enable then
 			if not LMP:IsPingSuppressed(MAP_PIN_TYPE_PING, 'player') then LMP:UnsuppressPing(MAP_PIN_TYPE_PING,'player') end
@@ -634,12 +634,12 @@ function BUI.SendData(d0,d1,d2,d3)
 	BUI.CallLater("GetData",1000,GetData)
 end
 /script d("|c"..BUI.ColorString(unpack(BUI.Vars["FrameHealerColor"])).."FFF|r")
-/script local LMP=LibStub("LibMapPing", true) d((LMP) and "LMP on" or "LMP off")
+/script local LMP=LibMapPing2 d((LMP) and "LMP on" or "LMP off")
 /script BUI.StatShare:LMP(false)
 /script if BUI_StatShare then BUI_StatShare:SetHidden(not BUI_StatShare:IsHidden()) else BUI.StatShare.UI_Init() end
 /script x1,y1=GetMapPlayerPosition('player') BUI.CallLater("MapPosition",2000,function() x2,y2=GetMapPlayerPosition('player') StartChatInput("["..GetCurrentMapZoneIndex().."]="..x2-x1) end)
 /script BUI.PingMap(136, 1, 1 / 2^16, 1 / 2^16) StartChatInput(table.concat({GetMapPlayerWaypoint()}, ","))
 /script SendPing() BUI.CallLater("UpdateStats",200,UpdateStats)
-/script local LMP=LibStub("LibMapPing") LMP.Unload() LMP:MutePing(MAP_PIN_TYPE_PING,'player') for i=1,24 do LMP:MutePing(MAP_PIN_TYPE_PING,'group'..i) end
+/script local LMP=LibMapPing2 LMP.Unload() LMP:MutePing(MAP_PIN_TYPE_PING,'player') for i=1,24 do LMP:MutePing(MAP_PIN_TYPE_PING,'group'..i) end
 /script BUI.PingMap(MAP_PIN_TYPE_PING, MAP_TYPE_LOCATION_CENTERED, 0, 0)
 --]]
