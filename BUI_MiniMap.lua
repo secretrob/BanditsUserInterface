@@ -188,7 +188,7 @@ local function ResizePins(resize)
 	end
 end
 
-local function Map_Toggle() --TOKEN419 Unreferenced Function
+local function Map_Toggle() -- Unreferenced Function
 	local _visible=not ZO_WorldMap:IsHidden()
 	ZO_WorldMap:SetHidden(_visible)
 	_G["ZO_WorldMapMapFrame"]:SetHidden(_visible)
@@ -291,12 +291,12 @@ BUI:JoinTables(BUI.Defaults,BUI.MiniMap.Defaults)
 -- Register Functions
 BUI.MiniMap.ZoneChanged = ZoneChanged
 BUI.MiniMap.Update = Update
-BUI.MiniMap.Map_Toggle = Map_Toggle --TOKEN419 Unreferenced Function
+BUI.MiniMap.Map_Toggle = Map_Toggle -- Unreferenced Function
 BUI.MiniMap.ResizePins = ResizePins
 BUI.MiniMap.Restore = Restore
 BUI.MiniMap.Show = Show
 BUI.MiniMap.PinColors = PinColors
-BUI.MiniMap.Initialize = Initialize --TOKEN419 Referenced in BUI_Events
+BUI.MiniMap.Initialize = Initialize
 BUI.MiniMap.UpdateDimensions = UpdateDimensions
 BUI.MiniMap.UpdatePosition = UpdatePosition
 BUI.MiniMap.ZoomUpdate = ZoomUpdate
