@@ -31,15 +31,15 @@ local ContainerHandlerRunning,LootStolen=false,false
 local Button_Fish,Button_Container
 local ItemsTotal={[ITEMTYPE_FISH]=0,[ITEMTYPE_CONTAINER]=0}
 local GeodeContainer={
-	[134583]=1,[134623]=4,[134622]=4,[134590]=4,[134588]=5,[134591]=10,[134618]=50,	--Geode
-	[87703]=5,[139665]=5,[139669]=5,	--Warriors Coffer
-	[139664]=5,[87702]=5,[139668]=5,	--Mages Coffer
-	[87705]=5,[87706]=5,[139666]=5,[139667]=5,	--Serpent Coffer
-	[94089]=5,[139670]=5,	--Dro-m'Athra Coffer
-	[138711]=5,[138712]=5,[141739]=5,[141738]=5,	--Welkynar Coffer
-	[139674]=5,	--Saint's Coffer
-	[139673]=5,	--Fabricant Coffer
-	[151970]=5,	--Sunspire Coffer
+	134583,171531,134623,134622,134590,134588,134591,134618,	--Geode
+	87703,139665,139669,	--Warriors Coffer
+	139664,87702,139668,	--Mages Coffer
+	87705,87706,139666,139667,	--Serpent Coffer
+	94089,139670,	--Dro-m'Athra Coffer
+	138711,138712,141739,141738,	--Welkynar Coffer
+	139674,	--Saint's Coffer
+	139673,	--Fabricant Coffer
+	151970,	--Sunspire Coffer
 }
 local WhiteList={
 	[ITEMTYPE_CONTAINER]={
@@ -152,7 +152,8 @@ local function IsItemType(slotIndex, Type)
 					GetItemQuality(BAG_BACKPACK, slotIndex)<ITEM_QUALITY_LEGENDARY
 					and (
 						not GeodeContainer[id]
-						or GetMaxPossibleCurrency(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)-GetCurrencyAmount(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)>GeodeContainer[id])
+						or GetCurrencyAmount(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)+GetLootCurrency(CURT_CHAOTIC_CREATIA)<=GetMaxPossibleCurrency(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)
+					)
 				)
 			)
 	end

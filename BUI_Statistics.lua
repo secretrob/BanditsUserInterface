@@ -856,7 +856,7 @@ local function SetupTargetBuffs(control)
 	--Apply labels
 	parent.summary:SetHeight((fs-4)*1.36*(control.index>1 and 4 or 3))
 
-	if (BUI.language == "es") then
+	if (BUI.language == "es" or BUI.language == "de" or BUI.language == "fr" or BUI.language == "br" ) then
 		ab_Magickasteal = ab_Magickasteal:gsub('%^.*', '')
 		ab_Crusher = ab_Crusher:gsub('%^.*', '')
 		ab_Alkosh = ab_Alkosh:gsub('%^.*', '')
