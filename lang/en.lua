@@ -731,6 +731,8 @@ LootStolen	="Auto loot stolen in stealth",
 LootStolenDesc	="",
 UndauntedPledges	="Activity finder: Undaunted pledges",
 UndauntedPledgesDesc	="Adds button to mark dungeons in activity finder with active quest from Undaunted.\nAdds dungeons achievements info.",
+DungeonQuests	="Activity finder: Dungeon Quests",
+DungeonQuestsDesc	="Adds button to mark dungeons in activity finder with incomplete dungeon quests for skillpoints.\nAdds question icon in achievements info if the dungeon is not complete.",
 CollapseNormalDungeon	="Collapse normal dungeons",
 CollapseNormalDungeonDesc	="Collapse normal dungeons during the dungeon finder window.\nOnly available if Undaunted pledges is enabled.",
 ConfirmLocked	="Auto confirm locked items",
@@ -806,4 +808,18 @@ STATISTICS_In="in",
 STATISTICS_TotalDamage="TotalDamage",
 STATISTICS_Over="over",
 STATISTICS_Every="every",
+
+SETTINGS_ReloadingUI="Reloading UI",
+
+ACTIVITYFINDER_DailyPledges = "Daily pledges",
+
+AUTOMATION_Left="Left",
+AUTOMATION_Stop="Stop",
+AUTOMATION_SETTINGS_MAP_PIN_All="All",
+AUTOMATION_SETTINGS_MAP_PIN_Owned="Owned",
+AUTOMATION_SETTINGS_MAP_PIN_Unowned="Unowned",
+AUTOMATION_SETTINGS_MAP_PIN_Disabled="Disabled",
+AUTOMATION_Global_Cooldown="Setting Global Cooldown",
+AUTOMATION_Quest_Low_Reward="Quest with low reward is skipped",
+
 }
