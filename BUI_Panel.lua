@@ -131,7 +131,7 @@ local PanelContent={
 	},
 	{	--Minimap
 	tooltip	=function() return GetString(SI_BINDING_NAME_TOGGLE_MINIMAP) end,
-	func	=function()BUI.Vars.MiniMap=not BUI.Vars.MiniMap BUI.MiniMap.Initialize()end,
+	func	=function()BUI.Vars.MiniMap=not BUI.Vars.MiniMap BUI.MiniMap.ReInit()end,
 	enabled	=function()return BUI.Vars.MiniMap end,
 	var		="Minimap"
 	},

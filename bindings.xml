@@ -2,7 +2,7 @@
 	<Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
 		<Category name="|c4B8BFEBandits|r User Interface">
 			<Action name="TOGGLE_MINIMAP">
-				<Down>BUI.Vars.MiniMap=not BUI.Vars.MiniMap BUI.MiniMap.Initialize()</Down>
+				<Down>BUI.Vars.MiniMap=not BUI.Vars.MiniMap BUI.MiniMap.ReInit()</Down>
 			</Action>
 			<Action name="REGROUPER_REINVITE">
 				<Down>BUI.RG_ReInvite()</Down>

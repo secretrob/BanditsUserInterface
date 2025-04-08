@@ -44,7 +44,7 @@ local function OnMount(eventCode,mounted)
 	BUI.MiniMap.ZoomUpdate(mounted)
 end
 
-local function Initialize()
+local function ReInit()
 	local function OnHUD(oldState, newState)
 		if BUI.moveDefault or BUI.move then return end
 		if newState==SCENE_HIDDEN then BUI.CallLater("MiniMap",20,function()
@@ -63,7 +63,7 @@ local function Initialize()
 	end
 
 	EVENT_MANAGER:RegisterForEvent("BUI_MiniMap_Event", EVENT_GAMEPAD_PREFERRED_MODE_CHANGED,	function(_,gamepadPreferred)
-		BUI.MiniMap.Initialize()
+		BUI.MiniMap.ReInit()
 	end)
 
 	BUI.MiniMap.PinColors()
@@ -247,6 +247,170 @@ local function ZoneChanged(delay)
 	BUI.CallLater("MiniMap_ZoomUpdate",delay and delay or 0,function() BUI.MiniMap.ZoomUpdate() BUI.MiniMap.ZoomUpdatind=false end)
 end
 
+local function Settings_Init()
+	local MenuOptions={
+		--	type="header",name="Minimap",advanced=true
+		--Enable Minimap
+		{	type		="checkbox",
+			name		="Minimap",
+			getFunc	=function() return BUI.Vars.MiniMap end,
+			setFunc	=function(value) BUI.Vars.MiniMap=value BUI.MiniMap.ReInit() end,
+		},
+		--Minimap Size
+		{	type		="slider",
+			name		="MiniMapDimensions",
+			min		=200,
+			max		=500,
+			step		=20,
+			getFunc	=function() return BUI.Vars.MiniMapDimensions end,
+			setFunc	=function(value) BUI.Vars.MiniMapDimensions=value BUI.MiniMap.ReInit() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		--Minimap title
+		{	type		="checkbox",
+			name		="MinimapTitle",
+			getFunc	=function() return BUI.Vars.MiniMapTitle end,
+			setFunc	=function(value) BUI.Vars.MiniMapTitle=value BUI.MiniMap.ReInit() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		--Minimap PinScale
+		{	type		="slider",
+			name		="PinScale",
+			min		=50,
+			max		=100,
+			step		=2,
+			getFunc	=function() return BUI.Vars.PinScale end,
+			setFunc	=function(value) BUI.Vars.PinScale=value BUI.MiniMap.ReInit() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="header",
+			name		="ZoomHeader",
+		},
+		{	type		="slider",
+			name		="ZoomZone",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomZone end,
+			setFunc	=function(value) BUI.Vars.ZoomZone=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomSubZone",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomSubZone end,
+			setFunc	=function(value) BUI.Vars.ZoomSubZone=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomDungeon",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomDungeon end,
+			setFunc	=function(value) BUI.Vars.ZoomDungeon=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomCyrodiil",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomCyrodiil end,
+			setFunc	=function(value) BUI.Vars.ZoomCyrodiil=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomImperialsewer",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomImperialsewer end,
+			setFunc	=function(value) BUI.Vars.ZoomImperialsewer=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomImperialCity",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomImperialCity end,
+			setFunc	=function(value) BUI.Vars.ZoomImperialCity=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomMountRatio",
+			min		=50,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomMountRatio end,
+			setFunc	=function(value) BUI.Vars.ZoomMountRatio=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+		{	type		="slider",
+			name		="ZoomGlobal",
+			min		=0,
+			max		=100,
+			step		=10,
+			getFunc	=function() return BUI.Vars.ZoomGlobal end,
+			setFunc	=function(value) BUI.Vars.ZoomGlobal=value BUI.MiniMap.Show() end,
+			disabled	=function() return not BUI.Vars.MiniMap end,
+		},
+	--[[
+		{--Reset
+			type		="button",
+			name		="MinimapReset",
+			func		=function() BUI.Menu.Reset("Minimap") end,
+		}
+	--]]
+	}
+
+	local PinTypes={
+	--	[MAP_PIN_TYPE_PLAYER]={name="Player",icon="/EsoUI/Art/MapPins/UI-WorldMapPlayerPip.dds"},
+		[MAP_PIN_TYPE_GROUP_LEADER]={name="Group leader",icon="/EsoUI/Art/Compass/groupLeader.dds"},
+		[MAP_PIN_TYPE_GROUP]={name="Group member",icon="/EsoUI/Art/MapPins/UI-WorldMapGroupPip.dds"},
+		[MAP_PIN_TYPE_POI_COMPLETE]={name="POI complete",icon="/esoui/art/icons/poi/poi_areaofinterest_complete.dds"},
+		[MAP_PIN_TYPE_FAST_TRAVEL_WAYSHRINE]={name="Wayshrine",icon="/esoui/art/icons/poi/poi_wayshrine_complete.dds"},
+		[MAP_PIN_TYPE_ASSISTED_QUEST_ENDING]={name="Quest complete",icon="/esoui/art/compass/quest_icon_assisted.dds"},
+	--	[MAP_PIN_TYPE_VENDOR]={name="Vandor",icon="/esoui/art/icons/mapkey/mapkey_vendor.dds"},
+	}
+
+	do	--Pin colors
+		table.insert(MenuOptions,{type="header",name="PinColorsHeader"})
+		for pin,data in pairs(PinTypes) do
+			table.insert(MenuOptions,
+			{	type		="colorpicker",
+				name		=zo_iconFormat(data.icon,32,32).." "..data.name,
+				getFunc	=function() return unpack(BUI.Vars.PinColor[pin]) end,
+				setFunc	=function(r,g,b,a) BUI.Vars.PinColor[pin]={r,g,b,a} BUI.MiniMap.PinColors() BUI.MiniMap.Show() end,
+			})
+		end
+		table.insert(MenuOptions,
+			{--Reset
+			type		="button",
+			name		="MinimapReset",
+			func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("MinimapResetDesc"),func=function()BUI.Menu.Reset("Minimap")end})end,
+		})
+	end
+	BUI.Menu.RegisterPanel("BUI_MenuMinimap",{
+			type="panel",
+			name="9.  |t32:32:/esoui/art/icons/achievements_indexicon_exploration_up.dds|t"..BUI.Loc("MinimapHeader"),
+			})
+	BUI.Menu.RegisterOptions("BUI_MenuMinimap", MenuOptions)
+	MenuHandlers={
+		["OnEffectivelyShown"]=function() BUI.inMenu=true BUI.MiniMap.Show() end,
+		["OnEffectivelyHidden"]=function() BUI.inMenu=false end,
+	}
+	for event,handler in pairs(MenuHandlers) do _G["BUI_MenuMinimap"]:SetHandler(event, handler) end
+end
+
+local function Initialize()
+	BUI.MiniMap.Settings_Init()
+	BUI.MiniMap.ReInit()
+end
+
 -- Setup MiniMap
 BUI.MiniMap={}
 BUI.MiniMap.LastX1=0
@@ -301,3 +465,5 @@ BUI.MiniMap.UpdateDimensions = UpdateDimensions
 BUI.MiniMap.UpdatePosition = UpdatePosition
 BUI.MiniMap.ZoomUpdate = ZoomUpdate
 BUI.MiniMap.OnMount = OnMount
+BUI.MiniMap.Settings_Init = Settings_Init
+BUI.MiniMap.ReInit = ReInit
