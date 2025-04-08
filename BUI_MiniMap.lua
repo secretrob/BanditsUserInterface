@@ -278,13 +278,13 @@ BUI.MiniMap.Defaults.ZoomImperialCity=80
 BUI.MiniMap.Defaults.ZoomMountRatio=70
 BUI.MiniMap.Defaults.ZoomGlobal=3
 BUI.MiniMap.Defaults.PinColor={}
--- BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_PLAYER={1,1,1,1}
-BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_GROUP_LEADER={1,1,0,1}
-BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_GROUP={1,1,1,1}
-BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_POI_COMPLETE={1,1,1,1}
--- BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_VENDOR={1,1,1,1}
-BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_FAST_TRAVEL_WAYSHRINE={1,1,1,1}
-BUI.MiniMap.Defaults.PinColor.MAP_PIN_TYPE_ASSISTED_QUEST_ENDING={1,1,1,1}
+-- BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_PLAYER]={1,1,1,1}
+BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_GROUP_LEADER]={1,1,0,1}
+BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_GROUP]={1,1,1,1}
+BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_POI_COMPLETE]={1,1,1,1}
+-- BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_VENDOR]={1,1,1,1}
+BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_FAST_TRAVEL_WAYSHRINE]={1,1,1,1}
+BUI.MiniMap.Defaults.PinColor[MAP_PIN_TYPE_ASSISTED_QUEST_ENDING]={1,1,1,1}
 
 BUI:JoinTables(BUI.Defaults,BUI.MiniMap.Defaults)
 
