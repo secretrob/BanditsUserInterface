@@ -16,7 +16,6 @@ MenuDamageStatistics="/esoui/art/mainmenu/menubar_skills_up.dds",
 MenuBuffs="/esoui/art/progression/morph_up.dds",
 MenuActions="/esoui/art/treeicons/tutorial_idexicon_timedactivities_up.dds",
 MenuNotifications="/esoui/art/help/help_tabicon_tutorial_up.dds",
-MenuMinimap="/esoui/art/icons/achievements_indexicon_exploration_up.dds",
 MenuFrameColors="/esoui/art/tutorial/dyes_tabicon_dye_up.dds",
 MenuMeters="esoui/art/treeicons/housing_indexicon_structures_up.dds",
 MenuMarkers="/esoui/art/guild/guild_indexicon_leader_up.dds",
@@ -31,7 +30,6 @@ MenuGroupFrames	="5.  ",
 MenuTargetFrames	="6.  ",
 MenuActions		="7.  ",
 MenuBuffs		="8.  ",
-MenuMinimap		="9.  ",
 MenuReticle		="10. ",
 MenuDamageStatistics="11. ",
 MenuNotifications	="12. ",
@@ -162,7 +160,7 @@ local function MenuOptions_Init()	--Menu options
 		name		="ActionSlots",
 		getFunc	=function() return BUI.Vars.ActionSlots end,
 		setFunc	=function(value) BUI.Vars.ActionSlots=value BUI.Themes_Setup() end,
-	},	
+	},
 	--QuickSlots
 	{	type		="header",
 		name		="QuickSlotsHeader",
@@ -224,7 +222,7 @@ local function MenuOptions_Init()	--Menu options
 		name		="DisableHelpAnnounce",
 		getFunc	=function() return BUI.Vars.DisableHelpAnnounce end,
 		setFunc	=function(value) BUI.Vars.DisableHelpAnnounce=value end,
-	},	
+	},
 --[[	--Champion system helper
 	{	type		="checkbox",
 		name		="ChampionHelper",
@@ -796,7 +794,7 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.TargetHeight end,
 		setFunc	=function(value) BUI.Menu.UpdateFrames("TargetHeight", value) end,
 		disabled	=function() return not BUI.Vars.TargetFrame end,
-	},	
+	},
 	--Center Frame Text
 	{	type		="checkbox",
 		name		="TargetFrameCenter",
@@ -1669,7 +1667,7 @@ end
 		getFunc	=function() return BUI.Vars.FullSwapPanel end,
 		setFunc	=function(value) BUI.Vars.FullSwapPanel=value end,
 		disabled	=function() return not BUI.Vars.Actions or not BUI.Vars.UseSwapPanel end,
-	},	
+	},
 	{	type		="checkbox",
 		name		="ExpiresAnimation",
 		getFunc	=function() return BUI.Vars.ExpiresAnimation end,
@@ -1805,156 +1803,6 @@ end
 	MenuHandlers["MenuNotifications"]={
 	["OnEffectivelyHidden"]=function() BUI.inMenu=false end,
 	}
-
-	MenuOptions["MenuMinimap"]={
-	--	type="header",name="Minimap",advanced=true
-	--Enable Minimap
-	{	type		="checkbox",
-		name		="Minimap",
-		getFunc	=function() return BUI.Vars.MiniMap end,
-		setFunc	=function(value) BUI.Vars.MiniMap=value BUI.MiniMap.Initialize() end,
-	},
-	--Minimap Size
-	{	type		="slider",
-		name		="MiniMapDimensions",
-		min		=200,
-		max		=500,
-		step		=20,
-		getFunc	=function() return BUI.Vars.MiniMapDimensions end,
-		setFunc	=function(value) BUI.Vars.MiniMapDimensions=value BUI.MiniMap.Initialize() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	--Minimap title
-	{	type		="checkbox",
-		name		="MinimapTitle",
-		getFunc	=function() return BUI.Vars.MiniMapTitle end,
-		setFunc	=function(value) BUI.Vars.MiniMapTitle=value BUI.MiniMap.Initialize() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	--Minimap PinScale
-	{	type		="slider",
-		name		="PinScale",
-		min		=50,
-		max		=100,
-		step		=2,
-		getFunc	=function() return BUI.Vars.PinScale end,
-		setFunc	=function(value) BUI.Vars.PinScale=value BUI.MiniMap.Initialize() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="header",
-		name		="ZoomHeader",
-	},
-	{	type		="slider",
-		name		="ZoomZone",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomZone end,
-		setFunc	=function(value) BUI.Vars.ZoomZone=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomSubZone",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomSubZone end,
-		setFunc	=function(value) BUI.Vars.ZoomSubZone=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomDungeon",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomDungeon end,
-		setFunc	=function(value) BUI.Vars.ZoomDungeon=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomCyrodiil",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomCyrodiil end,
-		setFunc	=function(value) BUI.Vars.ZoomCyrodiil=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomImperialsewer",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomImperialsewer end,
-		setFunc	=function(value) BUI.Vars.ZoomImperialsewer=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomImperialCity",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomImperialCity end,
-		setFunc	=function(value) BUI.Vars.ZoomImperialCity=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomMountRatio",
-		min		=50,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomMountRatio end,
-		setFunc	=function(value) BUI.Vars.ZoomMountRatio=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
-	{	type		="slider",
-		name		="ZoomGlobal",
-		min		=0,
-		max		=100,
-		step		=10,
-		getFunc	=function() return BUI.Vars.ZoomGlobal end,
-		setFunc	=function(value) BUI.Vars.ZoomGlobal=value BUI.MiniMap.Show() end,
-		disabled	=function() return not BUI.Vars.MiniMap end,
-	},
---[[
-	{--Reset
-		type		="button",
-		name		="MinimapReset",
-		func		=function() BUI.Menu.Reset("Minimap") end,
-	}
---]]
-	}
-	MenuPanel["MenuMinimap"]={name="MinimapHeader"}
-	MenuHandlers["MenuMinimap"]={
-	["OnEffectivelyShown"]=function() BUI.inMenu=true BUI.MiniMap.Show() end,
-	["OnEffectivelyHidden"]=function() BUI.inMenu=false end,
-	}
-	do	--Pin colors
-		local PinTypes={
-		--	[MAP_PIN_TYPE_PLAYER]={name="Player",icon="/EsoUI/Art/MapPins/UI-WorldMapPlayerPip.dds"},
-			[MAP_PIN_TYPE_GROUP_LEADER]={name="Group leader",icon="/EsoUI/Art/Compass/groupLeader.dds"},
-			[MAP_PIN_TYPE_GROUP]={name="Group member",icon="/EsoUI/Art/MapPins/UI-WorldMapGroupPip.dds"},
-			[MAP_PIN_TYPE_POI_COMPLETE]={name="POI complete",icon="/esoui/art/icons/poi/poi_areaofinterest_complete.dds"},
-			[MAP_PIN_TYPE_FAST_TRAVEL_WAYSHRINE]={name="Wayshrine",icon="/esoui/art/icons/poi/poi_wayshrine_complete.dds"},
-			[MAP_PIN_TYPE_ASSISTED_QUEST_ENDING]={name="Quest complete",icon="/esoui/art/compass/quest_icon_assisted.dds"},
-		--	[MAP_PIN_TYPE_VENDOR]={name="Vandor",icon="/esoui/art/icons/mapkey/mapkey_vendor.dds"},
-			}
-		table.insert(MenuOptions["MenuMinimap"],{type="header",name="PinColorsHeader"})
-		for pin,data in pairs(PinTypes) do
-			table.insert(MenuOptions["MenuMinimap"],
-			{	type		="colorpicker",
-				name		=zo_iconFormat(data.icon,32,32).." "..data.name,
-				getFunc	=function() return unpack(BUI.Vars.PinColor[pin]) end,
-				setFunc	=function(r,g,b,a) BUI.Vars.PinColor[pin]={r,g,b,a} BUI.MiniMap.PinColors() BUI.MiniMap.Show() end,
-			})
-		end
-		table.insert(MenuOptions["MenuMinimap"],
-		{--Reset
-		type		="button",
-		name		="MinimapReset",
-		func		=function()ZO_Dialogs_ShowDialog("BUI_RESET_CONFIRMATION", {text=BUI.Loc("MinimapResetDesc"),func=function()BUI.Menu.Reset("Minimap")end})end,
-		})
-	end
 
 	MenuOptions["MenuFrameColors"]={
 	--	type="header",name="ColorsHeader"
@@ -2332,10 +2180,6 @@ function BUI.Menu.Reset(context)
 		for var, value in pairs(BUI.Actions.Defaults) do BUI.Vars[var]=value end
 		BUI.Actions:Initialize()
 		BUI.Menu.UpdateOptions("BUI_MenuActions")
-	elseif context=="Minimap" then
-		for var, value in pairs(BUI.MiniMap.Defaults) do BUI.Vars[var]=value end
-		BUI.MiniMap.Initialize()
-		BUI.Menu.UpdateOptions("BUI_MenuMinimap")
 	elseif context=="Colors" then
 		for var, value in pairs(BUI.Colors.Defaults) do BUI.Vars[var]=value end
 		BUI.Menu.UpdateFrames()
@@ -2773,7 +2617,7 @@ function BUI.Menu.MoveFrames(move)
 		if BUI.Vars.Attackers then table.insert(frames, BUI_Attackers) end
 		for _,name in pairs(BUI.Meters.List) do
 			if BUI.Vars["Meter_"..name] then table.insert(frames, _G["BUI_Meter_"..name]) end
-		end		
+		end
 		for _, frame in pairs(frames) do
 			frame:SetMouseEnabled(move)
 			frame:SetHidden(false)

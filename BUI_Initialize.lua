@@ -204,7 +204,7 @@ local function VersionCheck()
 	local accessibilityModeEnabled = GetSetting_Bool(SETTING_TYPE_ACCESSIBILITY, ACCESSIBILITY_SETTING_ACCESSIBILITY_MODE)
 	if BUI.Vars.DisableHelpAnnounce==false then
 		if IsInGamepadPreferredMode() then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("GamepadHelpAnnouncement")) end
-		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end	
+		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end
 	end
 end
 
@@ -226,7 +226,6 @@ local function Initialize(eventCode, addOnName)
 	BUI.Reticle.Initialize()
 	BUI.Target:Initialize()
 	BUI.Damage.Initialize()
-	BUI.MiniMap.Initialize()
 	BUI.Stats.Initialize()
 	BUI.Themes_Initialize()
 	BUI.Buffs.Initialize()
@@ -240,7 +239,8 @@ local function Initialize(eventCode, addOnName)
 	--BUI.Markers.Initialize()
 	BUI.Menu.Init()
 	BUI.Menu.Initialize()
-	BUI.Automation_Init()	
+	BUI.MiniMap.Initialize()
+	BUI.Automation_Init()
 --	BUI.Champion_Init()
 	BUI.Panel_Init()
 	BUI.CustomBar_Init()
