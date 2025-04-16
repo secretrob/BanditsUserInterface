@@ -39,12 +39,27 @@ local GeodeContainer={
  	[138711]=5,[138712]=5,[141739]=5,[141738]=5,	--Welkynar Coffer
  	[139674]=5,	--Saint's Coffer
  	[139673]=5,	--Fabricant Coffer
- 	[151970]=5,	--Sunspire Coffer
-	[194428]=3,	--Jubilee Gift
-	[147434]=3, --Jubilee Gift -- Guessing 3 on this one, i don't actually have it
+ 	[151970]=5,	--Sunspire Coffer	
+}
+local WhiteList={
+	[ITEMTYPE_CONTAINER]={
+	[147434]=true,	--Jubilee Gift
+	[194428]=true,	--Jubilee Gift
+	},
+	[ITEMTYPE_FISH]={}
 }
 local IgnoreItemId={
+[171531]=true,[134618]=true,[134591]=true,  --bigger transmute
 [135004]=true,[135006]=true,	--Cyrodiil Assault, Defence Crates
+}
+local ItemTypes={
+	[ITEMTYPE_CONTAINER]={
+		[ITEMTYPE_CONTAINER]=true,
+		[ITEMTYPE_CONTAINER_CURRENCY]=true
+	},
+	[ITEMTYPE_FISH]={
+		[ITEMTYPE_FISH]=true
+	}
 }
 local ConfirmationDialog={
 	["CONFIRM_RETRAIT_LOCKED_ITEM"]=true,
@@ -127,26 +142,34 @@ end
 local function IsItemType(slotIndex, Type)
 	local itemType=GetItemType(BAG_BACKPACK, slotIndex)
 	local id=GetItemId(BAG_BACKPACK, slotIndex)
-	if itemType == Type and itemType == ITEMTYPE_FISH then
-		return true
-	end
-	if itemType == Type and itemType == ITEMTYPE_CONTAINER and not IgnoreItemId[id] then
-		local usable, onlyFromActionSlot=IsItemUsable(BAG_BACKPACK, slotIndex)
+--	if GeodeContainer[id] then return false end
+	if ItemTypes[Type][itemType] and not IgnoreItemId[id] then
 		local currentCurrency = GetCurrencyAmount(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)
 		local containercurrency = GetLootCurrency(CURT_CHAOTIC_CREATIA)
 		local maxCurrency = GetMaxPossibleCurrency(CURT_CHAOTIC_CREATIA, CURRENCY_LOCATION_ACCOUNT)
-		if currentCurrency + containercurrency + (GeodeContainer[id] or 0) <= maxCurrency then
-			-- d(id.." "..GetItemLink(BAG_BACKPACK, slotIndex).." "..currentCurrency.." + "..containercurrency.." <= "..maxCurrency)
-			return true
-		end
+		local usable, onlyFromActionSlot=IsItemUsable(BAG_BACKPACK, slotIndex)
+		return usable and not onlyFromActionSlot
+			and CanInteractWithItem(BAG_BACKPACK, slotIndex)
+			and (
+				WhiteList[Type][id]
+				or (
+					GetItemQuality(BAG_BACKPACK, slotIndex)<ITEM_QUALITY_LEGENDARY
+					and (
+						not GeodeContainer[id]
+						--or currentCurrency+containercurrency<=maxCurrency
+						or currentCurrency+GeodeContainer[id]<=maxCurrency
+					)
+				)
+			)
 	end
+	return false
 end
 
 local function HaveItems(Type)
 	--d("Checking inventory")
 	if not(CheckInventorySpaceSilently(2) and (IsInGamepadPreferredMode() and GAMEPAD_INVENTORY_FRAGMENT or BACKPACK_MENU_BAR_LAYOUT_FRAGMENT):GetState()==SCENE_SHOWN) then return false end
 	local total=0
-	for i=0, GetBagSize(BAG_BACKPACK)-1 do
+	for i=0, GetBagSize(BAG_BACKPACK)-1 do		
 		if IsItemType(i, Type) then
 			local _, count=GetItemInfo(BAG_BACKPACK, i)
 			--d(GetItemInfo(BAG_BACKPACK, i))
