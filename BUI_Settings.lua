@@ -140,6 +140,13 @@ local function MenuOptions_Init()	--Menu options
 		getFunc	=function() return BUI.Vars.FramesTexture end,
 		setFunc	=function(i,value) BUI.Menu.UpdateFrames("FramesTexture", value) end,
 	},
+	--Frames ShortenThreshold
+	{	type		="dropdown",
+		name		="ShortenThreshold",
+		choices	={"1000","10000","100000"},
+		getFunc	=function() return tostring(BUI.Vars.ShortenThreshold) end,
+		setFunc	=function(i,value) BUI.Vars.ShortenThreshold=tonumber(value) end,
+	},	
 	--Custom theme Color
 	{	type		="colorpicker",
 		name		="CustomEdgeColor",

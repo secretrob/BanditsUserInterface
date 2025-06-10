@@ -30,7 +30,7 @@ local Defaults = {
 	"Widgets",
 	"VeteranDifficulty",
 	"LFG_Role",
---	"Assistans",
+--	"Assistants",
 	"Banker",
 	"Trader",
 	"Smuggler",
@@ -60,37 +60,38 @@ BUI.SidePanel = {}
 BUI.SidePanel.VanishPlayers = false -- Appears to be commented out everywhere
 
 
--- Sidebar Assistans
+-- Sidebar Assistants
 -- Notes:
--- You can find the ID for new assistans by searching for the name in collectibles on UESP:
+-- You can find the ID for new Assistants by searching for the name in collectibles on UESP:
 -- https://content3.m.uesp.net/esolog/viewlog.php?search=Tythis+Andromo&searchtype=collectibles
 -- You can see detailed information about collectibles by ID on UESP:
 -- https://content3.m.uesp.net/esolog/viewlog.php?action=view&record=collectibles&id=267
-BUI.SidePanel.Assistans = {}
-BUI.SidePanel.Assistans.Armorer = {}
-BUI.SidePanel.Assistans.Armorer[1] = 9745 -- Ghrasharog, Armory Assistant
-BUI.SidePanel.Assistans.Armorer[2] = 10618 -- Zuqoth, Armory Advisor
-BUI.SidePanel.Assistans.Armorer[3] = 11876 -- Drinweth, Valenwood Armorer
-BUI.SidePanel.Assistans.Banker = {}
-BUI.SidePanel.Assistans.Banker[1] = 267 -- Tythis Andromo, the Banker
-BUI.SidePanel.Assistans.Banker[2] = 6376 -- Ezabi the Banker
-BUI.SidePanel.Assistans.Banker[3] = 8994 -- Baron Jangleplume, the Banker
-BUI.SidePanel.Assistans.Banker[4] = 9743 -- Factotum Property Steward
-BUI.SidePanel.Assistans.Banker[5] = 11097 -- Pyroclast, Infernace Conservator
-BUI.SidePanel.Assistans.Banker[6] = 12413 -- Eri, Barking Banker
-BUI.SidePanel.Assistans.Ragpicker = {}
-BUI.SidePanel.Assistans.Ragpicker[1] = 10184 -- Giladil the Ragpicker
-BUI.SidePanel.Assistans.Ragpicker[2] = 10617 -- Aderene, Fargrave Dregs Dealer
-BUI.SidePanel.Assistans.Ragpicker[3] = 11877 -- Tzozabrar, Dwarven Deconstructor
-BUI.SidePanel.Assistans.Smuggler = {}
-BUI.SidePanel.Assistans.Smuggler[1] = 300 -- Pirharri the Smuggler
-BUI.SidePanel.Assistans.Trader = {}
-BUI.SidePanel.Assistans.Trader[1] = 301 -- Nuzhimeh the Merchant
-BUI.SidePanel.Assistans.Trader[2] = 6378 -- Fezez the Merchant
-BUI.SidePanel.Assistans.Trader[3] = 8995 -- Peddler of Prizes, the Merchant
-BUI.SidePanel.Assistans.Trader[4] = 9744 -- Factotum Commerce Delegate
-BUI.SidePanel.Assistans.Trader[5] = 11059 -- Hoarfrost, Takubar Trader
-BUI.SidePanel.Assistans.Trader[6] = 12414 -- Xyn, Planar Purveyor
+BUI.SidePanel.Assistants = {}
+BUI.SidePanel.Assistants.Armorer = {}
+BUI.SidePanel.Assistants.Armorer[1] = 9745 -- Ghrasharog, Armory Assistant
+BUI.SidePanel.Assistants.Armorer[2] = 10618 -- Zuqoth, Armory Advisor
+BUI.SidePanel.Assistants.Armorer[3] = 11876 -- Drinweth, Valenwood Armorer
+BUI.SidePanel.Assistants.Armorer[4] = 13518 -- Voko, Carnaval Weapondancer
+BUI.SidePanel.Assistants.Banker = {}
+BUI.SidePanel.Assistants.Banker[1] = 267 -- Tythis Andromo, the Banker
+BUI.SidePanel.Assistants.Banker[2] = 6376 -- Ezabi the Banker
+BUI.SidePanel.Assistants.Banker[3] = 8994 -- Baron Jangleplume, the Banker
+BUI.SidePanel.Assistants.Banker[4] = 9743 -- Factotum Property Steward
+BUI.SidePanel.Assistants.Banker[5] = 11097 -- Pyroclast, Infernace Conservator
+BUI.SidePanel.Assistants.Banker[6] = 12413 -- Eri, Barking Banker
+BUI.SidePanel.Assistants.Ragpicker = {}
+BUI.SidePanel.Assistants.Ragpicker[1] = 10184 -- Giladil the Ragpicker
+BUI.SidePanel.Assistants.Ragpicker[2] = 10617 -- Aderene, Fargrave Dregs Dealer
+BUI.SidePanel.Assistants.Ragpicker[3] = 11877 -- Tzozabrar, Dwarven Deconstructor
+BUI.SidePanel.Assistants.Smuggler = {}
+BUI.SidePanel.Assistants.Smuggler[1] = 300 -- Pirharri the Smuggler
+BUI.SidePanel.Assistants.Trader = {}
+BUI.SidePanel.Assistants.Trader[1] = 301 -- Nuzhimeh the Merchant
+BUI.SidePanel.Assistants.Trader[2] = 6378 -- Fezez the Merchant
+BUI.SidePanel.Assistants.Trader[3] = 8995 -- Peddler of Prizes, the Merchant
+BUI.SidePanel.Assistants.Trader[4] = 9744 -- Factotum Commerce Delegate
+BUI.SidePanel.Assistants.Trader[5] = 11059 -- Hoarfrost, Takubar Trader
+BUI.SidePanel.Assistants.Trader[6] = 12414 -- Xyn, Planar Purveyor
 
 -- Sidebar Disabled
 BUI.SidePanel.Disabled = {}
@@ -99,7 +100,7 @@ BUI.SidePanel.Disabled = {}
 BUI.SidePanel.Icons = {}
 BUI.SidePanel.Icons.AllowOther = "/esoui/art/inventory/gamepad/gp_inventory_icon_miscellaneous.dds"
 BUI.SidePanel.Icons.Armorer = "/esoui/art/treeicons/gamepad/gp_collectionicon_weapona+armor.dds"
-BUI.SidePanel.Icons.Assistans = "/esoui/art/treeicons/gamepad/gp_collection_indexicon_assistants.dds"
+BUI.SidePanel.Icons.Assistants = "/esoui/art/treeicons/gamepad/gp_collection_indexicon_assistants.dds"
 BUI.SidePanel.Icons.Banker = "/esoui/art/icons/mapkey/mapkey_bank.dds"
 BUI.SidePanel.Icons.Compass = "/esoui/art/treeicons/gamepad/achievement_categoryicon_exploration.dds"
 BUI.SidePanel.Icons.DismissPets = "/esoui/art/treeicons/gamepad/gp_store_indexicon_vanitypets.dds"
@@ -127,11 +128,11 @@ BUI.SidePanel.Icons.WPamA = "/esoui/art/icons/poi/poi_solotrial_complete.dds"
 BUI.SidePanel.Disabled.Widgets = function() return not BUI.Vars.EnableWidgets end
 BUI.SidePanel.Disabled.Teleporter = function() return not CTS end
 BUI.SidePanel.Disabled.WPamA = function() return not WPamA end
-BUI.SidePanel.Disabled.Banker = function() return not CollectibleUnlocked(BUI.SidePanel.Assistans.Banker) end
-BUI.SidePanel.Disabled.Trader = function() return not CollectibleUnlocked(BUI.SidePanel.Assistans.Trader) end
-BUI.SidePanel.Disabled.Smuggler = function() return not CollectibleUnlocked(BUI.SidePanel.Assistans.Smuggler) end
-BUI.SidePanel.Disabled.Armorer = function() return not CollectibleUnlocked(BUI.SidePanel.Assistans.Armorer) end
-BUI.SidePanel.Disabled.Ragpicker = function() return not CollectibleUnlocked(BUI.SidePanel.Assistans.Ragpicker) end
+BUI.SidePanel.Disabled.Banker = function() return not CollectibleUnlocked(BUI.SidePanel.Assistants.Banker) end
+BUI.SidePanel.Disabled.Trader = function() return not CollectibleUnlocked(BUI.SidePanel.Assistants.Trader) end
+BUI.SidePanel.Disabled.Smuggler = function() return not CollectibleUnlocked(BUI.SidePanel.Assistants.Smuggler) end
+BUI.SidePanel.Disabled.Armorer = function() return not CollectibleUnlocked(BUI.SidePanel.Assistants.Armorer) end
+BUI.SidePanel.Disabled.Ragpicker = function() return not CollectibleUnlocked(BUI.SidePanel.Assistants.Ragpicker) end
 BUI.SidePanel.Disabled.GearManager = function() return not BUI_GearShow end
 BUI.SidePanel.Disabled.VeteranDifficulty = function() return not CanPlayerChangeGroupDifficulty() end
 -- END Export Functions
@@ -249,7 +250,7 @@ local PanelContent={
 	func	=function()
 --			local id=IsCollectibleUnlocked(9743) and 9743 or IsCollectibleUnlocked(8994) and 8994 or IsCollectibleUnlocked(6376) and 6376 or 267
 			local id=BUI.Vars.SidePanel.Banker
-			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistans.Banker) end
+			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistants.Banker) end
 			UseCollectible(id)
 			SCENE_MANAGER:SetInUIMode()
 		end,
@@ -261,7 +262,7 @@ local PanelContent={
 	icon	="/esoui/art/mail/gamepad/gp_mailmenu_attachitem.dds",
 	func	=function()
 			local id=BUI.Vars.SidePanel.Trader
-			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistans.Trader) end
+			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistants.Trader) end
 			UseCollectible(id)
 			SCENE_MANAGER:SetInUIMode()
 		end,
@@ -273,7 +274,7 @@ local PanelContent={
 	icon	="/esoui/art/icons/mapkey/mapkey_fence.dds",
 	func	=function()
 			local id=BUI.Vars.SidePanel.Smuggler
-			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistans.Smuggler) end
+			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistants.Smuggler) end
 			UseCollectible(id)
 			SCENE_MANAGER:SetInUIMode()
 			end,
@@ -285,7 +286,7 @@ local PanelContent={
 	icon	="/esoui/art/treeicons/gamepad/gp_collectionicon_weapona+armor.dds",	--/esoui/art/crafting/smithing_multiple_armorweaponslot.dds
 	func	=function()
 			local id=BUI.Vars.SidePanel.Armorer
-			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistans.Armorer) end
+			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistants.Armorer) end
 			UseCollectible(id)
 			SCENE_MANAGER:SetInUIMode()
 		end,
@@ -297,7 +298,7 @@ local PanelContent={
 	icon	="esoui/art/crafting/gamepad/gp_crafting_menuicon_deconstruct.dds",
 	func	=function()
 			local id=BUI.Vars.SidePanel.Ragpicker
-			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistans.Ragpicker) end
+			if id == 1 or id == true then id = CollectibleUnlocked(BUI.SidePanel.Assistants.Ragpicker) end
 			UseCollectible(id)
 			SCENE_MANAGER:SetInUIMode()
 		end,
@@ -477,10 +478,10 @@ local function Menu_Init()
 	})
 
 	--Extrimely ugly part. Hate LUA, hate users requests...
-	local AssistansNames={}
-	local AssistansValues={}
-	local AssistansIndexes={}
-	for var, data in pairs(BUI.SidePanel.Assistans) do
+	local AssistantsNames={}
+	local AssistantsValues={}
+	local AssistantsIndexes={}
+	for var, data in pairs(BUI.SidePanel.Assistants) do
 		temp={
 			[0]=BUI.GetIcon('esoui/art/contacts/tabicon_ignored_up.dds',32).." Disabled",
 			[1]=BUI.GetIcon('/esoui/art/help/help_tabicon_feedback_up.dds',32).." Auto"
@@ -491,14 +492,14 @@ local function Menu_Init()
 				temp[id]=BUI.GetIcon(icon,32).." "..tostring(name)
 			end
 		end
-		AssistansNames[var]={}
-		AssistansValues[var]={}
-		AssistansIndexes[var]={}
+		AssistantsNames[var]={}
+		AssistantsValues[var]={}
+		AssistantsIndexes[var]={}
 		local i=1
 		for id,val in pairs(temp) do
-			AssistansNames[var][i]=val
-			AssistansValues[var][i]=id
-			AssistansIndexes[var][id]=i
+			AssistantsNames[var][i]=val
+			AssistantsValues[var][i]=id
+			AssistantsIndexes[var][id]=i
 			i=i+1
 		end
 	end
@@ -507,23 +508,23 @@ local function Menu_Init()
 	for _,var in pairs(Defaults) do
 		table.insert(Options,
 		{
-		type = BUI.SidePanel.Assistans[var] and "dropdown" or "checkbox",
+		type = BUI.SidePanel.Assistants[var] and "dropdown" or "checkbox",
 		icon = BUI.SidePanel.Icons[var],
 		name		="Panel"..var,
-		choices		=AssistansNames[var],	--nil if var is not key of Assistans
-		getFunc = BUI.SidePanel.Assistans[var] and
+		choices		=AssistantsNames[var],	--nil if var is not key of Assistants
+		getFunc = BUI.SidePanel.Assistants[var] and
 					function()
 						local value=BUI.Vars.SidePanel[var]
 						local res=value
 						if type(value)=='boolean' then res=value and 1 or 0 end
-						local index=AssistansIndexes[var][res]
+						local index=AssistantsIndexes[var][res]
 --						d(tostring(var)..': '..tostring(res)..' ('..tostring(index)..')')
 						return index
 					end
 					or
 					function() return BUI.Vars.SidePanel[var] end,
-		setFunc = BUI.SidePanel.Assistans[var] and
-					function(i,value) BUI.Vars.SidePanel[var]=AssistansValues[var][i] UI_Init() end
+		setFunc = BUI.SidePanel.Assistants[var] and
+					function(i,value) BUI.Vars.SidePanel[var]=AssistantsValues[var][i] UI_Init() end
 					or
 					function(value) BUI.Vars.SidePanel[var]=value UI_Init() end,
 		disabled	=BUI.SidePanel.Disabled[var]

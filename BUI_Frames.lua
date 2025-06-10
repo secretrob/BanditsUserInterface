@@ -1335,7 +1335,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 				if BUI.Vars.ExecuteSound then PlaySound(SOUNDS.LOCKPICKING_UNLOCKED) end
 			end
 			if BUI.Vars.DefaultTargetFrame and BUI.Vars.DefaultTargetFrameText and BUI_TargetResourceNumbers then
-				local label=powerValue>100000 and BUI.DisplayNumber(powerValue/1000).."k" or BUI.DisplayNumber(powerValue)
+				local label=powerValue>BUI.Vars.ShortenThreshold and BUI.DisplayNumber(powerValue/1000).."k" or BUI.DisplayNumber(powerValue)
 				BUI_TargetResourceNumbers:SetText(label.." ("..pctLabel..")"..(execute and ' |t36:36:/esoui/art/icons/mapkey/mapkey_groupboss.dds|t' or ""))
 			end
 		end
@@ -1357,7 +1357,7 @@ function BUI.Frames.Attribute(unitTag, attribute, powerValue, powerMax, pct, shi
 	else return end
 
 	if enabled then
-		local short=powerValue>100000 or group
+		local short=powerValue>BUI.Vars.ShortenThreshold or group
 		local label=group and (BUI.Vars.RaidStatValue==3 and "" or BUI.Vars.RaidStatValue==2 and pctLabel or BUI.DisplayNumber(powerValue/1000,1).."k") or
 			(short and BUI.DisplayNumber(powerValue/1000,1) or BUI.DisplayNumber(powerValue))
 			..(ShowMax and "/".. (short and BUI.DisplayNumber(powerMax/1000,1) or BUI.DisplayNumber(powerMax)) or "")
@@ -1420,7 +1420,7 @@ function BUI.Frames:Shield(unitTag, shieldValue, shieldPct, healthValue, healthM
 		frame.shield:SetWidth(width)
 		frame.shield:SetHidden(shieldValue<=0)
 			--Update bar labels
-		local short=group or healthValue>100000
+		local short=group or healthValue>BUI.Vars.ShortenThreshold
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
 			..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")
 			..((shieldValue>0 or traumaValue>0) and "[" or "")
@@ -1454,7 +1454,7 @@ function BUI.Frames:Trauma(unitTag, traumaValue, traumaPct, healthValue, healthM
 		frame.trauma:SetWidth(width)
 		frame.trauma:SetHidden(traumaValue<=0)	
 		--Update bar labels
-		local short=group or healthValue>100000
+		local short=group or healthValue>BUI.Vars.ShortenThreshold
 		local label=(short and BUI.DisplayNumber(healthValue/1000,1) or BUI.DisplayNumber(healthValue))
 		..(BUI.Vars.FrameShowMax and "/"..(short and BUI.DisplayNumber(healthMax/1000,1).."K" or BUI.DisplayNumber(healthMax)) or "")
 		..((shieldValue>0 or traumaValue>0) and "[" or "")

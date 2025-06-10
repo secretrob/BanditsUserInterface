@@ -332,6 +332,8 @@ DisableHelpAnnounce ="Disable Startup Annoucements",
 DisableHelpAnnounceDesc ="Disable the Gamepad and Accissiblity mode warning annoucements.",
 GamepadHelpAnnouncement ="You are currently in gamepad mode which is not fully supported by BUI.",
 AccessibilityHelpAnnouncement ="You are currently in accessibility mode which may cause issues with BUI and other addons.",
+ShortenThreshold	 ="Shorten UI number threshold",
+ShortenThresholdDesc ="Value of when to shorten the UI numbers. 10000 would change 10000 to 10k.",
 
 --Player frame
 PlayerFrame	="Player Frame",

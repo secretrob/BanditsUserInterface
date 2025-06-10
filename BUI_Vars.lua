@@ -5,7 +5,7 @@ BUI	={
 	DisplayName			="|c4B8BFEBandits|cFEFEFE User Interface|r",	--"|c4B8BFEBandits|r User Interface",
 	ShortName			="|c4B8BFEBandits|r UI",
 	URL					="https://github.com/secretrob/BanditsUserInterface",
-	Version				=4.430,
+	Version				=4.431,
 	language			=tostring(GetCVar("language.2")),
 	API					=GetAPIVersion(),
 	GamepadMode			=IsInGamepadPreferredMode(),
@@ -174,6 +174,7 @@ BUI	={
 		--Group leader
 		MarkerLeader		=false,
 		MarkerSize			=40,
+		ShortenThreshold    =100000,
 		}
 	},
 	Colors={
