@@ -192,7 +192,6 @@ local PanelContent={
 	tooltip	=function() return GetString(SI_BINDING_NAME_BUI_DISMISS_ALL) end,
 	func	=BUI.DismissPets,
 	var		="DismissPets",
-	disabled	=function()local class=GetUnitClassId('player') return class~=2 and class~=4 end	--and class~=5
 	},
 	{	--SubSampling Quality
 	tooltip	=GetString(SI_GRAPHICS_OPTIONS_VIDEO_SUB_SAMPLING),

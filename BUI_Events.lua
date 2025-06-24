@@ -664,18 +664,21 @@ local function OnActivated()
 	end
 	BUI.PvPzone=PvPzone
 	--Vanity Pet
-	if not PvPzone then	--and not (RaidNotifier and RaidNotifier.Vars.general.last_pet) then
-		if TrialLobby[BUI.MapId] then
-			local id=GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-			if id~=0 and BUI.Vars.AutoDismissPet then
-				ZO_Alert(UI_ALERT_CATEGORY_ALERT,nil,"Dismissing: "..string.gsub(tostring(GetCollectibleName(id)),"%^%w+",""))
-				UseCollectible(id)
-				CallBackVanityPet=id
+	if not PvPzone then	--and not (RaidNotifier and RaidNotifier.Vars.general.last_pet) then		
+		zo_callLater(function()
+			if BUI.IsTrialLobby() then
+				local id=GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)			
+				if id~=0 and BUI.Vars.AutoDismissPet then
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT,nil,"Dismissing: "..string.gsub(tostring(GetCollectibleName(id)),"%^%w+",""))
+					UseCollectible(id)
+					CallBackVanityPet=id
+				end			
+			elseif CallBackVanityPet and not BUI.IsPlayerInTrial() and not IsCollectibleBlocked(CallBackVanityPet) then			
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT,nil,"Activating: "..string.gsub(tostring(GetCollectibleName(CallBackVanityPet)),"%^%w+",""))
+				UseCollectible(CallBackVanityPet) CallBackVanityPet=false			
 			end
-		elseif CallBackVanityPet and not TrialNames[GetUnitZone('player')] and not IsCollectibleBlocked(CallBackVanityPet) then
-			ZO_Alert(UI_ALERT_CATEGORY_ALERT,nil,"Activating: "..string.gsub(tostring(GetCollectibleName(CallBackVanityPet)),"%^%w+",""))
-			UseCollectible(CallBackVanityPet) CallBackVanityPet=false
 		end
+		,2500)
 	end
 	--Leader arrow
 	if BUI.Vars.LeaderArrow then BUI.Reticle.LeaderArrow() end
@@ -686,6 +689,14 @@ local function OnActivated()
 	BUI.Menu.MarkerLeader(true)
 	--ParticleUI
 	ParticleUI:Destroy3DRenderSpace() ParticleUI:Create3DRenderSpace()
+end
+
+function BUI.IsTrialLobby()
+	return TrialLobby[BUI.MapId]
+end
+
+function BUI.IsPlayerInTrial()
+	return TrialNames[GetUnitZone('player')]
 end
 
 local function OnLoad()
