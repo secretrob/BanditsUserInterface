@@ -374,6 +374,8 @@ local function UndauntedPledges()
 								text=text..((DungeonIndex[id].quest and GetCompletedQuestInfo(DungeonIndex[id].quest) == "" and obj.node.data.isLocked == false) and "|t20:20:/esoui/art/compass/quest_available_icon.dds|t" or "") --/esoui/art/compass/quest_available_icon.dds /esoui/art/icons/poi/poi_dungeon_complete.dds
 								if GetCompletedQuestInfo(DungeonIndex[id].quest) == "" then
 									obj.needDungeonQuest = true
+								else
+									obj.needDungeonQuest = nil
 								end
  							end
 							--Achievment icons
