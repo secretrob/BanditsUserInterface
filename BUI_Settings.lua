@@ -2196,6 +2196,10 @@ function BUI.Menu.Reset(context)
 		for _,var in pairs(vars) do BUI.Vars[var.."1"]=BUI.Vars[var] end
 		BUI.Menu.UpdateFrames()
 		BUI.Menu.UpdateOptions("BUI_MenuFrameColors")
+	elseif context=="Minimap" then
+		for var, value in pairs(BUI.MiniMap.Defaults) do BUI.Vars[var]=value end
+		BUI.Menu.UpdateFrames()
+		BUI.Menu.UpdateOptions("BUI_MenuMinimap")
 	elseif context=="DefaultFrames" then
 		local frames={"ZO_PlayerAttributeMagicka","ZO_PlayerAttributeStamina","ZO_PlayerAttributeSiegeHealth"}
 		for frame in pairs(frames) do BUI.Vars[frame]=nil end

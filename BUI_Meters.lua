@@ -99,11 +99,11 @@ Meters={
 		min=0,max=100,delta=100,color={{.6,.6,.6,1},{.9,.9,.9,1}},
 		startfunc=function()
 			local useSpell=GetPlayerStat(STAT_SPELL_CRITICAL)>GetPlayerStat(STAT_CRITICAL_STRIKE)
-			local minValue=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10)/10
+			local minValue=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10 + .05)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10 + .05)/10
 			Meters.Crit.color[2]=useSpell and {0,.2,.96,1} or {0,.55,.12,1}
 			BUI.Meters.UI_Init("Crit")
 			local function PowerUpdate()
-				local value=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10)/10
+				local value=useSpell and math.floor(GetPlayerStat(STAT_SPELL_CRITICAL)/219*10 + .05)/10 or math.floor(GetPlayerStat(STAT_CRITICAL_STRIKE)/219*10 + .05)/10
 				if value<minValue then minValue=value end
 				BUI_Meter_Crit.value:SetText(value.."%")
 				MeterSet("Crit",minValue,value)

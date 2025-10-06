@@ -131,6 +131,8 @@ local DungeonIndex={
 [146]	={normal=79,	quest=4246,	vet=1589,	hm=1594,	tt=1592,	nd=1593,	npc="Maj",	pledge=5278,	index=2},	--Wayrest Sewers I
 [933]	={normal=1595,	quest=4813,	vet=678,	hm=681,	tt=679,	nd=1596,	npc="Maj",	pledge=5282,	index=9},	--Wayrest Sewers II
 [688]	={normal=1346,	quest=5342,	vet=1120,	hm=1279,	tt=1275,	nd=1276,	npc="Urgarlag",	pledge=5431,	index=3},	--White-Gold Tower
+[1551]  ={normal=4311,  quest=7320, vet=4312,   hm=4313,    tt=4314,    nd=4135,    npc="Urgarlag", pledge=7321,    index=34},  --Naj-Caldeesh
+[1552]  ={normal=4334,  quest=7323, vet=4335,   hm=4336,    tt=4337,    nd=4338,    npc="Urgarlag", pledge=7324,    index=35},  --Black Gem Foundry
 }
 
 function SiegeCameraToggle()
