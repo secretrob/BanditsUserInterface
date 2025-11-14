@@ -1,3 +1,5 @@
+local ZOShowMapHeader
+
 local function UpdateDimensions()
 	ZO_WorldMap:SetDimensions(BUI.MiniMap.size,BUI.MiniMap.size)
 	ZO_WorldMapScroll:SetDimensions(BUI.MiniMap.size-8,BUI.MiniMap.size-8)
@@ -127,7 +129,7 @@ local function ReInit()
 
 	ctrl:SetMovable(true)
 	ctrl:SetMouseEnabled(false)
-	ctrl:SetHandler("OnMouseUp", function(self) BUI.Menu:SaveAnchor(BUI_Minimap) end)
+	ctrl:SetHandler("OnMouseUp", function(self) BUI.Menu:SaveAnchor(BUI_Minimap) end)	
 	--Map Title
 	ZO_WorldMapTitle:SetFont(BUI.UI.Font("standard", 20, "shadow"))
 	ZO_WorldMapTitle:ClearAnchors()
@@ -158,22 +160,38 @@ local function Show()
 	ZO_WorldMap:SetHidden(not (SCENE_MANAGER:IsShowingBaseScene() or BUI.inMenu))
 	_G["ZO_WorldMapMapFrame"]:SetHidden(not (SCENE_MANAGER:IsShowingBaseScene() or BUI.inMenu))
 	BUI.init.MiniMap=true
-	BUI.MiniMap.ZoneChanged()
+	BUI.MiniMap.ZoneChanged()	
 	BUI.CallLater("MiniMap_Shown",100,function() EVENT_MANAGER:RegisterForUpdate("BUI_Minimap", 500, BUI.MiniMap.Update) end)
 	CALLBACK_MANAGER:FireCallbacks("BUI_MiniMap_Shown", true)
+	local EMPTY_HEADER_INFO =
+	{
+		nameText = "",
+		descriptionText = "",
+		owner = "BUI",
+		showProgressBar = false,
+	}
+	WORLD_MAP_MANAGER:SetMapHeader(EMPTY_HEADER_INFO)	
 end
 
-local function Restore()
+local function Restore()	
 	EVENT_MANAGER:UnregisterForUpdate("BUI_Minimap")
 --	if BUI.API<=10024 then
 	BUI.MiniMap.ResizePins(false)
-	BUI.MiniMap.MapPanAndZoom:SetCurrentNormalizedZoomInternal(BUI.Vars.ZoomGlobal/100)
+	BUI.MiniMap.MapPanAndZoom:SetCurrentNormalizedZoomInternal(BUI.Vars.ZoomGlobal/100)	
 	ZO_WorldMap_UpdateMap()
 	BUI.init.MiniMap=false
 	CALLBACK_MANAGER:FireCallbacks("BUI_MiniMap_Shown", false)
 	if BUI.g_mapPinManager and (BUI.Vars.StatsShareDPS or BUI.Vars.StatShare) then
 		BUI.g_mapPinManager:RemovePins("pings", MAP_PIN_TYPE_PING)
 	end
+	local CLEAR_HEADER_INFO =
+	{
+		nameText = "",
+		descriptionText = "",
+		owner = nil,
+		showProgressBar = false,
+	}
+	WORLD_MAP_MANAGER:SetMapHeader(CLEAR_HEADER_INFO)	
 end
 
 local function ResizePins(resize)
@@ -407,6 +425,7 @@ local function Settings_Init()
 end
 
 local function Initialize()
+	ZOShowMapHeader = ZO_WorldMapManager.TryShowSpectacleMapHeader
 	BUI.MiniMap.Settings_Init()
 	BUI.MiniMap.ReInit()
 end
@@ -467,3 +486,4 @@ BUI.MiniMap.ZoomUpdate = ZoomUpdate
 BUI.MiniMap.OnMount = OnMount
 BUI.MiniMap.Settings_Init = Settings_Init
 BUI.MiniMap.ReInit = ReInit
+BUI.MiniMap.HideHeader = HideHeader

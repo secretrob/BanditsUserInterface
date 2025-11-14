@@ -129,7 +129,7 @@ local function MenuOptions_Init()	--Menu options
 			if i==BUI.Vars.Theme then
 				--Do nothing
 			else
-				BUI.Vars.Theme=i BUI.Themes_Setup(true) SCENE_MANAGER:SetInUIMode(false) a("Changing theme: Done")
+				BUI.Vars.Theme=i BUI.Themes_Setup(true) SCENE_MANAGER:SetInUIMode(false) bui_a("Changing theme: Done")
 			end
 		end,
 	},
@@ -328,7 +328,7 @@ local function MenuOptions_Init()	--Menu options
 	--Reticle mode
 	{	type		="dropdown",
 		name		="ReticleMode",
-		choices	={"Default","Crosshair","Rhomboid","Circular","Triangle 1","Triangle 2","Dotty","Brackets","Dots"},
+		choices	={"Default","Crosshair","Rhomboid","Circular","Triangle 1","Triangle 2","Dotty","Brackets","Dots",[11]="Off"},
 		getFunc	=function() return BUI.Vars.ReticleMode end,
 		setFunc	=function(i,value) BUI.Vars.ReticleMode=i BUI.Reticle.Mode(i) end,
 	},
@@ -2318,7 +2318,7 @@ local function WidgetContext_UI(parent)	--Context menu
 				local refer_name="BUI_Widget_"..string.gsub(WidgetId," ","_")
 				if not BUI.Vars[refer_name] then BUI.Vars[refer_name]={[11]=true} else BUI.Vars[refer_name][11]=true end
 			else
-				a("Additional effect was removed",SOUNDS.NEGATIVE_CLICK)
+				bui_a("Additional effect was removed",SOUNDS.NEGATIVE_CLICK)
 				if BUI.Vars[name] then BUI.Vars[name][11]=nil end
 				BUI_Menu_Context_Combine.eb:SetText("")
 			end
@@ -2372,7 +2372,7 @@ local function ManageWidgets_UI()		--Manage widgets
 				frame:SetAnchor(CENTER,BanditsUI,CENTER,0,0)
 			end
 		else
-			a("Widget \""..tostring(value).."\" is not found")
+			bui_a("Widget \""..tostring(value).."\" is not found")
 		end
 	end
 	local AddWidget=function(value)

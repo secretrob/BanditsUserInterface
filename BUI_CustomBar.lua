@@ -33,7 +33,7 @@ local SlashCommands={
 	--Widgets
 	{enable=false,command="/script BUI.Vars.EnableWidgets=not BUI.Vars.EnableWidgets BUI.Frames.Widgets_Init() d('Widgets are now '..(BUI.Vars.EnableWidgets and '|c33EE33enabled|r' or '|EE3333disabled|r'))",icon="/esoui/art/progression/morph_up.dds"},
 	--Text sample
-	{enable=false,command="/script local text='Another sample'd(text) a(text)",icon="Text"},
+	{enable=false,command="/script local text='Another sample'd(text) bui_a(text)",icon="Text"},
 --	/script BUI.Vars.CustomBar.Enable=true BUI.Vars.CustomBar.Slash[12]={enable=true,icon="/esoui/art/treeicons/gamepad/gp_tutorial_idexicon_ava.dds",command="/script BUI.OnScreen.Notification(11,'Traveling to Guild Hall',nil,8000) JumpToHouse('@SiameseCat')"} BUI.CustomBarUpdate()
 }
 local BarContent={}

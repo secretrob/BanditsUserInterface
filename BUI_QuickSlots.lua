@@ -54,7 +54,7 @@ end
 local function OnSlotChanged()
 	for i=1,BUI.Vars.QuickSlotsShow do BUI_QuickSlots[i].status:SetHidden(true) end
 	local slot=GetCurrentQuickslot()
---	pl("Selected quickslot: "..tostring(slot))
+--	bui_pl("Selected quickslot: "..tostring(slot))
 	local i=QUICKSLOTS[slot]
 	if i and i<=BUI.Vars.QuickSlotsShow then
 		BUI_QuickSlots[i].status:SetHidden(false)

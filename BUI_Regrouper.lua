@@ -6,7 +6,7 @@ local loop_count=0
 function BUI.RG_Save()
 	local groupSize=GetGroupSize()
 	if groupSize<=1 then
-		a("You are not in a group")
+		bui_a("You are not in a group")
 		return
 	end
 	GroupMembers={}
@@ -17,7 +17,7 @@ function BUI.RG_Save()
 		end
 	end
 	if #GroupMembers>0 then
-		a("Group saved")
+		bui_a("Group saved")
 		BUI.Vars.LastGroupMembers=GroupMembers
 	end
 end
@@ -35,7 +35,7 @@ function BUI.RG_ReGroup()
 		BUI.RG_Save()
 		GroupDisband()
 	else
-		a("You are not in a group")
+		bui_a("You are not in a group")
 		return
 	end
 	loop_count=0
@@ -57,7 +57,7 @@ function BUI.RG_ReInvite()
 		GroupMembers=BUI.Vars.LastGroupMembers
 	end
 	if #GroupMembers<=0 then
-		a("Saved group list is empty")
+		bui_a("Saved group list is empty")
 		return
 	end
 	d("Regrouping:")
@@ -75,7 +75,7 @@ function BUI.RG_ListGroup()
 		GroupMembers=BUI.Vars.LastGroupMembers
 	end
 	if #GroupMembers<=0 then
-		a("Saved group list is empty")
+		bui_a("Saved group list is empty")
 		return
 	end
 	d("Saved group members:")
@@ -91,30 +91,30 @@ function BUI.RG_Clear(where)
 	if where==3 then
 		if #GroupMembers>0 then
 			GroupMembers={}
-			a("Saved group list is cleared")
+			bui_a("Saved group list is cleared")
 			done=true
 		end
 		if #BUI.Vars.LastGroupMembers>0 then
 			BUI.Vars.LastGroupMembers={}
-			a("Removed last player names from SavedVariables")
+			bui_a("Removed last player names from SavedVariables")
 			done=true
 		end
 	elseif where==2 then
 		if #BUI.Vars.LastGroupMembers>0 then
 			BUI.Vars.LastGroupMembers={}
-			a("Removed last player names from SavedVariables")
+			bui_a("Removed last player names from SavedVariables")
 			done=true
 		end
 	elseif where==1 then
 		if #GroupMembers>0 then
 			GroupMembers={}
-			a("Saved group list is cleared")
+			bui_a("Saved group list is cleared")
 			done=true
 		end
 	end
 
 	if not done then
-		a("Saved group list is empty")
+		bui_a("Saved group list is empty")
 	end
 end
 
@@ -126,7 +126,7 @@ function BUI.RG_Add(nameParts)
 		local playerName=nameParts[2]
 		if playerName~="" then
 			if playerName==GetUnitName("player") then
-				a("You cannot add yourself to the saved group list")
+				bui_a("You cannot add yourself to the saved group list")
 			return
 		end
 		local alreadyIn=false

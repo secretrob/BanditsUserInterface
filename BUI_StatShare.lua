@@ -35,7 +35,7 @@ end
 
 	--Switch to world map so we can calculate the global map scale and offset
 --*|*	if SetMapToMapListIndex(TAMRIEL_MAP_INDEX)==SET_MAP_RESULT_FAILED then
---*|*		if BUI.Vars.DeveloperMode then pl("Error: Could not switch to world map") end
+--*|*		if BUI.Vars.DeveloperMode then bui_pl("Error: Could not switch to world map") end
 --*|*		return mData.default.scaleX,mData.default.scaleY
 --*|*	end
 --*|*	local pX1,pY1=GetMapPlayerPosition('player')
@@ -47,13 +47,13 @@ end
 	--calculate scale and offset for all collected maps	
 --*|*	local scaleX,scaleY=(wpX1-pX1)/(wpX-pX),(wpY1-pY1)/(wpY-pY)
 --	local offsetX,offsetY=pX1-pX*scaleX,pY1-pY*scaleY
---*|*	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then pl("Error: Map data for "..BUI.MapId.." might be wrong") end
+--*|*	if BUI.Vars.DeveloperMode and (math.abs(scaleX-scaleY)>1e-3) then bui_pl("Error: Map data for "..BUI.MapId.." might be wrong") end
 --*|*	mData[BUI.MapId]={scaleX=scaleX,scaleY=scaleY,offsetX=offsetX,offsetY=offsetY}
 
 --*|*	RemovePlayerWaypoint()
 --*|*	SetMapToPlayerLocation()
 --*|*	if not mData[BUI.MapId] then
---*|*		if BUI.Vars.DeveloperMode then pl("Error: Map data for "..BUI.MapId.." was not collected") end
+--*|*		if BUI.Vars.DeveloperMode then bui_pl("Error: Map data for "..BUI.MapId.." was not collected") end
 --*|*		return mData.default.scaleX,mData.default.scaleY
 --*|*	end
 --*|*	return mData[BUI.MapId].scaleX,mData[BUI.MapId].scaleY
@@ -514,7 +514,7 @@ function BUI.StatShare.GroupElection()
 				if value<6 or value>64 then d("/dice [6-64]") return end
 				local dice=math.random(98)
 				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Dice_request)/100+(value+10)/10000,.701+dice/1000)
-				a("Dice roll request was sent.")
+				bui_a("Dice roll request was sent.")
 			else
 				a(GetString(SI_GROUPELECTIONFAILURE8))
 			end
@@ -526,11 +526,11 @@ function BUI.StatShare.GroupElection()
 	if BUI.Vars.RaidFrames and BUI.Vars.GroupElection then
 		CastGroupVote=function(vote)
 			if vote==GROUP_VOTE_CHOICE_FOR then
-				a("Sharing disabled")
+				bui_a("Sharing disabled")
 				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_Yes+.5)/100,.75)
 			elseif vote==GROUP_VOTE_CHOICE_AGAINST then
 				--*|*BUI.PingMap(MAP_PIN_TYPE_PING,MAP_TYPE_LOCATION_CENTERED,(StatShare_Code+Election_No+.5)/100,.75)
-				a("Sharing disabled")
+				bui_a("Sharing disabled")
 			end
 			CastGroupVoteOrig(vote)
 		end

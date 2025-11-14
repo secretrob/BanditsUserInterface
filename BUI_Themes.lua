@@ -494,7 +494,7 @@ function BUI.Frames.ZO_Frame_reposition()
 				elseif name=='ZO_EndDunHUDTrackerContainer' then ApplyTemplateHook(ZO_HUDTracker_Base, 'ZO_EndDunHUDTrackerContainer','RefreshAnchors') end
 				frame:ClearAnchors() frame:SetAnchor(var[1],GuiRoot,var[2],var[3],var[4])
 			else
-				pl(name.." was not placed")
+				bui_pl(name.." was not placed")
 			end
 		end
 	end

@@ -828,7 +828,7 @@ function BUI.RegisterEvents()
 end
 
 --Message functions
-function dt(strings)
+function bui_dt(strings)
 	local _t=""
 	local _s=""
 	for _,s in pairs(strings) do
@@ -838,9 +838,9 @@ function dt(strings)
 	end
 	d(_t)
 end
-function pl(msg)
+function bui_pl(msg)
 	if CHAT_SYSTEM.primaryContainer then d(msg) else messages[#messages+1]=msg end
 end
-function a(text,sound)
+function bui_a(text,sound)
 	ZO_Alert(UI_ALERT_CATEGORY_ALERT, sound, text)
 end

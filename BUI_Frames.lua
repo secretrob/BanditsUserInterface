@@ -360,7 +360,7 @@ end
 	--Group frame
 local function ClearDeathCount()
 	for accname in pairs(BUI.Group) do if accname~="members" then BUI.Group[accname].death=nil end end
-	a("Group death list is cleared")
+	bui_a("Group death list is cleared")
 end
 
 local function PostDeathCount()
@@ -380,7 +380,7 @@ local function PostDeathCount()
 		CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
 		StartChatInput("/p Group deaths: "..text)
 	else
-		a("Group death list is empty")
+		bui_a("Group death list is empty")
 	end
 end
 

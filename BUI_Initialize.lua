@@ -144,14 +144,14 @@ local function VersionCheck()
 		BUI.Vars.ZoomImperialCity	=BUI.MiniMap.Defaults.ZoomImperialCity
 		BUI.Vars.ZoomGlobal		=BUI.MiniMap.Defaults.ZoomGlobal
 		changed=true
-		pl("|c4B8BFEBandits|r User Interface: New version. Minimap zoom settings are resetted to defaults")
+		bui_pl("|c4B8BFEBandits|r User Interface: New version. Minimap zoom settings are resetted to defaults")
 	end
 	if BUI.Vars.LastVersion*1000<3189 then
 		BUI.Vars.FrameHeight=BUI.Defaults.FrameHeight
 		BUI.Vars.BUI_PlayerFrame=BUI.Defaults.BUI_PlayerFrame
 		BUI.Vars.BUI_HPlayerFrame=BUI.Defaults.BUI_HPlayerFrame
 		changed=true
-		pl("|c4B8BFEBandits|r User Interface: New version. Some players frames settings are resetted to defaults")
+		bui_pl("|c4B8BFEBandits|r User Interface: New version. Some players frames settings are resetted to defaults")
 	end
 	if BUI.Vars.LastVersion*1000<3193 then
 		BUI.Vars.BUI_OnScreen=BUI.Defaults.BUI_OnScreen
@@ -165,7 +165,7 @@ local function VersionCheck()
 	end
 	if BUI.Vars.LastVersion*1000<3202 then
 		if BUI.Vars.FrameOpacityOut==0 then BUI.Vars.FrameOpacityOut=BUI.Defaults.FrameOpacityOut end
-		if BUI.Vars.CurvedFrame~="Disabled" then pl("|c4B8BFEBandits|r User Interface: Curved frames are changed. Settings are resetted to defaults") end
+		if BUI.Vars.CurvedFrame~="Disabled" then bui_pl("|c4B8BFEBandits|r User Interface: Curved frames are changed. Settings are resetted to defaults") end
 		for n,v in pairs(BUI.Curved.Defaults) do BUI.Vars[n]=v end
 		changed=true
 	end
@@ -203,8 +203,8 @@ local function VersionCheck()
 	if changed then BUI.Vars.LastVersion=BUI.Version end
 	local accessibilityModeEnabled = GetSetting_Bool(SETTING_TYPE_ACCESSIBILITY, ACCESSIBILITY_SETTING_ACCESSIBILITY_MODE)
 	if BUI.Vars.DisableHelpAnnounce==false then
-		if IsInGamepadPreferredMode() then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("GamepadHelpAnnouncement")) end
-		if accessibilityModeEnabled then pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end
+		if IsInGamepadPreferredMode() then bui_pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("GamepadHelpAnnouncement")) end
+		if accessibilityModeEnabled then bui_pl("|c4B8BFEBandits|r User Interface: " .. BUI.Loc("AccessibilityHelpAnnouncement")) end
 	end
 end
 
