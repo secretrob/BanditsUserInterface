@@ -206,6 +206,7 @@ function BUI.Player:UpdateShield(unitTag, value, maxValue)
 	if value==data.shield.current then return end
 	local pct=value/data.health.max
 	data.shield={["current"]=value, ["max"]=maxValue, ["pct"]=pct}
+	--d("Shield: "..value,"Max: "..maxValue,"Pct: "..pct)
 	--Update frames
 	if BUI.init.Frames then
 		if BUI.Vars.PlayerFrame or BUI.Vars.RaidFrames then BUI.Frames:Shield(unitTag,value,pct,data.health.current,data.health.max,data.trauma.current) end

@@ -673,6 +673,8 @@ ExpiresAnimation="Animation beim Auslaufen von Effekten",
 ExpiresAnimationDesc=default..(BUI.Defaults.ExpiresAnimation and on or off).."]",
 ActionsFontSize="Schriftgröße",
 ActionsFontSizeDesc=default..BUI.Defaults.ActionsFontSize.."]",
+UpdateTime="Zeit für ein Update",
+UpdateTimeDesc="Wie oft die Fähigkeits-Timer in Millisekunden aktualisiert werden.\nKleinere Werte können FPS-Abstürze verursachen.\n"..default..BUI.Defaults.UpdateTime,
 
 --Automation
 AutoConfirm	="Auto-Annehmen",

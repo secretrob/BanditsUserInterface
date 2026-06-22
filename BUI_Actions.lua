@@ -590,7 +590,7 @@ function BUI.Actions.Initialize()
 		if BUI.Vars.UseSwapPanel then
 			for i=3,7 do MakeAbilitySlot(i) end
 		end
-		EVENT_MANAGER:RegisterForUpdate("BUI_Actions", 200, UpdateTimers)
+		EVENT_MANAGER:RegisterForUpdate("BUI_Actions", BUI.Vars.UpdateTime, UpdateTimers)
 		--Rapid Maneuver
 		local _,progressionIndex=GetAbilityProgressionXPInfoFromAbilityId(40211)
 		for rank=0,2 do

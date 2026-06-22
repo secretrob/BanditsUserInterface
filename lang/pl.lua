@@ -681,6 +681,8 @@ ExpiresAnimation	="Expires animation",
 ExpiresAnimationDesc	=default..(BUI.Defaults.ExpiresAnimation and on or off),
 ActionsFontSize	="Rozmiar czcionki",
 ActionsFontSizeDesc	=default..BUI.Defaults.ActionsFontSize,
+UpdateTime="Czas na aktualizację",
+UpdateTimeDesc="Jak często aktualizować liczniki czasu zdolności w milisekundach.\nNiższe wartości mogą powodować spadki FPS.\n"..default..BUI.Defaults.UpdateTime,
 
 --Automation
 AutoConfirm	="Automatyczne potwierdzenie",

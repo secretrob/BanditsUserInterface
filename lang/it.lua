@@ -665,6 +665,8 @@ ExpiresAnimation	="Fine Animazione",
 ExpiresAnimationDesc	=default..(BUI.Defaults.ExpiresAnimation and on or off),
 ActionsFontSize	="Dimensione Caratteri",
 ActionsFontSizeDesc	=default..BUI.Defaults.ActionsFontSize,
+UpdateTime="Momento dell'aggiornamento",
+UpdateTimeDesc="Frequenza di aggiornamento dei timer delle abilità in millisecondi.\nValori più bassi possono causare cali di FPS.\n"..default..BUI.Defaults.UpdateTime,
 
 --Automation
 AutoConfirm	="Conferma Automatica",

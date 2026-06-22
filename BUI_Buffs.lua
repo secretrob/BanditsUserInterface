@@ -196,7 +196,6 @@ local PotionIcon={
 }
 BUI.SynergyCd={}
 BUI.Buffs	={
-	UpdateTime		=200,
 	Effects		={},
 	Defaults		={
 		PlayerBuffs		=true,
@@ -928,7 +927,7 @@ local function SynergyCd_Update()
 					local pct=timer/20000
 					ability.bar:SetWidth(pct*(ability.progress:GetWidth()-4))
 				end
-				if timer<=BUI.Buffs.UpdateTime then BUI.SynergyCd[i]=nil end
+				if timer<=BUI.Vars.UpdateTime then BUI.SynergyCd[i]=nil end
 			else
 				ability:SetHidden(true)
 			end
@@ -1034,7 +1033,7 @@ local function BuffsPlayer()		--PlayerBuffs
 							Positive	=(effectType==1),
 						}
 					elseif timeEnding==0 then
-						BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].Duration=BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].Duration+BUI.Buffs.UpdateTime
+						BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].Duration=BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].Duration+BUI.Vars.UpdateTime
 					elseif BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].timeEnding>=timeStarted then
 							BUI.Stats.Current[BUI.ReportN].PlayerBuffs[buffName].timeEnding=timeEnding
 					else
@@ -1186,7 +1185,7 @@ local function BuffsPlayer()		--PlayerBuffs
 	if not Purge and BUI.OnScreen.Message[7] then BUI.OnScreen.Message[7]["time"]=0 BUI.OnScreen.Update() end
 	--Food
 	if have_food then
-		if have_food<10000 and have_food>10000-BUI.Buffs.UpdateTime then
+		if have_food<10000 and have_food>10000-BUI.Vars.UpdateTime then
 			if BUI.Vars.NotificationFood then
 				BUI.OnScreen.Notification(0,BUI.Loc("Food"),nil,have_food)
 			end
@@ -1518,12 +1517,15 @@ function BUI.Buffs.RemoveFrom(var,value,target)
 end
 
 function BUI.FormatTime(t)
-	if t<0 then return ""
+	local decimalValues = BUI.Vars.DecimalValues
+	if BUI.Vars.UpdateTime > 500 then decimalValues = false end
+
+	if t<0 then return ""	
 	elseif t<60 then
-		return BUI.Vars.DecimalValues and string.format('%.1f',t) or math.floor(t+.5)
+		return decimalValues and string.format('%.1f',t) or math.floor(t+.5)
 	elseif t<3600 then
 --		return ZO_FormatTime(t,SI_TIME_FORMAT_TIMESTAMP)
-		return BUI.Vars.DecimalValues and string.format('%d:%.2d',math.floor(t/60),t%60) or math.floor(t/60+.5)
+		return decimalValues and string.format('%d:%.2d',math.floor(t/60),t%60) or math.floor(t/60+.5)
 	elseif t>172800 then
 		return string.format('%dd', t/86400)
 	else
@@ -1598,7 +1600,7 @@ function BUI.Buffs.Initialize()
 	if BUI.Vars.EnableWidgets then BUI.Frames.Widgets_Init() end
 
 	if BUI.Vars.PlayerBuffs or BUI.Vars.TargetBuffs or BUI.Vars.EnableCustomBuffs or BUI.Vars.EnableWidgets or (BUI.Vars.EnableStats and BUI.Vars.StatsBuffs) then
-		EVENT_MANAGER:RegisterForUpdate("BUI_TimersUpdate", BUI.Buffs.UpdateTime, TimersUpdate)
+		EVENT_MANAGER:RegisterForUpdate("BUI_TimersUpdate", BUI.Vars.UpdateTime, TimersUpdate)
 	else
 		EVENT_MANAGER:UnregisterForUpdate("BUI_TimersUpdate")
 	end

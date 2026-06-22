@@ -395,8 +395,8 @@ local function UndauntedPledges()
 								local length = 12
 								local shift = 0
 								if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
-									length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
-									shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
+									length = 34 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+									shift = 19  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
 								end
 								if 1+(day+shift)%length == DungeonIndex[id].index then
 									daily=" ("..BUI.Loc("UndauntedDaily")..")"
@@ -439,8 +439,8 @@ local function UndauntedPledges()
 							local length = 12
 							local shift = 0
 							if DungeonIndex[id].npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
-								length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
-								shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
+								length = 34 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+								shift = 19  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
 							end
 							if 1+(day+shift)%length == DungeonIndex[id].index then
 								daily=" ("..BUI.Loc("UndauntedDaily")..")"
@@ -520,8 +520,8 @@ function BUI.DailyPledges()
 		local length = 12
 		local shift = 0
 		if v.npc == "Urgarlag" then -- Override Length if Urg - NEEDS TO BE UPDATED EACH DUNGEON ADDITON
-			length = 32 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
-			shift = 27  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
+			length = 34 -- Increment When New Dungeons Added - This is a count of how many quests Urgarlag gives out for daily pledges
+			shift = 19  -- Adjust as necessary with Dungeon Additions - This is an offset that needs to be set manually to make Urgarlag quests show in the correct order. The value can be from 1 through the max number of pledge quests Urgarlag gives
 		end
 		local n=1+(day+shift)%length
 		local pledge=GetZoneNameById(zoneId)

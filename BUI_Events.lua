@@ -174,7 +174,7 @@ local function OnVisualAdded(eventCode, unitTag, unitAttributeVisual, statType, 
 		elseif powerType==POWERTYPE_HEALTH then
 			if unitAttributeVisual==ATTRIBUTE_VISUAL_POWER_SHIELDING then
 				BUI.Player:UpdateShield(unitTag, (sequenceId==0 and value or 0), maxValue)
-				if sequenceId==0 and value>20000 then BUI.Buffs.BarrierActive=GetGameTimeSeconds()+30 end
+				if sequenceId==0 and value>20000 then BUI.Buffs.BarrierActive=GetGameTimeSeconds() end
 			elseif unitAttributeVisual==ATTRIBUTE_VISUAL_TRAUMA then
 				BUI.Player:UpdateTrauma(unitTag, (sequenceId==0 and value or 0), maxValue)
 			elseif statType==3 and unitAttributeVisual==ATTRIBUTE_VISUAL_DECREASED_STAT and value>1000 then	--unitAttributeVisual==ATTRIBUTE_VISUAL_INCREASED_STAT

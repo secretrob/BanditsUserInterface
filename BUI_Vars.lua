@@ -5,7 +5,7 @@ BUI	={
 	DisplayName			="|c4B8BFEBandits|cFEFEFE User Interface|r",	--"|c4B8BFEBandits|r User Interface",
 	ShortName			="|c4B8BFEBandits|r UI",
 	URL					="https://github.com/secretrob/BanditsUserInterface",
-	Version				=4.434,
+	Version				=4.436,
 	language			=tostring(GetCVar("language.2")),
 	API					=GetAPIVersion(),
 	GamepadMode			=IsInGamepadPreferredMode(),
@@ -43,7 +43,7 @@ BUI	={
 	Cloudrest			={Group=0,Plus=0,Timer=0,Init=0,Fallen=0,Hoarfrost=0},
 	PingMap				=PingMap,
 	Markers				=0,
-	GroupMarker			={},
+	GroupMarker			={},	
 	Penetration={
 		Target={
 			[GetAbilityName(62787)]=5948,--Major Breach
@@ -103,6 +103,7 @@ BUI	={
 		QuickSlotsShow		=4,
 		QuickSlotsInventory	=true,
 		DisableHelpAnnounce =false,
+		UpdateTime			=200,
 	},
 	Frames={
 		Defaults={

@@ -666,6 +666,8 @@ ExpiresAnimation	="Expira animação",
 ExpiresAnimationDesc	=default..(BUI.Defaults.ExpiresAnimation and on or off),
 ActionsFontSize	="Tamanho da Fonte",
 ActionsFontSizeDesc	=default..BUI.Defaults.ActionsFontSize,
+UpdateTime="Hora de atualizar",
+UpdateTimeDesc="Frequência de atualização dos temporizadores de habilidade em milissegundos.\nValores mais baixos podem causar quedas de FPS..\n"..default..BUI.Defaults.UpdateTime,
 
 --Automação
 AutoConfirm	="Confirmar automaticamente",

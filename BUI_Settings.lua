@@ -1646,6 +1646,14 @@ end
 		getFunc	=function() return BUI.Vars.Actions end,
 		setFunc	=function(value) BUI.Vars.Actions=value BUI.Actions:Initialize() end,
 	},
+	{	type		="slider",
+		name		="UpdateTime",
+		min		=1,
+		max		=10,
+		step	=1,
+		getFunc	=function() return BUI.Vars.UpdateTime/100 end,
+		setFunc	=function(value) BUI.Vars.UpdateTime=value*100 BUI.Actions:Initialize() BUI.Buffs.Initialize() end
+	},
 	{
 		type		="checkbox",
 		name		="ActionsPrecise",

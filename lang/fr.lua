@@ -681,6 +681,8 @@ ExpiresAnimation =				"Expiration d'animation",
 ExpiresAnimationDesc =			default..(BUI.Defaults.ExpiresAnimation and on or off),
 ActionsFontSize =				"Taille de la police",
 ActionsFontSizeDesc =			default..BUI.Defaults.ActionsFontSize,
+UpdateTime=						"L'heure de la mise à jour",
+UpdateTimeDesc=					"Fréquence de mise à jour des compteurs de compétence en millisecondes.\nDes valeurs plus basses peuvent causer des baisses de FPS.\n"..default..BUI.Defaults.UpdateTime,
 
 --Automation
 AutoConfirm =					"Confirmation auto",

@@ -641,6 +641,8 @@ ExpiresAnimation	="Анимация истечения действия",
 ExpiresAnimationDesc	=default..(BUI.Defaults.ExpiresAnimation and on or off).."]",
 ActionsFontSize	="Размер шрифта",
 ActionsFontSizeDesc	=default..BUI.Defaults.ActionsFontSize.."]",
+UpdateTime="Время обновления",
+UpdateTimeDesc="Как часто обновлять таймеры способностей в миллисекундах.\nБолее низкие значения могут вызвать падение FPS.\n"..default..BUI.Defaults.UpdateTime,
 
 --Automation
 AutoConfirm	="Автозапуск",
