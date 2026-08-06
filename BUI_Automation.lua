@@ -718,13 +718,17 @@ function BUI.Automation_Init()
 	if BUI.Vars.DeleteMail then
 		MAIL_INBOX.Delete=function(self)
 			if self.mailId then
-				local dialogTextParams = { mainTextParams = { GetString(SI_DELETE_MAIL_CONFIRMATION_TEXT), }, }
-				local numAttachments,attachedMoney=GetMailAttachmentInfo(self.mailId)
-				if numAttachments>0 or attachedMoney>0 then
-					ZO_Dialogs_ShowDialog("BUI_DELETE_CONFIRMATION", { confirmationCallback = function(...) DeleteMail(self.mailId) PlaySound(SOUNDS.MAIL_ITEM_DELETED) end, title = SI_PROMPT_TITLE_DELETE_MAIL_ATTACHMENTS, body = BUI.Loc("DeleteMailConfirm"), })
-				else
-					DeleteMail(self.mailId)
-					PlaySound(SOUNDS.MAIL_ITEM_DELETED)
+				if self.isMailFromGuild then
+                    MAIL_MANAGER:MarkGuildMailDeleted(self.mailId)
+                    PlaySound(SOUNDS.MAIL_ITEM_DELETED)
+                else
+					local numAttachments,attachedMoney=GetMailAttachmentInfo(self.mailId)
+					if numAttachments>0 or attachedMoney>0 then
+						ZO_Dialogs_ShowDialog("BUI_DELETE_CONFIRMATION", { confirmationCallback = function(...) DeleteMail(self.mailId) PlaySound(SOUNDS.MAIL_ITEM_DELETED) end, title = SI_PROMPT_TITLE_DELETE_MAIL_ATTACHMENTS, body = BUI.Loc("DeleteMailConfirm"), })
+					else
+						DeleteMail(self.mailId)
+						PlaySound(SOUNDS.MAIL_ITEM_DELETED)
+					end
 				end
 			end
 		end
