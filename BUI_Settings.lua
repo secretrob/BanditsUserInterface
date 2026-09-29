@@ -2550,7 +2550,7 @@ local function MoveDefaultFrames(move)
 	elseif move then
 		BUI.UI.TopLevelWindow("BUI_Move",GuiRoot,{GuiRoot:GetWidth(),GuiRoot:GetHeight()},{CENTER,CENTER,0,0},false)
 		for name,desc in pairs(BUI.DefaultFrames) do
-			local frame=_G[name]
+			local frame=_G[name]			
 			local lX,lY,anchorPoint=0,0,CENTER
 			if frame and not (name=="ZO_LootHistoryControl_Keyboard" and BUI.GamepadMode) and not (name=="ZO_LootHistoryControl_Gamepad" and not BUI.GamepadMode) then
 			if name=="ZO_LootHistoryControl_Keyboard" then
@@ -2583,8 +2583,10 @@ local function MoveDefaultFrames(move)
 			bg:SetMovable(true)
 			bg:SetMouseEnabled(true)
 			bg:SetHandler("OnMouseUp", function(self)
-				BUI.Menu:SaveAnchor(self,nil,name,anchorPoint)
-				BUI.Frames.ZO_Frame_reposition()
+					if HUD_MANAGER:GetKeyboardElementForControl(frame) == nil then
+						BUI.Menu:SaveAnchor(self,nil,name,anchorPoint)						
+						BUI.Frames.ZO_Frame_reposition()
+					end
 				end)
 			end
 		end
@@ -2702,7 +2704,7 @@ function BUI.Menu:SaveAnchor(control,anchor,name,anchorPoint,widget_side,widget_
 	local w,h=control:GetWidth(),control:GetHeight()
 	anchorPoint=anchorPoint or CENTER
 	if anchor and anchor~=BanditsUI then
-		local _, point, _, _, offsetX, offsetY=anchor:GetAnchor()
+		local _, point, _, _, offsetX, offsetY=anchor:GetAnchor()		
 		offsetX=point==128 and offsetX or((point==3 or point==6) and offsetX-GuiRoot:GetWidth()/2+w/2 or GuiRoot:GetWidth()/2+offsetX-w/2)
 --		offsetY=point==128 and offsetY or((point==3 or point==9) and offsetY-GuiRoot:GetHeight()/2+h/2 or GuiRoot:GetHeight()/2+offsetY-h/2)
 		anchorX=math.floor(offsetX*10)/10 --offsetY=math.floor(offsetY*10)/10
@@ -2710,18 +2712,22 @@ function BUI.Menu:SaveAnchor(control,anchor,name,anchorPoint,widget_side,widget_
 	--Get the new position
 	local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY=control:GetAnchor()
 	if not isValidAnchor then return end
+	
 	--Save the anchors
 	offsetX=math.floor(offsetX*10)/10 offsetY=math.floor(offsetY*10)/10
 	frame=control:GetName() if BUI.Vars.FrameHorisontal and frame=="BUI_PlayerFrame" then frame="BUI_HPlayerFrame" end
-	name=name or frame
-	if frame=="BUI_RaidFrame" then
-		offsetX=point==128 and offsetX or((point==3 or point==6) and offsetX-GuiRoot:GetWidth()/2 or GuiRoot:GetWidth()/2+offsetX-w)
-		offsetY=point==128 and offsetY or((point==3 or point==9) and offsetY-GuiRoot:GetHeight()/2 or GuiRoot:GetHeight()/2+offsetY-h)
-		offsetX=math.floor(offsetX*10)/10 offsetY=math.floor(offsetY*10)/10
-		BUI.Vars[frame]={TOPLEFT,CENTER,offsetX,offsetY}
-	else
---		local anchor_name={[BOTTOM]="BOTTOM",[BOTTOMLEFT]="BOTTOMLEFT",[BOTTOMRIGHT]="BOTTOMRIGHT",[CENTER]="CENTER",[LEFT]="LEFT",[NONE]="NONE",[RIGHT]="RIGHT",[TOP]="TOP",[TOPLEFT]="TOPLEFT",[TOPRIGHT]="TOPRIGHT"}
---		d(frame..": "..anchor_name[point]..", "..anchor_name[relativePoint]..", "..offsetX.. ", "..offsetY)
+	name=name or frame		
+	if frame=="BUI_RaidFrame" then		
+		if relativeTo==BanditsUI then
+			BUI.Vars[frame]={TOPLEFT,CENTER,offsetX,offsetY}
+		end
+		--offsetX=point==128 and offsetX or((point==3 or point==6) and offsetX-GuiRoot:GetWidth()/2 or GuiRoot:GetWidth()/2+offsetX-w)
+		--offsetY=point==128 and offsetY or((point==3 or point==9) and offsetY-GuiRoot:GetHeight()/2 or GuiRoot:GetHeight()/2+offsetY-h)
+		--offsetX=math.floor(offsetX*10)/10 offsetY=math.floor(offsetY*10)/10
+		--BUI.Vars[frame]={TOPLEFT,CENTER,offsetX,offsetY}
+	else		
+		--local anchor_name={[BOTTOM]="BOTTOM",[BOTTOMLEFT]="BOTTOMLEFT",[BOTTOMRIGHT]="BOTTOMRIGHT",[CENTER]="CENTER",[LEFT]="LEFT",[NONE]="NONE",[RIGHT]="RIGHT",[TOP]="TOP",[TOPLEFT]="TOPLEFT",[TOPRIGHT]="TOPRIGHT"}
+		--d(frame..": "..anchor_name[point]..", "..anchor_name[relativePoint]..", "..offsetX.. ", "..offsetY)
 		offsetX=point==128 and offsetX or((point==3 or point==6) and offsetX-GuiRoot:GetWidth()/2+w/2 or GuiRoot:GetWidth()/2+offsetX-w/2)
 		offsetY=point==128 and offsetY or((point==3 or point==9) and offsetY-GuiRoot:GetHeight()/2+h/2 or GuiRoot:GetHeight()/2+offsetY-h/2)
 		offsetX=math.floor(offsetX*10)/10 offsetY=math.floor(offsetY*10)/10
@@ -2732,6 +2738,6 @@ function BUI.Menu:SaveAnchor(control,anchor,name,anchorPoint,widget_side,widget_
 		elseif anchorPoint==TOP or anchorPoint==TOPRIGHT or anchorPoint==TOPLEFT then offsetY=offsetY-h/2
 		end
 		BUI.Vars[name]={[1]=anchorPoint,[2]=CENTER,[3]=(anchor and anchorX or offsetX),[4]=offsetY,[6]=widget_side,[7]=widget_cd,[8]=widget_progress,[9]=multi_target,[10]=self_effects,[11]=combine,[12]=allwaysshow,[13]=sound}
---		d("New: "..anchor_name[anchorPoint]..", "..anchor_name[CENTER]..", "..(anchor and anchorX or offsetX)..", "..offsetY)
+		--d("New: "..anchor_name[anchorPoint]..", "..anchor_name[CENTER]..", "..(anchor and anchorX or offsetX)..", "..offsetY)
 	end
 end

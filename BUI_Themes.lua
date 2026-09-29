@@ -449,13 +449,15 @@ end
 
 function BUI.Frames.ZO_Frame_reposition()	
 	local function SetupFunction(control, data)
-		control:SetWidth(GuiRoot:GetRight()-ZO_Compass:GetRight()-40)
-		control:SetText(data.text)
-		control:SetColor(data.color:UnpackRGBA())
-		local align=TEXT_ALIGN_RIGHT	--TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER
-		local var=BUI.Vars["ZO_AlertTextNotification"] if var and var[5] then align=var[5] end
-		control:SetHorizontalAlignment(align)
-		ZO_SoundAlert(data.category, data.soundId)
+		if HUD_MANAGER:GetKeyboardElementForControl(control) == nil then
+			control:SetWidth(GuiRoot:GetRight()-ZO_Compass:GetRight()-40)
+			control:SetText(data.text)
+			control:SetColor(data.color:UnpackRGBA())
+			local align=TEXT_ALIGN_RIGHT	--TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER
+			local var=BUI.Vars["ZO_AlertTextNotification"] if var and var[5] then align=var[5] end
+			control:SetHorizontalAlignment(align)
+			ZO_SoundAlert(data.category, data.soundId)
+		end
 	end
 	ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, ' ')
 	local line
@@ -463,7 +465,7 @@ function BUI.Frames.ZO_Frame_reposition()
 		line=ZO_AlertTextNotification:GetChild(1)
 --		line.fadingControlBuffer.templates.ZO_AlertLine.setup=SetupFunction
 		local var=BUI.Vars["ZO_AlertTextNotification"]
-		if var then line.fadingControlBuffer.anchor=ZO_Anchor:New(var[1],GuiRoot,var[2],var[3],var[4]) end
+		if var and line.fadingControlBuffer then line.fadingControlBuffer.anchor=ZO_Anchor:New(var[1],GuiRoot,var[2],var[3],var[4]) end
 	else
 		line=ZO_AlertTextNotificationGamepad:GetChild(1)
 --		line.fadingControlBuffer.templates.ZO_AlertLineGamepad.setup=SetupFunction
