@@ -2601,6 +2601,16 @@ local function SyncHUDMover(control,frame)
 	if IsInGamepadPreferredMode() then return end
 	local ref=element and element:GetHUDRefElement() or frame
 	if not ref then return end
+	if element then
+		-- Keep the drag proxy identical to ESO's HUD editor proxy. Centering it
+		-- independently introduces a fixed edge offset for tracker elements
+		-- whose reference rectangle is a child of the registered control.
+		local primaryAnchorPoint,refOffsetX,refOffsetY,refWidth,refHeight=element:GetConvertedRefControlAnchorInfo()
+		control:SetDimensions(refWidth>0 and refWidth or 100,refHeight>0 and refHeight or 24)
+		control:ClearAnchors()
+		control:SetAnchor(primaryAnchorPoint,nil,nil,refOffsetX,refOffsetY)
+		return
+	end
 	local x,y=ref:GetCenter()
 	local rootX,rootY=GuiRoot:GetCenter()
 	--Inactive prompts/subtitles may have a zero-sized reference rectangle.
