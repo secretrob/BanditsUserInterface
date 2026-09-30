@@ -2585,8 +2585,12 @@ local function DetachHUDTracker(element)
 	if key then
 		local trackerElement=HUD_TRACKER_MANAGER:GetHUDElement(false)
 		if trackerElement then
-			trackerElement:SetCustomOptionValue("SeparatedTrackers",key,true)
-			HUD_TRACKER_MANAGER:RefreshLayout()
+			-- Defer the layout refresh until the new element offset has been
+			-- saved. Refreshing here makes the native tracker revert its old
+			-- anchor before BUI finishes the drag, which is visible on Endless
+			-- Archive at the screen edges.
+			trackerElement:SetCustomOptionValue("SeparatedTrackers",key,true,true)
+			return trackerElement
 		end
 	end
 end
@@ -2609,7 +2613,7 @@ end
 function BUI.Menu.SaveHUDMover(control,frame)
 	local element=BUI.Menu.GetHUDElement(frame)
 	if not element or IsInGamepadPreferredMode() then return end
-	DetachHUDTracker(element)
+	local trackerElement=DetachHUDTracker(element)
 	local ref=element.GetHUDRefElement and element:GetHUDRefElement() or frame
 	if not ref then return end
 	if frame==ZO_PlayerAttributeHealth or frame==ZO_PlayerAttributeMagicka or frame==ZO_PlayerAttributeStamina then
@@ -2624,6 +2628,7 @@ function BUI.Menu.SaveHUDMover(control,frame)
 	local primaryAnchorPoint=element:GetConvertedRefControlAnchorInfo()
 	local refOffsetX,refOffsetY=ZO_GetControlPointOffsetFromGuiRoot(control,primaryAnchorPoint)
 	element:ApplyOffset(refOffsetX,refOffsetY,true)
+	if trackerElement then HUD_TRACKER_MANAGER:RefreshLayout() end
 	SyncHUDMover(control,frame)
 end
 
