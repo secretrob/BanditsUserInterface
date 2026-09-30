@@ -2595,6 +2595,52 @@ local function DetachHUDTracker(element)
 	end
 end
 
+-- Endless Archive is a detached native tracker. ESO can rebuild its tracker
+-- hierarchy after BUI has saved the position, which reapplies the old control
+-- anchor even though ZO_HUDManager already contains the new offset.
+local endlessAnchorReapplyId
+local endlessAnchorGuardInstalled=false
+
+local function ReapplyEndlessArchiveAnchor()
+	local frame=_G["ZO_EndDunHUDTrackerContainer"]
+	local element=frame and BUI.Menu.GetHUDElement(frame)
+	if not element or IsInGamepadPreferredMode() then return end
+	local offsetX,offsetY=HUD_MANAGER:GetSavedAnchorOffsets(element)
+	if offsetX and offsetY then
+		-- false prevents this corrective application from rewriting SavedVars or
+		-- firing another OffsetsChanged callback.
+		element:ApplyOffset(offsetX,offsetY,false)
+	end
+end
+
+local function QueueEndlessArchiveAnchor()
+	if endlessAnchorReapplyId then zo_removeCallLater(endlessAnchorReapplyId) end
+	endlessAnchorReapplyId=zo_callLater(function()
+		endlessAnchorReapplyId=nil
+		ReapplyEndlessArchiveAnchor()
+	end,50)
+end
+
+local function InstallEndlessArchiveAnchorGuard()
+	if endlessAnchorGuardInstalled then return end
+	endlessAnchorGuardInstalled=true
+	if HUD_MANAGER and HUD_MANAGER.RegisterCallback then
+		HUD_MANAGER:RegisterCallback("PropagateSettings", QueueEndlessArchiveAnchor)
+		HUD_MANAGER:RegisterCallback("OffsetsChanged", function(element)
+			if element==BUI.Menu.GetHUDElement(_G["ZO_EndDunHUDTrackerContainer"]) then
+				QueueEndlessArchiveAnchor()
+			end
+		end)
+	end
+	if HUD_TRACKER_MANAGER and HUD_TRACKER_MANAGER.RegisterCallback then
+		HUD_TRACKER_MANAGER:RegisterCallback("SeparatedTrackersUpdated", QueueEndlessArchiveAnchor)
+	end
+	if EVENT_MANAGER and EVENT_PLAYER_ACTIVATED then
+		EVENT_MANAGER:RegisterForEvent("BUI_EndlessArchiveAnchorGuard", EVENT_PLAYER_ACTIVATED, QueueEndlessArchiveAnchor)
+	end
+	QueueEndlessArchiveAnchor()
+end
+
 local function SyncHUDMover(control,frame)
 	local element=BUI.Menu.GetHUDElement(frame)
 	control:SetHidden(IsInGamepadPreferredMode())
@@ -2710,6 +2756,7 @@ end
 
 function BUI.Menu.MoveFrames(move)
 	if not (MoveMode_1 or MoveMode_2) then return end
+	InstallEndlessArchiveAnchorGuard()
 	if SCENE_MANAGER:IsInUIMode() and not WINDOW_MANAGER:IsSecureRenderModeEnabled() then SCENE_MANAGER:SetInUIMode(false) end
 	--Move elements back to their normal positions
 	if move then
