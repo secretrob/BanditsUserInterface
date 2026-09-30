@@ -2551,12 +2551,11 @@ end
 --Native HUD elements own their saved anchors; BUI only supplies the drag UI.
 function BUI.Menu.GetHUDElement(frame)
 	if not (frame and HUD_MANAGER and HUD_MANAGER.GetKeyboardElementForControl) then return end
-	if frame==ZO_EndDunHUDTrackerContainer and ENDLESS_DUNGEON_HUD_TRACKER then
-		local element=HUD_MANAGER:GetKeyboardElementForControl(ENDLESS_DUNGEON_HUD_TRACKER.control)
-		if element then return element end
-	end
+	-- Endless Archive keeps its legacy BUI mover path until its native tracker
+	-- lifecycle is supported independently.
+	if frame==ZO_EndDunHUDTrackerContainer then return end
 	-- U51 registered several elements on a top-level owner while BUI's list
-	-- names their child container (Endless Archive, progress and score widgets).
+	-- names their child container.
 	local candidate=frame
 	for _=1,4 do
 		local element=HUD_MANAGER:GetKeyboardElementForControl(candidate)
@@ -2575,70 +2574,6 @@ function BUI.Menu.GetHUDElement(frame)
 			if ref==frame then return element end
 		end
 	end
-end
-
-local function DetachHUDTracker(element)
-	if not (element and HUD_TRACKER_MANAGER and HUD_TRACKER_MANAGER.GetHUDElement) then return end
-	local owner=element.control and element.control.owner
-	if not (owner and owner.GetHUDElementOptionKeys) then return end
-	local key=owner:GetHUDElementOptionKeys()
-	if key then
-		local trackerElement=HUD_TRACKER_MANAGER:GetHUDElement(false)
-		if trackerElement then
-			-- Defer the layout refresh until the new element offset has been
-			-- saved. Refreshing here makes the native tracker revert its old
-			-- anchor before BUI finishes the drag, which is visible on Endless
-			-- Archive at the screen edges.
-			trackerElement:SetCustomOptionValue("SeparatedTrackers",key,true,true)
-			return trackerElement
-		end
-	end
-end
-
--- Endless Archive is a detached native tracker. ESO can rebuild its tracker
--- hierarchy after BUI has saved the position, which reapplies the old control
--- anchor even though ZO_HUDManager already contains the new offset.
-local endlessAnchorReapplyId
-local endlessAnchorGuardInstalled=false
-
-local function ReapplyEndlessArchiveAnchor()
-	local frame=_G["ZO_EndDunHUDTrackerContainer"]
-	local element=frame and BUI.Menu.GetHUDElement(frame)
-	if not element or IsInGamepadPreferredMode() then return end
-	local offsetX,offsetY=HUD_MANAGER:GetSavedAnchorOffsets(element)
-	if offsetX and offsetY then
-		-- false prevents this corrective application from rewriting SavedVars or
-		-- firing another OffsetsChanged callback.
-		element:ApplyOffset(offsetX,offsetY,false)
-	end
-end
-
-local function QueueEndlessArchiveAnchor()
-	if endlessAnchorReapplyId then zo_removeCallLater(endlessAnchorReapplyId) end
-	endlessAnchorReapplyId=zo_callLater(function()
-		endlessAnchorReapplyId=nil
-		ReapplyEndlessArchiveAnchor()
-	end,50)
-end
-
-local function InstallEndlessArchiveAnchorGuard()
-	if endlessAnchorGuardInstalled then return end
-	endlessAnchorGuardInstalled=true
-	if HUD_MANAGER and HUD_MANAGER.RegisterCallback then
-		HUD_MANAGER:RegisterCallback("PropagateSettings", QueueEndlessArchiveAnchor)
-		HUD_MANAGER:RegisterCallback("OffsetsChanged", function(element)
-			if element==BUI.Menu.GetHUDElement(_G["ZO_EndDunHUDTrackerContainer"]) then
-				QueueEndlessArchiveAnchor()
-			end
-		end)
-	end
-	if HUD_TRACKER_MANAGER and HUD_TRACKER_MANAGER.RegisterCallback then
-		HUD_TRACKER_MANAGER:RegisterCallback("SeparatedTrackersUpdated", QueueEndlessArchiveAnchor)
-	end
-	if EVENT_MANAGER and EVENT_PLAYER_ACTIVATED then
-		EVENT_MANAGER:RegisterForEvent("BUI_EndlessArchiveAnchorGuard", EVENT_PLAYER_ACTIVATED, QueueEndlessArchiveAnchor)
-	end
-	QueueEndlessArchiveAnchor()
 end
 
 local function SyncHUDMover(control,frame)
@@ -2669,7 +2604,6 @@ end
 function BUI.Menu.SaveHUDMover(control,frame)
 	local element=BUI.Menu.GetHUDElement(frame)
 	if not element or IsInGamepadPreferredMode() then return end
-	local trackerElement=DetachHUDTracker(element)
 	local ref=element.GetHUDRefElement and element:GetHUDRefElement() or frame
 	if not ref then return end
 	if frame==ZO_PlayerAttributeHealth or frame==ZO_PlayerAttributeMagicka or frame==ZO_PlayerAttributeStamina then
@@ -2684,7 +2618,6 @@ function BUI.Menu.SaveHUDMover(control,frame)
 	local refX,refY=ref:GetCenter()
 	local x,y=control:GetCenter()
 	element:ApplyOffset(offsetX+x-refX,offsetY+y-refY,true)
-	if trackerElement then HUD_TRACKER_MANAGER:RefreshLayout() end
 	SyncHUDMover(control,frame)
 end
 
@@ -2705,7 +2638,7 @@ local function MoveDefaultFrames(move)
 		if move then
 			for name in pairs(BUI.DefaultFrames) do
 				local mover=_G[name.."_BUI_BG"]
-				if mover then SyncHUDMover(mover,_G[name]) end
+				if mover and name~="ZO_EndDunHUDTrackerContainer" then SyncHUDMover(mover,_G[name]) end
 			end
 		end
 	elseif move then
@@ -2728,6 +2661,10 @@ local function MoveDefaultFrames(move)
 				anchorPoint=RIGHT
 			elseif name=="ZO_PlayerAttributeStamina" then
 				anchorPoint=LEFT
+			elseif name=="ZO_EndDunHUDTrackerContainer" then
+				frame:SetWidth(200)
+				lX,lY=-100,-20
+				anchorPoint=BOTTOMRIGHT
 			end
 			local w,h=frame:GetDimensions()
 			if w==0 then w=14 end w=w+math.abs(lX)
@@ -2739,9 +2676,12 @@ local function MoveDefaultFrames(move)
 			BUI.UI.Line(name.."_Line_vert",	bg,	{0,h+200},	{TOPLEFT,TOP,0,-100},	{.8,.8,.8,.4},1.8, false)
 			bg:SetMovable(true)
 			bg:SetMouseEnabled(true)
-			SyncHUDMover(bg,frame)
+			if name~="ZO_EndDunHUDTrackerContainer" then SyncHUDMover(bg,frame) end
 			bg:SetHandler("OnMouseUp", function(self)
-					if BUI.Menu.GetHUDElement(frame) then
+					if frame==ZO_EndDunHUDTrackerContainer then
+						BUI.Menu:SaveAnchor(self,nil,name,anchorPoint)
+						BUI.Frames.ZO_Frame_reposition()
+					elseif BUI.Menu.GetHUDElement(frame) then
 						BUI.Menu.SaveHUDMover(self,frame)
 					else
 						BUI.Menu.SaveLegacyMover(self,frame,name)
@@ -2756,7 +2696,6 @@ end
 
 function BUI.Menu.MoveFrames(move)
 	if not (MoveMode_1 or MoveMode_2) then return end
-	InstallEndlessArchiveAnchorGuard()
 	if SCENE_MANAGER:IsInUIMode() and not WINDOW_MANAGER:IsSecureRenderModeEnabled() then SCENE_MANAGER:SetInUIMode(false) end
 	--Move elements back to their normal positions
 	if move then
