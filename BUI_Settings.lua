@@ -2630,14 +2630,14 @@ function BUI.Menu.SaveHUDMover(control,frame)
 		local combined=HUD_MANAGER:GetKeyboardElementForControl(ZO_PlayerAttribute)
 		if combined then combined:SetCustomOptionValue("Combine",nil,false) end
 	end
-	-- Match ESO's HUD editor: convert the mover's current rectangle into an
-	-- absolute offset for the element's primary anchor. Adding the old offset
-	-- to a center delta works for most controls, but Endless Archive's tracker
-	-- refresh can reapply the saved anchor and snap the control back (especially
-	-- at the bottom/right edge).
-	local primaryAnchorPoint=element:GetConvertedRefControlAnchorInfo()
-	local refOffsetX,refOffsetY=ZO_GetControlPointOffsetFromGuiRoot(control,primaryAnchorPoint)
-	element:ApplyOffset(refOffsetX,refOffsetY,true)
+	-- The registered tracker control and its HUDElementRef are different
+	-- rectangles. Preserve the reference rectangle's current native offset and
+	-- apply only the drag delta; passing the proxy's absolute offset would make
+	-- the internal control/ref offset get applied a second time.
+	local _,offsetX,offsetY=element:GetConvertedRefControlAnchorInfo()
+	local refX,refY=ref:GetCenter()
+	local x,y=control:GetCenter()
+	element:ApplyOffset(offsetX+x-refX,offsetY+y-refY,true)
 	if trackerElement then HUD_TRACKER_MANAGER:RefreshLayout() end
 	SyncHUDMover(control,frame)
 end
