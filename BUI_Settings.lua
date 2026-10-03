@@ -2174,11 +2174,7 @@ function BUI.Menu.Reset(context)
 			for _,frame in pairs(frames) do BUI.Vars[frame]=BUI.Defaults[frame] end
 		end
 		if MoveMode_2 then
-			for frame in pairs(BUI.DefaultFrames) do
-				BUI.Vars[frame]=nil
-				local element=BUI.Menu.GetHUDElement(_G[frame])
-				if element and not IsInGamepadPreferredMode() then element:ResetToDefaultAnchor(true) end
-			end
+			for frame in pairs(BUI.DefaultFrames) do BUI.Vars[frame]=nil end
 		end
 		if MoveMode_1 or MoveMode_2 then
 			SCENE_MANAGER:SetInUIMode(false) BUI.OnScreen.Notification(8,"Reloading UI") BUI.CallLater("ReloadUI",1000,ReloadUI)
@@ -2548,99 +2544,9 @@ function BUI.Menu.ManageWidgets(move)
 end
 
 --Move frames
---Native HUD elements own their saved anchors; BUI only supplies the drag UI.
-function BUI.Menu.GetHUDElement(frame)
-	if not (frame and HUD_MANAGER and HUD_MANAGER.GetKeyboardElementForControl) then return end
-	-- Endless Archive keeps its legacy BUI mover path until its native tracker
-	-- lifecycle is supported independently.
-	if frame==ZO_EndDunHUDTrackerContainer then return end
-	-- U51 registered several elements on a top-level owner while BUI's list
-	-- names their child container.
-	local candidate=frame
-	for _=1,4 do
-		local element=HUD_MANAGER:GetKeyboardElementForControl(candidate)
-		if element then return element end
-		-- Only traverse to a registered tracker owner, not arbitrary containers
-		-- (moving a child must not silently move all resource bars).
-		if not candidate.GetParent then break end
-		candidate=candidate:GetParent()
-		if not candidate then break end
-		if not (candidate.owner and candidate.owner.GetHUDElementOptionKeys) then break end
-	end
-	-- Some HUD elements expose their reference rectangle on the child itself.
-	if HUD_MANAGER.KeyboardElementIterator then
-		for _,element in HUD_MANAGER:KeyboardElementIterator() do
-			local ref=element.GetHUDRefElement and element:GetHUDRefElement()
-			if ref==frame then return element end
-		end
-	end
-end
-
-local function SyncHUDMover(control,frame)
-	local element=BUI.Menu.GetHUDElement(frame)
-	control:SetHidden(IsInGamepadPreferredMode())
-	if IsInGamepadPreferredMode() then return end
-	local ref=element and element:GetHUDRefElement() or frame
-	if not ref then return end
-	if element then
-		-- Keep the drag proxy identical to ESO's HUD editor proxy. Centering it
-		-- independently introduces a fixed edge offset for tracker elements
-		-- whose reference rectangle is a child of the registered control.
-		local primaryAnchorPoint,refOffsetX,refOffsetY,refWidth,refHeight=element:GetConvertedRefControlAnchorInfo()
-		control:SetDimensions(refWidth>0 and refWidth or 100,refHeight>0 and refHeight or 24)
-		control:ClearAnchors()
-		control:SetAnchor(primaryAnchorPoint,nil,nil,refOffsetX,refOffsetY)
-		return
-	end
-	local x,y=ref:GetCenter()
-	local rootX,rootY=GuiRoot:GetCenter()
-	--Inactive prompts/subtitles may have a zero-sized reference rectangle.
-	--Keep their independent mover visible and usable while the prompt is hidden.
-	control:SetDimensions(math.max(100,ref:GetWidth()),math.max(24,ref:GetHeight()))
-	control:ClearAnchors()
-	control:SetAnchor(CENTER,GuiRoot,CENTER,x-rootX,y-rootY)
-end
-
-function BUI.Menu.SaveHUDMover(control,frame)
-	local element=BUI.Menu.GetHUDElement(frame)
-	if not element or IsInGamepadPreferredMode() then return end
-	local ref=element.GetHUDRefElement and element:GetHUDRefElement() or frame
-	if not ref then return end
-	if frame==ZO_PlayerAttributeHealth or frame==ZO_PlayerAttributeMagicka or frame==ZO_PlayerAttributeStamina then
-		local combined=HUD_MANAGER:GetKeyboardElementForControl(ZO_PlayerAttribute)
-		if combined then combined:SetCustomOptionValue("Combine",nil,false) end
-	end
-	-- The registered tracker control and its HUDElementRef are different
-	-- rectangles. Preserve the reference rectangle's current native offset and
-	-- apply only the drag delta; passing the proxy's absolute offset would make
-	-- the internal control/ref offset get applied a second time.
-	local _,offsetX,offsetY=element:GetConvertedRefControlAnchorInfo()
-	local refX,refY=ref:GetCenter()
-	local x,y=control:GetCenter()
-	element:ApplyOffset(offsetX+x-refX,offsetY+y-refY,true)
-	SyncHUDMover(control,frame)
-end
-
-function BUI.Menu.SaveLegacyMover(control,frame,name)
-	local x,y=control:GetCenter()
-	local rootX,rootY=GuiRoot:GetCenter()
-	-- Read the actual screen rectangle; GetAnchor offsets can be relative to
-	-- the moved frame or BUI_Move rather than GuiRoot.
-	BUI.Vars[name]={CENTER,CENTER,x-rootX,y-rootY}
-	frame:ClearAnchors()
-	frame:SetAnchor(CENTER,GuiRoot,CENTER,x-rootX,y-rootY)
-	SyncHUDMover(control,frame)
-end
-
 local function MoveDefaultFrames(move)
 	if BUI.init.DefaultFrames then
 		BUI_Move:SetHidden(not move)
-		if move then
-			for name in pairs(BUI.DefaultFrames) do
-				local mover=_G[name.."_BUI_BG"]
-				if mover and name~="ZO_EndDunHUDTrackerContainer" then SyncHUDMover(mover,_G[name]) end
-			end
-		end
 	elseif move then
 		BUI.UI.TopLevelWindow("BUI_Move",GuiRoot,{GuiRoot:GetWidth(),GuiRoot:GetHeight()},{CENTER,CENTER,0,0},false)
 		for name,desc in pairs(BUI.DefaultFrames) do
@@ -2676,15 +2582,10 @@ local function MoveDefaultFrames(move)
 			BUI.UI.Line(name.."_Line_vert",	bg,	{0,h+200},	{TOPLEFT,TOP,0,-100},	{.8,.8,.8,.4},1.8, false)
 			bg:SetMovable(true)
 			bg:SetMouseEnabled(true)
-			if name~="ZO_EndDunHUDTrackerContainer" then SyncHUDMover(bg,frame) end
 			bg:SetHandler("OnMouseUp", function(self)
-					if frame==ZO_EndDunHUDTrackerContainer then
-						BUI.Menu:SaveAnchor(self,nil,name,anchorPoint)
+					if HUD_MANAGER:GetKeyboardElementForControl(frame) == nil then
+						BUI.Menu:SaveAnchor(self,nil,name,anchorPoint)						
 						BUI.Frames.ZO_Frame_reposition()
-					elseif BUI.Menu.GetHUDElement(frame) then
-						BUI.Menu.SaveHUDMover(self,frame)
-					else
-						BUI.Menu.SaveLegacyMover(self,frame,name)
 					end
 				end)
 			end

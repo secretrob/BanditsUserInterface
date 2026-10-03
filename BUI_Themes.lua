@@ -412,9 +412,6 @@ end
 
 function BUI.Frames.ZO_PlayerAttribute_reposition()
 	if not BUI.Vars.DefaultPlayerFrames then return end
-	-- U51 owns combined/separate resource placement. Do not re-anchor its
-	-- children (or the ram) after the native saved layout has been applied.
-	if BUI.Menu.GetHUDElement(ZO_PlayerAttributeHealth) then return end
 	if BUI.Vars.RepositionFrames then
 		local _, point, relativeTo, relativePoint, offsetX, offsetY=ZO_PlayerAttributeHealth:GetAnchor()
 		if not BUI.Vars.ZO_PlayerAttributeHealth then
@@ -468,38 +465,35 @@ function BUI.Frames.ZO_Frame_reposition()
 		line=ZO_AlertTextNotification:GetChild(1)
 --		line.fadingControlBuffer.templates.ZO_AlertLine.setup=SetupFunction
 		local var=BUI.Vars["ZO_AlertTextNotification"]
-		if var and line and line.fadingControlBuffer and not BUI.Menu.GetHUDElement(ZO_AlertTextNotification) then line.fadingControlBuffer.anchor=ZO_Anchor:New(var[1],GuiRoot,var[2],var[3],var[4]) end
+		if var and line.fadingControlBuffer then line.fadingControlBuffer.anchor=ZO_Anchor:New(var[1],GuiRoot,var[2],var[3],var[4]) end
 	else
 		line=ZO_AlertTextNotificationGamepad:GetChild(1)
 --		line.fadingControlBuffer.templates.ZO_AlertLineGamepad.setup=SetupFunction
 	end
 
 	local function ApplyTemplateHook(obj,name,func)
-		if not (obj and obj[func]) then return end
-		BUI.Frames.positionHooks=BUI.Frames.positionHooks or {}
-		if BUI.Frames.positionHooks[name..func] then return end
-		BUI.Frames.positionHooks[name..func]=true
-		ZO_PostHook(obj,func,function()
-			if BUI.Vars[name] and not BUI.Menu.GetHUDElement(_G[name]) then
+		local ZO_Func=obj[func]
+		obj[func]=function(self)
+			local result=ZO_Func(self)
+			if BUI.Vars[name] then
 				local frame=_G[name] frame:ClearAnchors() frame:SetAnchor(BUI.Vars[name][1],GuiRoot,BUI.Vars[name][2],BUI.Vars[name][3],BUI.Vars[name][4])
 			end
-		end)
+			return result
+		end
 	end
 
-	-- Let native templates refresh dimensions/fonts. Reapply only the saved
-	-- legacy position afterwards, rather than globally blocking templates.
-	ApplyTemplateHook(PLAYER_PROGRESS_BAR,'ZO_PlayerProgress','RefreshTemplate')
-	ApplyTemplateHook(COMPASS_FRAME,'ZO_CompassFrame','ApplyStyle')
-	ApplyTemplateHook(CENTER_SCREEN_ANNOUNCE,'ZO_CenterScreenAnnounce','ApplyStyle')
+	local block={ZO_CompassFrame_Keyboard_Template=true,ZO_CompassFrame_Gamepad_Template=true,ZO_PlayerProgressTemplate=true,ZO_PlayerChampionProgressTemplate=true,ZO_GamepadPlayerProgressTemplate=true,ZO_GamepadPlayerChampionProgressTemplate=true}	--ZO_ActionButton_Keyboard_Template=true
+	local ZO_ApplyTemplateToControl=ApplyTemplateToControl
+	ApplyTemplateToControl=function(control, templateName) if block[templateName] then return else ZO_ApplyTemplateToControl(control,templateName) end end
 	for name in pairs(BUI.DefaultFrames) do
 		local var=BUI.Vars[name]
-		if var and not BUI.Menu.GetHUDElement(_G[name]) then
+		if var then
 			local frame=_G[name]
 			if frame then
 				if name=='ZO_ActiveCombatTips' then ApplyTemplateHook(ACTIVE_COMBAT_TIP_SYSTEM,'ZO_ActiveCombatTips','ApplyStyle')
 				elseif name=='ZO_CenterScreenAnnounce' then ApplyTemplateHook(CENTER_SCREEN_ANNOUNCE,'ZO_CenterScreenAnnounce','ApplyStyle')
 				elseif name=='ZO_CompassFrame' then ApplyTemplateHook(COMPASS_FRAME,'ZO_CompassFrame','ApplyStyle')
-				end
+				elseif name=='ZO_EndDunHUDTrackerContainer' then ApplyTemplateHook(ZO_HUDTracker_Base, 'ZO_EndDunHUDTrackerContainer','RefreshAnchors') end
 				frame:ClearAnchors() frame:SetAnchor(var[1],GuiRoot,var[2],var[3],var[4])
 			else
 				bui_pl(name.." was not placed")
@@ -508,28 +502,14 @@ function BUI.Frames.ZO_Frame_reposition()
 	end
 	if BUI.Vars.RepositionFrames then BUI.Frames.ZO_PlayerAttribute_reposition() end
 
-	if not BUI.Frames.positionShowHooks then
-	BUI.Frames.positionShowHooks=true
-	for name in pairs(BUI.DefaultFrames) do
-		local frame=_G[name]
-		if frame then
-			ZO_PreHookHandler(frame,'OnShow',function()
-				local var=BUI.Vars[name]
-				if var and not BUI.Menu.GetHUDElement(frame) and not IsInGamepadPreferredMode() then
-					frame:ClearAnchors() frame:SetAnchor(var[1],GuiRoot,var[2],var[3],var[4])
-				end
-			end)
-		end
-	end
 	ZO_PreHookHandler(ZO_ActionBar1, 'OnShow', function()
 		local scenename=SCENE_MANAGER:GetCurrentSceneName() if scenename=="skills" or scenename=="inventory" then return end
 		local name="ZO_ActionBar1"
-		if BUI.Vars[name] and not BUI.Menu.GetHUDElement(ZO_ActionBar1) then
+		if BUI.Vars[name] then
 			ZO_ActionBar1:ClearAnchors() ZO_ActionBar1:SetAnchor(BUI.Vars[name][1],GuiRoot,BUI.Vars[name][2],BUI.Vars[name][3],BUI.Vars[name][4])
 		end
 		ZO_ActionBar1KeybindBG:SetHidden(true)
 	end)
-	end
 end
 
 function BUI.Themes_Initialize()		
